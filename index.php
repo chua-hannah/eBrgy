@@ -1,20 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>LOGIN</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-     <form action="login.php" method="post">
-        <h2>LOGIN</h2>
-        <?php if (isset($_GET['error'])) { ?>
-            <p class="error"><?php echo $_GET['error']; ?></p>
-        <?php } ?>
-        <label>User Name</label>
-        <input type="text" name="uname" placeholder="User Name" required><br>
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Password"><br> 
-        <button type="submit">Login</button>
-     </form>
-</body>
-</html>
+<?php
+    // Include necessary files and start your application logic here
+    require_once 'config.php';
+    require_once 'functions/db.php';
+    require_once 'functions/auth.php';
+    // ...
+
+    // Example: Routing logic
+    $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+   
+    // Example: Include the appropriate page based on the routing logic
+    switch ($page) {
+        case 'home':
+            include 'pages/header.php';
+            include 'pages/home.php';
+            include 'pages/footer.php';
+            break;
+        case 'about':
+            include 'pages/header.php';
+            include 'pages/about.php';
+            include 'pages/footer.php';
+            break;
+        case 'contact':
+                include 'pages/header.php';
+                include 'pages/contact.php';
+                include 'pages/footer.php';
+                break;
+        // Add more cases for other pages
+        default:
+            include 'pages/header.php';
+            include 'pages/home.php';
+            include 'pages/footer.php';
+            break;
+    }
+    var_dump($page)
+?>
