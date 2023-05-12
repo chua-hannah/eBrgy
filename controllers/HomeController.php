@@ -8,10 +8,10 @@
             include 'pages/footer.php';
         }
 
-        public function about() {
+        public function officials() {
             // Example: About page controller logic
             include 'pages/header.php';
-            include 'pages/about.php';
+            include 'pages/officials.php';
             include 'pages/footer.php';
         }
         public function contact() {

@@ -18,8 +18,8 @@
         case 'home':
             $homeController->index();
             break;
-        case 'about':
-            $homeController->about();
+        case 'officials':
+            $homeController->officials();
             break;
         case 'contact':
             $homeController->contact();
