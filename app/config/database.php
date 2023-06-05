@@ -1,14 +1,14 @@
 <?php
+$hostname = 'localhost'; // Replace with your database server hostname
+$username = 'root'; // Replace with your database username
+$password = ''; // Replace with your database password
+$database = 'barangay_db'; // Replace with your database name
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'barangay_db');
+// Create a connection
+$connection = new mysqli($hostname, $username, $password, $database);
 
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-if ($conn->connect_error) {
-    die('Database connection error: ' . $conn->connect_error);
+// Check the connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
 }
-
-
+?>
