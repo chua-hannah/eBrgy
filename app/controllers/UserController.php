@@ -17,15 +17,20 @@ class UserController {
 
     public function register()
     {
+       
+        $role = 'residence';
         if (isset($_POST['register'])) {
             // Retrieve the submitted form data
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
+            $fullname = $_POST['fullname'];
+            $age = $_POST['age'];
+            
             // Add more fields as needed
 
             // Insert the data into the database
-            $query = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
+            $query = "INSERT INTO users ( username, password, email, fullname, age, role) VALUES ('$username', '$password', '$email', '$fullname', '$age', '$role')";
             if ($this->connection->query($query) === true) {
                 // Registration successful
                 echo "Registration successful";
@@ -39,3 +44,5 @@ class UserController {
         include 'templates/register.php';
     }
 }
+
+
