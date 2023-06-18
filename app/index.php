@@ -17,6 +17,7 @@ $userManagementController = new UserManagementController($connection);
 $requestManagementController = new RequestManagementController();
 $attendanceController = new AttendanceController();
 
+ // Replace with your actual base URL
 $requestUri = $_SERVER['REQUEST_URI'];
 $path = parse_url($requestUri, PHP_URL_PATH);
 $filename = basename($path);
@@ -99,7 +100,7 @@ if ($filename === 'login') {
                 });
             } else if ($filename === 'user-management') {
                 includeAdminContent(function() use ($userManagementController) {
-                    $userManagementController->add();
+                    $userManagementController->index();
                 });
             } else if ($filename === 'request-management') {
                 includeAdminContent(function() use ($requestManagementController) {

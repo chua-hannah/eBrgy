@@ -10,9 +10,10 @@
     <title>Captain Portal</title>
 </head>
 <body>
+    <?php $baseUrl = "http://localhost/eBrgy/app";?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container">
-        <a class="navbar-brand" href="home">Captain Portal</a>
+        <a class="navbar-brand" href="<?php echo $baseUrl;?>/home">Captain Portal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,10 +23,11 @@
             </ul>
             <ul class="navbar-nav">
     <?php
+
     if (isset($_SESSION['username'])) {
         $fullname = $_SESSION['fullname'];
         echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="profile">'.$fullname.'</a>';
+        echo '<a class="nav-link" href="'.$baseUrl.'/profile">'.$fullname.'</a>';
         echo '</li>';
         echo '<li class="nav-item">';
         echo '<a class="nav-link" href="logout.php">Logout</a>';
@@ -50,21 +52,22 @@
     <div class="row">
         <div class="col-lg-3 bg-light">
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="dashboard">Dashboard</a>
+            <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $baseUrl;?>/dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="attendance">Attendance</a>
+                    <a class="nav-link" href="<?php echo $baseUrl;?>/attendance">Attendance</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="user-management">User Management</a>
+                    <a class="nav-link" href="<?php echo $baseUrl;?>/user-management">User Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="request-management">Request</a>
+                    <a class="nav-link" href="<?php echo $baseUrl;?>/request-management">Request</a>
                 </li>
           
             </ul>
         </div>
         <div class="col-lg-9">
+
             <!-- Place your page content here -->
 

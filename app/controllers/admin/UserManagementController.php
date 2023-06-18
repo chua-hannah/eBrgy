@@ -9,7 +9,7 @@ class UserManagementController {
   }
     public function index() {
       // Render the home page content
-      include 'templates/dashboard.php';
+      include 'templates/admin/user_management/user_management.php';
     }
     public function user_management() {
       // Render the home page content
@@ -18,7 +18,7 @@ class UserManagementController {
 
     public function add()
     {
-        $role = 'admin';
+       
         if (isset($_POST['add'])) {
             // Retrieve the submitted form data
             $username = $_POST['username'];
@@ -26,6 +26,7 @@ class UserManagementController {
             $email = $_POST['email'];
             $fullname = $_POST['fullname'];
             $age = $_POST['age'];
+            $role = $_POST['role'];
     
             // Add more fields as needed
     
@@ -72,7 +73,7 @@ class UserManagementController {
         }
     
         // Render the register page content
-        include 'templates/admin/user_management.php';
+        include 'templates/admin/user_management/add_user.php';
     }
   }
   
