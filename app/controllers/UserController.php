@@ -42,10 +42,10 @@ class UserController {
                     header("Location: home");
                     exit();
                 case 'captain':
-                    header("Location: captain_dashboard.php");
+                    header("Location: captain");
                     exit();
                 case 'admin':
-                    header("Location: admin_dashboard.php");
+                    header("Location: admin");
                     exit();
                 default:
                     echo "Invalid user role.";
