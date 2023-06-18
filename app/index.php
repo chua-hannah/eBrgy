@@ -13,7 +13,7 @@ $userController = new UserController($connection);
 $homeController = new HomeController();
 //Admin Controllers
 $profileController = new ProfileController();
-$userManagementController = new UserManagementController();
+$userManagementController = new UserManagementController($connection);
 $requestManagementController = new RequestManagementController();
 $attendanceController = new AttendanceController();
 
@@ -99,7 +99,7 @@ if ($filename === 'login') {
                 });
             } else if ($filename === 'user-management') {
                 includeAdminContent(function() use ($userManagementController) {
-                    $userManagementController->user_management();
+                    $userManagementController->add();
                 });
             } else if ($filename === 'request-management') {
                 includeAdminContent(function() use ($requestManagementController) {
