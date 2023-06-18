@@ -33,6 +33,12 @@ function includeAdminHeaderFooter($controller) {
     include 'templates/admin/footer.php';
 }
 
+function includeAdminContent($controller) {
+    include 'templates/admin/header.php';
+    $controller();
+    include 'templates/admin/footer.php';
+}
+
 if ($filename === 'login') {
     includeHeaderFooter(function() use ($userController) {
         $userController->login();
@@ -80,23 +86,23 @@ if ($filename === 'login') {
         } else if ($role === 'captain') {
             // Captain-specific routes
             if ($filename === 'dashboard') {
-                includeAdminHeaderFooter(function() use ($homeController) {
+                includeAdminContent(function() use ($homeController) {
                     $homeController->admin();
                 });
             } else if ($filename === 'profile') {
-                includeAdminHeaderFooter(function() use ($profileController) {
+                includeAdminContent(function() use ($profileController) {
                     $profileController->profile();
                 });
             } else if ($filename === 'attendance') {
-                includeAdminHeaderFooter(function() use ($attendanceController) {
+                includeAdminContent(function() use ($attendanceController) {
                     $attendanceController->attendance();
                 });
             } else if ($filename === 'user-management') {
-                includeAdminHeaderFooter(function() use ($userManagementController) {
+                includeAdminContent(function() use ($userManagementController) {
                     $userManagementController->user_management();
                 });
             } else if ($filename === 'request-management') {
-                includeAdminHeaderFooter(function() use ($requestManagementController) {
+                includeAdminContent(function() use ($requestManagementController) {
                     $requestManagementController->request_management();
                 });
             } else {
@@ -111,10 +117,30 @@ if ($filename === 'login') {
             });
         }
     } else {
-        // User is not logged in, redirect to login page
-        header('Location: login');
+        // User is not logged in
+        if ($filename === 'home') {
+            includeHeaderFooter(function() use ($homeController) {
+                $homeController->index();
+            });
+        }
+        else if ($filename === 'officials') {
+            includeHeaderFooter(function() use ($homeController) {
+                $homeController->officials();
+            });
+        }
+        else if ($filename === 'services') {
+            includeHeaderFooter(function() use ($homeController) {
+                $homeController->services();
+            });
+        }
+        else if ($filename === 'contact') {
+            includeHeaderFooter(function() use ($homeController) {
+                $homeController->contact();
+            });
+        }
+        else {
+            header('Location: login');
+        }
     }
 }
-
-
 ?>
