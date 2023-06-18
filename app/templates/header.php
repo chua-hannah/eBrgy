@@ -33,13 +33,27 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register">Register</a>
-                </li>
-            </ul>
+    <?php
+    if (isset($_SESSION['username'])) {
+        $fullname = $_SESSION['fullname'];
+        echo '<li class="nav-item">';
+        echo '<a class="nav-link" href="#">'.$fullname.'</a>';
+        echo '</li>';
+        echo '<li class="nav-item">';
+        echo '<a class="nav-link" href="logout.php">Logout</a>';
+        echo '</li>';
+        
+    } else {
+        echo '<li class="nav-item">';
+        echo '<a class="nav-link" href="login">Login</a>';
+        echo '</li>';
+        echo '<li class="nav-item">';
+        echo '<a class="nav-link" href="register">Register</a>';
+        echo '</li>';
+    }
+    ?>
+</ul>
+
         </div>
     </div>
 </nav>

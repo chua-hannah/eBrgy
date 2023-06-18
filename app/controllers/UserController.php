@@ -10,10 +10,58 @@ class UserController {
     }
 
     public function login()
-    {
-        // Render the login page content
-        include 'templates/login.php';
+{  
+    if (isset($_POST['login'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        // Validate username and password
+        if (empty($username) || empty($password)) {
+            echo "Please enter both username and password.";
+            return;
+        }
+
+        // Retrieve user data from the database
+        $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        $result = $this->connection->query($query);
+
+        if ($result->num_rows > 0) {
+            // User exists, login successful
+            $user = $result->fetch_assoc();
+            $role = $user['role'];
+            $fullname = $user['fullname'];
+
+            // Store the user's fullname in the session
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
+            $_SESSION['fullname'] = $fullname;
+            
+            // Redirect to appropriate page based on user role
+            switch ($role) {
+                case 'residence':
+                    header("Location: home");
+                    exit();
+                case 'captain':
+                    header("Location: captain_dashboard.php");
+                    exit();
+                case 'admin':
+                    header("Location: admin_dashboard.php");
+                    exit();
+                default:
+                    echo "Invalid user role.";
+                    return;
+            }
+        } else {
+            // Invalid username or password
+            echo "Invalid username or password.";
+            return;
+        }
     }
+
+    // Render the login page content
+    include 'templates/login.php';
+}
+
 
     public function register()
     {
@@ -61,6 +109,8 @@ class UserController {
                 if ($this->connection->query($query) === true) {
                     // Registration successful
                     echo "Registration successful";
+                    header("Location: login");
+                    exit();
                 } else {
                     // Error occurred
                     echo "Error: " . $this->connection->error;
@@ -70,6 +120,21 @@ class UserController {
     
         // Render the register page content
         include 'templates/register.php';
+    }
+
+    public function logout()
+    {
+        session_start();
+        
+        // Clear all session variables
+        $_SESSION = [];
+
+        // Destroy the session
+        session_destroy();
+
+        // Redirect to the login page or any other page you prefer
+        header("Location: login");
+        exit();
     }
     
 }
