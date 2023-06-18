@@ -25,7 +25,7 @@
     if (isset($_SESSION['username'])) {
         $fullname = $_SESSION['fullname'];
         echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="#">'.$fullname.'</a>';
+        echo '<a class="nav-link" href="profile">'.$fullname.'</a>';
         echo '</li>';
         echo '<li class="nav-item">';
         echo '<a class="nav-link" href="logout.php">Logout</a>';
@@ -54,14 +54,15 @@
                     <a class="nav-link" href="dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="attendance">Attendance</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="user-management">User Management</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="request-management">Request</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">asdasd</a>
-                </li>
+          
             </ul>
         </div>
         <div class="col-lg-9">

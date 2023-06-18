@@ -37,7 +37,7 @@
     if (isset($_SESSION['username'])) {
         $fullname = $_SESSION['fullname'];
         echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="#">'.$fullname.'</a>';
+        echo '<a class="nav-link" href="profile">'.$fullname.'</a>';
         echo '</li>';
         echo '<li class="nav-item">';
         echo '<a class="nav-link" href="logout.php">Logout</a>';
