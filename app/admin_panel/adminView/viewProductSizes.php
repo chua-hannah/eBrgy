@@ -1,12 +1,12 @@
 
 <div >
-  <h2>Product Sizes Item</h2>
+  <h2>Available Stocks</h2>
   <table class="table ">
     <thead>
       <tr>
         <th class="text-center">S.N.</th>
-        <th class="text-center">Product Name</th>
-        <th class="text-center">Size</th>
+        <th class="text-center">Equipment Name</th>
+        <th class="text-center">Type</th>
         <th class="text-center">Stock Quantity</th>
         <th class="text-center" colspan="2">Action</th>
       </tr>
@@ -36,7 +36,7 @@
 
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-secondary" style="height:40px" data-toggle="modal" data-target="#myModal">
-    Add Size Variation
+    Add Stock Variation
   </button>
 
   <!-- Modal -->
@@ -46,16 +46,16 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">New Product Size Variation</h4>
+          <h4 class="modal-title">New Equipment Stock</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <form  enctype='multipart/form-data' action="./controller/addVariationController.php" method="POST">
             
             <div class="form-group">
-              <label>Product:</label>
+              <label>Equipment:</label>
               <select name="product" >
-                <option disabled selected>Select product</option>
+                <option disabled selected>Select Equipment</option>
                 <?php
 
                   $sql="SELECT * from product";
@@ -70,9 +70,9 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Size:</label>
+              <label>Type:</label>
               <select name="size" >
-                <option disabled selected>Select size</option>
+                <option disabled selected>Select Type</option>
                 <?php
 
                   $sql="SELECT * from sizes";
@@ -91,7 +91,7 @@
               <input type="number" class="form-control" name="qty" required>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-secondary" name="upload" style="height:40px">Add Variation</button>
+              <button type="submit" class="btn btn-secondary" name="upload" style="height:40px">Add Stock</button>
             </div>
           </form>
 
