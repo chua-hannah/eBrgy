@@ -19,9 +19,10 @@ $attendanceController = new AttendanceController();
 
 $baseUrl = "http://localhost/eBrgy/app"; // Replace with your actual base URL
 $requestUri = $_SERVER['REQUEST_URI'];
-$path = parse_url($requestUri, PHP_URL_PATH);
-$filename = basename($path);
-$relativeUrl = substr($path, strlen($baseUrl));
+$basePath = parse_url($baseUrl, PHP_URL_PATH);
+$trimmedPath = trim(str_replace($basePath, '', $requestUri), '/');
+$filename = $trimmedPath;
+
 
 
 
@@ -105,9 +106,13 @@ if ($filename === 'login') {
                 });
             } else if ($filename === 'user-management') {
                 includeAdminContent(function () use ($userManagementController) {
+                    $userManagementController->index();
+                });
+            }else if ($filename === 'user-management/add-user') {
+                includeAdminContent(function () use ($userManagementController) {
                     $userManagementController->add();
                 });
-            } else if ($filename === 'request-management') {
+            }  else if ($filename === 'request-management') {
                 includeAdminContent(function() use ($requestManagementController) {
                     $requestManagementController->request_management();
                 });

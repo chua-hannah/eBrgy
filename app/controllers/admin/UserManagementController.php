@@ -12,6 +12,23 @@ class UserManagementController {
       include 'templates/admin/user_management/user_management.php';
     }
     public function user_management() {
+         // Prepare and execute the query
+         $query = "SELECT * FROM users";
+         $result = $this->connection->query($query);
+ 
+         // Fetch all user records as an associative array
+         $users = array();
+         if ($result->num_rows > 0) {
+             while ($row = $result->fetch_assoc()) {
+                 $users[] = $row;
+             }
+         }
+ 
+         // Close the database connection
+         $result->close();
+ 
+         // Return the fetched user data
+         return $users;
       // Render the home page content
       include 'templates/admin/user_management.php';
     }
