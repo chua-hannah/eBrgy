@@ -1,13 +1,13 @@
 
 <div >
-  <h2>Product Items</h2>
+  <h2>Product and Services List</h2>
   <table class="table ">
     <thead>
       <tr>
         <th class="text-center">S.N.</th>
-        <th class="text-center">Product Image</th>
-        <th class="text-center">Product Name</th>
-        <th class="text-center">Product Description</th>
+        <th class="text-center">Image</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Description</th>
         <th class="text-center">Category Name</th>
         <th class="text-center">Unit Price</th>
         <th class="text-center" colspan="2">Action</th>
@@ -15,6 +15,8 @@
     </thead>
     <?php
       include_once "../config/dbconnect.php";
+      // require_once '../controller/AdminDashboardController.php';
+      // $adminController = new AdminDashboardController($conn);
       $sql="SELECT * from product, category WHERE product.category_id=category.category_id";
       $result=$conn-> query($sql);
       $count=1;
@@ -29,7 +31,7 @@
       <td><?=$row["category_name"]?></td> 
       <td><?=$row["price"]?></td>     
       <td><button class="btn btn-primary" style="height:40px" onclick="itemEditForm('<?=$row['product_id']?>')">Edit</button></td>
-      <td><button class="btn btn-danger" style="height:40px" onclick="itemDelete('<?=$row['product_id']?>')">Delete</button></td>
+      <td><button class="btn btn-danger" style="height:40px" onclick="itemDelete('<?=$row['product_id']?>')" id = "itemDelete" class = "itemDelete">Delete</button></td>
       </tr>
       <?php
             $count=$count+1;

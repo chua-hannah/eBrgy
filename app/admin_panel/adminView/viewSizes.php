@@ -1,11 +1,11 @@
 
 <div >
-  <h3>Available Sizes</h3>
+  <h3>Equipment Type</h3>
   <table class="table ">
     <thead>
       <tr>
         <th class="text-center">S.N.</th>
-        <th class="text-center">Size</th>
+        <th class="text-center">Type</th>
         <th class="text-center" colspan="2">Action</th>
       </tr>
     </thead>

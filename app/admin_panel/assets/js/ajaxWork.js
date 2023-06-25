@@ -1,5 +1,8 @@
-
-
+// $(document).ready(function(){
+//     $("#itemDelete").click(function(){
+//         itemDelete();
+//     });
+//     });
 function showProductItems(){  
     $.ajax({
         url:"./adminView/viewAllProducts.php",
@@ -177,7 +180,66 @@ function itemDelete(id){
         }
     });
 }
+// //delete product data
+// function itemDelete(id){
+//     var method = 'deleteItem';
+//     var record = $p_id;
+//     var data = {method:method,
+//         Record:record
+//     }
+//     $.ajax({
+//         url:"./controller/AdminDashboardController.php",
+//         method:"post",
+//         data: data,
+//         success:function(data){
+//             alert('Items Successfully deleted');
+//             $('form').trigger('reset');
+//             showProductItems();
+//         }
+//     });
+// }
+// function itemDelete(id){
+//     var method = "deleteItem";
+//     var record = id;
+//     var data = {
+//         method: method,
+//         Record: record,
+//         };
+//     $.ajax({
+//         url:"./controller/Product.php",
+//         method:"post",
+//         data: data,
+//         success:function(data){
+//             alert('Items Successfully deleted');
+//             $('form').trigger('reset');
+//             showProductItems();
+//             console.log('testing1',id);
+//             console.log('testing2',data.record);
+//             console.log('testing3',record);
+//             console.log('testing4',method);
+//             console.log('testing5',data.id);
+//         }
+//     });
+// }
+//add product data
+// function itemDelete(id){
+//     var fd = new FormData();
+//     fd.append('record', id);
+//     console.log('test',fd);
+//     $.ajax({
+//         url:"./controller/Product.php",
+//         method:"post",
+//         data:fd,
+//         processData: false,
+//         contentType: false,
+//         success: function(data){
+//             alert('Product deleted successfully.');
+//             $('form').trigger('reset');
+//             showProductItems();
 
+//         }
+//     });
+// }
 
 //delete cart data
 function cartDelete(id){
