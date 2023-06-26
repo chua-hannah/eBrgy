@@ -1,4 +1,5 @@
 <?php
+
 class UserManagementController {
 
   private $connection;
@@ -80,7 +81,7 @@ class UserManagementController {
                 if ($this->connection->query($query) === true) {
                     // Registration successful
                     echo "Registration successful";
-                    header("Location: user-management");
+                    header("Location: ");
                     exit();
                 } else {
                     // Error occurred

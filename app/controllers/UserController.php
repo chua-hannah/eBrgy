@@ -10,7 +10,7 @@ class UserController {
     }
 
     public function login()
-{  
+{
     if (isset($_POST['login'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -28,14 +28,17 @@ class UserController {
         if ($result->num_rows > 0) {
             // User exists, login successful
             $user = $result->fetch_assoc();
+            $username = $user['username'];
+            $user_id = $user['user_id'];
             $role = $user['role'];
             $fullname = $user['fullname'];
 
-            // Store the user's fullname in the session
+            // Store the user's data in the session
             $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = $user_id;
             $_SESSION['role'] = $role;
             $_SESSION['fullname'] = $fullname;
-            
+
             // Redirect to appropriate page based on user role
             switch ($role) {
                 case 'residence':

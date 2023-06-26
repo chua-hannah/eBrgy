@@ -26,8 +26,8 @@ $users = UserManagementController::user_management();
                         <td><?php echo $user['role']; ?></td>
                         <td>
                             <div class="btn-group">
-                                <button class="btn btn-primary" onclick="editUser(<?php echo $user['id']; ?>)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteUser(<?php echo $user['id']; ?>)">Delete</button>
+                                <button class="btn btn-primary" onclick="editUser(<?php echo $user['user_id']; ?>)">Edit</button>
+                                <button class="btn btn-danger" onclick="deleteUser(<?php echo $user['user_id']; ?>)">Delete</button>
                             </div>
                         </td>
                     </tr>

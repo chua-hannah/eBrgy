@@ -15,18 +15,13 @@ $homeController = new HomeController();
 $profileController = new ProfileController();
 $userManagementController = new UserManagementController($connection);
 $requestManagementController = new RequestManagementController();
-$attendanceController = new AttendanceController();
+$attendanceController = new AttendanceController($connection);
 
 $baseUrl = "http://localhost/eBrgy/app"; // Replace with your actual base URL
 $requestUri = $_SERVER['REQUEST_URI'];
 $basePath = parse_url($baseUrl, PHP_URL_PATH);
 $trimmedPath = trim(str_replace($basePath, '', $requestUri), '/');
 $filename = $trimmedPath;
-
-
-
-
-
 
 function includeHeaderFooter($controller) {
     include 'templates/header.php';
@@ -57,21 +52,32 @@ if ($filename === 'login') {
 } else if ($filename === 'logout.php') {
     $userController->logout();
 } else {
+   
     $user = isset($_SESSION['username']) ? $_SESSION['username'] : null;
-    $role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
-
+    $role = isset($_SESSION['role']) ? $_SESSION['role'] : null; 
     if ($user && $role) {
         // User is logged in, check their role
         if ($role === 'admin') {
             // Admin-specific routes
-            if ($filename === 'admin-page.php') {
-                // Handle admin page
-            } else if ($filename === 'manage-users.php') {
-                // Handle user management
+            if ($filename === 'dashboard') {
+                includeAdminContent(function() use ($homeController) {
+                    $homeController->admin();
+                });
+            } else if ($filename === 'profile') {
+                includeAdminContent(function() use ($profileController) {
+                    $profileController->profile();
+                });
+            } else if ($filename === 'attendance') {
+                includeAdminContent(function() use ($attendanceController) {
+                    $attendanceController->attendance();
+                });
+            } else if ($filename === 'request-management') {
+                includeAdminContent(function() use ($requestManagementController) {
+                    $requestManagementController->request_management();
+                });
             } else {
-                // Handle other admin routes or redirect to default page
-                includeHeaderFooter(function() use ($homeController) {
-                    $homeController->index();
+                includeAdminHeaderFooter(function() use ($homeController) {
+                    $homeController->admin();
                 });
             }
         } else if ($role === 'residence') {
