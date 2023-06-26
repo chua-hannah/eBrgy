@@ -15,7 +15,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Sales</h3>
+                    <h3 class="card-title">Inventory</h3>
                 </div>
                 <div class="card-body">
                     <p>Total Sales: $10,000</p>
@@ -27,7 +27,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Orders</h3>
+                    <h3 class="card-title">Requests</h3>
                 </div>
                 <div class="card-body">
                     <p>Total Orders: 50</p>

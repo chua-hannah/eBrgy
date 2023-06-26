@@ -62,10 +62,10 @@ if ($filename === 'login') {
         if ($role === 'admin') {
             // Admin-specific routes
             if ($filename === 'dashboard') {
-                includeAdminContent(function() use ($homeController) {
-                    $homeController->admin();
+                includeAdminContent(function() use ($dashboardController) {
+                    $dashboardController->index();
                 });
-            } else if ($filename === 'profile') {
+            }  else if ($filename === 'profile') {
                 includeAdminContent(function() use ($profileController) {
                     $profileController->profile();
                 });

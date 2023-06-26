@@ -48,7 +48,7 @@ class UserController {
                     header("Location: dashboard");
                     exit();
                 case 'admin':
-                    header("Location: admin");
+                    header("Location: dashboard");
                     exit();
                 default:
                     echo "Invalid user role.";
