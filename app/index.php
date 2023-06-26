@@ -6,12 +6,14 @@ require_once 'controllers/UserController.php';
 //admin Controllers
 require_once 'controllers/ProfileController.php';
 require_once 'controllers/admin/UserManagementController.php';
+require_once 'controllers/admin/DashboardController.php';
 require_once 'controllers/admin/RequestManagementController.php';
 require_once 'controllers/admin/AttendanceController.php';
 
 $userController = new UserController($connection);
 $homeController = new HomeController();
 //Admin Controllers
+$dashboardController = new DashboardController($connection);
 $profileController = new ProfileController();
 $userManagementController = new UserManagementController($connection);
 $requestManagementController = new RequestManagementController();
@@ -99,8 +101,8 @@ if ($filename === 'login') {
         } else if ($role === 'captain') {
             // Captain-specific routes
             if ($filename === 'dashboard') {
-                includeAdminContent(function() use ($homeController) {
-                    $homeController->admin();
+                includeAdminContent(function() use ($dashboardController) {
+                    $dashboardController->index();
                 });
             } else if ($filename === 'profile') {
                 includeAdminContent(function() use ($profileController) {

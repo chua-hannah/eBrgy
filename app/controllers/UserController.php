@@ -45,7 +45,7 @@ class UserController {
                     header("Location: home");
                     exit();
                 case 'captain':
-                    header("Location: captain");
+                    header("Location: dashboard");
                     exit();
                 case 'admin':
                     header("Location: admin");
