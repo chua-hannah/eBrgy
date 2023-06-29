@@ -2,7 +2,7 @@
 $hostname = 'localhost'; // Replace with your database server hostname
 $username = 'root'; // Replace with your database username
 $password = ''; // Replace with your database password
-$database = 'admin_dashboard'; // Replace with your database name
+$database = 'barangay_db'; // Replace with your database name
 
 // Create a connection
 $connection = new mysqli($hostname, $username, $password, $database);
