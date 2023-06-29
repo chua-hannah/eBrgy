@@ -44,9 +44,9 @@ function showProductSizes(){
     });
 }
 
-function showCustomers(){
+function showResidents(){
     $.ajax({
-        url:"./adminView/viewCustomers.php",
+        url:"./admin_panel/resident_list.php",
         method:"post",
         data:{record:1},
         success:function(data){
