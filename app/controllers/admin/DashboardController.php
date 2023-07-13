@@ -7,7 +7,8 @@ class DashboardController {
     {
         $this->connection = $connection;
     }
-    public function index() {
+
+    public function users() {
         // Check the database connection
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);
@@ -31,22 +32,43 @@ class DashboardController {
         $rowResidence = $resultResidence->fetch_assoc();
         $totalResidences = $rowResidence['total_residences'];
     
-        // Pass the total users counts to the template
-        $data['totalUsers'] = $totalUsers;
-        $data['totalAdmins'] = $totalAdmins;
-        $data['totalResidences'] = $totalResidences;
-    
-        // Render the home page content
-        include 'templates/admin/dashboard.php';
-    
         // Close the database connections
         $result->close();
         $resultAdmin->close();
         $resultResidence->close();
-    }
     
+        // Return the data as an array
+        return [
+            'totalUsers' => $totalUsers,
+            'totalAdmins' => $totalAdmins,
+            'totalResidences' => $totalResidences
+        ];
+    }
 
-   
-  }
-  
+    public function attendance() {
+        // Check the database connection
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+
+        $query = "SELECT COUNT(*) AS attendee FROM attendance WHERE status = 'Present'";
+        $result = $this->connection->query($query);
+        $row = $result->fetch_assoc();
+        $totalPresentAttendee = $row['attendee'];
+
+        $query = "SELECT * FROM attendance ";
+        $resultTotal = $this->connection->query($query);
+        $rowTotal = $resultTotal->fetch_assoc();
+        $totalAttendee = $row['attendee'];
+    
+        // Close the database connection
+        $result->close();
+      
+        // Return the data as an array
+        return [
+            'totalPresentAttendee' => $totalPresentAttendee,
+            'totalAttendee' => $totalAttendee
+        ];
+    }
+}
 ?>

@@ -81,7 +81,7 @@ class UserManagementController {
                 if ($this->connection->query($query) === true) {
                     // Registration successful
                     echo "Registration successful";
-                    header("Location: ");
+                    header("Location: /eBrgy/app/user-management");
                     exit();
                 } else {
                     // Error occurred

@@ -85,6 +85,9 @@
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $baseUrl;?>/attendance">Attendance</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $baseUrl;?>/request-management">Request</a>
+        </li>
         <?php
         // Check the user's role from the session and conditionally show the "User Management" tab
         if ($_SESSION['role'] === 'captain') {
@@ -92,12 +95,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo $baseUrl;?>/user-management">User Management</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo $baseUrl;?>/settings">Settings</a>
+            </li>
             <?php
         }
         ?>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo $baseUrl;?>/request-management">Request</a>
-        </li>
+      
     </ul>
 </div>
 

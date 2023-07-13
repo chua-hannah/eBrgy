@@ -27,12 +27,10 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Requests</h3>
+                    <h3 class="card-title">Attendance</h3>
                 </div>
                 <div class="card-body">
-                    <p>Total Orders: 50</p>
-                    <p>Pending Orders: 10</p>
-                    <p>Completed Orders: 40</p>
+                   Present: <?php echo $data['totalPresentAttendee'] . '/' . $data['totalAttendee']; ?>
                 </div>
             </div>
         </div>

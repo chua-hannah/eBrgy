@@ -9,6 +9,7 @@ require_once 'controllers/admin/UserManagementController.php';
 require_once 'controllers/admin/DashboardController.php';
 require_once 'controllers/admin/RequestManagementController.php';
 require_once 'controllers/admin/AttendanceController.php';
+require_once 'controllers/admin/SettingsController.php';
 
 $userController = new UserController($connection);
 $homeController = new HomeController();
@@ -18,6 +19,7 @@ $profileController = new ProfileController();
 $userManagementController = new UserManagementController($connection);
 $requestManagementController = new RequestManagementController();
 $attendanceController = new AttendanceController($connection);
+$settingsController = new SettingsController($connection);
 
 $baseUrl = "http://localhost/eBrgy/app"; // Replace with your actual base URL
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -63,7 +65,7 @@ if ($filename === 'login') {
             // Admin-specific routes
             if ($filename === 'dashboard') {
                 includeAdminContent(function() use ($dashboardController) {
-                    $dashboardController->index();
+                    $dashboardController->users();
                 });
             }  else if ($filename === 'profile') {
                 includeAdminContent(function() use ($profileController) {
@@ -102,7 +104,11 @@ if ($filename === 'login') {
             // Captain-specific routes
             if ($filename === 'dashboard') {
                 includeAdminContent(function() use ($dashboardController) {
-                    $dashboardController->index();
+                    $userData = $dashboardController->users();
+                    $attendanceData = $dashboardController->attendance();
+                    $data = array_merge($userData, $attendanceData);
+                    // Pass the data to the template
+                    include 'templates/admin/dashboard.php';
                 });
             } else if ($filename === 'profile') {
                 includeAdminContent(function() use ($profileController) {
@@ -123,6 +129,11 @@ if ($filename === 'login') {
             }  else if ($filename === 'request-management') {
                 includeAdminContent(function() use ($requestManagementController) {
                     $requestManagementController->request_management();
+                });
+            }else if ($filename === 'settings') {
+                includeAdminContent(function() use ($settingsController) {
+                    $settingsController->attendance_setting();
+                    include 'templates/admin/settings.php';
                 });
             } else {
                 includeAdminHeaderFooter(function() use ($homeController) {
