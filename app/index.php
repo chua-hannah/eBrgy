@@ -12,12 +12,12 @@ require_once 'controllers/admin/AttendanceController.php';
 require_once 'controllers/admin/SettingsController.php';
 
 $userController = new UserController($connection);
-$homeController = new HomeController();
+$homeController = new HomeController($connection);
 //Admin Controllers
 $dashboardController = new DashboardController($connection);
-$profileController = new ProfileController();
+$profileController = new ProfileController($connection);
 $userManagementController = new UserManagementController($connection);
-$requestManagementController = new RequestManagementController();
+$requestManagementController = new RequestManagementController($connection);
 $attendanceController = new AttendanceController($connection);
 $settingsController = new SettingsController($connection);
 
@@ -61,7 +61,7 @@ if ($filename === 'login') {
     $role = isset($_SESSION['role']) ? $_SESSION['role'] : null; 
     if ($user && $role) {
         // User is logged in, check their role
-        if ($role === 'admin') {
+        if ($role === 'kagawad') {
             // Admin-specific routes
             if ($filename === 'dashboard') {
                 includeAdminContent(function() use ($dashboardController) {
@@ -90,9 +90,20 @@ if ($filename === 'login') {
                 includeHeaderFooter(function() use ($homeController) {
                     $homeController->index();
                 });
-            } else if ($filename === 'profile') {
-                includeHeaderFooter(function() use ($profileController) {
-                    $profileController->profile();
+            }
+            else if ($filename === 'officials') {
+                includeHeaderFooter(function() use ($homeController) {
+                    $homeController->officials();
+                });
+            }
+            else if ($filename === 'services') {
+                includeHeaderFooter(function() use ($homeController) {
+                    $homeController->services();
+                });
+            }
+            else if ($filename === 'contact') {
+                includeHeaderFooter(function() use ($homeController) {
+                    $homeController->contact();
                 });
             } else {
                 // Handle other residence routes or redirect to default page

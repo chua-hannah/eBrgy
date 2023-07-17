@@ -11,9 +11,11 @@ $users = UserManagementController::user_management();
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Username</th>
                     <th>Email</th>
                     <th>Fullname</th>
+                    <th>Age</th>
+                    <th>Sex</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,6 +25,8 @@ $users = UserManagementController::user_management();
                         <td><?php echo $user['username']; ?></td>
                         <td><?php echo $user['email']; ?></td>
                         <td><?php echo $user['fullname']; ?></td>
+                        <td><?php echo $user['age']; ?></td>
+                        <td><?php echo $user['sex']; ?></td>
                         <td><?php echo $user['role']; ?></td>
                         <td>
                             <div class="btn-group">

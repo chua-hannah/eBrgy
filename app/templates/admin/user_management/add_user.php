@@ -10,17 +10,21 @@
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="fullname" placeholder="Full name" required>
         <input type="text" name="age" placeholder="Age" required>
-
+        <select name="sex" required>
+            <option value="">Sex</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
         <!-- Add dropdown input -->
         <select name="role" required>
             <option value="">Select Role</option>
             <option value="captain">Captain</option>
-            <option value="admin">Admin</option>
+            <option value="kagawad">Kagawad</option>
         </select>
         <!-- End dropdown input -->
 
         <!-- Add more fields as needed -->
-        <button type="submit" name="add">Add</button>
+        <button type="submit" name="add-officials">Add</button>
     </form>
 </div>
 

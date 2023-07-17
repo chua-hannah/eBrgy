@@ -30,7 +30,7 @@
                     <h3 class="card-title">Attendance</h3>
                 </div>
                 <div class="card-body">
-                   Present: <?php echo $data['totalPresentAttendee'] . '/' . $data['totalAttendee']; ?>
+                   Present: <?php echo $data['totalPresentAttendee'] . '/' . $data['totalKagawad']; ?>
                 </div>
             </div>
         </div>

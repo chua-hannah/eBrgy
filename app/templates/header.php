@@ -18,20 +18,26 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="officials">Officials</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="services">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact">Contact</a>
-                </li>
-            </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="officials">Officials</a>
+            </li>
+            <?php
+                // Check if there is a logged-in user or session
+                if (isset($_SESSION['user_id'])) {
+                    echo '<li class="nav-item">
+                            <a class="nav-link" href="services">Services</a>
+                        </li>';
+                }
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="contact">Contact</a>
+            </li>
+        </ul>
+
             <ul class="navbar-nav">
     <?php
     if (isset($_SESSION['username'])) {

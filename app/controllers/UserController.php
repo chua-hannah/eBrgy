@@ -76,6 +76,7 @@ class UserController {
             $email = $_POST['email'];
             $fullname = $_POST['fullname'];
             $age = $_POST['age'];
+            $sex = $_POST['sex'];
     
             // Add more fields as needed
     
@@ -108,7 +109,7 @@ class UserController {
                 echo "Email already exists. Please choose a different one.";
             } else {
                 // Insert the data into the database
-                $query = "INSERT INTO users (username, password, email, fullname, age, role) VALUES ('$username', '$password', '$email', '$fullname', '$age', '$role')";
+                $query = "INSERT INTO users (username, password, email, fullname, age, sex, role) VALUES ('$username', '$password', '$email', '$fullname', '$age', '$sex', '$role')";
                 if ($this->connection->query($query) === true) {
                     // Registration successful
                     echo "Registration successful";

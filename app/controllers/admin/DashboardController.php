@@ -50,25 +50,32 @@ class DashboardController {
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);
         }
-
-        $query = "SELECT COUNT(*) AS attendee FROM attendance WHERE status = 'Present'";
+    
+        // Get the current date
+        $currentDate = date("Y-m-d");
+    
+        // Query to count the number of attendees present today
+        $query = "SELECT COUNT(*) AS attendee FROM attendance WHERE status = 'Present' AND DATE(date) = '$currentDate'";
         $result = $this->connection->query($query);
         $row = $result->fetch_assoc();
         $totalPresentAttendee = $row['attendee'];
-
-        $query = "SELECT * FROM attendance ";
-        $resultTotal = $this->connection->query($query);
+    
+        // Query to count the total number of attendees for today
+        $queryTotal = "SELECT COUNT(*) AS totalKagawad FROM users WHERE role = 'kagawad'";
+        $resultTotal = $this->connection->query($queryTotal);
         $rowTotal = $resultTotal->fetch_assoc();
-        $totalAttendee = $row['attendee'];
+        $totalKagawad = $rowTotal['totalKagawad'];
     
         // Close the database connection
         $result->close();
-      
+        $resultTotal->close();
+    
         // Return the data as an array
         return [
             'totalPresentAttendee' => $totalPresentAttendee,
-            'totalAttendee' => $totalAttendee
+            'totalKagawad' => $totalKagawad
         ];
     }
+    
 }
 ?>

@@ -14,7 +14,7 @@ class UserManagementController {
     }
     public function user_management() {
          // Prepare and execute the query
-         $query = "SELECT * FROM users";
+         $query = "SELECT * FROM users WHERE role != 'captain'";
          $result = $this->connection->query($query);
  
          // Fetch all user records as an associative array
@@ -36,17 +36,15 @@ class UserManagementController {
 
     public function add()
     {
-       
-        if (isset($_POST['add'])) {
+        if (isset($_POST['add-officials'])) {
             // Retrieve the submitted form data
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
             $fullname = $_POST['fullname'];
             $age = $_POST['age'];
+            $sex = $_POST['sex'];
             $role = $_POST['role'];
-    
-            // Add more fields as needed
     
             // Check if the username or email already exists in the database
             $query = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
@@ -76,16 +74,25 @@ class UserManagementController {
                 // Email already exists, display an error message
                 echo "Email already exists. Please choose a different one.";
             } else {
-                // Insert the data into the database
-                $query = "INSERT INTO users (username, password, email, fullname, age, role) VALUES ('$username', '$password', '$email', '$fullname', '$age', '$role')";
-                if ($this->connection->query($query) === true) {
-                    // Registration successful
-                    echo "Registration successful";
-                    header("Location: /eBrgy/app/user-management");
-                    exit();
+                // Check if there are already 7 users with the role 'kagawad'
+                $kagawadCountQuery = "SELECT COUNT(*) AS count FROM users WHERE role = 'kagawad'";
+                $kagawadCountResult = $this->connection->query($kagawadCountQuery);
+                $kagawadCount = $kagawadCountResult->fetch_assoc()['count'];
+    
+                if ($role === 'kagawad' && $kagawadCount >= 7) {
+                    echo "Maximum number of kagawad users reached.";
                 } else {
-                    // Error occurred
-                    echo "Error: " . $this->connection->error;
+                    // Insert the data into the database
+                    $query = "INSERT INTO users (username, password, email, fullname, age, sex, role) VALUES ('$username', '$password', '$email', '$fullname', '$age', '$sex', '$role')";
+                    if ($this->connection->query($query) === true) {
+                        // Registration successful
+                        echo "Registration successful";
+                        header("Location: /eBrgy/app/user-management");
+                        exit();
+                    } else {
+                        // Error occurred
+                        echo "Error: " . $this->connection->error;
+                    }
                 }
             }
         }
@@ -93,6 +100,7 @@ class UserManagementController {
         // Render the register page content
         include 'templates/admin/user_management/add_user.php';
     }
+    
   }
   
 ?>
