@@ -47,7 +47,7 @@ class UserController {
                 case 'captain':
                     header("Location: dashboard");
                     exit();
-                case 'admin':
+                case 'kagawad':
                     header("Location: dashboard");
                     exit();
                 default:

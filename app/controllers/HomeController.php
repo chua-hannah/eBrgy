@@ -8,7 +8,7 @@ class HomeController {
       $this->connection = $connection;
   }
 
-    public function index() {
+    public function home() {
       // Render the home page content
       include 'templates/home.php';
     }
@@ -44,9 +44,39 @@ class HomeController {
       include 'templates/services.php';
     }
     public function contact() {
-      // Render the home page content
+      if (isset($_POST['submit_message'])) {
+          date_default_timezone_set('Asia/Manila');
+          $firstname = $_POST['firstname'];
+          $lastname = $_POST['lastname'];
+          $email = $_POST['email'];
+          $mobile = $_POST['mobile'];
+          $subject = $_POST['subject'];
+          $contact_message = $_POST['contact_message'];
+          $date = date('Y-m-d');
+          $time_in = date('H:i:s'); // Philippine time
+  
+          // Combine date and time into a single datetime string
+          $datetime = $date . ' ' . $time_in;
+  
+          // Use prepared statement to insert data into the database
+          $query = "INSERT INTO messages (firstname, lastname, email, mobile, subject, contact_message, created_at) VALUES ('$firstname', '$lastname', '$email', '$mobile', '$subject', '$contact_message', '$created_at')";
+  
+          // Prepare the statement
+          if ($this->connection->query($query) === true) {
+            // Registration successful
+            echo "Message sent successful";
+            header("Location: contact");
+            exit();
+        } else {
+            // Error occurred
+            echo "Error: " . $this->connection->error;
+        }
+      }
+  
+      // Render the contact page content
       include 'templates/contact.php';
-    }
+  }
+  
     public function admin() {
       // Render the home page content
       include 'templates/admin/dashboard.php';
