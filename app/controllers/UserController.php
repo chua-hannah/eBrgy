@@ -29,6 +29,8 @@ class UserController {
             // User exists, login successful
             $user = $result->fetch_assoc();
             $username = $user['username'];
+            $email = $user['email'];
+            $mobile = $user['mobile'];
             $user_id = $user['user_id'];
             $role = $user['role'];
             $fullname = $user['fullname'];
@@ -37,6 +39,8 @@ class UserController {
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $user_id;
             $_SESSION['role'] = $role;
+            $_SESSION['mobile'] = $mobile;
+            $_SESSION['email'] = $email;
             $_SESSION['fullname'] = $fullname;
 
             // Redirect to appropriate page based on user role
@@ -74,6 +78,7 @@ class UserController {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
+            $mobile = $_POST['mobile'];
             $fullname = $_POST['fullname'];
             $age = $_POST['age'];
             $sex = $_POST['sex'];
@@ -81,11 +86,12 @@ class UserController {
             // Add more fields as needed
     
             // Check if the username or email already exists in the database
-            $query = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
+            $query = "SELECT * FROM users WHERE username = '$username' OR email = '$email' OR mobile = '$mobile'";
             $result = $this->connection->query($query);
     
             $existingUsername = false;
             $existingEmail = false;
+            $existingMobile = false;
     
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -95,21 +101,27 @@ class UserController {
                     if ($row['email'] == $email) {
                         $existingEmail = true;
                     }
+                    if ($row['mobile'] == $mobile) {
+                        $existingEmail = true;
+                    }
                 }
             }
     
-            if ($existingUsername && $existingEmail) {
+            if ($existingUsername && $existingEmail && $existingMobile) {
                 // Both username and email already exist, display an error message
-                echo "Username and email already exist. Please choose different ones.";
+                echo "Username , email and mobile already exist. Please choose different ones.";
             } elseif ($existingUsername) {
                 // Username already exists, display an error message
                 echo "Username already exists. Please choose a different one.";
             } elseif ($existingEmail) {
                 // Email already exists, display an error message
                 echo "Email already exists. Please choose a different one.";
-            } else {
+            } elseif ($$existingMobile) {
+                // Email already exists, display an error message
+                echo "Mobile already exists. Please choose a different one.";
+            }else {
                 // Insert the data into the database
-                $query = "INSERT INTO users (username, password, email, fullname, age, sex, role) VALUES ('$username', '$password', '$email', '$fullname', '$age', '$sex', '$role')";
+                $query = "INSERT INTO users (username, password, email, mobile, fullname, age, sex, role) VALUES ('$username', '$password', '$email', '$mobile', '$fullname', '$age', '$sex', '$role')";
                 if ($this->connection->query($query) === true) {
                     // Registration successful
                     echo "Registration successful";

@@ -105,10 +105,26 @@ switch ($filename) {
                     switch ($filename) {
                         case 'home':
                         case 'officials':
-                        case 'services':
                         case 'contact':
+                      
                             includeHeaderFooter(function() use ($homeController, $filename) {
                                 $homeController->$filename();
+                            });
+                            break;
+                        case 'profile':
+                            includeHeaderFooter(function() use ($profileController, $filename) {
+                                $profileController->$filename();
+                            });
+                            break;
+                        case 'services':
+                            includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
+                                $fullname = $_SESSION['fullname'];
+                                $mobile = $_SESSION['mobile'];
+                                $email = $_SESSION['email'];
+                                $homeController->$filename();
+                                $requests = $settingsController->get_request_settings(); // Call the function here
+                                $myrequest = $homeController->get_user_requests($fullname, $mobile, $email);
+                                include 'templates/services.php';
                             });
                             break;
                         default:
@@ -152,11 +168,14 @@ switch ($filename) {
                         case 'request-management':
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requestManagementController->request_management();
+                                
                             });
                             break;
                         case 'settings':
                             includeAdminContent(function() use ($settingsController) {
                                 $settingsController->attendance_setting();
+                                $settingsController->request_setting();
+                                $requests = $settingsController->get_request_settings();
                                 include 'templates/admin/settings.php';
                             });
                             break;
@@ -178,7 +197,6 @@ switch ($filename) {
             switch ($filename) {
                 case 'home':
                 case 'officials':
-                case 'services':
                 case 'contact':
                     includeHeaderFooter(function() use ($homeController, $filename) {
                         $homeController->$filename();

@@ -5,6 +5,7 @@
     <input type="text" name="username" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
     <input type="email" name="email" placeholder="Email" required>
+    <input type="mobile" name="mobile" placeholder="Mobile number" required>
     <input type="text" name="fullname" placeholder="Full name" required>
     <input type="text" name="age" placeholder="Age" required>
     <select name="sex" required>

@@ -18,7 +18,7 @@ class HomeController {
           die("Connection failed: " . $this->connection->error);
       }
   
-      $query = "SELECT * FROM users WHERE role = 'kagawad'";
+      $query = "SELECT * FROM users WHERE role = 'captain' OR role = 'kagawad'";
       $result = $this->connection->query($query);
   
       // Fetch all user records as an associative array
@@ -41,8 +41,82 @@ class HomeController {
   
     public function services() {
       // Render the home page content
-      include 'templates/services.php';
+      if (isset($_POST['request_service'])) {
+          date_default_timezone_set('Asia/Manila');
+          $request_type_id = $_POST['request_type_id'];
+          $fullname = $_SESSION['fullname'];
+          $email = $_SESSION['email'];
+          $mobile = $_SESSION['mobile'];
+          $status = 'pending';
+          $request_name = $_POST['selected_service'];
+          $service_message = $_POST['service_message'];
+          $date = date('Y-m-d');
+          $time_in = date('H:i:s'); // Philippine time
+
+          // Combine date and time into a single datetime string
+          $datetime = $date . ' ' . $time_in;
+
+          // Check if a similar request already exists
+          $checkQuery = "SELECT COUNT(*) as count FROM user_requests WHERE request_type_id = ? AND fullname = ? AND email = ? AND mobile = ?";
+          $stmt = $this->connection->prepare($checkQuery);
+          $stmt->bind_param('isss', $request_type_id, $fullname, $email, $mobile);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          $row = $result->fetch_assoc();
+          $count = $row['count'];
+
+          if ($count > 0) {
+              // A similar request already exists
+              echo "Error: You have already submitted a similar request.";
+          } else {
+              // Use prepared statement to insert data into the database
+              $query = "INSERT INTO user_requests (request_type_id, request_name, fullname, email, mobile, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+              $stmt = $this->connection->prepare($query);
+              $stmt->bind_param('isssssss', $request_type_id, $request_name, $fullname, $email, $mobile, $service_message, $status, $datetime);
+              if ($stmt->execute()) {
+                  // Request sent successfully
+                  echo "Request sent successfully";
+                  header("Location: services");
+                  exit();
+              } else {
+                  // Error occurred
+                  echo "Error: " . $this->connection->error;
+              }
+          }
+      }
+  }
+
+      public function get_user_requests($fullname, $mobile, $email) {
+        
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+
+        // Use prepared statement to prevent SQL injection
+        $query = "SELECT * FROM user_requests WHERE fullname = ? AND mobile = ? AND email = ?";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param('sss', $fullname, $mobile, $email);
+        $stmt->execute();
+
+        // Fetch all request settings records as an associative array
+        $result = $stmt->get_result();
+        $myrequests = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $myrequests[] = $row;
+            }
+        }
+
+        // Close the prepared statement
+        $stmt->close();
+
+        // Return the fetched request settings data
+        return $myrequests;
     }
+
+
+
+
     public function contact() {
       if (isset($_POST['submit_message'])) {
           date_default_timezone_set('Asia/Manila');
