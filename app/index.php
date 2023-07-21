@@ -86,6 +86,8 @@ switch ($filename) {
                         case 'attendance':
                             includeAdminContent(function() use ($attendanceController) {
                                 $attendanceController->attendance();
+                                $my_attendance = $attendanceController->my_attendance();
+                                include 'templates/admin/attendance/attendance.php';
                             });
                             break;
                         case 'request-management':
@@ -153,6 +155,8 @@ switch ($filename) {
                         case 'attendance':
                             includeAdminContent(function() use ($attendanceController) {
                                 $attendanceController->attendance();
+                                $my_attendance = $attendanceController->my_attendance();
+                                include 'templates/admin/attendance/attendance.php';
                             });
                             break;
                         case 'user-management':
