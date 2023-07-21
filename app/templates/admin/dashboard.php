@@ -15,12 +15,12 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Inventory</h3>
+                    <h3 class="card-title">Request</h3>
                 </div>
                 <div class="card-body">
-                    <p>Total Sales: $10,000</p>
-                    <p>Monthly Sales: $2,000</p>
-                    <p>Daily Sales: $100</p>
+                <div>Pending: <?php echo $data['totalPending']; ?></div>
+                <div>Approved: <?php echo $data['totalApproved']; ?></div>
+                <div>Rejected: <?php echo $data['totalRejected']; ?></div>
                 </div>
             </div>
         </div>
@@ -30,7 +30,8 @@
                     <h3 class="card-title">Attendance</h3>
                 </div>
                 <div class="card-body">
-                   Present: <?php echo $data['totalPresentAttendee'] . '/' . $data['totalKagawad']; ?>
+                   <div>Present: <?php echo $data['totalPresentAttendee'] . '/' . $data['totalKagawad']; ?></div>
+                   <div>Late: <?php echo $data['totalLateAttendee'] . '/' . $data['totalKagawad']; ?></div>
                 </div>
             </div>
         </div>
