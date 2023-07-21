@@ -171,7 +171,8 @@ switch ($filename) {
                             break;
                         case 'request-management':
                             includeAdminContent(function() use ($requestManagementController) {
-                                $requestManagementController->request_management();
+                                $requests = $requestManagementController->request_management();
+                                include 'templates/admin/request_management.php';
                                 
                             });
                             break;
