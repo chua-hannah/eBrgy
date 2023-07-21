@@ -154,7 +154,7 @@ switch ($filename) {
                             break;
                         case 'attendance':
                             includeAdminContent(function() use ($attendanceController) {
-                                $attendanceController->attendance();
+                                $attendanceData = $attendanceController->attendance();
                                 $my_attendance = $attendanceController->my_attendance();
                                 include 'templates/admin/attendance/attendance.php';
                             });

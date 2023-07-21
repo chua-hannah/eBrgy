@@ -1,10 +1,11 @@
 <form method="POST" action="">
-    <?php if ($_SESSION['isCheckIn'] && !$_SESSION['isCheckOut']): ?>
-        <button type="submit" name="check_out" class="btn btn-danger">Check-out</button>
+    <?php if ($_SESSION['isCheckIn'] && $_SESSION['isCheckOut']): ?>
+        <button type="button" class="btn btn-secondary" disabled>Checked-in and Checked-out</button>
+       
     <?php elseif (!$_SESSION['isCheckIn']): ?>
         <button type="submit" name="check_in" class="btn btn-primary">Check-in</button>
-    <?php else: ?>
-        <button type="button" class="btn btn-secondary" disabled>Checked-in and Checked-out</button>
+    <?php elseif ($_SESSION['isCheckIn'] && !$_SESSION['isCheckOut']): ?>
+        <button type="submit" name="check_out" class="btn btn-danger">Check-out</button>
     <?php endif; ?>
 </form>
 

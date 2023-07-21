@@ -26,13 +26,31 @@ class AttendanceController {
     $date = date('Y-m-d');
     $time_in = date('H:i:s'); // Philippine time
 
-    // Check if the user has already checked in or checked out for the current date
-    $query = "SELECT id FROM attendance WHERE user_id = '$employeeId' AND date = '$date'";
-    $result = $this->connection->query($query);
-
-    // Initialize the flags based on the query results
-    $isCheckIn = ($result->num_rows > 0);
-    $isCheckOut = false;
+     // Check if the user has already checked in or checked out for the current date
+     $query = "SELECT time_in, time_out FROM attendance WHERE user_id = '$employeeId' AND date = '$date'";
+     $result = $this->connection->query($query);
+     $attendanceData = $result->fetch_assoc();
+     if(!empty($attendanceData['time_in']))
+     {
+        $time_in_db = $attendanceData['time_in'];
+     }
+     else
+     {
+        $time_in_db = null;
+     }
+     if(!empty($attendanceData['time_out']))
+     {
+        $time_out_db = $attendanceData['time_out'];
+     }
+     else
+     {
+        $time_out_db = null;
+     }
+    
+ 
+     // Initialize the flags based on the query results
+     $isCheckIn = ($time_in_db !== null);
+     $isCheckOut = ($time_out_db !== null);
 
     if (isset($_POST['check_in'])) {
         if (!$isCheckIn) {
@@ -96,6 +114,8 @@ class AttendanceController {
     // Save the updated flag values in session variables
     $_SESSION['isCheckIn'] = $isCheckIn;
     $_SESSION['isCheckOut'] = $isCheckOut;
+
+  
 }
 
     
