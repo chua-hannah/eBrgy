@@ -2,31 +2,22 @@
         <h1>Services</h1>
         <p>This is a sample home page for your website.</p>
         <form action="" method="post">
-        <?php
-    foreach ($requests as $request) {
-        // Display the data for each request
-        ?>
-        <input type="hidden" name="request_type_id" value="<?php echo $request['request_type_id']; ?>">
-        <?php
-    }
-    ?>
-        
     <select name="selected_service" required>
-    <option value="">Choose a service</option>
-    <?php
-    foreach ($requests as $request) {
-        // Display the data for each request
-        ?>
-        <option value="<?php echo $request['request_name']; ?>"><?php echo $request['request_name']; ?></option>    
+        <option value="">Choose a service</option>
         <?php
-    }
-    ?>
-           
-        </select>
+        foreach ($requests as $request) {
+            // Display the data for each request
+            ?>
+            <option value="<?php echo $request['request_name']; ?>"><?php echo $request['request_name']; ?></option>    
+            <?php
+        }
+        ?>
+    </select>
     <textarea name="service_message" placeholder="Message" required></textarea>
     <!-- Add more fields as needed -->
     <button type="submit" name="request_service">Submit</button>
 </form>
+
 <!-- templates/services.php -->
 <div>
     <h1>My Requests</h1>

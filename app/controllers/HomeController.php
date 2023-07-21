@@ -39,52 +39,53 @@ class HomeController {
       return $users;
   }
   
-    public function services() {
-      // Render the home page content
-      if (isset($_POST['request_service'])) {
-          date_default_timezone_set('Asia/Manila');
-          $request_type_id = $_POST['request_type_id'];
-          $fullname = $_SESSION['fullname'];
-          $email = $_SESSION['email'];
-          $mobile = $_SESSION['mobile'];
-          $status = 'pending';
-          $request_name = $_POST['selected_service'];
-          $service_message = $_POST['service_message'];
-          $date = date('Y-m-d');
-          $time_in = date('H:i:s'); // Philippine time
+  public function services() {
+    // Render the home page content
+    if (isset($_POST['request_service'])) {
+        date_default_timezone_set('Asia/Manila');
+        $fullname = $_SESSION['fullname'];
+        $email = $_SESSION['email'];
+        $mobile = $_SESSION['mobile'];
+        $status = 'pending';
+        $request_name = $_POST['selected_service'];
+        $service_message = $_POST['service_message'];
+        $date = date('Y-m-d');
+        $time_in = date('H:i:s'); // Philippine time
 
-          // Combine date and time into a single datetime string
-          $datetime = $date . ' ' . $time_in;
+        // Combine date and time into a single datetime string
+        $datetime = $date . ' ' . $time_in;
 
-          // Check if a similar request already exists
-          $checkQuery = "SELECT COUNT(*) as count FROM user_requests WHERE request_type_id = ? AND fullname = ? AND email = ? AND mobile = ?";
-          $stmt = $this->connection->prepare($checkQuery);
-          $stmt->bind_param('isss', $request_type_id, $fullname, $email, $mobile);
-          $stmt->execute();
-          $result = $stmt->get_result();
-          $row = $result->fetch_assoc();
-          $count = $row['count'];
+        // Check if a similar request already exists based on request_name, fullname, email, and mobile
+        $checkQuery = "SELECT COUNT(*) as count FROM user_requests WHERE request_name = ? AND fullname = ? AND email = ? AND mobile = ?";
+        $stmt = $this->connection->prepare($checkQuery);
+        $stmt->bind_param('ssss', $request_name, $fullname, $email, $mobile);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $count = $row['count'];
 
-          if ($count > 0) {
-              // A similar request already exists
-              echo "Error: You have already submitted a similar request.";
-          } else {
-              // Use prepared statement to insert data into the database
-              $query = "INSERT INTO user_requests (request_type_id, request_name, fullname, email, mobile, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-              $stmt = $this->connection->prepare($query);
-              $stmt->bind_param('isssssss', $request_type_id, $request_name, $fullname, $email, $mobile, $service_message, $status, $datetime);
-              if ($stmt->execute()) {
-                  // Request sent successfully
-                  echo "Request sent successfully";
-                  header("Location: services");
-                  exit();
-              } else {
-                  // Error occurred
-                  echo "Error: " . $this->connection->error;
-              }
-          }
-      }
-  }
+        if ($count === 0) {
+            // No similar request exists with the same fullname, email, mobile, and request_name
+            // Proceed to insert the new request into the database
+            $query = "INSERT INTO user_requests (request_name, fullname, email, mobile, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('sssssss', $request_name, $fullname, $email, $mobile, $service_message, $status, $datetime);
+            if ($stmt->execute()) {
+                // Request sent successfully
+                echo "Request sent successfully";
+                header("Location: services");
+                exit();
+            } else {
+                // Error occurred
+                echo "Error: " . $this->connection->error;
+            }
+        } else {
+            // A similar request already exists with the same fullname, email, mobile, and request_name
+            echo "Error: Similar request already exists.";
+        }
+    }
+}
+
 
       public function get_user_requests($fullname, $mobile, $email) {
         
