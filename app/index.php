@@ -72,9 +72,10 @@ switch ($filename) {
                     switch ($filename) {
                         case 'dashboard':
                             includeAdminContent(function() use ($dashboardController) {
-                                $userData = $dashboardController->users();
-                                $attendanceData = $dashboardController->attendance();
-                                $data = array_merge($userData, $attendanceData);
+                                $userData = $dashboardController->users_count();
+                                $attendanceData = $dashboardController->attendance_count();
+                                $requestData = $dashboardController->request_count();
+                                $data = array_merge($userData, $attendanceData, $requestData);
                                 include 'templates/admin/dashboard.php';
                             });
                             break;
@@ -85,14 +86,17 @@ switch ($filename) {
                             break;
                         case 'attendance':
                             includeAdminContent(function() use ($attendanceController) {
-                                $attendanceController->attendance();
+                                $attendanceData = $attendanceController->attendance();
                                 $my_attendance = $attendanceController->my_attendance();
+                                $office_time = $attendanceController->get_time_settings();
+                              
                                 include 'templates/admin/attendance/attendance.php';
                             });
                             break;
                         case 'request-management':
                             includeAdminContent(function() use ($requestManagementController) {
-                                $requestManagementController->request_management();
+                                $requests = $requestManagementController->request_management();
+                                include 'templates/admin/request_management.php';
                             });
                             break;
                         default:

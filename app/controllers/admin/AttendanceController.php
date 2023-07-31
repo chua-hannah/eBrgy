@@ -146,11 +146,6 @@ class AttendanceController {
             $my_attendance_data[] = $row;
         }
     }
-
-    // Close the database connection
-
-
-    // Return the attendance data
     return $my_attendance_data;
     }
 

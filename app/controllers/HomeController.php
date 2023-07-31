@@ -29,9 +29,6 @@ class HomeController {
           }
       }
   
-      // Close the database connection
-      $result->close();
-  
       // Render the home page content
       include 'templates/officials.php';
   
@@ -107,9 +104,6 @@ class HomeController {
                 $myrequests[] = $row;
             }
         }
-
-        // Close the prepared statement
-        $stmt->close();
 
         // Return the fetched request settings data
         return $myrequests;

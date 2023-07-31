@@ -32,11 +32,6 @@ class DashboardController {
         $rowResidence = $resultResidence->fetch_assoc();
         $totalResidences = $rowResidence['total_residences'];
     
-        // Close the database connections
-        $result->close();
-        $resultAdmin->close();
-        $resultResidence->close();
-    
         // Return the data as an array
         return [
             'totalUsers' => $totalUsers,
@@ -71,10 +66,7 @@ class DashboardController {
         $rowTotal = $resultTotal->fetch_assoc();
         $totalKagawad = $rowTotal['totalKagawad'];
     
-        // Close the database connection
-        $resultPresent->close();
-        $resultLate->close();
-        $resultTotal->close();
+     
        
         // Return the data as an array
         return [
@@ -109,10 +101,7 @@ class DashboardController {
         $rowRejected = $resultRejected->fetch_assoc();
         $totalRejected = $rowRejected['rejected'];
     
-        // Close the database connection
-        $resultPending->close();
-        $resultApproved->close();
-        $resultRejected->close();
+    
        
         // Return the data as an array
         return [

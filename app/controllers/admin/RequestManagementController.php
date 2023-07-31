@@ -31,10 +31,6 @@ class RequestManagementController {
             $all_request[] = $row;
         }
     }
-
-    // Close the prepared statement
-    $stmt->close();
-
     // Return the fetched request settings data
     return $all_request;
     }

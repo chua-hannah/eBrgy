@@ -25,9 +25,6 @@ class UserManagementController {
              }
          }
  
-         // Close the database connection
-         $result->close();
- 
          // Return the fetched user data
          return $users;
       // Render the home page content

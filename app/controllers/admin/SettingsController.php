@@ -100,9 +100,6 @@ class SettingsController {
             }
         }
     
-        // Close the database connection
-        $result->close();
-    
         // Return the fetched request settings data
         return $requests;
     }
@@ -122,9 +119,6 @@ class SettingsController {
                 $office_time[] = $row; 
             }
         }
-    
-        // Close the database connection
-        $result->close();
     
         // Return the fetched request settings data
         return $office_time;

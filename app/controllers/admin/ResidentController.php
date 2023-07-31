@@ -49,4 +49,4 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 // Fetch customers for display
 $residents = $resident->getResidents();
 
-$resident->closeConnection();
+
