@@ -1,3 +1,37 @@
+    <div>
+         Office Time
+        <div>
+            <?php
+          
+            if (!empty($office_time)) {
+            ?>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Time in</th>
+                            <th>Time out</th>
+                            <th>Late Thereshold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                   
+                        <tr>
+                            <td><?php echo $office_time['work_hours_start']; ?></td>
+                            <td><?php echo $office_time['work_hours_end']; ?></td>
+                            <td><?php echo $office_time['late_threshold'];  ?></td>
+                        </tr>
+                  
+                    </tbody>
+                </table>
+            <?php
+            } else {
+                // Display a message if no records are found
+                echo "No Data Available.";
+            }
+            ?>
+        </div>
+    </div>
+
 <form method="POST" action="">
     <?php if ($_SESSION['isCheckIn'] && $_SESSION['isCheckOut']): ?>
         <button type="button" class="btn btn-secondary" disabled>Checked-in and Checked-out</button>

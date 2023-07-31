@@ -157,6 +157,8 @@ switch ($filename) {
                             includeAdminContent(function() use ($attendanceController) {
                                 $attendanceData = $attendanceController->attendance();
                                 $my_attendance = $attendanceController->my_attendance();
+                                $office_time = $attendanceController->get_time_settings();
+                              
                                 include 'templates/admin/attendance/attendance.php';
                             });
                             break;
@@ -182,6 +184,7 @@ switch ($filename) {
                                 $settingsController->attendance_setting();
                                 $settingsController->request_setting();
                                 $requests = $settingsController->get_request_settings();
+                                $office_time = $settingsController->get_time_settings();
                                 include 'templates/admin/settings.php';
                             });
                             break;
@@ -214,5 +217,7 @@ switch ($filename) {
             }
         }
         break;
+      
 }
+$connection->close();
 ?>

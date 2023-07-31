@@ -148,7 +148,7 @@ class AttendanceController {
     }
 
     // Close the database connection
-    $this->connection->close();
+
 
     // Return the attendance data
     return $my_attendance_data;
@@ -160,6 +160,22 @@ class AttendanceController {
           return $this->isCheckIn;
       }
   
+
+      public function get_time_settings() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+    
+        $query = "SELECT * FROM time_settings"; // Use LIMIT 1 to get only one row
+        $result = $this->connection->query($query);
+    
+        // Fetch the time settings record as an associative array
+        $office_time = $result->fetch_assoc();
+   
+        return $office_time;
+     
+    }
+    
   }
   
 ?>

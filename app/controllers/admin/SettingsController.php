@@ -106,6 +106,30 @@ class SettingsController {
         // Return the fetched request settings data
         return $requests;
     }
+
+    public function get_time_settings() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+    
+        $query = "SELECT * FROM time_settings";
+        $result = $this->connection->query($query);
+    
+        // Fetch all request settings records as an associative array
+        $office_time = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $office_time[] = $row; 
+            }
+        }
+    
+        // Close the database connection
+        $result->close();
+    
+        // Return the fetched request settings data
+        return $office_time;
+    }
+    
     
     
 }
