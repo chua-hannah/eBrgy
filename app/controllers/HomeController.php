@@ -128,7 +128,7 @@ class HomeController {
           $datetime = $date . ' ' . $time_in;
   
           // Use prepared statement to insert data into the database
-          $query = "INSERT INTO messages (firstname, lastname, email, mobile, subject, contact_message, created_at) VALUES ('$firstname', '$lastname', '$email', '$mobile', '$subject', '$contact_message', '$created_at')";
+          $query = "INSERT INTO messages (firstname, lastname, email, mobile, subject, contact_message, created_at) VALUES ('$firstname', '$lastname', '$email', '$mobile', '$subject', '$contact_message', '$datetime')";
   
           // Prepare the statement
           if ($this->connection->query($query) === true) {

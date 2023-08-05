@@ -100,10 +100,8 @@ switch ($filename) {
                             });
                             break;
                         default:
-                            includeAdminHeaderFooter(function() use ($homeController) {
-                                $homeController->admin();
-                            });
-                            break;
+                        header("Location: " . $baseUrl . "/dashboard");
+                        exit;
                     }
                     break;
 
@@ -134,10 +132,8 @@ switch ($filename) {
                             });
                             break;
                         default:
-                            includeHeaderFooter(function() use ($homeController) {
-                                $homeController->index();
-                            });
-                            break;
+                        header("Location: " . $baseUrl . "/home");
+                        exit;
                     }
                     break;
 
@@ -193,16 +189,15 @@ switch ($filename) {
                             });
                             break;
                         default:
-                            includeAdminHeaderFooter(function() use ($homeController) {
-                                $homeController->admin();
-                            });
-                            break;
+                            
+                        header("Location: " . $baseUrl . "/dashboard");
+                        exit;
                     }
                     break;
 
                 default:
                     includeHeaderFooter(function() use ($homeController) {
-                        $homeController->index();
+                        $homeController->home();
                     });
                     break;
             }

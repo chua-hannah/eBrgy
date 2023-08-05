@@ -30,7 +30,8 @@
                 if (isset($_SESSION['user_id'])) {
                     echo '<li class="nav-item">
                             <a class="nav-link" href="services">Services</a>
-                        </li>';
+                        </li>
+                        ';
                 }
             ?>
             <li class="nav-item">

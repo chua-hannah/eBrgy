@@ -2,7 +2,7 @@
          Office Time
         <div>
             <?php
-          
+           
             if (!empty($office_time)) {
             ?>
                 <table class="table table-bordered table-striped">
@@ -31,10 +31,24 @@
             ?>
         </div>
     </div>
+<?php  
+date_default_timezone_set('Asia/Manila');
 
+// Get the current time in Philippine Time as a timestamp
+$current_time_timestamp = time();
+
+// Convert the 'work_hours_end' string to a timestamp
+$work_hours_start_timestamp = strtotime(date('Y-m-d') . ' ' . $office_time['work_hours_start']);
+$work_hours_end_timestamp = strtotime(date('Y-m-d') . ' ' . $office_time['work_hours_end']);
+
+var_dump($current_time_timestamp, $work_hours_end_timestamp); ?>
 <form method="POST" action="">
-    <?php if ($_SESSION['isCheckIn'] && $_SESSION['isCheckOut']): ?>
-        <button type="button" class="btn btn-secondary" disabled>Checked-in and Checked-out</button>
+    <?php if (
+    ($_SESSION['isCheckIn'] && $_SESSION['isCheckOut']) ||
+   ( $current_time_timestamp > $work_hours_end_timestamp &&
+    $current_time_timestamp < strtotime(date('Y-m-d') . ' 23:59:59')) || ( $current_time_timestamp < $work_hours_start_timestamp &&
+    $current_time_timestamp > strtotime(date('Y-m-d') . ' 00:00:01'))): ?>
+        <button type="button" class="btn btn-secondary" disabled>Check in/out</button>
        
     <?php elseif (!$_SESSION['isCheckIn']): ?>
         <button type="submit" name="check_in" class="btn btn-primary">Check-in</button>
