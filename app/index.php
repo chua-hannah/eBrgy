@@ -127,7 +127,7 @@ switch ($filename) {
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();
                                 $requests = $settingsController->get_request_settings(); // Call the function here
-                                $myrequest = $homeController->get_user_requests($fullname, $mobile, $email);
+                                $myrequest = $homeController->get_doc_requests($fullname, $mobile, $email);
                                 include 'templates/services.php';
                             });
                             break;

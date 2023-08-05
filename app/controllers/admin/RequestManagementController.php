@@ -19,7 +19,7 @@ class RequestManagementController {
     }
 
     // Use prepared statement to prevent SQL injection
-    $query = "SELECT * FROM user_requests";
+    $query = "SELECT * FROM doc_requests";
     $stmt = $this->connection->prepare($query);
     $stmt->execute();
 

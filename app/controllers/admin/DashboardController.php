@@ -86,17 +86,17 @@ class DashboardController {
         $currentDate = date("Y-m-d");
     
         // Query to count the number of attendees present today
-        $queryPending = "SELECT COUNT(*) AS pending FROM user_requests WHERE status = 'pending'";
+        $queryPending = "SELECT COUNT(*) AS pending FROM doc_requests WHERE status = 'pending'";
         $resultPending = $this->connection->query($queryPending);
         $rowPending = $resultPending->fetch_assoc();
         $totalPending = $rowPending['pending'];
 
-        $queryApproved = "SELECT COUNT(*) AS approved FROM user_requests WHERE status = 'approved'";
+        $queryApproved = "SELECT COUNT(*) AS approved FROM doc_requests WHERE status = 'approved'";
         $resultApproved = $this->connection->query($queryApproved);
         $rowApproved = $resultApproved->fetch_assoc();
         $totalApproved = $rowApproved['approved'];
     
-        $queryRejected = "SELECT COUNT(*) AS rejected FROM user_requests WHERE status = 'rejected'";
+        $queryRejected = "SELECT COUNT(*) AS rejected FROM doc_requests WHERE status = 'rejected'";
         $resultRejected = $this->connection->query($queryRejected);
         $rowRejected = $resultRejected->fetch_assoc();
         $totalRejected = $rowRejected['rejected'];

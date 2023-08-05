@@ -53,7 +53,7 @@ class HomeController {
         $datetime = $date . ' ' . $time_in;
 
         // Check if a similar request already exists based on request_name, fullname, email, and mobile
-        $checkQuery = "SELECT COUNT(*) as count FROM user_requests WHERE request_name = ? AND fullname = ? AND email = ? AND mobile = ?";
+        $checkQuery = "SELECT COUNT(*) as count FROM doc_requests WHERE request_name = ? AND fullname = ? AND email = ? AND mobile = ?";
         $stmt = $this->connection->prepare($checkQuery);
         $stmt->bind_param('ssss', $request_name, $fullname, $email, $mobile);
         $stmt->execute();
@@ -64,7 +64,7 @@ class HomeController {
         if ($count === 0) {
             // No similar request exists with the same fullname, email, mobile, and request_name
             // Proceed to insert the new request into the database
-            $query = "INSERT INTO user_requests (request_name, fullname, email, mobile, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO doc_requests (request_name, fullname, email, mobile, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param('sssssss', $request_name, $fullname, $email, $mobile, $service_message, $status, $datetime);
             if ($stmt->execute()) {
@@ -84,14 +84,14 @@ class HomeController {
 }
 
 
-      public function get_user_requests($fullname, $mobile, $email) {
+      public function get_doc_requests($fullname, $mobile, $email) {
         
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);
         }
 
         // Use prepared statement to prevent SQL injection
-        $query = "SELECT * FROM user_requests WHERE fullname = ? AND mobile = ? AND email = ?";
+        $query = "SELECT * FROM doc_requests WHERE fullname = ? AND mobile = ? AND email = ?";
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param('sss', $fullname, $mobile, $email);
         $stmt->execute();
