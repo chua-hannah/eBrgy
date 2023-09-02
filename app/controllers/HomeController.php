@@ -7,7 +7,6 @@ class HomeController {
   {
       $this->connection = $connection;
   }
-
     public function home() {
       // Render the home page content
       include 'templates/home.php';

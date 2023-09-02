@@ -124,8 +124,8 @@ class UserController {
                 $query = "INSERT INTO users (username, password, email, mobile, fullname, age, sex, role) VALUES ('$username', '$password', '$email', '$mobile', '$fullname', '$age', '$sex', '$role')";
                 if ($this->connection->query($query) === true) {
                     // Registration successful
-                    echo "Registration successful";
-                    header("Location: login");
+                    $_SESSION['status'] = "Registration successful";
+                    header("Location: register");
                     exit();
                 } else {
                     // Error occurred
