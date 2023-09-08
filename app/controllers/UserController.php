@@ -34,6 +34,7 @@ class UserController {
             $user_id = $user['user_id'];
             $role = $user['role'];
             $fullname = $user['fullname'];
+            $sex = $user['sex'];
 
             // Store the user's data in the session
             $_SESSION['username'] = $username;
@@ -42,7 +43,8 @@ class UserController {
             $_SESSION['mobile'] = $mobile;
             $_SESSION['email'] = $email;
             $_SESSION['fullname'] = $fullname;
-
+            $_SESSION['sex'] = $sex;
+            
             // Redirect to appropriate page based on user role
             switch ($role) {
                 case 'residence':
@@ -109,16 +111,16 @@ class UserController {
     
             if ($existingUsername && $existingEmail && $existingMobile) {
                 // Both username and email already exist, display an error message
-                echo "Username , email and mobile already exist. Please choose different ones.";
+                $_SESSION['status'] = "Username , email and mobile already exist. Please choose different ones.";
             } elseif ($existingUsername) {
                 // Username already exists, display an error message
-                echo "Username already exists. Please choose a different one.";
+                $_SESSION['status'] = "Username already exists. Please choose a different one.";
             } elseif ($existingEmail) {
                 // Email already exists, display an error message
-                echo "Email already exists. Please choose a different one.";
-            } elseif ($$existingMobile) {
+                $_SESSION['status'] = "Email already exists. Please choose a different one.";
+            } elseif ($existingMobile) {
                 // Email already exists, display an error message
-                echo "Mobile already exists. Please choose a different one.";
+                $_SESSION['status'] = "Mobile already exists. Please choose a different one.";
             }else {
                 // Insert the data into the database
                 $query = "INSERT INTO users (username, password, email, mobile, fullname, age, sex, role) VALUES ('$username', '$password', '$email', '$mobile', '$fullname', '$age', '$sex', '$role')";
@@ -129,7 +131,7 @@ class UserController {
                     exit();
                 } else {
                     // Error occurred
-                    echo "Error: " . $this->connection->error;
+                    $_SESSION['status'] = "Error: " . $this->connection->error;
                 }
             }
         }

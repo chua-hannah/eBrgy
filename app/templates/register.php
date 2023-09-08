@@ -1,26 +1,20 @@
-<!-- <div class="container mt-5">
-        <h1>Register</h1>
-        register.php
-<form action="" method="post">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="mobile" name="mobile" placeholder="Mobile number" required>
-    <input type="text" name="fullname" placeholder="Full name" required>
-    <input type="text" name="age" placeholder="Age" required>
-    <select name="sex" required>
-            <option value="">Sex</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-        </select>
-     Add more fields as needed
-    <button type="submit" name="register">Register</button>
-</form>
-
-    </div>  -->
-
-
 <section class="volunteer-section section-padding" id="section_4">
+<div class="container">
+<?php
+    if(isset($_SESSION['status']))
+    {
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="row justify-content-center">
+                <h6 class="text-center"><?php echo $_SESSION['status']; ?></h6>
+    </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php 
+        unset($_SESSION['status']);
+    }
+    ?>
+    </div>
   <div class="container">
   <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-6 col-12">
@@ -68,15 +62,7 @@
 
               </div>
 
-              <button type="submit" name="register" class="form-control">Register</button>
-              <?php
-              if(isset($_SESSION['status']))
-              {
-                echo $_SESSION['status'];
-                unset($_SESSION['status']);
-              }
-              ?>
-              
+              <button type="submit" name="register" class="form-control">Register</button>              
           </form>
       </div>
   </div>

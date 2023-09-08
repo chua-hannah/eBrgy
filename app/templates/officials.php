@@ -1,4 +1,3 @@
-
 <div class="container mt-5">
     <div class="container text-center">
         <h1>Officials</h1>
