@@ -121,6 +121,11 @@ switch ($filename) {
                             });
                             break;
                         case 'services':
+                            includeHeaderFooter(function() use ($homeController, $filename) {
+                                $homeController->$filename();        
+                            });
+                            break;
+                        case 'documents':
                             includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
                                 $fullname = $_SESSION['fullname'];
                                 $mobile = $_SESSION['mobile'];
@@ -128,9 +133,19 @@ switch ($filename) {
                                 $homeController->$filename();
                                 $requests = $settingsController->get_request_settings(); // Call the function here
                                 $myrequest = $homeController->get_doc_requests($fullname, $mobile, $email);
-                                include 'templates/services.php';
+                                include 'templates/docs.php';
                             });
                             break;
+                        case 'reports':
+                            includeHeaderFooter(function() use ($homeController, $filename) {
+                                $homeController->$filename();        
+                            });
+                            break;      
+                        case 'equipments':
+                            includeHeaderFooter(function() use ($homeController, $filename) {
+                                $homeController->$filename();        
+                            });
+                            break; 
                         default:
                         header("Location: " . $baseUrl . "/home");
                         exit;

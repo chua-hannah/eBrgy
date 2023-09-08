@@ -34,8 +34,12 @@ class HomeController {
       // Return the fetched user data
       return $users;
   }
-  
+
   public function services() {
+    include 'templates/services.php';
+}
+  
+  public function documents() {
     // Render the home page content
     if (isset($_POST['request_service'])) {
         date_default_timezone_set('Asia/Manila');
@@ -69,7 +73,7 @@ class HomeController {
             if ($stmt->execute()) {
                 // Request sent successfully
                 echo "Request sent successfully";
-                header("Location: services");
+                header("Location: documents");
                 exit();
             } else {
                 // Error occurred
@@ -80,6 +84,15 @@ class HomeController {
             echo "Error: Similar request already exists.";
         }
     }
+     
+}
+
+public function reports() {
+    include 'templates/reports.php';
+}
+
+public function equipments() {
+    include 'templates/equipments.php';
 }
 
 

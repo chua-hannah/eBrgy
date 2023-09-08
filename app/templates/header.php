@@ -48,17 +48,8 @@
                 <?php
                     // Check if there is a logged-in user or session
                     if (isset($_SESSION['user_id'])) {
-                        echo '<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                            id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Services</a>
-
-                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="services">Service 1</a></li>
-
-                            <li><a class="dropdown-item" href="services">Service 2</a></li>
-                        </ul>                        
-                        </li>';
+                        echo '<li class="nav-item">';
+                        echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'services' ? 'active' : ''; echo '"href="services">Services</a>';
                     }
                 ?>
                 <li class="nav-item">
