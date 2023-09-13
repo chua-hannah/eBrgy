@@ -1,20 +1,4 @@
 <section class="volunteer-section section-padding" id="section_4">
-<div class="container">
-<?php
-    if(isset($_SESSION['status']))
-    {
-        ?>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <div class="row justify-content-center">
-                <h6 class="text-center"><?php echo $_SESSION['status']; ?></h6>
-    </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php 
-        unset($_SESSION['status']);
-    }
-    ?>
-    </div>
   <div class="container">
   <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-6 col-12">
@@ -22,7 +6,7 @@
 
           <form class="custom-form volunteer-form mb-5 mb-lg-0" action="" method="post" role="form">
               <h3 class="mb-4">Become a member today</h3>
-              <p class="text-secondary">Plese provide your information</p>
+              <p class="text-secondary">Please provide your information</p>
 
               <div class="row">
 

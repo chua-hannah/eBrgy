@@ -1250,6 +1250,7 @@ blockquote::before {
 .site-footer {
   background-color: var(--site-footer-bg-color);
   padding-top: 70px;
+  padding-bottom: 70px;
 }
 
 .site-footer-bottom {
@@ -1663,4 +1664,10 @@ blockquote::before {
   color: #fff;
   cursor: pointer;
   border: solid 1px #BA68C8
+}
+
+
+.alert .alert-warning { 
+ 
+  margin-bottom: 0;
 }

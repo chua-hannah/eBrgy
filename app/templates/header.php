@@ -78,3 +78,18 @@
             </div>
         </div>
     </nav>
+<!-- Alerts -->
+    <?php
+        if(isset($_SESSION['status'])) {
+    ?>
+        <div class="alert alert-warning alert-dismissible fade show" style="margin-bottom: 0px;  border-radius: 0;" role="alert">
+            <div class="row justify-content-center">
+                <strong class="text-center" style="margin-bottom: 0px;"><?php echo $_SESSION['status']; ?></strong>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php 
+        unset($_SESSION['status']);
+        }
+    ?>
+    </div>

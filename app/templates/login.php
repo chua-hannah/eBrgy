@@ -30,14 +30,6 @@
               </div>
 
               <button type="submit" name="login" class="form-control">Login</button>
-              <?php
-              if(isset($_SESSION['status']))
-              {
-                echo $_SESSION['status'];
-                unset($_SESSION['status']);
-              }
-              ?>
-              
           </form>
       </div>
   </div>

@@ -62,8 +62,8 @@ class UserController {
             }
         } else {
             // Invalid username or password
-            echo "Invalid username or password.";
-            return;
+            $_SESSION['status'] = "Invalid username or password.";
+            
         }
     }
 
