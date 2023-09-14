@@ -39,7 +39,7 @@ class HomeController {
     include 'templates/services.php';
 }
   
-  public function documents() {
+public function documents() {
     // Render the home page content
     if (isset($_POST['request_service'])) {
         date_default_timezone_set('Asia/Manila');
@@ -88,7 +88,53 @@ class HomeController {
 }
 
 public function reports() {
-    include 'templates/reports.php';
+    if (isset($_POST['report_form'])) {
+        date_default_timezone_set('Asia/Manila');
+        $fullname = $_SESSION['fullname'];
+        $email = $_SESSION['email'];
+        $mobile = $_SESSION['mobile'];
+        $status = 'pending';
+        $reported_person_name = $_POST['reported_person_name'];
+        $subject_person = $_POST['subject_person'];
+        $place_of_incident = $_POST['place_of_incident'];
+        $time_of_incident = $_POST['time_of_incident'];
+        $date_of_incident = $_POST['date_of_incident'];
+        $note = $_POST['note'];
+        $date = date('Y-m-d');
+        $time_in = date('H:i:s'); // Philippine time
+
+        // Combine date and time into a single datetime string
+        $datetime = $date . ' ' . $time_in;
+
+        // Check if a similar request already exists based on request_name, fullname, email, and mobile
+        $checkQuery = "SELECT COUNT(*) as count FROM report_requests  WHERE reported_person = ? AND subject_person = ? AND fullname = ? AND email = ? AND mobile = ?";
+        $stmt = $this->connection->prepare($checkQuery);
+        $stmt->bind_param('sssss', $reported_person_name, $subject_person,  $fullname, $email, $mobile);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $count = $row['count'];
+
+        if ($count === 0) {
+            // No similar request exists with the same fullname, email, mobile, and request_name
+            // Proceed to insert the new request into the database
+            $query = "INSERT INTO report_requests (reported_person, subject_person, place_of_incident, date_of_incident, time_of_incident, fullname, email, mobile, note, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('sssssssssss', $reported_person_name, $subject_person, $place_of_incident, $date_of_incident, $time_of_incident, $fullname, $email, $mobile, $note, $status, $datetime);
+            if ($stmt->execute()) {
+                // Request sent successfully
+                echo "Request sent successfully";
+                header("Location: reports");
+                exit();
+            } else {
+                // Error occurred
+                echo "Error: " . $this->connection->error;
+            }
+        } else {
+            
+            echo "Error: Similar request already exists.";
+        }
+    }
 }
 
 public function equipments() {

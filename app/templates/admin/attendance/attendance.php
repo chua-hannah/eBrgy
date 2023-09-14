@@ -41,7 +41,7 @@ $current_time_timestamp = time();
 $work_hours_start_timestamp = strtotime(date('Y-m-d') . ' ' . $office_time['work_hours_start']);
 $work_hours_end_timestamp = strtotime(date('Y-m-d') . ' ' . $office_time['work_hours_end']);
 
-var_dump($current_time_timestamp, $work_hours_end_timestamp); ?>
+ ?>
 <form method="POST" action="">
     <?php if (
     ($_SESSION['isCheckIn'] && $_SESSION['isCheckOut']) ||

@@ -117,7 +117,9 @@ switch ($filename) {
                             break;
                         case 'profile':
                             includeHeaderFooter(function() use ($profileController, $filename) {
-                                $profileController->$filename();
+                                $user_id = $_SESSION['user_id'];
+                                $user_data = $profileController->$filename($user_id);
+                                include 'templates/profile.php';
                             });
                             break;
                         case 'services':
@@ -138,7 +140,11 @@ switch ($filename) {
                             break;
                         case 'reports':
                             includeHeaderFooter(function() use ($homeController, $filename) {
-                                $homeController->$filename();        
+                                $fullname = $_SESSION['fullname'];
+                                $mobile = $_SESSION['mobile'];
+                                $email = $_SESSION['email'];
+                                $homeController->$filename();  
+                                include 'templates/reports.php';      
                             });
                             break;      
                         case 'equipments':
