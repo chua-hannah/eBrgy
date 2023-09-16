@@ -97,6 +97,31 @@ class UserManagementController {
         // Render the register page content
         include 'templates/admin/user_management/add_user.php';
     }
+
+function activate_user($user_id) {
+    if (isset($_POST['activate_user'])) {
+        // Retrieve the user ID from the form
+        $user_id = $_POST['user_id'];
+    
+        // Use prepared statements to prevent SQL injection
+        $stmt = $this->connection->prepare("UPDATE users SET status = 'activated' WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+    
+        if ($stmt->execute()) {
+            // Activation successful
+            echo "User activated successfully.";
+        } else {
+            // Activation failed
+            echo "Error updating user status: " . $stmt->error;
+        }
+    
+        // Close the prepared statement
+        $stmt->close();
+    }
+    
+}
+
+
     
   }
   

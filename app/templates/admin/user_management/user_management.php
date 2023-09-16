@@ -16,6 +16,7 @@ $users = UserManagementController::user_management();
                     <th>Fullname</th>
                     <th>Age</th>
                     <th>Sex</th>
+                    <th>Role</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,9 +30,16 @@ $users = UserManagementController::user_management();
                         <td><?php echo $user['sex']; ?></td>
                         <td><?php echo $user['role']; ?></td>
                         <td>
-                            <div class="btn-group">
-                                <button class="btn btn-primary" onclick="editUser(<?php echo $user['user_id']; ?>)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteUser(<?php echo $user['user_id']; ?>)">Delete</button>
+                            <div class="btn-group" style="display: flex; gap: 8px; justify-conter: space-around;">
+                                <button class="btn btn-primary" style="padding: 8px;" >Edit</button>
+                                <button class="btn btn-danger" style="padding: 8px;" >Delete</button>
+                               
+                                <form method="post" action="">
+                                    <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
+                                    <button name="activate_user" type="submit" class="btn <?php echo $user['status'] === 'activated' ? 'btn-outline-success' : 'btn-success'; ?>" <?php echo $user['status'] === 'activated' ? 'disabled' : ''; ?> style="padding: 8px;">
+                                        <?php echo $user['status'] === 'activated' ? '<span style="color: green;">Active</span>' : 'Activate'; ?>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

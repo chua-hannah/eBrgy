@@ -185,7 +185,10 @@ switch ($filename) {
                             break;
                         case 'user-management':
                             includeAdminContent(function () use ($userManagementController) {
+                                $user_id = $_SESSION['user_id'];
                                 $userManagementController->index();
+                                $userManagementController->activate_user($user_id);
+                             
                             });
                             break;
                         case 'user-management/add-user':
