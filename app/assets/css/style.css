@@ -1056,7 +1056,7 @@ blockquote::before {
   box-shadow: none;
   border: 0;
   color: var(--p-color);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   padding-top: 13px;
   padding-bottom: 13px;
   outline: none;
@@ -1656,7 +1656,7 @@ blockquote::before {
 }
 
 .labels {
-  font-size: 11px
+  font-size: 14px
 }
 
 .add-experience:hover {
@@ -1664,10 +1664,4 @@ blockquote::before {
   color: #fff;
   cursor: pointer;
   border: solid 1px #BA68C8
-}
-
-
-.alert .alert-warning { 
- 
-  margin-bottom: 0;
 }

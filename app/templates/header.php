@@ -82,14 +82,21 @@
     <?php
         if(isset($_SESSION['status'])) {
     ?>
-        <div class="alert alert-warning alert-dismissible fade show" style="margin-bottom: 0px;  border-radius: 0;" role="alert">
+        <div id="alert" class="alert alert-warning alert-dismissible fade show" auto-close="1000" style="margin-bottom: 0px;  border-radius: 0;" role="alert">
             <div class="row justify-content-center">
                 <strong class="text-center" style="margin-bottom: 0px;"><?php echo $_SESSION['status']; ?></strong>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php 
         unset($_SESSION['status']);
         }
     ?>
+    <!-- Alert timeout for auto dismiss -->
+    <script type="text/javascript">
+        setTimeout(function () {
+
+            // Closing the alert
+            $('#alert').alert('close');
+        }, 3000);
+    </script>
     </div>

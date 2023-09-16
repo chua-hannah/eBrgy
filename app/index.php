@@ -154,7 +154,7 @@ switch ($filename) {
                             break; 
                         default:
                         header("Location: " . $baseUrl . "/home");
-                        exit;
+                        exit();
                     }
                     break;
 
