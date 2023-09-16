@@ -1665,9 +1665,3 @@ blockquote::before {
   cursor: pointer;
   border: solid 1px #BA68C8
 }
-
-
-.alert .alert-warning { 
- 
-  margin-bottom: 0;
-}
