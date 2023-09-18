@@ -67,7 +67,7 @@ class SettingsController {
             $datetime = $date . ' ' . $time_in;
     
             // Use prepared statement to insert data into the database
-            $query = "INSERT INTO request_settings (request_name, request_status, description, created_at) VALUES ('$request_name', '$status', '$description', '$datetime')";
+            $query = "INSERT INTO doc_settings (request_name, request_status, description, created_at) VALUES ('$request_name', '$status', '$description', '$datetime')";
     
             // Prepare the statement
             if ($this->connection->query($query) === true) {
@@ -89,7 +89,7 @@ class SettingsController {
             die("Connection failed: " . $this->connection->error);
         }
     
-        $query = "SELECT * FROM request_settings";
+        $query = "SELECT * FROM doc_settings";
         $result = $this->connection->query($query);
     
         // Fetch all request settings records as an associative array

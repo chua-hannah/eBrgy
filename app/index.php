@@ -185,10 +185,7 @@ switch ($filename) {
                             break;
                         case 'user-management':
                             includeAdminContent(function () use ($userManagementController) {
-                                $user_id = $_SESSION['user_id'];
                                 $userManagementController->index();
-                                $userManagementController->activate_user($user_id);
-                             
                             });
                             break;
                         case 'user-management/add-user':
@@ -196,6 +193,18 @@ switch ($filename) {
                                 $userManagementController->add();
                             });
                             break;
+                            case 'user-management/edit-user':
+                                // Check if the userId parameter is present in the POST data
+                                $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
+                                
+                                includeAdminContent(function () use ($userManagementController, $userId) {
+                                    $userManagementController->edit($userId);
+                                    $userManagementController->activate_user($userId);
+                                    $userManagementController->deactivate_user($userId);
+                                });
+                                break;
+                            
+                                                                
                         case 'request-management':
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requests = $requestManagementController->request_management();

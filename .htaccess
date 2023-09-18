@@ -2,4 +2,5 @@ RewriteEngine On
 RewriteBase /eBrgy/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ app/index.php?/$1 [L]
+RewriteRule ^(.*)$ app/index.php/$1 [L]
+
