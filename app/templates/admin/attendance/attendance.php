@@ -1,5 +1,14 @@
     <div>
          Office Time
+      <div>
+       
+            <a href="http://localhost/eBrgy/app/settings" style="color: white; text-decoration: none;">
+            <button class="btn btn-secondary">
+                Manage Office Time
+                </button>
+            </a>
+       
+      </div>
         <div>
             <?php
            

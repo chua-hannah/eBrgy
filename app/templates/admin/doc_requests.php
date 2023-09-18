@@ -1,10 +1,16 @@
-<div>
-    Request Management
-</div>
+
 
 <!-- templates/services.php -->
 <div>
-    <h1>Requests</h1>
+    <h1>Documents Requests</h1>
+   
+        <a href="http://localhost/eBrgy/app/requests/documents-management" style="color: white; text-decoration: none;">
+        <button class="btn btn-primary">
+            Manage Documents
+            </button>
+        </a>
+    
+
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead>
@@ -37,7 +43,9 @@
             </tbody>
         </table>
     </div>
+  
 </div>
+
     <!--Additional div for sidebar-->
     </div>
     </div>

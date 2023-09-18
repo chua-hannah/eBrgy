@@ -205,18 +205,31 @@ switch ($filename) {
                                 break;
                             
                                                                 
-                        case 'request-management':
+                        case 'requests':
                             includeAdminContent(function() use ($requestManagementController) {
-                                $requests = $requestManagementController->request_management();
-                                include 'templates/admin/request_management.php';
+                               
+                                include 'templates/admin/requests.php';
+                                
+                            });
+                            break;
+                        case 'requests/documents':
+                            includeAdminContent(function() use ($requestManagementController) {
+                                $requests = $requestManagementController->doc_requests();
+                                include 'templates/admin/doc_requests.php';
+                                
+                            });
+                            break;
+                        case 'requests/documents-management':
+                            includeAdminContent(function() use ($requestManagementController, $settingsController) {
+                                $settingsController->request_setting();
+                                $requests = $settingsController->get_request_settings();
+                                include 'templates/admin/request_management/doc_management.php';
                                 
                             });
                             break;
                         case 'settings':
                             includeAdminContent(function() use ($settingsController) {
                                 $settingsController->attendance_setting();
-                                $settingsController->request_setting();
-                                $requests = $settingsController->get_request_settings();
                                 $office_time = $settingsController->get_time_settings();
                                 include 'templates/admin/settings.php';
                             });

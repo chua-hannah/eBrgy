@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <title>Barangay 95</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <!-- CSS FILES -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
     <?php
         // Check the user's role from the session and conditionally show the "User Management" tab
         if ($_SESSION['role'] === 'captain') {
@@ -86,7 +95,7 @@
             <a class="nav-link" href="<?php echo $baseUrl;?>/attendance">Attendance</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo $baseUrl;?>/request-management">Request</a>
+            <a class="nav-link" href="<?php echo $baseUrl;?>/requests">Requests</a>
         </li>
         <?php
         // Check the user's role from the session and conditionally show the "User Management" tab
@@ -95,9 +104,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo $baseUrl;?>/user-management">User Management</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo $baseUrl;?>/settings">Settings</a>
-            </li>
+          
             <?php
         }
         ?>
