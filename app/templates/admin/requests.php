@@ -17,7 +17,7 @@
 
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="/eBrgy/app/reports" class="d-block">
+                            <a href="/eBrgy/app/requests/reports" class="d-block">
                                 <img src="assets/images/icons/heart.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"><strong>Reports</strong></p>

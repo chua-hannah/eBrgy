@@ -12,14 +12,14 @@ class RequestManagementController {
       // Render the home page content
       include 'templates/dashboard.php';
     }
-    public function request() {
+    public function report_requests() {
       // Render the home page content
       if ($this->connection->error) {
         die("Connection failed: " . $this->connection->error);
     }
 
     // Use prepared statement to prevent SQL injection
-    $query = "SELECT * FROM doc_requests";
+    $query = "SELECT * FROM report_requests";
     $stmt = $this->connection->prepare($query);
     $stmt->execute();
 

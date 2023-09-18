@@ -203,13 +203,9 @@ switch ($filename) {
                                     $userManagementController->deactivate_user($userId);
                                 });
                                 break;
-                            
-                                                                
                         case 'requests':
                             includeAdminContent(function() use ($requestManagementController) {
-                               
-                                include 'templates/admin/requests.php';
-                                
+                                include 'templates/admin/requests.php';   
                             });
                             break;
                         case 'requests/documents':
@@ -224,6 +220,13 @@ switch ($filename) {
                                 $settingsController->request_setting();
                                 $requests = $settingsController->get_request_settings();
                                 include 'templates/admin/request_management/doc_management.php';
+                                
+                            });
+                            break;
+                        case 'requests/reports':
+                            includeAdminContent(function() use ($requestManagementController) {
+                                $requests = $requestManagementController->report_requests();
+                                include 'templates/admin/report_requests.php';
                                 
                             });
                             break;
