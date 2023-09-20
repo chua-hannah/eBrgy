@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2023 at 01:39 PM
+-- Generation Time: Sep 20, 2023 at 03:51 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,7 +52,8 @@ INSERT INTO `attendance` (`id`, `user_id`, `fullname`, `date`, `time_in`, `time_
 (7, 6, 'kagawad5', '2023-07-22', '00:45:53', '00:45:55', 'Present', ''),
 (8, 7, 'kagawad6', '2023-07-22', '00:47:05', '00:47:12', 'Present', ''),
 (9, 1, 'lance chua', '2023-08-02', '20:12:08', '20:12:20', 'Late', ''),
-(10, 1, 'lance chua', '2023-09-02', '13:12:44', '13:12:45', 'Present', '');
+(10, 1, 'lance chua', '2023-09-02', '13:12:44', '13:12:45', 'Present', ''),
+(11, 1, 'lance chua', '2023-09-18', '21:12:48', '21:18:43', 'Late', '');
 
 -- --------------------------------------------------------
 
@@ -61,12 +62,13 @@ INSERT INTO `attendance` (`id`, `user_id`, `fullname`, `date`, `time_in`, `time_
 --
 
 CREATE TABLE `doc_requests` (
+  `id` int(11) NOT NULL,
   `request_name` varchar(255) NOT NULL,
   `fullname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `mobile` varchar(15) NOT NULL,
-  `message` text NOT NULL,
-  `status` enum('Pending','Approved','Rejected') NOT NULL,
+  `mobile` varchar(255) NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `message` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -74,9 +76,12 @@ CREATE TABLE `doc_requests` (
 -- Dumping data for table `doc_requests`
 --
 
-INSERT INTO `doc_requests` (`request_name`, `fullname`, `email`, `mobile`, `message`, `status`, `created_at`) VALUES
-('TIN ID', 'tao1', 'tao1@mail.com', '', 'suptest', 'Pending', '2023-09-08 16:28:59'),
-('Barangay Certificate', 'tao1', 'tao1@mail.com', '', 'tesatasda', 'Pending', '2023-09-14 22:15:35');
+INSERT INTO `doc_requests` (`id`, `request_name`, `fullname`, `email`, `mobile`, `status`, `message`, `created_at`) VALUES
+(1, 'Barangay Certificate', 'tao1', 'tao1@mail.com', '', 'pending', 'asdsadsad', '2023-07-21 11:04:56'),
+(2, 'PSA', 'tao1', 'tao1@mail.com', '', 'pending', 'test', '2023-07-21 11:05:07'),
+(3, 'TIN ID', 'tao1', 'tao1@mail.com', '', 'pending', 'test', '2023-07-21 11:05:25'),
+(4, 'Barangay Certificate', 'tao2', 'tao2@mail.com', '09999999', 'pending', 'test2', '2023-07-21 11:15:06'),
+(5, 'PSA', 'tao2', 'tao2@mail.com', '09999999', 'pending', 'test3', '2023-07-21 11:15:17');
 
 -- --------------------------------------------------------
 
@@ -99,7 +104,55 @@ CREATE TABLE `doc_settings` (
 INSERT INTO `doc_settings` (`request_type_id`, `request_name`, `request_status`, `description`, `created_at`) VALUES
 (1, 'Barangay Certificate', '1', 'Certificate', '2023-07-20'),
 (2, 'PSA', '1', 'Birth Certificate', '2023-07-20'),
-(3, 'TIN ID', '1', 'Taxpayer Identification Number\r\n', '2023-07-20');
+(3, 'TIN ID', '1', 'Taxpayer Identification Number\r\n', '2023-07-20'),
+(4, 'POSTAL ID', '2', 'POST OFFICE VALID ID', '2023-09-18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipment_requests`
+--
+
+CREATE TABLE `equipment_requests` (
+  `id` int(11) NOT NULL,
+  `equipment_name` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `total_equipment_borrowed` int(11) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `mobile` varchar(50) DEFAULT NULL,
+  `request_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `processed_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `equipment_requests`
+--
+
+INSERT INTO `equipment_requests` (`id`, `equipment_name`, `status`, `total_equipment_borrowed`, `fullname`, `email`, `mobile`, `request_date`, `processed_date`) VALUES
+(1, 'plastic chair', 'pending', 10, 'tao1', 'tao1@mail.com', '12312321321', '2023-09-20 01:46:41', '2023-09-20 01:46:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipment_settings`
+--
+
+CREATE TABLE `equipment_settings` (
+  `equipment_id` int(11) NOT NULL,
+  `equipment_name` varchar(255) NOT NULL,
+  `number_of_equipment` varchar(255) NOT NULL,
+  `total_equipment` varchar(255) NOT NULL,
+  `availability` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `equipment_settings`
+--
+
+INSERT INTO `equipment_settings` (`equipment_id`, `equipment_name`, `number_of_equipment`, `total_equipment`, `availability`) VALUES
+(1, 'plastic chair', '20', '40', '1'),
+(2, 'plastic chair', '20', '40', '1');
 
 -- --------------------------------------------------------
 
@@ -214,7 +267,7 @@ CREATE TABLE `time_settings` (
 --
 
 INSERT INTO `time_settings` (`setting_id`, `work_hours_start`, `work_hours_end`, `late_threshold`) VALUES
-(1, '13:00:00', '22:00:00', '14:00:00');
+(1, '08:00:00', '17:00:00', '08:20:00');
 
 -- --------------------------------------------------------
 
@@ -243,15 +296,15 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `fullname`, `age`, `sex`, `role`, `id_selfie`, `valid_id`, `status`) VALUES
 (1, 'kapitanlance', 'pass123', 'kapitanlance@mail.com', '', 'lance chua', 8, 'male', 'captain', NULL, '', 'activated'),
-(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '', 'kagawad1', 21, '', 'kagawad', NULL, '', 'activated'),
+(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '', 'kagawad1', 21, '', 'kagawad', NULL, '', 'deactivated'),
 (3, 'kagawad2', 'kagawad2', 'kagawad2@mail.com', '', 'kagawad2', 21, '', 'kagawad', NULL, NULL, 'activated'),
 (4, 'kagawad3', 'kagawad3', 'kagawad3@mail.com', '', 'kagawad3', 26, '', 'kagawad', NULL, NULL, 'activated'),
 (5, 'kagawad4', 'kagawad4', 'kagawad4@mail.com', '', 'kagawad4', 31, '', 'kagawad', NULL, NULL, 'activated'),
-(6, 'kagawad5', 'kagawad5', 'kagawad5@mail.com', '', 'kagawad5', 51, 'male', 'kagawad', NULL, NULL, ''),
-(7, 'kagawad6', 'kagawad6', 'kagawad6@mail.com', '', 'kagawad6', 41, 'female', 'kagawad', NULL, NULL, ''),
-(8, 'kagawad7', 'kagawad7', 'kagawad7@mail.com', '', 'kagawad7', 32, 'male', 'kagawad', NULL, NULL, ''),
+(6, 'kagawad5', 'kagawad5', 'kagawad5@mail.com', '', 'kagawad5', 51, 'male', 'kagawad', NULL, NULL, 'activated'),
+(7, 'kagawad6', 'kagawad6', 'kagawad6@mail.com', '', 'kagawad6', 41, 'female', 'kagawad', NULL, NULL, 'activated'),
+(8, 'kagawad7', 'kagawad7', 'kagawad7@mail.com', '', 'kagawad7', 32, 'male', 'kagawad', NULL, NULL, 'activated'),
 (9, 'tao1', 'tao1', 'tao1@mail.com', '12312321321', 'tao1', 12, 'male', 'residence', NULL, NULL, 'activated'),
-(10, 'francis', 'francis', 'francis@mail.com', '', 'francis sic', 39, 'male', 'residence', NULL, NULL, ''),
+(10, 'francis', 'francis', 'francis@mail.com', '', 'francis sic', 39, 'male', 'residence', NULL, NULL, 'deactivated'),
 (11, 'tao2', 'tao2', 'tao2@mail.com', '09999999', 'tao2', 23, 'male', 'residence', NULL, NULL, ''),
 (12, 'tao3', 'tao3', 'tao3@email.com', 'tao3', 'tao3', 55, 'male', 'residence', NULL, NULL, ''),
 (13, 'hana', 'tao3', 'hannahchua013@gmail.com', '09064376521', 'tao3', 55, 'male', 'residence', NULL, NULL, ''),
@@ -259,35 +312,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `full
 (15, '123151', '125123', 'hannasdas@asda.com', '0906', 'Han', 4512, 'male', 'residence', NULL, NULL, ''),
 (16, '1243', '123142', 'test1234@easede.coa', '09064', 'Hann', 55, 'female', 'residence', NULL, NULL, ''),
 (17, 'sic', 'pass123', 'sic@mail.com', '3213123132', 'sic', 23, 'male', 'residence', 'cheesecake.jpg', 'cheesecake.jpg', 'activated'),
-(18, 'resident', 'pass123', 'resident@mail.com', '1231232131', 'resident', 54123, 'male', 'residence', 'cheesecake.jpg', 'cheesecake.jpg', 'activated');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_requests`
---
-
-CREATE TABLE `user_requests` (
-  `id` int(11) NOT NULL,
-  `request_name` varchar(255) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `mobile` varchar(255) NOT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `message` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_requests`
---
-
-INSERT INTO `user_requests` (`id`, `request_name`, `fullname`, `email`, `mobile`, `status`, `message`, `created_at`) VALUES
-(1, 'Barangay Certificate', 'tao1', 'tao1@mail.com', '', 'pending', 'asdsadsad', '2023-07-21 11:04:56'),
-(2, 'PSA', 'tao1', 'tao1@mail.com', '', 'pending', 'test', '2023-07-21 11:05:07'),
-(3, 'TIN ID', 'tao1', 'tao1@mail.com', '', 'pending', 'test', '2023-07-21 11:05:25'),
-(4, 'Barangay Certificate', 'tao2', 'tao2@mail.com', '09999999', 'pending', 'test2', '2023-07-21 11:15:06'),
-(5, 'PSA', 'tao2', 'tao2@mail.com', '09999999', 'pending', 'test3', '2023-07-21 11:15:17');
+(18, 'resident', 'pass123', 'resident@mail.com', '1231232131', 'resident', 54123, 'male', 'residence', 'cheesecake.jpg', 'cheesecake.jpg', 'deactivated');
 
 --
 -- Indexes for dumped tables
@@ -300,10 +325,28 @@ ALTER TABLE `attendance`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `doc_requests`
+--
+ALTER TABLE `doc_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `doc_settings`
 --
 ALTER TABLE `doc_settings`
   ADD PRIMARY KEY (`request_type_id`);
+
+--
+-- Indexes for table `equipment_requests`
+--
+ALTER TABLE `equipment_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `equipment_settings`
+--
+ALTER TABLE `equipment_settings`
+  ADD PRIMARY KEY (`equipment_id`);
 
 --
 -- Indexes for table `messages`
@@ -330,12 +373,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `user_requests`
---
-ALTER TABLE `user_requests`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -343,13 +380,31 @@ ALTER TABLE `user_requests`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `doc_requests`
+--
+ALTER TABLE `doc_requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `doc_settings`
 --
 ALTER TABLE `doc_settings`
-  MODIFY `request_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `request_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `equipment_requests`
+--
+ALTER TABLE `equipment_requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `equipment_settings`
+--
+ALTER TABLE `equipment_settings`
+  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -374,12 +429,6 @@ ALTER TABLE `time_settings`
 --
 ALTER TABLE `users`
   MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `user_requests`
---
-ALTER TABLE `user_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
