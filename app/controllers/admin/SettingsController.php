@@ -104,6 +104,54 @@ class SettingsController {
         return $requests;
     }
 
+    public function add_equipment_setting() {
+        if (isset($_POST['add_equipment'])) {
+            $equipment_name = $_POST['equipment_name'];
+            $availability = $_POST['availability'];
+            $number_of_equipment = $_POST['number_of_equipment'];
+            $total_equipment = $_POST['total_equipment'];
+    
+    
+            // Use prepared statement to insert data into the database
+            $query = "INSERT INTO equipment_settings (equipment_name, availability, number_of_equipment, total_equipment) VALUES ('$equipment_name', '$availability', '$number_of_equipment', '$total_equipment')";
+    
+            // Prepare the statement
+            if ($this->connection->query($query) === true) {
+              // Registration successful
+              echo "New Equipment Added successful!";
+           
+          } else {
+              // Error occurred
+              echo "Error: " . $this->connection->error;
+          }
+        }
+    
+        // Render the contact page content
+     
+    }
+
+    
+
+    public function get_equipments_list() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+    
+        $query = "SELECT * FROM equipment_settings";
+        $result = $this->connection->query($query);
+    
+        // Fetch all request settings records as an associative array
+        $requests = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $requests[] = $row; // Corrected variable name to $requests[]
+            }
+        }
+    
+        // Return the fetched request settings data
+        return $requests;
+    }
+
     public function get_time_settings() {
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);

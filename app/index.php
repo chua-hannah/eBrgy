@@ -139,17 +139,25 @@ switch ($filename) {
                             });
                             break;
                         case 'reports':
-                            includeHeaderFooter(function() use ($homeController, $filename) {
+                            includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
                                 $fullname = $_SESSION['fullname'];
                                 $mobile = $_SESSION['mobile'];
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();  
+                                
                                 include 'templates/reports.php';      
                             });
                             break;      
                         case 'equipments':
-                            includeHeaderFooter(function() use ($homeController, $filename) {
-                                $homeController->$filename();        
+                            includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
+                                $fullname = $_SESSION['fullname'];
+                                $mobile = $_SESSION['mobile'];
+                                $email = $_SESSION['email'];
+                                $homeController->$filename();   
+                                $requests = $settingsController->get_equipments_list(); // Call the function here
+                                $myrequest = $homeController->get_equipment_requests($fullname, $mobile, $email);   
+                                include 'templates/equipments.php';      
+  
                             });
                             break; 
                         default:
@@ -227,6 +235,21 @@ switch ($filename) {
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requests = $requestManagementController->report_requests();
                                 include 'templates/admin/report_requests.php';
+                                
+                            });
+                            break;
+                        case 'requests/equipments':
+                            includeAdminContent(function() use ($requestManagementController) {
+                                // $requests = $requestManagementController->report_requests();
+                                include 'templates/admin/equipment_requests.php';
+                                
+                            });
+                            break;
+                        case 'requests/equipments-management':
+                            includeAdminContent(function() use ($requestManagementController, $settingsController) {
+                                $settingsController->add_equipment_setting();
+                                $requests = $settingsController->get_equipments_list();
+                                include 'templates/admin/request_management/equipment_management.php';
                                 
                             });
                             break;

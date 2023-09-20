@@ -87,6 +87,32 @@ public function documents() {
      
 }
 
+public function get_doc_requests($fullname, $mobile, $email) {
+        
+    if ($this->connection->error) {
+        die("Connection failed: " . $this->connection->error);
+    }
+
+    // Use prepared statement to prevent SQL injection
+    $query = "SELECT * FROM doc_requests WHERE fullname = ? AND mobile = ? AND email = ?";
+    $stmt = $this->connection->prepare($query);
+    $stmt->bind_param('sss', $fullname, $mobile, $email);
+    $stmt->execute();
+
+    // Fetch all request settings records as an associative array
+    $result = $stmt->get_result();
+    $myrequests = array();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $myrequests[] = $row;
+        }
+    }
+
+    // Return the fetched request settings data
+    return $myrequests;
+}
+
+
 public function reports() {
     if (isset($_POST['report_form'])) {
         date_default_timezone_set('Asia/Manila');
@@ -138,18 +164,62 @@ public function reports() {
 }
 
 public function equipments() {
-    include 'templates/equipments.php';
+    // Render the home page content
+    if (isset($_POST['request_equipment'])) {
+        date_default_timezone_set('Asia/Manila');
+        $fullname = $_SESSION['fullname'];
+        $email = $_SESSION['email'];
+        $mobile = $_SESSION['mobile'];
+        $status = 'pending';
+        $equipment_name = $_POST['equipment_name'];
+        $total_equipment_borrowed = $_POST['total_equipment_borrowed'];
+        $date = date('Y-m-d');
+        $time_in = date('H:i:s'); // Philippine time
+
+        // Combine date and time into a single datetime string
+        $datetime = $date . ' ' . $time_in;
+
+        // Check if a similar request already exists based on equipment_name, fullname, email, and mobile
+        $checkQuery = "SELECT COUNT(*) as count FROM equipment_requests WHERE equipment_name = ? AND fullname = ? AND email = ? AND mobile = ?";
+        $stmt = $this->connection->prepare($checkQuery);
+        $stmt->bind_param('ssss', $equipment_name, $fullname, $email, $mobile);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $count = $row['count'];
+
+        if ($count === 0) {
+            // No similar request exists with the same fullname, email, mobile, and request_name
+            // Proceed to insert the new request into the database
+            $query = "INSERT INTO equipment_requests (equipment_name, fullname, email, mobile, total_equipment_borrowed, status, request_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('sssssss', $equipment_name, $fullname, $email, $mobile, $total_equipment_borrowed, $status, $datetime);
+            if ($stmt->execute()) {
+                // Request sent successfully
+                echo "Request sent successfully";
+                header("Location: equipments");
+                exit();
+            } else {
+                // Error occurred
+                echo "Error: " . $this->connection->error;
+            }
+        } else {
+            // A similar request already exists with the same fullname, email, mobile, and request_name
+            echo "Error: Similar request already exists.";
+        }
+    }
+     
 }
 
 
-      public function get_doc_requests($fullname, $mobile, $email) {
+      public function get_equipment_requests($fullname, $mobile, $email) {
         
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);
         }
 
         // Use prepared statement to prevent SQL injection
-        $query = "SELECT * FROM doc_requests WHERE fullname = ? AND mobile = ? AND email = ?";
+        $query = "SELECT * FROM equipment_requests WHERE fullname = ? AND mobile = ? AND email = ?";
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param('sss', $fullname, $mobile, $email);
         $stmt->execute();

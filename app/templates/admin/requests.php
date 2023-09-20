@@ -2,7 +2,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-12 text-center mx-auto">
-                        <h2 class="mb-5">Services</h2>
+                        <h2 class="mb-5">Requests</h2>
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
@@ -27,7 +27,7 @@
 
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="/eBrgy/app/equipments" class="d-block">
+                            <a href="/eBrgy/app/requests/equipments" class="d-block">
                                 <img src="assets/images/icons/receive.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"><strong>Equipments</strong></p>
