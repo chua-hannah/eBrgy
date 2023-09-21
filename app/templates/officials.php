@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div class="container text-center">
-        <h1>Officials</h1>
+    <h2>Officials</h2>
         <div class="row d-flex justify-content-center">
         <?php foreach ($users as $user): ?>
             <?php if ($user['role'] === 'captain'): ?>
