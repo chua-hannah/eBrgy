@@ -78,7 +78,7 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="services" class="d-block">
-                                <img src="assets/images/icons/heart.png" class="featured-block-image img-fluid" alt="">
+                                <img src="assets/images/icons/letter.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"><strong>Report</strong> Complaint</p>
                             </a>
@@ -87,8 +87,8 @@
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="contact" class="d-block">
-                                <img src="assets/images/icons/receive.png" class="featured-block-image img-fluid" alt="">
+                            <a href="register" class="d-block">
+                                <img src="assets/images/icons/add-user.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">Create your<strong> Account</strong></p>
                             </a>
@@ -97,8 +97,8 @@
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="login" class="d-block">
-                                <img src="assets/images/icons/scholarship.png" class="featured-block-image img-fluid" alt="">
+                            <a href="contact" class="d-block">
+                                <img src="assets/images/icons/contact.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"><strong>Contact</strong> Us</p>
                             </a>

@@ -1033,11 +1033,11 @@ blockquote::before {
   CUSTOM FORM               
 -----------------------------------------*/
 .custom-form .form-control,
-.input-group-file {
+.input-group-text {
   background-color: var(--white-color);
   box-shadow: none;
   color: var(--p-color);
-  margin-bottom: 16px;
+  margin-bottom: 13px;
   padding-top: 13px;
   padding-bottom: 13px;
   outline: none;
@@ -1045,11 +1045,10 @@ blockquote::before {
 
 .custom-form .form-select,
 .input-group-file {
-  background-color: var(--section-bg-color);
+  background-color: var(--white-color);
   box-shadow: none;
-  border: 0;
   color: var(--p-color);
-  margin-bottom: 24px;
+  margin-bottom: 13px;
   padding-top: 13px;
   padding-bottom: 13px;
   outline: none;
@@ -1064,6 +1063,7 @@ blockquote::before {
 }
 
 .custom-form label {
+  color: var(--p-color);
   margin-bottom: 10px;
 }
 
@@ -1629,6 +1629,7 @@ blockquote::before {
 }
 
 .labels {
+  #717275;
   font-size: 14px;
 }
 

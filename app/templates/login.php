@@ -10,7 +10,7 @@
     </form> -->
     <section class="volunteer-section section-padding" id="section_4">
   <div class="container">
-  <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="row d-flex justify-content-center align-items-center">
       <div class="col-lg-6 col-12">
           <h2 class="mt-4 mb-4 text-center">Login</h2>
           <form class="custom-form volunteer-form mb-5 mb-lg-0 needs-validation" action="" method="post" role="form">
@@ -24,7 +24,7 @@
               </div>
 
               <div class="col-lg-12 col-12">
-                <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+                <input type="password" name="password" class="form-control mb-4" placeholder="Enter Password" required>
               </div>
 
               </div>

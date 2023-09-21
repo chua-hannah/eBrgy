@@ -41,7 +41,7 @@
                         Barangay 95, Manila, Philippines
                     </p>
 
-                    <a href="contact" class="custom-btn btn mt-3">Get Direction</a>
+                    <a href="https://maps.app.goo.gl/JMK2TDxUKZVWfsHa6" target="_blank" class="custom-btn btn mt-3">Get Direction</a>
                 </div>
             </div>
         </div>
@@ -54,6 +54,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/counter.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/validation.js"></script>
 
 </body>
 

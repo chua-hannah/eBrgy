@@ -39,7 +39,7 @@
                             </a>
                         </p>
 
-                        <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+                        <a href="https://maps.app.goo.gl/JMK2TDxUKZVWfsHa6" target="_blank" class="custom-btn btn mt-3">Get Direction</a>
                     </div>
                 </div>
             </div>
