@@ -1,8 +1,10 @@
 <?php
 require './config/database.php';
-
+$error = "";
+$errors = array();
 class UserController {
     private $connection;
+    
 
     public function __construct($connection)
     {
@@ -17,53 +19,53 @@ class UserController {
 
         // Validate username and password
         if (empty($username) || empty($password)) {
-            echo "Please enter both username and password.";
-            return;
+            // Invalid login, display an error message
+            $error = "Enter username and password.";
         }
+        else {
+            // Retrieve user data from the database
+            $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND status = 'activated'";
+            $result = $this->connection->query($query);
 
-        // Retrieve user data from the database
-        $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND status = 'activated'";
-        $result = $this->connection->query($query);
+            if ($result->num_rows > 0) {
+                // User exists, login successful
+                $user = $result->fetch_assoc();
+                $username = $user['username'];
+                $email = $user['email'];
+                $mobile = $user['mobile'];
+                $user_id = $user['user_id'];
+                $role = $user['role'];
+                $fullname = $user['fullname'];
+                $sex = $user['sex'];
 
-        if ($result->num_rows > 0) {
-            // User exists, login successful
-            $user = $result->fetch_assoc();
-            $username = $user['username'];
-            $email = $user['email'];
-            $mobile = $user['mobile'];
-            $user_id = $user['user_id'];
-            $role = $user['role'];
-            $fullname = $user['fullname'];
-            $sex = $user['sex'];
-
-            // Store the user's data in the session
-            $_SESSION['username'] = $username;
-            $_SESSION['user_id'] = $user_id;
-            $_SESSION['role'] = $role;
-            $_SESSION['mobile'] = $mobile;
-            $_SESSION['email'] = $email;
-            $_SESSION['fullname'] = $fullname;
-            $_SESSION['sex'] = $sex;
-            
-            // Redirect to appropriate page based on user role
-            switch ($role) {
-                case 'residence':
-                    header("Location: home");
-                    exit();
-                case 'captain':
-                    header("Location: dashboard");
-                    exit();
-                case 'kagawad':
-                    header("Location: dashboard");
-                    exit();
-                default:
-                    echo "Invalid user role.";
-                    return;
+                // Store the user's data in the session
+                $_SESSION['username'] = $username;
+                $_SESSION['user_id'] = $user_id;
+                $_SESSION['role'] = $role;
+                $_SESSION['mobile'] = $mobile;
+                $_SESSION['email'] = $email;
+                $_SESSION['fullname'] = $fullname;
+                $_SESSION['sex'] = $sex;
+                
+                // Redirect to appropriate page based on user role
+                switch ($role) {
+                    case 'residence':
+                        header("Location: home");
+                        exit();
+                    case 'captain':
+                        header("Location: dashboard");
+                        exit();
+                    case 'kagawad':
+                        header("Location: dashboard");
+                        exit();
+                    default:
+                        echo "Invalid user role.";
+                        return;
+                }
+            } else {
+                // Invalid username or password
+                $error = "Invalid username or password.";
             }
-        } else {
-            // Invalid username or password
-            $_SESSION['status'] = "Invalid username or password.";
-            
         }
     }
 
@@ -75,6 +77,9 @@ class UserController {
 public function register()
 {
     $role = 'residence';
+    $minUsernameLength = 6;
+    $minPasswordLength = 8;
+
     
     if (isset($_POST['register'])) {
         // Retrieve the submitted form data
@@ -90,75 +95,117 @@ public function register()
         // Handle image uploads
         $idSelfieFileName = '';
         $validIdFileName = '';
-
-        if (isset($_FILES['id_selfie']) && isset($_FILES['valid_id'])) {
-            $idSelfieUploadPath = 'uploads/id_selfie/';
-            $validIdUploadPath = 'uploads/valid_id/';
-
-            $idSelfieFileName = $_FILES['id_selfie']['name'];
-            $validIdFileName = $_FILES['valid_id']['name'];
-
-            $idSelfieTargetPath = $idSelfieUploadPath . $idSelfieFileName;
-            $validIdTargetPath = $validIdUploadPath . $validIdFileName;
-
-            if (move_uploaded_file($_FILES['id_selfie']['tmp_name'], $idSelfieTargetPath) && move_uploaded_file($_FILES['valid_id']['tmp_name'], $validIdTargetPath)) {
-                // Both image uploads were successful
-            } else {
-                // Image uploads failed
-                $_SESSION['status'] = "Image upload failed. Please try again.";
-                // You can return or redirect to the registration page here.
-                return;
-            }
+        // Validate empty input fields
+        if (empty($fullname))  {
+            $errors["fullname"] = "Enter your First name";
         }
-
-        // Check if the username or email already exists in the database
-        $query = "SELECT * FROM users WHERE username = '$username' OR email = '$email' OR mobile = '$mobile'";
-        $result = $this->connection->query($query);
-
-        $existingUsername = false;
-        $existingEmail = false;
-        $existingMobile = false;
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                if ($row['username'] == $username) {
-                    $existingUsername = true;
-                }
-                if ($row['email'] == $email) {
-                    $existingEmail = true;
-                }
-                if ($row['mobile'] == $mobile) {
-                    $existingMobile = true;
+        // if (empty($lastname))  {
+        //     $errors ["lastname"] = "Enter your Last name";
+        // }
+        // if (empty($birthdate))  {
+        //     $errors["birthdate"] = "Enter your Birthdate";
+        // }
+        if (empty($sex))  {
+            $errors["sex"] = "Select Gender";
+        }
+        if (empty($mobile))  {
+            $errors["mobile"] = "Enter Mobile number";
+        }
+        if (empty($email))  {
+            $errors["email"] = "Enter Email address";
+        }
+        if (empty($username))  {
+            $errors ["username"] = "Enter Username";
+        }
+        if (empty($password))  {
+            $errors["password"] = "Enter Password";
+        }
+        // Validate username length
+        if (!(empty($username)) && strlen($username) < $minUsernameLength){
+            $errors ["username"] = "Username must be at least {$minUsernameLength} characters long.";
+        }
+        // Validate password length
+        if (!(empty($password)) && strlen($password) < $minPasswordLength){
+            $errors["password"] = "Password must be at least {$minPasswordLength} characters long.";
+        }
+        // File input is empty
+        if (isset($_FILES['id_selfie']) && $_FILES['id_selfie']['error'] === UPLOAD_ERR_NO_FILE) {
+            $errors ["id_selfie"] = "Please upload your Selfie w/ ID";
+        }
+        if (isset($_FILES['valid_id']) && $_FILES['valid_id']['error'] === UPLOAD_ERR_NO_FILE) {
+            $errors ["valid_id"] = "Please upload your Valid ID";
+        }
+        
+        if (empty($errors)) {
+            if (isset($_FILES['id_selfie']) && isset($_FILES['valid_id'])) {
+                $idSelfieUploadPath = 'uploads/id_selfie/';
+                $validIdUploadPath = 'uploads/valid_id/';
+    
+                $idSelfieFileName = $_FILES['id_selfie']['name'];
+                $validIdFileName = $_FILES['valid_id']['name'];
+    
+                $idSelfieTargetPath = $idSelfieUploadPath . $idSelfieFileName;
+                $validIdTargetPath = $validIdUploadPath . $validIdFileName;
+    
+                if (move_uploaded_file($_FILES['id_selfie']['tmp_name'], $idSelfieTargetPath) && move_uploaded_file($_FILES['valid_id']['tmp_name'], $validIdTargetPath)) {
+                    // Both image uploads were successful
+                } else {
+                    // Image uploads failed
+                    $error = "Image upload failed. Please try again.";
+                    // You can return or redirect to the registration page here.
+                    return;
                 }
             }
-        }
-
-        if ($existingUsername && $existingEmail && $existingMobile) {
-            // Both username and email already exist, display an error message
-            $_SESSION['status'] = "Username , email and mobile already exist. Please choose different ones.";
-        } elseif ($existingUsername) {
-            // Username already exists, display an error message
-            $_SESSION['status'] = "Username already exists. Please choose a different one.";
-        } elseif ($existingEmail) {
-            // Email already exists, display an error message
-            $_SESSION['status'] = "Email already exists. Please choose a different one.";
-        } elseif ($existingMobile) {
-            // Email already exists, display an error message
-            $_SESSION['status'] = "Mobile already exists. Please choose a different one.";
-        } else {
-            // Insert the data into the database
-            $query = "INSERT INTO users (username, password, email, mobile, fullname, age, sex, role, id_selfie, valid_id, status) 
-                      VALUES ('$username', '$password', '$email', '$mobile', '$fullname', '$age', '$sex', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
-            if ($this->connection->query($query) === true) {
-                // Registration successful
-                $_SESSION['status'] = "Registration successful";
-                header("Location: register");
-                exit();
-            } else {
-                // Error occurred
-                $_SESSION['status'] = "Error: " . $this->connection->error;
+    
+            // Check if the username or email already exists in the database
+            $query = "SELECT * FROM users WHERE username = '$username' OR email = '$email' OR mobile = '$mobile'";
+            $result = $this->connection->query($query);
+    
+            $existingUsername = false;
+            $existingEmail = false;
+            $existingMobile = false;
+    
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    if ($row['username'] == $username) {
+                        $existingUsername = true;
+                    }
+                    if ($row['email'] == $email) {
+                        $existingEmail = true;
+                    }
+                    if ($row['mobile'] == $mobile) {
+                        $existingMobile = true;
+                    }
+                }
             }
-        }
+    
+            if ($existingUsername && $existingEmail && $existingMobile) {
+                // Both username and email already exist, display an error message
+                $error = "Given username, email, and mobile number already exist.";
+            } elseif ($existingUsername) {
+                // Username already exists, display an error message
+                $error = "Given username already exists.";
+            } elseif ($existingEmail) {
+                // Email already exists, display an error message
+                $error = "Given email  already exists.";
+            } elseif ($existingMobile) {
+                // Email already exists, display an error message
+                $error = "Given mobile number already exists";
+            } else if (empty($errors) && empty($error)) {
+                // Insert the data into the database
+                $query = "INSERT INTO users (username, password, email, mobile, fullname, age, sex, role, id_selfie, valid_id, status) 
+                          VALUES ('$username', '$password', '$email', '$mobile', '$fullname', '$age', '$sex', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
+                if ($this->connection->query($query) === true) {
+                    // Registration successful
+                    $_SESSION['status'] = "Registration successful";
+                    header("Location: register");
+                    exit();
+                } else {
+                    // Error occurred
+                    $_SESSION['status'] = "Error: " . $this->connection->error;
+                }
+            }
+        }  
     }
 
     // Render the register page content
