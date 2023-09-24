@@ -22,7 +22,7 @@ class AttendanceController {
 
     // Get the employee ID and other relevant data from the form
     $employeeId = $_SESSION['user_id'];
-    $fullname = $_SESSION['fullname'];
+    $username = $_SESSION['username'];
     $date = date('Y-m-d');
     $time_in = date('H:i:s'); // Philippine time
 
@@ -74,8 +74,8 @@ class AttendanceController {
                 }
 
                 // Perform the database query to insert the attendance record
-                $query = "INSERT INTO attendance (user_id, fullname, date, time_in, time_out, status, remark)
-                VALUES ('$employeeId', '$fullname', '$date', '$time_in', NULL, '$status', '')";
+                $query = "INSERT INTO attendance (user_id, username, date, time_in, time_out, status, remark)
+                VALUES ('$employeeId', '$username', '$date', '$time_in', NULL, '$status', '')";
 
                 // Execute the query
                 if ($this->connection->query($query) === true) {

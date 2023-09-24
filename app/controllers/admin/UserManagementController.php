@@ -34,64 +34,106 @@ class UserManagementController {
     public function add()
     {
         if (isset($_POST['add-officials'])) {
-            // Retrieve the submitted form data
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $email = $_POST['email'];
-            $fullname = $_POST['fullname'];
-            $age = $_POST['age'];
-            $sex = $_POST['sex'];
-            $role = $_POST['role'];
-    
-            // Check if the username or email already exists in the database
-            $query = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
-            $result = $this->connection->query($query);
-    
-            $existingUsername = false;
-            $existingEmail = false;
-    
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    if ($row['username'] == $username) {
-                        $existingUsername = true;
-                    }
-                    if ($row['email'] == $email) {
-                        $existingEmail = true;
-                    }
-                }
-            }
-    
-            if ($existingUsername && $existingEmail) {
-                // Both username and email already exist, display an error message
-                echo "Username and email already exist. Please choose different ones.";
-            } elseif ($existingUsername) {
-                // Username already exists, display an error message
-                echo "Username already exists. Please choose a different one.";
-            } elseif ($existingEmail) {
-                // Email already exists, display an error message
-                echo "Email already exists. Please choose a different one.";
+             // Retrieve the submitted form data
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $email = $_POST['email'];
+        $mobile = $_POST['mobile'];
+        $firstname = $_POST['firstname'];
+        $middlename = $_POST['middlename'];
+        $lastname = $_POST['lastname'];
+        $birthdate = $_POST['birthdate'];
+        $sex = $_POST['sex'];
+        $role = $_POST['role'];
+        $status = 'deactivate';
+        // Convert birthdate to YYYY-MM-DD format
+        $birthdateTimestamp = strtotime($birthdate);
+        if ($birthdateTimestamp === false) {
+            // Invalid date format, handle the error
+            $_SESSION['status'] = "Invalid date format for birthdate. Please use MM/DD/YYYY format.";
+            // You can return or redirect to the registration page here.
+            return;
+        } else {
+            // Valid date format, convert it to YYYY-MM-DD
+            $birthdate = date('Y-m-d', $birthdateTimestamp);
+        }
+
+        // Calculate age from birthdate
+        $currentTimestamp = time();
+        $ageInSeconds = $currentTimestamp - $birthdateTimestamp;
+        $age = floor($ageInSeconds / (365 * 24 * 3600));
+        // Handle image uploads
+        $idSelfieFileName = '';
+        $validIdFileName = '';
+
+        if (isset($_FILES['id_selfie']) && isset($_FILES['valid_id'])) {
+            $idSelfieUploadPath = 'uploads/id_selfie/';
+            $validIdUploadPath = 'uploads/valid_id/';
+
+            $idSelfieFileName = $_FILES['id_selfie']['name'];
+            $validIdFileName = $_FILES['valid_id']['name'];
+
+            $idSelfieTargetPath = $idSelfieUploadPath . $idSelfieFileName;
+            $validIdTargetPath = $validIdUploadPath . $validIdFileName;
+
+            if (move_uploaded_file($_FILES['id_selfie']['tmp_name'], $idSelfieTargetPath) && move_uploaded_file($_FILES['valid_id']['tmp_name'], $validIdTargetPath)) {
+                // Both image uploads were successful
             } else {
-                // Check if there are already 7 users with the role 'kagawad'
-                $kagawadCountQuery = "SELECT COUNT(*) AS count FROM users WHERE role = 'kagawad'";
-                $kagawadCountResult = $this->connection->query($kagawadCountQuery);
-                $kagawadCount = $kagawadCountResult->fetch_assoc()['count'];
-    
-                if ($role === 'kagawad' && $kagawadCount >= 7) {
-                    echo "Maximum number of kagawad users reached.";
-                } else {
-                    // Insert the data into the database
-                    $query = "INSERT INTO users (username, password, email, fullname, age, sex, role) VALUES ('$username', '$password', '$email', '$fullname', '$age', '$sex', '$role')";
-                    if ($this->connection->query($query) === true) {
-                        // Registration successful
-                        echo "Registration successful";
-                        header("Location: /eBrgy/app/user-management");
-                        exit();
-                    } else {
-                        // Error occurred
-                        echo "Error: " . $this->connection->error;
-                    }
+                // Image uploads failed
+                $_SESSION['status'] = "Image upload failed. Please try again.";
+                // You can return or redirect to the registration page here.
+                return;
+            }
+        }
+
+        // Check if the username or email already exists in the database
+        $query = "SELECT * FROM users WHERE username = '$username' OR email = '$email' OR mobile = '$mobile'";
+        $result = $this->connection->query($query);
+
+        $existingUsername = false;
+        $existingEmail = false;
+        $existingMobile = false;
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if ($row['username'] == $username) {
+                    $existingUsername = true;
+                }
+                if ($row['email'] == $email) {
+                    $existingEmail = true;
+                }
+                if ($row['mobile'] == $mobile) {
+                    $existingMobile = true;
                 }
             }
+        }
+
+        if ($existingUsername && $existingEmail && $existingMobile) {
+            // Both username and email already exist, display an error message
+            $_SESSION['status'] = "Username , email and mobile already exist. Please choose different ones.";
+        } elseif ($existingUsername) {
+            // Username already exists, display an error message
+            $_SESSION['status'] = "Username already exists. Please choose a different one.";
+        } elseif ($existingEmail) {
+            // Email already exists, display an error message
+            $_SESSION['status'] = "Email already exists. Please choose a different one.";
+        } elseif ($existingMobile) {
+            // Email already exists, display an error message
+            $_SESSION['status'] = "Mobile already exists. Please choose a different one.";
+        } else {
+            // Insert the data into the database
+            $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, role, id_selfie, valid_id, status) 
+                      VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
+            if ($this->connection->query($query) === true) {
+                // Registration successful
+                $_SESSION['status'] = "Registration successful";
+                header("Location: user-management");
+                exit();
+            } else {
+                // Error occurred
+                $_SESSION['status'] = "Error: " . $this->connection->error;
+            }
+        }
         }
     
         // Render the register page content

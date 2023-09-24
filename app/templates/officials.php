@@ -7,7 +7,20 @@
                 <div class="col-md-4">
                     <div class="card my-5">
                         <div class="card-body text-center">
-                            <h5 class="card-title"><?php echo $user['fullname']; ?></h5>
+                        <div>
+                            <?php
+                            $idSelfiePath = 'uploads/id_selfie/' . $user['id_selfie'];
+                            if (!empty($user['id_selfie']) && file_exists($idSelfiePath)) {
+                                ?>
+                                <div class="text-center">
+                                    <img src="<?php echo $idSelfiePath; ?>" alt="ID Selfie" class="img-thumbnail" style="width: 200px;">
+                                   
+                                </div>
+                            <?php } else { ?>
+                                <p>ID Selfie not available</p>
+                            <?php } ?>
+                        </div>
+                            <h5 class="card-title"><?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?></h5>
                             <p class="card-text">
                                 <strong>Age:</strong> <?php echo $user['age']; ?><br>
                                 <strong></strong> <?php echo $user['role']; ?>
@@ -36,7 +49,25 @@
 
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <h5 class="card-title"><?php echo $user['fullname']; ?></h5>
+                    
+                        <!-- Display the ID Selfie image -->
+                        <div>
+                            <?php
+                            $idSelfiePath = 'uploads/id_selfie/' . $user['id_selfie'];
+                            if (!empty($user['id_selfie']) && file_exists($idSelfiePath)) {
+                                ?>
+                                <div class="text-center">
+                                    <img src="<?php echo $idSelfiePath; ?>" alt="ID Selfie" class="img-thumbnail" style="width: 200px;">
+                                   
+                                </div>
+                            <?php } else { ?>
+                                <p>ID Selfie not available</p>
+                            <?php } ?>
+                        </div>
+
+                      
+                 
+                    <h5 class="card-title"><?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?></h5>
                         <p class="card-text">
                             <strong>Age:</strong> <?php echo $user['age']; ?><br>
                             <strong>Role:</strong> <?php echo $user['role']; ?>

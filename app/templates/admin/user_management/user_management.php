@@ -28,7 +28,7 @@ $users = UserManagementController::user_management();
                     <tr>
                         <td><?php echo $user['username']; ?></td>
                         <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['fullname']; ?></td>
+                        <td><?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?></td>
                         <td><?php echo $user['age']; ?></td>
                         <td><?php echo $user['sex']; ?></td>
                       

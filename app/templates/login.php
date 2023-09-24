@@ -1,14 +1,5 @@
-<!-- <h2>Login</h2>
-    <form method="POST" action="">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        
-        <input type="submit" name="login">
-    </form> -->
-    <section class="volunteer-section section-padding" id="section_4">
+
+  <section class="volunteer-section section-padding" id="section_4">
   <div class="container">
   <div class="row d-flex justify-content-center align-items-center">
       <div class="col-lg-6 col-12">

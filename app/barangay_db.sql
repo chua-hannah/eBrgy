@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2023 at 03:51 AM
+-- Generation Time: Sep 24, 2023 at 08:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `attendance` (
   `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
-  `fullname` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `date` date NOT NULL,
   `time_in` time NOT NULL,
   `time_out` time DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `attendance` (
 -- Dumping data for table `attendance`
 --
 
-INSERT INTO `attendance` (`id`, `user_id`, `fullname`, `date`, `time_in`, `time_out`, `status`, `remark`) VALUES
+INSERT INTO `attendance` (`id`, `user_id`, `username`, `date`, `time_in`, `time_out`, `status`, `remark`) VALUES
 (1, 1, 'lance chua', '2023-07-21', '15:16:52', NULL, 'Late', ''),
 (2, 1, 'lance chua', '2023-07-22', '00:09:57', '00:15:52', 'Present', ''),
 (3, 2, 'kagawad1', '2023-07-22', '00:17:33', NULL, 'Present', ''),
@@ -281,7 +281,10 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `mobile` varchar(255) NOT NULL,
-  `fullname` varchar(100) NOT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `middlename` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `sex` varchar(100) NOT NULL,
   `role` varchar(50) DEFAULT NULL,
@@ -294,25 +297,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `fullname`, `age`, `sex`, `role`, `id_selfie`, `valid_id`, `status`) VALUES
-(1, 'kapitanlance', 'pass123', 'kapitanlance@mail.com', '', 'lance chua', 8, 'male', 'captain', NULL, '', 'activated'),
-(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '', 'kagawad1', 21, '', 'kagawad', NULL, '', 'deactivated'),
-(3, 'kagawad2', 'kagawad2', 'kagawad2@mail.com', '', 'kagawad2', 21, '', 'kagawad', NULL, NULL, 'activated'),
-(4, 'kagawad3', 'kagawad3', 'kagawad3@mail.com', '', 'kagawad3', 26, '', 'kagawad', NULL, NULL, 'activated'),
-(5, 'kagawad4', 'kagawad4', 'kagawad4@mail.com', '', 'kagawad4', 31, '', 'kagawad', NULL, NULL, 'activated'),
-(6, 'kagawad5', 'kagawad5', 'kagawad5@mail.com', '', 'kagawad5', 51, 'male', 'kagawad', NULL, NULL, 'activated'),
-(7, 'kagawad6', 'kagawad6', 'kagawad6@mail.com', '', 'kagawad6', 41, 'female', 'kagawad', NULL, NULL, 'activated'),
-(8, 'kagawad7', 'kagawad7', 'kagawad7@mail.com', '', 'kagawad7', 32, 'male', 'kagawad', NULL, NULL, 'activated'),
-(9, 'tao1', 'tao1', 'tao1@mail.com', '12312321321', 'tao1', 12, 'male', 'residence', NULL, NULL, 'activated'),
-(10, 'francis', 'francis', 'francis@mail.com', '', 'francis sic', 39, 'male', 'residence', NULL, NULL, 'deactivated'),
-(11, 'tao2', 'tao2', 'tao2@mail.com', '09999999', 'tao2', 23, 'male', 'residence', NULL, NULL, ''),
-(12, 'tao3', 'tao3', 'tao3@email.com', 'tao3', 'tao3', 55, 'male', 'residence', NULL, NULL, ''),
-(13, 'hana', 'tao3', 'hannahchua013@gmail.com', '09064376521', 'tao3', 55, 'male', 'residence', NULL, NULL, ''),
-(14, 'admin123', 'admin12', 'hannahchu@asd', '090643', 'Han', 11, 'male', 'residence', NULL, NULL, ''),
-(15, '123151', '125123', 'hannasdas@asda.com', '0906', 'Han', 4512, 'male', 'residence', NULL, NULL, ''),
-(16, '1243', '123142', 'test1234@easede.coa', '09064', 'Hann', 55, 'female', 'residence', NULL, NULL, ''),
-(17, 'sic', 'pass123', 'sic@mail.com', '3213123132', 'sic', 23, 'male', 'residence', 'cheesecake.jpg', 'cheesecake.jpg', 'activated'),
-(18, 'resident', 'pass123', 'resident@mail.com', '1231232131', 'resident', 54123, 'male', 'residence', 'cheesecake.jpg', 'cheesecake.jpg', 'deactivated');
+INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `birthdate`, `age`, `sex`, `role`, `id_selfie`, `valid_id`, `status`) VALUES
+(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', '1990-01-15', 33, 'male', 'captain', '8.png', '8.png', 'activated'),
+(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', '1988-02-14', 35, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
+(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', '1990-01-19', 33, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
+(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', '1982-12-25', 40, 'male', 'kagawad', '8.png', '8.png', 'deactivate');
 
 --
 -- Indexes for dumped tables
@@ -428,7 +417,7 @@ ALTER TABLE `time_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

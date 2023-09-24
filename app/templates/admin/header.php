@@ -58,9 +58,9 @@
     <?php
 
     if (isset($_SESSION['username'])) {
-        $fullname = $_SESSION['fullname'];
+        $username = $_SESSION['username'];
         echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="'.$baseUrl.'/profile">'.$fullname.'</a>';
+        echo '<a class="nav-link" href="'.$baseUrl.'/profile">'.$username.'</a>';
         echo '</li>';
         echo '<li class="nav-item">';
         echo '<a class="nav-link" href="logout.php">Logout</a>';

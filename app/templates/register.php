@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="col-lg-6 col-12">
-                            <input type="text" name="birthdate" class="form-control" id="birthdate" placeholder="Birthdate (MM/DD/YYYY)"  value="<?php if (!empty($_POST["age"])) { echo $_POST["age"]; } else { echo ''; };?>" required>
+                            <input type="text" name="birthdate" class="form-control" id="birthdate" placeholder="Birthdate (MM/DD/YYYY)" value="<?php if (!empty($_POST["birthdate"])) { echo $_POST["birthdate"]; } else { echo ''; };?>" required>
                         </div>
 
                         <div class="col-lg-6 col-12">
@@ -42,7 +42,7 @@
                         <div class="col-lg-6 col-12">
                             <div class="input-group">
                                 <span class="input-group-text">+63</span>
-                                <input type="text" class="form-control" id="mobileNumber" placeholder="Mobile Number" oninput="validateNumericInput(this)" maxlength="10" required>
+                                <input type="text" class="form-control" name="mobile" id="mobileNumber" placeholder="Mobile Number" oninput="validateNumericInput(this)" maxlength="10" required>
                             </div>
                         </div>
 

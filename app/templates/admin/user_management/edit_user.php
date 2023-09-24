@@ -23,7 +23,7 @@ if ($userId) {
     <div class="card-body">
         <h5 class="card-title">Username: <?php echo $userData['username']; ?></h5>
         <p class="card-text">Email: <?php echo $userData['email']; ?></p>
-        <p class="card-text">Full Name: <?php echo $userData['fullname']; ?></p>
+        <p class="card-text">Full Name: <?php echo $userData['firstname'] . ' ' . $userData['middlename'] . ' ' . $userData['lastname']; ?></p>
         <p class="card-text">Age: <?php echo $userData['age']; ?></p>
         <p class="card-text">Status: <?php echo $userData['status']; ?></p>
 
@@ -75,9 +75,6 @@ if ($userId) {
             </form>';
         ?>
     </div
-
-
-    <!-- End of Bootstrap card -->
 </div>
 
 

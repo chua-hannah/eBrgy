@@ -33,8 +33,7 @@ class UserController {
             $mobile = $user['mobile'];
             $user_id = $user['user_id'];
             $role = $user['role'];
-            $fullname = $user['fullname'];
-            $sex = $user['sex'];
+           
 
             // Store the user's data in the session
             $_SESSION['username'] = $username;
@@ -42,8 +41,7 @@ class UserController {
             $_SESSION['role'] = $role;
             $_SESSION['mobile'] = $mobile;
             $_SESSION['email'] = $email;
-            $_SESSION['fullname'] = $fullname;
-            $_SESSION['sex'] = $sex;
+           
             
             // Redirect to appropriate page based on user role
             switch ($role) {
@@ -82,11 +80,28 @@ public function register()
         $password = $_POST['password'];
         $email = $_POST['email'];
         $mobile = $_POST['mobile'];
-        $fullname = $_POST['fullname'];
-        $age = $_POST['age'];
+        $firstname = $_POST['firstname'];
+        $middlename = $_POST['middlename'];
+        $lastname = $_POST['lastname'];
+        $birthdate = $_POST['birthdate'];
         $sex = $_POST['sex'];
         $status = 'deactivate';
+        // Convert birthdate to YYYY-MM-DD format
+        $birthdateTimestamp = strtotime($birthdate);
+        if ($birthdateTimestamp === false) {
+            // Invalid date format, handle the error
+            $_SESSION['status'] = "Invalid date format for birthdate. Please use MM/DD/YYYY format.";
+            // You can return or redirect to the registration page here.
+            return;
+        } else {
+            // Valid date format, convert it to YYYY-MM-DD
+            $birthdate = date('Y-m-d', $birthdateTimestamp);
+        }
 
+        // Calculate age from birthdate
+        $currentTimestamp = time();
+        $ageInSeconds = $currentTimestamp - $birthdateTimestamp;
+        $age = floor($ageInSeconds / (365 * 24 * 3600));
         // Handle image uploads
         $idSelfieFileName = '';
         $validIdFileName = '';
@@ -147,8 +162,8 @@ public function register()
             $_SESSION['status'] = "Mobile already exists. Please choose a different one.";
         } else {
             // Insert the data into the database
-            $query = "INSERT INTO users (username, password, email, mobile, fullname, age, sex, role, id_selfie, valid_id, status) 
-                      VALUES ('$username', '$password', '$email', '$mobile', '$fullname', '$age', '$sex', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
+            $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, role, id_selfie, valid_id, status) 
+                      VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
             if ($this->connection->query($query) === true) {
                 // Registration successful
                 $_SESSION['status'] = "Registration successful";
