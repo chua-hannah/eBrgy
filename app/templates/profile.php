@@ -19,9 +19,17 @@
                 </div>
                 <div class="row mt-3">
                     <?php if ($user_data) { ?>
-                        <div class="col-md-12">
-                            <label class="labels">Full Name</label>
-                            <input type="text" class="form-control" value="<?php echo $user_data['fullname']; ?>">
+                        <div class="col-md-4">
+                            <label class="labels">First Name</label>
+                            <input type="text" class="form-control" value="<?php echo $user_data['firstname']; ?>">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="labels">Middle Name</label>
+                            <input type="text" class="form-control" value="<?php echo $user_data['middlename']; ?>">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="labels">Last Name</label>
+                            <input type="text" class="form-control" value="<?php echo $user_data['lastname']; ?>">
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Mobile Number</label>
@@ -41,7 +49,6 @@
                         </div>
                     <?php } ?>
                     <div class="mt-5 text-center">
-                        <button class="btn btn-primary profile-button" type="button">Edit</button>
                         <button class="btn btn-primary profile-button" type="button">Save Changes</button>
                     </div>
                 </div>
