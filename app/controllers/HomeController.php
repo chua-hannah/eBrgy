@@ -149,7 +149,7 @@ public function reports() {
             $stmt->bind_param('sssssssssss', $reported_person_name, $subject_person, $place_of_incident, $date_of_incident, $time_of_incident, $fullname, $email, $mobile, $note, $status, $datetime);
             if ($stmt->execute()) {
                 // Request sent successfully
-                echo "Request sent successfully";
+                $_SESSION['status'] = "Request sent successfully";
                 header("Location: reports");
                 exit();
             } else {
@@ -207,7 +207,7 @@ public function equipments() {
         
         if ($stmt->execute()) {
             // Request sent successfully
-            echo "Request sent successfully";
+            $_SESSION['status'] = "Request sent successfully";
             header("Location: equipments");
             exit();
         } else {
