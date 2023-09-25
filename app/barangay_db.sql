@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2023 at 08:54 PM
+-- Generation Time: Sep 25, 2023 at 11:59 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -64,7 +64,7 @@ INSERT INTO `attendance` (`id`, `user_id`, `username`, `date`, `time_in`, `time_
 CREATE TABLE `doc_requests` (
   `id` int(11) NOT NULL,
   `request_name` varchar(255) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` varchar(255) NOT NULL,
   `status` varchar(255) DEFAULT NULL,
@@ -76,12 +76,8 @@ CREATE TABLE `doc_requests` (
 -- Dumping data for table `doc_requests`
 --
 
-INSERT INTO `doc_requests` (`id`, `request_name`, `fullname`, `email`, `mobile`, `status`, `message`, `created_at`) VALUES
-(1, 'Barangay Certificate', 'tao1', 'tao1@mail.com', '', 'pending', 'asdsadsad', '2023-07-21 11:04:56'),
-(2, 'PSA', 'tao1', 'tao1@mail.com', '', 'pending', 'test', '2023-07-21 11:05:07'),
-(3, 'TIN ID', 'tao1', 'tao1@mail.com', '', 'pending', 'test', '2023-07-21 11:05:25'),
-(4, 'Barangay Certificate', 'tao2', 'tao2@mail.com', '09999999', 'pending', 'test2', '2023-07-21 11:15:06'),
-(5, 'PSA', 'tao2', 'tao2@mail.com', '09999999', 'pending', 'test3', '2023-07-21 11:15:17');
+INSERT INTO `doc_requests` (`id`, `request_name`, `username`, `email`, `mobile`, `status`, `message`, `created_at`) VALUES
+(1, 'Barangay Certificate', 'resident1', 'resident1@mail.com', '1111111111', 'pending', 'test123', '2023-09-25 08:47:52');
 
 -- --------------------------------------------------------
 
@@ -115,10 +111,11 @@ INSERT INTO `doc_settings` (`request_type_id`, `request_name`, `request_status`,
 
 CREATE TABLE `equipment_requests` (
   `id` int(11) NOT NULL,
+  `equipment_id` int(50) NOT NULL,
   `equipment_name` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
-  `total_equipment_borrowed` int(11) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
+  `total_equipment_borrowed` int(11) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` varchar(50) DEFAULT NULL,
   `request_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -129,8 +126,16 @@ CREATE TABLE `equipment_requests` (
 -- Dumping data for table `equipment_requests`
 --
 
-INSERT INTO `equipment_requests` (`id`, `equipment_name`, `status`, `total_equipment_borrowed`, `fullname`, `email`, `mobile`, `request_date`, `processed_date`) VALUES
-(1, 'plastic chair', 'pending', 10, 'tao1', 'tao1@mail.com', '12312321321', '2023-09-20 01:46:41', '2023-09-20 01:46:41');
+INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `status`, `total_equipment_borrowed`, `username`, `email`, `mobile`, `request_date`, `processed_date`) VALUES
+(1, 0, 'plastic chair', 'pending', 10, 'tao1', 'tao1@mail.com', '12312321321', '2023-09-20 01:46:41', '2023-09-20 01:46:41'),
+(2, 0, 'plastic chair', 'pending', 2, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:18:29', '2023-09-25 09:15:24'),
+(3, 0, 'plastic chair', 'pending', 12, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:17:50', '2023-09-25 09:17:50'),
+(4, 1, '', 'pending', 12, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:23:33', '2023-09-25 09:23:33'),
+(5, 2, '', 'pending', 24, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:23:48', '2023-09-25 09:23:48'),
+(6, 1, 'plastic chair', 'pending', 21, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:30:10', '2023-09-25 09:30:10'),
+(7, 1, 'plastic chair', 'pending', 33, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:32:01', '2023-09-25 09:32:01'),
+(8, 2, 'plastic chair', 'pending', 99, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:35:11', '0000-00-00 00:00:00'),
+(9, 1, 'plastic chair', 'pending', 98, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:35:45', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -301,7 +306,9 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firs
 (1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', '1990-01-15', 33, 'male', 'captain', '8.png', '8.png', 'activated'),
 (2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', '1988-02-14', 35, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
 (3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', '1990-01-19', 33, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
-(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', '1982-12-25', 40, 'male', 'kagawad', '8.png', '8.png', 'deactivate');
+(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', '1982-12-25', 40, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
+(5, 'resident1', 'pass123', 'resident1@mail.com', '1111111111', 'resident1', 'resident1', 'resident1', '1990-12-22', 32, 'male', 'residence', '8.png', '8.png', 'activated'),
+(6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', '1997-01-25', 26, 'male', 'residence', '8.png', '8.png', 'deactivate');
 
 --
 -- Indexes for dumped tables
@@ -375,7 +382,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `doc_requests`
 --
 ALTER TABLE `doc_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `doc_settings`
@@ -387,7 +394,7 @@ ALTER TABLE `doc_settings`
 -- AUTO_INCREMENT for table `equipment_requests`
 --
 ALTER TABLE `equipment_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `equipment_settings`
@@ -417,7 +424,7 @@ ALTER TABLE `time_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
