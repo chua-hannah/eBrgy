@@ -164,15 +164,16 @@ public function register()
             // Insert the data into the database
             $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, role, id_selfie, valid_id, status) 
                       VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
-            if ($this->connection->query($query) === true) {
-                // Registration successful
-                $_SESSION['status'] = "Registration successful";
-                header("Location: register");
-                exit();
-            } else {
-                // Error occurred
-                $_SESSION['status'] = "Error: " . $this->connection->error;
-            }
+          if ($this->connection->query($query) === true) {
+            // Registration successful
+            $_SESSION['status'] = "Registration successful";
+            sleep(3); // Sleep for 3 seconds
+            header("Location: login");
+            exit();
+        } else {
+            // Error occurred
+            $_SESSION['status'] = "Error: " . $this->connection->error;
+        }
         }
     }
 

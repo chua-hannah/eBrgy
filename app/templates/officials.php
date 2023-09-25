@@ -1,3 +1,5 @@
+<main>
+<section class="hero-section hero-section-full-height">
 <div class="container mt-5">
     <div class="container text-center">
     <h2>Officials</h2>
@@ -86,3 +88,5 @@
 </div>
 
 </div>
+</section>
+</main>

@@ -34,7 +34,6 @@
                                 foreach ($myrequest as $request) {
                                     ?>
                                     <tr>
-                                    
                                         <td><?php echo $request['request_name']; ?></td>
                                         <td><?php echo $request['status']; ?></td>
                                         <td><?php echo $request['created_at']; ?></td>

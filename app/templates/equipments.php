@@ -1,33 +1,26 @@
-<!-- <div class="text-center" style="margin: 16px;">
+<div class="text-center" style="margin: 16px;">
             <div><h4>EQUIPMENTS FORM</h4></div>
-            <form action="process_form.php" method="post">
-        <label for="equipment_name">Equipment Name:</label>
-        <input type="text" id="equipment_name" name="equipment_name" required><br><br>
+            <form action="" method="post">
+            <select name="equipment_id" required>
+                <option value="">Choose a Equipment</option>
+                <?php
+                foreach ($requests as $request) {
+                    // Display the data for each request
+                    ?>
+                    <option value="<?php echo $request['equipment_id']; ?>"><?php echo $request['equipment_name']; ?></option>    
+                    <?php
+                }
+                ?>
+            </select>
+    
+        <label for="total_equipment_borrowed">Equipment Count:</label>
+        <input type="text" id="total_equipment_borrowed" name="total_equipment_borrowed" required>
 
-        <label for="fullname">Full Name:</label>
-        <input type="text" id="fullname" name="fullname" required><br><br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <label for="mobile">Mobile:</label>
-        <input type="tel" id="mobile" name="mobile" required><br><br>
-
-        <label for="status">Status:</label>
-        <select id="status" name="status" required>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-            <option value="Repair">Repair</option>
-        </select><br><br>
-
-        <label for="equipment_count">Equipment Count:</label>
-        <input type="number" id="equipment_count" name="equipment_count" required><br><br>
-
-        <input type="submit" value="Submit">
+        <input type="submit" name="request_equipment" value="Submit">
     </form>
-        </div> -->
+</div>
 
-        <section class="contact-section section-padding" id="section_6">
+        <!-- <section class="contact-section section-padding" id="section_6">
 <div class="col-lg-5 col-12 mx-auto">
     <form class="custom-form contact-form" action="#" method="post" role="form">
         <h2>Request Equipments</h2>
@@ -67,4 +60,4 @@
         <button type="submit" class="form-control">Send Request</button>
     </form>
 </div>
-</section>
+</section> -->

@@ -129,33 +129,34 @@ switch ($filename) {
                             break;
                         case 'documents':
                             includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
-                                $fullname = $_SESSION['fullname'];
+                                $username = $_SESSION['username'];
                                 $mobile = $_SESSION['mobile'];
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();
                                 $requests = $settingsController->get_request_settings(); // Call the function here
-                                $myrequest = $homeController->get_doc_requests($fullname, $mobile, $email);
+                                $myrequest = $homeController->get_doc_requests($username, $mobile, $email);
                                 include 'templates/docs.php';
                             });
                             break;
                         case 'reports':
                             includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
-                                $fullname = $_SESSION['fullname'];
+                                $username = $_SESSION['username'];
                                 $mobile = $_SESSION['mobile'];
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();  
-                                
+                             
                                 include 'templates/reports.php';      
                             });
                             break;      
                         case 'equipments':
                             includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
-                                $fullname = $_SESSION['fullname'];
+                                $username = $_SESSION['username'];
                                 $mobile = $_SESSION['mobile'];
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();   
                                 $requests = $settingsController->get_equipments_list(); // Call the function here
-                                $myrequest = $homeController->get_equipment_requests($fullname, $mobile, $email);   
+                                $myrequest = $homeController->get_equipment_requests($username, $mobile, $email);   
+
                                 include 'templates/equipments.php';      
   
                             });
@@ -178,8 +179,10 @@ switch ($filename) {
                             });
                             break;
                         case 'profile':
-                            includeAdminContent(function() use ($profileController) {
-                                $profileController->profile();
+                            includeAdminContent(function() use ($profileController, $filename) {
+                                $user_id = $_SESSION['user_id'];
+                                $user_data = $profileController->$filename($user_id);
+                                include 'templates/admin/profile.php';
                             });
                             break;
                         case 'attendance':

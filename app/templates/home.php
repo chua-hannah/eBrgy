@@ -165,27 +165,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-6 col-md-6 col-12">
-                                <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0">
-                                    <div class="counter-thumb">
-                                        <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="2009"
-                                                data-speed="1000"></span>
-                                            <span class="counter-number-text"></span>
-                                        </div>
-
-                                        <span class="counter-text">Founded</span>
-                                    </div>
-
-                                    <div class="counter-thumb mt-4">
-                                        <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="120"
-                                                data-speed="1000"></span>
-                                            <span class="counter-number-text">B</span>
-                                        </div>
-
-                                        <span class="counter-text">Donations</span>
-                                    </div> -->
+                
                                 </div>
                             </div>
                         </div>

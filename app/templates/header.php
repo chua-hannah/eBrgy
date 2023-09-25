@@ -57,9 +57,9 @@
                 </li>
                 <?php
                         if (isset($_SESSION['username'])) {
-                            $fullname = $_SESSION['fullname'];
+                            $username = $_SESSION['username'];
                             echo '<li class="nav-item">';
-                            echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'profile' ? 'active' : ''; echo '"href="profile">'.$fullname.'</a>';
+                            echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'profile' ? 'active' : ''; echo '"href="profile">'.$username.'</a>';
                             echo '</li>';
                             echo '<li class="nav-item">';
                             echo '<a class="nav-link" href="logout.php">Logout</a>';
