@@ -11,7 +11,7 @@
 
                         <div class="d-flex flex-column justify-content-center ms-3">
                             <p class="mb-0">Juan Dela Cruz</p>
-                            <p class="mb-0"><strong>Frontdesk</strong></p>
+                            <p class="mb-0"><strong>Barangay Secretary</strong></p>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
             </div>
 
             <div class="col-lg-5 col-12 mx-auto">
-                <form class="custom-form contact-form" action="#" method="post" role="form">
+                <form class="custom-form contact-form" action="" method="post" role="form">
                     <h2>Contact form</h2>
 
                     <p class="mb-4">Or, you can just send an email:
@@ -53,23 +53,24 @@
                     </p>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
-                            <input type="text" name="first-name" id="first-name" class="form-control"
-                                placeholder="Juan" required>
+                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-12">
-                            <input type="text" name="last-name" id="last-name" class="form-control"
-                                placeholder="Dela Cruz" required>
+                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="juandelacruz@gmail.com" required>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <input type="text" name="mobile" id="mobileNumber" class="form-control" placeholder="Mobile Number" oninput="validateNumericInput(this)" maxlength="11">
                         </div>
                     </div>
-
-                    <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                        placeholder="juandelacruz@gmail.com" required>
-
-                    <textarea name="message" rows="5" class="form-control" id="message"
+                    <textarea name="contact_message" rows="5" class="form-control mb-4" id="contact_message"
                         placeholder="What can we help you?"></textarea>
-
-                    <button type="submit" class="form-control">Send Message</button>
+                    <button type="submit" name="submit_message" class="form-control">Send Message</button>
                 </form>
             </div>
         </div>

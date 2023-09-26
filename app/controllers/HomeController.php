@@ -272,7 +272,7 @@ public function equipments() {
           // Prepare the statement
           if ($this->connection->query($query) === true) {
             // Registration successful
-            echo "Message sent successful";
+            $_SESSION["status"] = "Message sent successfully.";
             header("Location: contact");
             exit();
         } else {
