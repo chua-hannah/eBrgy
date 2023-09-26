@@ -1054,6 +1054,17 @@ blockquote::before {
   outline: none;
 }
 
+
+.custom-form .text-danger {
+  margin-top: -10px;
+  font-size: 15px;
+}
+
+.custom-form .invalid-feedback {
+  margin-top: -10px;
+  font-size: 15px;
+}
+
 .custom-form .form-select :disabled { 
   color: #9e9e9e; 
 }
