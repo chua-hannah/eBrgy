@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-12">
-                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="juandelacruz@gmail.com" required>
+                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-12">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <textarea name="contact_message" rows="5" class="form-control mb-4" id="contact_message"
-                        placeholder="What can we help you?"></textarea>
+                        placeholder="What can we help you?" required></textarea>
                     <button type="submit" name="submit_message" class="form-control">Send Message</button>
                 </form>
             </div>

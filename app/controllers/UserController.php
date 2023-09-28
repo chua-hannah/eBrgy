@@ -23,38 +23,47 @@ class UserController {
                 $error = "Enter username and password.";
             } else {
                 // Retrieve user data from the database
-                $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND status = 'activated'";
+                $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
                 $result = $this->connection->query($query);
     
                 if ($result->num_rows > 0) {
-                    // User exists, login successful
+                    // User exists
                     $user = $result->fetch_assoc();
                     $username = $user['username'];
                     $email = $user['email'];
                     $mobile = $user['mobile'];
                     $user_id = $user['user_id'];
                     $role = $user['role'];
-    
-                    // Store the user's data in the session
-                    $_SESSION['username'] = $username;
-                    $_SESSION['user_id'] = $user_id;
-                    $_SESSION['role'] = $role;
-                    $_SESSION['mobile'] = $mobile;
-                    $_SESSION['email'] = $email;
-    
-                    // Redirect to appropriate page based on user role
-                    switch ($role) {
-                        case 'residence':
-                            header("Location: home");
-                            exit();
-                        case 'captain':
-                        case 'kagawad':
-                            header("Location: dashboard");
-                            exit();
-                        default:
-                            echo "Invalid user role.";
-                            return;
+                    $status = $user['status'];
+                    // User is not yet activated
+                    if ($status=="deactivate"){
+                        $error = "Account is not yet activated.";
                     }
+                    // User is activated
+                    else {
+                        // Store the user's data in the session
+                        $_SESSION['username'] = $username;
+                        $_SESSION['user_id'] = $user_id;
+                        $_SESSION['role'] = $role;
+                        $_SESSION['mobile'] = $mobile;
+                        $_SESSION['email'] = $email;
+        
+                        // Redirect to appropriate page based on user role
+                        switch ($role) {
+                            case 'residence':
+                                header("Location: home");
+                                exit();
+                            case 'captain':
+                            case 'kagawad':
+                                header("Location: dashboard");
+                                exit();
+                            default:
+                                echo "Invalid user role.";
+                                return;
+                        }
+                    }
+    
+                    
                 } else {
                     // Invalid username or password
                     $error = "Invalid username or password.";
@@ -82,19 +91,34 @@ class UserController {
         $middlename = $_POST['middlename'];
         $lastname = $_POST['lastname'];
         $birthdate = $_POST['birthdate'];
-        $sex = $_POST['sex'];
+        $minUsernameLength = 6;
+        $minPasswordLength = 8;
+        $datePattern = "/^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/\d{4}$/";
+        $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
+        $mobilePattern = "/^9\d{9}$/";
+        // Handle undefined array error for sex
+        if (isset($_POST['sex'])) {
+            $sex = $_POST['sex'];
+            // Now you can safely access $selectOption without an "undefined array key" error.
+        } else {
+            // Handle the case when 'selectOption' is not set.
+            $sex = ""; // or some default value
+        }
         $status = 'deactivate';
 
-        // Validate empty input fields
+        // Validate empty input fields & date pattern
 
         if (empty($firstname)) {
             $errors["firstname"] = "Enter your First name";
         }
         if (empty($lastname)) {
             $errors["lastname"] = "Enter your Last name";
-        }
-        if (empty($birthdate)) {
+        }  
+        if ($birthdate==="") {
             $errors["birthdate"] = "Enter your Birthdate";
+        }
+        else if (!preg_match($datePattern, $birthdate)) {
+            $errors["birthdate"] = "Invalid date format. Please use mm/dd/yyyy.";    
         }
         if (empty($sex)) {
             $errors["sex"] = "Select Gender";
@@ -102,8 +126,14 @@ class UserController {
         if (empty($mobile)) {
             $errors["mobile"] = "Enter Mobile number";
         }
+        else if (!preg_match($mobilePattern, $mobile)) {
+            $errors["mobile"] = "Invalid mobile number format.";    
+        }
         if (empty($email)) {
             $errors["email"] = "Enter Email address";
+        }
+        else if (!preg_match($emailPattern, $email)) {
+            $errors["email"] = "Invalid email format";
         }
         if (empty($username)) {
             $errors ["username"] = "Enter Username";
@@ -111,9 +141,10 @@ class UserController {
         if (empty($password)) {
             $errors["password"] = "Enter Password";
         }
-
-        $minUsernameLength = 6;
-        $minPasswordLength = 8;
+        if (!(isset($_POST["data_privacy_agreement"]))) {
+            // The checkbox was checked
+            $errors["terms"] = "In order to proceed, I must agree to the data privacy consent.";
+        }
 
         // Validate username length
         if (!(empty($username)) && strlen($username) < $minUsernameLength) {
@@ -134,6 +165,10 @@ class UserController {
         }
 
         if (empty($errors)) {
+            // Add prefix in mobile number input
+            $prefixMobileNumber = "+63";
+            $mobile = $prefixMobileNumber . $mobile;
+
             // Convert birthdate to YYYY-MM-DD format
             $birthdateTimestamp = strtotime($birthdate);
 
@@ -215,7 +250,7 @@ class UserController {
                 
                 if ($this->connection->query($query) === true) {
                     // Registration successful
-                    $_SESSION['status'] = "Registration successful";
+                    $_SESSION['status'] = "Registration successful. Before you can login, your account must be validated within 24 hours by the administrator.";
                     header("Location: login");
                     exit();
                 } else {

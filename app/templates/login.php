@@ -1,5 +1,4 @@
-
-  <section class="volunteer-section section-padding" id="section_4">
+<section class="volunteer-section section-padding" id="section_4">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-lg-6 col-12">
@@ -28,33 +27,3 @@
     </div>
   </div>
 </section>
-
-<!-- Remove is-invalid -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-  const username = document.getElementById("username-login");
-  const password = document.getElementById("password-login");
-
-  // Add an input event listener to monitor changes in the input field
-  username.addEventListener("input", function() {
-      const inputUsername = username.value.trim();
-      if (inputUsername === "") {
-        username.classList.remove("is-invalid");
-        
-      }
-      else if (inputUsername.length>0){
-        username.classList.remove("is-invalid");
-      }
-  });
-  password.addEventListener("input", function() {
-      const inputPassword = password.value.trim();
-      if (inputPassword === "") {
-        password.classList.remove("is-invalid");
-        
-      }
-      else if (inputPassword.length>0){
-        password.classList.remove("is-invalid");
-      }
-  });
-});
-</script>

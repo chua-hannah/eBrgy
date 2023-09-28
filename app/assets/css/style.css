@@ -635,8 +635,8 @@ strong {
 .about-image {
   border-radius: var(--border-radius-medium);
   display: block;
-  width: 350px;
-  height: 400px;
+  width: 250px;
+  height: 280px;
   object-fit: cover;
 }
 
@@ -1055,7 +1055,7 @@ blockquote::before {
 }
 
 .custom-form .text-danger {
-  margin-top: -10px;
+  margin-top: -6px;
   font-size: 15px;
 }
 
@@ -1064,11 +1064,17 @@ blockquote::before {
   font-size: 15px;
 }
 
-.custom-form .form-select :disabled { 
-  color: #9e9e9e; 
+.custom-form .form-control:disabled { 
+  background-color: #dddddd;
 }
-.custom-form .form-control:hover,
-.custom-form .form-control:focus {
+
+
+.custom-form .form-select:disabled { 
+  color: #dddddd; 
+}
+
+.custom-form .form-control:hover:enabled,
+.custom-form .form-control:focus:enabled {
   border-color: var(--secondary-color);
 }
 
@@ -1179,8 +1185,8 @@ blockquote::before {
   transition: all 0.3s;
 }
 
-.custom-form button[type="submit"]:hover,
-.custom-form button[type="submit"]:focus {
+.custom-form button[type="submit"]:hover:enabled,
+.custom-form button[type="submit"]:focus:enabled {
   background: var(--custom-btn-bg-hover-color);
   border-color: transparent;
 }
@@ -1673,4 +1679,8 @@ table.custom-table tr {
 
 .img-thumbnail {
   width: 180px;
+}
+
+.error .custom-checkbox label {
+  border-color: red;
 }
