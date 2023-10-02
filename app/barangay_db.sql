@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2023 at 11:59 AM
+-- Generation Time: Oct 02, 2023 at 05:34 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -77,7 +77,10 @@ CREATE TABLE `doc_requests` (
 --
 
 INSERT INTO `doc_requests` (`id`, `request_name`, `username`, `email`, `mobile`, `status`, `message`, `created_at`) VALUES
-(1, 'Barangay Certificate', 'resident1', 'resident1@mail.com', '1111111111', 'pending', 'test123', '2023-09-25 08:47:52');
+(1, 'Barangay Certificate', 'resident1', 'resident1@mail.com', '1111111111', 'pending', 'test123', '2023-09-25 08:47:52'),
+(2, 'TIN ID', 'resident1', 'resident1@mail.com', '1111111111', 'pending', 'Test', '2023-09-25 15:43:29'),
+(3, 'PSA', 'resident1', 'resident1@mail.com', '1111111111', 'pending', 'Test', '2023-09-25 15:50:53'),
+(4, 'POSTAL ID', 'resident1', 'resident1@mail.com', '1111111111', 'pending', '3', '2023-09-25 16:30:07');
 
 -- --------------------------------------------------------
 
@@ -135,7 +138,10 @@ INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `statu
 (6, 1, 'plastic chair', 'pending', 21, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:30:10', '2023-09-25 09:30:10'),
 (7, 1, 'plastic chair', 'pending', 33, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:32:01', '2023-09-25 09:32:01'),
 (8, 2, 'plastic chair', 'pending', 99, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:35:11', '0000-00-00 00:00:00'),
-(9, 1, 'plastic chair', 'pending', 98, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:35:45', '0000-00-00 00:00:00');
+(9, 1, 'plastic chair', 'pending', 98, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 09:35:45', '0000-00-00 00:00:00'),
+(10, 2, 'plastic chair', 'pending', 1, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 10:14:29', '0000-00-00 00:00:00'),
+(19, 1, 'plastic chair', 'pending', 1, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 14:47:54', '0000-00-00 00:00:00'),
+(20, 2, 'plastic chair', 'pending', 5, 'resident1', 'resident1@mail.com', '1111111111', '2023-09-25 16:29:39', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -187,7 +193,24 @@ INSERT INTO `messages` (`id`, `firstname`, `lastname`, `email`, `mobile`, `subje
 (4, 'reklamor4', 'reklamor4', 'reklamor4@mail.com', '1231231', 'reklamor4', '', '2023-07-17 18:24:26'),
 (5, 'reklamo5', 'reklamo5', 'reklamo5@mail.com', '123123131', 'reklamo5', '', '2023-07-17 18:26:26'),
 (6, 'reklamo6', 'reklamo6', 'reklamo6@mail.com', '1321231', 'reklamo6', '', '2023-07-17 18:29:29'),
-(7, 'francis', 'francis', 'francis@mail.com', '1231212312', 'francis', 'lato lato sa umaga', '0000-00-00 00:00:00');
+(7, 'francis', 'francis', 'francis@mail.com', '1231212312', 'francis', 'lato lato sa umaga', '0000-00-00 00:00:00'),
+(8, 'Hannah', 'Hannah', 'hannahchua013@gmail.com', '', '', 'Ha', '2023-09-26 11:24:27'),
+(9, 'Test', 'Test', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:39:12'),
+(10, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:40:37'),
+(11, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:40:47'),
+(12, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:41:48'),
+(13, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:45:13'),
+(14, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:45:30'),
+(15, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:46:13'),
+(16, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:46:48'),
+(17, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:47:00'),
+(18, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:47:07'),
+(19, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:48:09'),
+(20, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:48:51'),
+(21, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:49:01'),
+(22, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:49:13'),
+(23, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '', '', '1', '2023-09-26 14:49:42'),
+(24, 'Hannah', 'Chua', 'hannahchua013@gmail.com', '09064376521', '', '', '2023-09-28 15:31:17');
 
 -- --------------------------------------------------------
 
@@ -295,20 +318,39 @@ CREATE TABLE `users` (
   `role` varchar(50) DEFAULT NULL,
   `id_selfie` varchar(255) DEFAULT NULL,
   `valid_id` varchar(255) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL
+  `status` varchar(50) DEFAULT NULL,
+  `address` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `birthdate`, `age`, `sex`, `role`, `id_selfie`, `valid_id`, `status`) VALUES
-(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', '1990-01-15', 33, 'male', 'captain', '8.png', '8.png', 'activated'),
-(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', '1988-02-14', 35, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
-(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', '1990-01-19', 33, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
-(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', '1982-12-25', 40, 'male', 'kagawad', '8.png', '8.png', 'deactivate'),
-(5, 'resident1', 'pass123', 'resident1@mail.com', '1111111111', 'resident1', 'resident1', 'resident1', '1990-12-22', 32, 'male', 'residence', '8.png', '8.png', 'activated'),
-(6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', '1997-01-25', 26, 'male', 'residence', '8.png', '8.png', 'deactivate');
+INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `birthdate`, `age`, `sex`, `role`, `id_selfie`, `valid_id`, `status`, `address`) VALUES
+(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', '1990-01-15', 33, 'male', 'captain', '8.png', '8.png', 'activated', ''),
+(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', '1988-02-14', 35, 'male', 'kagawad', '8.png', '8.png', 'deactivate', ''),
+(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', '1990-01-19', 33, 'male', 'kagawad', '8.png', '8.png', 'deactivate', ''),
+(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', '1982-12-25', 40, 'male', 'kagawad', '8.png', '8.png', 'deactivate', ''),
+(5, 'resident1', 'pass123', 'resident1@mail.com', '1111111111', 'resident1', 'resident1', 'resident1', '1990-12-22', 32, 'male', 'residence', NULL, '8.png', 'activated', ''),
+(6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', '1997-01-25', 26, 'male', 'residence', '8.png', '8.png', 'deactivate', ''),
+(7, 'resident3', '123456789', 'hannahchua013@gmail.com', '1', 'RResident', 'Resident', 'Resident', '2023-11-11', -1, 'female', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(8, 'resident4', 'pass123456', 'hannahchua11@gmail.com', '9412611555', 'Resident', 'Resident', 'Resident', '1997-11-11', 25, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(9, 'resident5', 'pass12345678', 'hannahchua12@gmail.com', '9412611558', 'Resident', 'Resident', 'Resident', '1997-11-11', 25, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(10, 'resident6', 'pass123456', 'hannahchua03@gmail.com', '9064376528', 'Hannah', 'Tan', 'Chua', '2002-12-31', 20, 'others', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(11, 'resident7', 'asdasdqwrqwrqwr', 'hannahchua014@gmail.com', '9064376533', 'Hannah', 'Tan', 'Chua', '1111-11-11', 912, 'female', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(12, 'user123456', 'useruser', 'hannahchua016@gmail.com', '9064376555', 'Hannah', '', 'Chua', '1111-11-11', 912, 'female', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(13, 'user1234567', 'asdasdasdasd', 'hannahchua088@gmail.com', '9064376588', 'Hannah', 'Test', 'Chua', '2002-11-11', 20, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(14, 'tao1tao1', 'tao1tao1', 'hannahchua0444@gmail.com', '9064376544', 'Hannah', '', 'Chua', '2003-11-11', 19, 'others', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(15, '123124124', '14124124124', 'hannahchua3@gmail.com', '9064376888', 'Hannah', '', 'Chua', '2023-11-20', -1, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(16, '123125412', '541241251251251', 'hannahchua013@gmail.com77', '9064376777', 'Hannah', '', 'Chua', '1999-11-12', 23, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(17, 'resident111', 'pass123456', 'hannahchua013@gmail.com1111', '9064376521', 'Hannah', '', 'Chua', '1993-11-11', 29, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(18, 'residentevil', 'evil1234', 'hannahchua013@gmail.com123', '9064376583', 'Hannah', '', 'Chua', '1993-11-11', 29, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'activated', ''),
+(19, 'asdasdas', 'asdasdasd', 'hannahchua013@gmail.com123123', '9064376511', 'Hannah', '', 'Chua', '2000-01-11', 23, 'female', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(20, 'testtest', 'testtest', 'hannahchua013@gmail.com111', '9064376411', 'Hannah', '', 'Chua', '1997-11-11', 25, 'female', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(21, '111123123', '125412125', '123123123', '9064371111', 'Hannah', '', 'Chua', '1997-11-11', 25, 'male', 'residence', 'Barangay.png', 'Barangay.png', 'deactivate', ''),
+(22, 'user12345678', 'pass1234', 'hannahchua011113@gmail.com', '+639642411111', 'Hannah', '', 'Chua', '1997-12-01', 25, 'female', 'residence', 'Barangay.png', 'Barangay.png', 'activated', ''),
+(23, 'useruser123', 'useruser123', 'hannahchua0134444@gmail.com', '+639064372222', 'Hannah', '', 'Chua', '1992-11-13', 30, 'Male', 'residence', 'curl_request.png', 'curl_request.png', 'deactivate', '10 - E F. Roxas St. Brgy. Tibagan'),
+(24, 'resident678', 'pass123456', 'hannahchu11a013@gmail.com', '+639064376576', 'Hannah', '', 'Chua', '2020-01-11', 3, 'Male', 'residence', 'curl_request.png', 'curl_request.png', 'deactivate', '10 - E F. Roxas St. Brgy. Tibagan');
 
 --
 -- Indexes for dumped tables
@@ -382,7 +424,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `doc_requests`
 --
 ALTER TABLE `doc_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `doc_settings`
@@ -394,7 +436,7 @@ ALTER TABLE `doc_settings`
 -- AUTO_INCREMENT for table `equipment_requests`
 --
 ALTER TABLE `equipment_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `equipment_settings`
@@ -406,7 +448,7 @@ ALTER TABLE `equipment_settings`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `report_requests`
@@ -424,7 +466,7 @@ ALTER TABLE `time_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

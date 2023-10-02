@@ -69,6 +69,21 @@
                                         <label class="labels">Email</label>
                                         <input type="text" class="form-control" id="email" value="<?php echo $user_data['email']; ?>" disabled>
                                     </div>
+                                    <div class="col-lg-12 col-12 mt-2">
+                                        <h5 class="mb-3">Address Details</h5>
+                                    </div>
+                                    <div class="col-lg-4 col-12">
+                                        <label class="labels">House No./Bldg./Street Name</label>
+                                        <input type="text" class="form-control" id="address" value="<?php echo $user_data['address']; ?>" disabled>
+                                    </div>
+                                    <div class="col-lg-4 col-12">
+                                        <label class="labels">City</label>
+                                        <input type="text" name="city" class="form-control" value="City of Manila" disabled>
+                                    </div>
+                                    <div class="col-lg-4 col-12">
+                                        <label class="labels">Barangay</label>
+                                        <input type="text" name="barangay" class="form-control" value="Barangay 95" disabled>
+                                    </div>
                                     <?php } else { ?>
                                     <div class="col-md-12">
                                         <p>User data not available.</p>
@@ -89,15 +104,17 @@
 // Get references to the input fields and the edit button
 const mobileInput = document.getElementById('mobile');
 const emailInput = document.getElementById('email');
+const addressInput = document.getElementById('address');
 const editButton = document.getElementById('edit');
 
 // Function to enable/disable input fields
 function toggleInputs() {
     mobileInput.disabled = !mobileInput.disabled;
     emailInput.disabled = !emailInput.disabled;
+    addressInput.disabled = !addressInput.disabled;
   
     // Change the text of the edit button based on the input field state
-    if (mobileInput.disabled && emailInput.disabled) {
+    if (mobileInput.disabled && emailInput.disabled && addressInput.disabled) {
         editButton.textContent = 'Edit Profile';
     } else {
         editButton.textContent = 'Save Changes';

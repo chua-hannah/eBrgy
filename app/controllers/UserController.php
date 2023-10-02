@@ -91,6 +91,7 @@ class UserController {
         $middlename = $_POST['middlename'];
         $lastname = $_POST['lastname'];
         $birthdate = $_POST['birthdate'];
+        $address = $_POST['address'];
         $minUsernameLength = 6;
         $minPasswordLength = 8;
         $datePattern = "/^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/\d{4}$/";
@@ -134,6 +135,9 @@ class UserController {
         }
         else if (!preg_match($emailPattern, $email)) {
             $errors["email"] = "Invalid email format";
+        }
+        if (empty($address)) {
+            $errors["address"] = "Enter Address";
         }
         if (empty($username)) {
             $errors ["username"] = "Enter Username";
@@ -245,8 +249,8 @@ class UserController {
                 $error = "Given mobile number already exists.";
             } elseif (empty($error) && empty($errors)) {
                 // Insert the data into the database
-                $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, role, id_selfie, valid_id, status) 
-                            VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
+                $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status) 
+                            VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
                 
                 if ($this->connection->query($query) === true) {
                     // Registration successful

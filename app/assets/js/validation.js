@@ -177,6 +177,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const mobile = document.getElementById("mobile");
     const sex = document.getElementById("sex");
     const email = document.getElementById("email");
+    const address = document.getElementById("address");
     const username = document.getElementById("username");
     const password = document.getElementById("password");
     const idSelfie = document.getElementById("id_selfie");
@@ -188,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const errorSex = document.getElementById("error_sex");
     const errorMobile = document.getElementById("error_mobile");
     const errorEmail = document.getElementById("error_email");
+    const errorAddress = document.getElementById("error_address");
     const errorTerms = document.getElementById("error_terms");
 
     
@@ -252,15 +254,15 @@ document.addEventListener("DOMContentLoaded", function() {
             email.classList.remove("is-invalid");
         }
     });
-    email.addEventListener("input", function() {
-        const inputEmail= email.value.trim();
-        errorEmail.style.display = "none";
-        if (inputEmail === "") {
-            email.classList.remove("is-invalid");
+    address.addEventListener("input", function() {
+        const inputAddress= address.value.trim();
+        errorAddress.style.display = "none";
+        if (inputAddress === "") {
+            address.classList.remove("is-invalid");
           
         }
-        else if (inputEmail.length>0){
-            email.classList.remove("is-invalid");
+        else if (inputAddress.length>0){
+            address.classList.remove("is-invalid");
         }
     });
     idSelfie.addEventListener("change", function () {
