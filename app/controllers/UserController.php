@@ -30,6 +30,9 @@ class UserController {
                     // User exists
                     $user = $result->fetch_assoc();
                     $username = $user['username'];
+                    $firstname = $user['firstname'];
+                    $middlename = $user['middlename'];
+                    $lastname = $user['lastname'];
                     $email = $user['email'];
                     $mobile = $user['mobile'];
                     $user_id = $user['user_id'];
@@ -43,6 +46,9 @@ class UserController {
                     else {
                         // Store the user's data in the session
                         $_SESSION['username'] = $username;
+                        $_SESSION['firstname'] = $firstname;
+                        $_SESSION['middlename'] = $middlename;
+                        $_SESSION['lastname'] = $lastname;
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['role'] = $role;
                         $_SESSION['mobile'] = $mobile;
@@ -254,12 +260,12 @@ class UserController {
                 
                 if ($this->connection->query($query) === true) {
                     // Registration successful
-                    $_SESSION['status'] = "Registration successful. Before you can login, your account must be validated within 24 hours by the administrator.";
-                    header("Location: login");
+                    header("Location: home");
+                    $_SESSION['registration_successful'] = true;
                     exit();
                 } else {
                     // Error occurred
-                    $_SESSION['status'] = "Error: " . $this->connection->error;
+                    $_SESSION['registerFailed'] = "Error: " . $this->connection->error;
                 }
             }
         }

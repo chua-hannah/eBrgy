@@ -19,7 +19,7 @@
             </div>  
             <div class="col-lg-12 col-md-6 col-12">
                 <label class="labels">Quantity</label>
-                <input type="text" name="total_equipment_borrowed" id="total_equipment_borrowed" class="form-control mb-4" required>
+                <input type="text" name="total_equipment_borrowed" id="total_equipment_borrowed" class="form-control mb-4" oninput="validateNumericInput(this)" required>
             </div>
         </div>
         <div class="d-grid gap-2 col-12 mx-auto">

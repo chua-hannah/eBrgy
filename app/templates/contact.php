@@ -49,7 +49,7 @@
                     <h2>Contact form</h2>
 
                     <p class="mb-4">Or, you can just send an email:
-                        <a href="#">dummy@only.ph</a>
+                        <a href="mailto:someone@example.com">dummy@only.ph</a>
                     </p>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
