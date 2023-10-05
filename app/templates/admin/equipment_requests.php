@@ -17,11 +17,12 @@
                 <tr>
                   
                     <th>Request Name</th>
-                    <th>Fullname</th>
+                    <th>Username</th>
+                    <th>Quantity</th>
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>Status</th>
-                    <th>Created At</th>
+                    <th>Request Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,12 +31,13 @@
                     ?>
                     <tr>
                        
-                        <td><?php echo $request['request_name']; ?></td>
-                        <td><?php echo $request['fullname']; ?></td>
+                        <td><?php echo $request['equipment_name']; ?></td>
+                        <td><?php echo $request['username']; ?></td>
+                        <td><?php echo $request['total_equipment_borrowed']; ?></td>
                         <td><?php echo $request['mobile']; ?></td>
                         <td><?php echo $request['email']; ?></td>
                         <td><?php echo $request['status']; ?></td>
-                        <td><?php echo $request['created_at']; ?></td>
+                        <td><?php echo $request['request_date']; ?></td>
                     </tr>
                     <?php
                 }

@@ -243,7 +243,7 @@ switch ($filename) {
                             break;
                         case 'requests/equipments':
                             includeAdminContent(function() use ($requestManagementController) {
-                                // $requests = $requestManagementController->report_requests();
+                                $requests = $requestManagementController->equipment_requests();
                                 include 'templates/admin/equipment_requests.php';
                                 
                             });

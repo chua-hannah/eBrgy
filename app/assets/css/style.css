@@ -471,7 +471,8 @@ strong {
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
   transition: top 300ms 50ms ease, -webkit-transform 300ms 350ms ease;
   transition: top 300ms 50ms ease, transform 300ms 350ms ease;
-  transition: top 300ms 50ms ease, transform 300ms 350ms ease, -webkit-transform 300ms 350ms ease;
+  transition: top 300ms 50ms ease, transform 300ms 350ms ease,
+    -webkit-transform 300ms 350ms ease;
   top: 0;
 }
 
@@ -496,14 +497,15 @@ strong {
 .navbar-toggler .navbar-toggler-icon:after {
   transition: top 300ms 350ms ease, -webkit-transform 300ms 50ms ease;
   transition: top 300ms 350ms ease, transform 300ms 50ms ease;
-  transition: top 300ms 350ms ease, transform 300ms 50ms ease, -webkit-transform 300ms 50ms ease;
+  transition: top 300ms 350ms ease, transform 300ms 50ms ease,
+    -webkit-transform 300ms 50ms ease;
   position: absolute;
   right: 0;
   left: 0;
   background: var(--dark-color);
   width: 30px;
   height: 2px;
-  content: '';
+  content: "";
 }
 
 .navbar-toggler .navbar-toggler-icon::before {
@@ -684,7 +686,7 @@ strong {
 
 .form-control:focus {
   background-color: var(--section-bg-color);
-} 
+}
 
 .volunteer-image {
   border-radius: 100%;
@@ -1065,13 +1067,12 @@ blockquote::before {
   font-size: 15px;
 }
 
-.custom-form .form-control:disabled { 
+.custom-form .form-control:disabled {
   background-color: #dddddd;
 }
 
-
-.custom-form .form-select:disabled { 
-  color: #dddddd; 
+.custom-form .form-select:disabled {
+  color: #dddddd;
 }
 
 .custom-form .form-control:hover:enabled,
@@ -1657,21 +1658,21 @@ blockquote::before {
 }
 
 .alert-custom {
-  background-color:#21afc0;
-  color:#fff;
+  background-color: #21afc0;
+  color: #fff;
 }
 
 /* Primary color for table headers and alternating rows */
 table.custom-table th,
 table.custom-table tr:nth-child(even) {
-    background-color: #5a6f80;
-    color: #ffffff;
+  background-color: #5a6f80;
+  color: #ffffff;
 }
 
 /* Secondary color for table data cells */
 table.custom-table td {
-    background-color: #ffffff;
-    color: #5a6f80;
+  background-color: #ffffff;
+  color: #5a6f80;
 }
 
 table.custom-table tr {
@@ -1679,7 +1680,7 @@ table.custom-table tr {
 }
 
 .img-thumbnail {
-  width: 180px;
+  width: 100px;
 }
 
 .error .custom-checkbox label {

@@ -8,10 +8,10 @@
                 <?php foreach ($users as $user): ?>
                     <?php if ($user['role'] === 'captain'): ?>
                         <div class="col-md-4">
-                            <div class="card my-5">
+                            <div class="card md-3">
                                 <div class="card-body text-center">
                                     <div>
-                                        <h3><?php echo $user['role']; ?></h3>
+                                        
                                         <?php
                                         $idSelfiePath = 'uploads/id_selfie/' . $user['id_selfie'];
                                         if (!empty($user['id_selfie']) && file_exists($idSelfiePath)):
@@ -23,7 +23,8 @@
                                             <p>ID Selfie not available</p>
                                         <?php endif; ?>
                                     </div>
-                                    <h5 class="card-title mt-4">
+                                    <h5><?php echo $user['role']; ?></h5>
+                                    <h5 class="card-title">
                                         <?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?>
                                     </h5>
                                     <p class="card-text">
@@ -37,7 +38,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container mt-3">
             <?php $count = 0; ?>
             <?php foreach ($users as $user): ?>
                 <?php if ($user['role'] === 'kagawad'): ?>
@@ -55,7 +56,6 @@
                             <div class="card-body text-center">
                                 <!-- Display the ID Selfie image -->
                                 <div>
-                                    <h3><?php echo $user['role']; ?></h3>
                                     <?php
                                     $idSelfiePath = 'uploads/id_selfie/' . $user['id_selfie'];
                                     if (!empty($user['id_selfie']) && file_exists($idSelfiePath)):
@@ -67,7 +67,8 @@
                                         <p>ID Selfie not available</p>
                                     <?php endif; ?>
                                 </div>
-                                <h5 class="card-title mt-4">
+                                <h5><?php echo $user['role']; ?></h5>
+                                <h5 class="card-title">
                                     <?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?>
                                 </h5>
                                 <p class="card-text">
@@ -76,9 +77,7 @@
                             </div>
                         </div>
                     </div>
-
                     <?php $count++; ?>
-
                     <?php if ($count % 7 === 0): ?>
                         </div>
                     <?php endif; ?>

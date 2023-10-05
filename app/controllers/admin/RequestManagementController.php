@@ -58,6 +58,29 @@ class RequestManagementController {
     return $all_request;
 
     }
+
+    public function equipment_requests() {
+      // Render the home page content
+      if ($this->connection->error) {
+        die("Connection failed: " . $this->connection->error);
+    }
+
+    // Use prepared statement to prevent SQL injection
+    $query = "SELECT * FROM equipment_requests";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute();
+
+    // Fetch all request settings records as an associative array
+    $result = $stmt->get_result();
+    $all_request = array();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $all_request[] = $row;
+        }
+    }
+    // Return the fetched request settings data
+    return $all_request;
+    }
   }
   
 ?>
