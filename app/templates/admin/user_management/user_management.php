@@ -15,7 +15,9 @@ $users = UserManagementController::user_management();
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Fullname</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
                     <th>Age</th>
                     <th>Sex</th>
                     <th>Role</th>
@@ -28,7 +30,9 @@ $users = UserManagementController::user_management();
                     <tr>
                         <td><?php echo $user['username']; ?></td>
                         <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?></td>
+                        <td><?php echo $user['firstname'] ?></td>
+                        <td><?php echo $user['middlename'] ?></td>
+                        <td><?php echo $user['lastname']; ?></td>
                         <td><?php echo $user['age']; ?></td>
                         <td><?php echo $user['sex']; ?></td>
                       
@@ -36,7 +40,7 @@ $users = UserManagementController::user_management();
                         <td style="color: <?php echo $user['status'] === 'activated' ? 'green' : 'red'; ?>;"><?php echo $user['status']; ?></td>
 
                         <td>
-                            <div class="btn-group" style="display: flex; gap: 8px; justify-conter: space-around;">
+                            <div class="btn-group" style="display: flex; gap: 8px; justify-content: space-around;">
                             <form action="user-management/edit-user" method="post">
                                 <input type="hidden" name="userId" value="<?php echo $user['user_id']; ?>">
                                 <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>

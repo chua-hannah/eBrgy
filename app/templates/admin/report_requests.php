@@ -29,7 +29,7 @@
                     ?>
                     <tr>
                        
-                        <td><?php echo $request['fullname']; ?></td>
+                        <td><?php echo $request['firstname'] . ' ' . $request['middlename'] . ' ' . $request['lastname']; ?></td>
                         <td><?php echo $request['email']; ?></td>
                         <td><?php echo $request['mobile']; ?></td>
                         <td><?php echo $request['reported_person']; ?></td>

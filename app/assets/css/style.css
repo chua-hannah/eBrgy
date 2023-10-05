@@ -134,6 +134,7 @@ h5 {
 
 h6 {
   font-size: var(--h6-font-size);
+  color: var(--secondary-color);
 }
 
 p {
@@ -1246,23 +1247,6 @@ blockquote::before {
   padding-bottom: 70px;
 }
 
-.site-footer-bottom {
-  background-color: var(--secondary-color);
-  position: relative;
-  z-index: 2;
-  margin-top: 70px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-.site-footer-bottom a {
-  color: var(--white-color);
-}
-
-.site-footer-bottom a:hover {
-  color: #ff6;
-}
-
 .site-footer-link {
   color: var(--white-color);
 }
@@ -1302,38 +1286,6 @@ blockquote::before {
   vertical-align: middle;
   margin-right: 10px;
   margin-bottom: 5px;
-}
-
-/*---------------------------------------
-  SOCIAL ICON               
------------------------------------------*/
-.social-icon {
-  margin: 0;
-  padding: 0;
-}
-
-.social-icon-item {
-  list-style: none;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.social-icon-link {
-  background: var(--site-footer-bg-color);
-  border-radius: var(--border-radius-large);
-  color: var(--white-color);
-  font-size: var(--copyright-font-size);
-  display: block;
-  margin-right: 5px;
-  text-align: center;
-  width: 35px;
-  height: 35px;
-  line-height: 38px;
-}
-
-.social-icon-link:hover {
-  background: var(--primary-color);
-  color: var(--white-color);
 }
 
 /*---------------------------------------
@@ -1680,7 +1632,8 @@ table.custom-table tr {
 }
 
 .img-thumbnail {
-  width: 100px;
+  width: 40%;
+  border-radius: var(--border-radius-medium);
 }
 
 .error .custom-checkbox label {
@@ -1689,4 +1642,15 @@ table.custom-table tr {
 
 .modal-title {
   text-align: center;
+}
+
+.custom-card {
+  background-color: var(--section-bg-color);
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }

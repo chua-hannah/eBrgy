@@ -68,7 +68,7 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="officials" class="d-block">
-                                <img src="assets/images/icons/hands.png" class="featured-block-image img-fluid" alt="">
+                                <img src="assets/images/icons/team.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">View <strong>Our Officials</strong></p>
                             </a>

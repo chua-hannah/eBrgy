@@ -17,7 +17,9 @@
                 <tr>
                   
                     <th>Request Name</th>
-                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>Status</th>
@@ -40,7 +42,9 @@
                     <tr>
                        
                         <td><?php echo $request['request_name']; ?></td>
-                        <td><?php echo $request['username']; ?></td>
+                        <td><?php echo $request['firstname']; ?></td>
+                        <td><?php echo $request['middlename']; ?></td>
+                        <td><?php echo $request['lastname']; ?></td>
                         <td><?php echo $request['mobile']; ?></td>
                         <td><?php echo $request['email']; ?></td>
                         <td><?php echo $request['status']; ?></td>
