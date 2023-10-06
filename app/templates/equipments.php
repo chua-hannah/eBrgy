@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="services">Services</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Equipments</li>
+  </ol>
+</nav>
 <h2 class="text-center mt-4 mb-4">Equipment Request Form</h2>
 <div class="col-lg-6 col-12 mx-auto">
     <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
