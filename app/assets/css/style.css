@@ -1243,8 +1243,8 @@ blockquote::before {
 -----------------------------------------*/
 .site-footer {
   background-color: var(--site-footer-bg-color);
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .site-footer-link {
@@ -1668,4 +1668,28 @@ img.img-responsive {
 
 .wrap-text {
   white-space: nowrap;
+}
+
+
+/* Custom breadcrumb styles */
+.breadcrumb {
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.breadcrumb-item {
+  font-size: 18px;
+}
+
+.breadcrumb-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: var(--primary-color);
+}
+
+.breadcrumb-item.a:hover {
+  color: var(--primary-color);
 }

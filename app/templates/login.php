@@ -1,4 +1,4 @@
-<section class="contact-section section-padding" id="section_4">
+<section class="contact-section section-padding mb-2 mt-2" id="section_4">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-lg-6 col-12">
