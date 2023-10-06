@@ -30,9 +30,54 @@
             </div>
         </div>
         <div class="d-grid gap-2 col-12 mx-auto">
-            <button type="submit" name="report_form" class="form-control">Submit Request</button>
+            <button type="submit" name="report_form" class="form-control">Submit Report</button>
+            <a href="#requestListModal" class="text-center mb-0" data-bs-toggle="modal" data-bs-target="#requestListModal">
+                View Submitted Reports
+            </a>
         </div>
     </form>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="requestListModal" tabindex="-1" aria-labelledby="requestListModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Request List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Modal Body (Your Table) -->
+            <div class="modal-body">
+                <?php if (empty($myrequest)) { ?>
+                    <div class="text-center"><p>No requests are currently available.</p></div>
+                <?php } else { ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped custom-table">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Document Type</th>
+                                    <th>Status</th>
+                                    <th>Request Date & Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($myrequest as $request) {
+                                    $htmlFormattedDate = date("m/d/Y", strtotime($request['created_at']));
+                                    $htmlFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $request['request_name']; ?></td>
+                                        <td><?php echo $request['status']; ?></td>
+                                        <td><?php echo $htmlFormattedDate . " " . $htmlFormattedTime; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
 </div>
 
 
