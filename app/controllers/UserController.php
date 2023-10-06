@@ -40,7 +40,7 @@ class UserController {
                     $status = $user['status'];
                     // User is not yet activated
                     if ($status=="deactivate"){
-                        $error = "Account is not yet activated.";
+                        $error = "Account is not yet activated. Please wait for your account to be verified by the administrator within 24 hours.";
                     }
                     // User is activated
                     else {

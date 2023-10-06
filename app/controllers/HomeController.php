@@ -46,7 +46,7 @@ public function documents() {
         $username = $_SESSION['username'];
         $email = $_SESSION['email'];
         $mobile = $_SESSION['mobile'];
-        $status = 'pending';
+        $status = 'PENDING';
         $request_name = $_POST['selected_service'];
         $service_message = $_POST['service_message'];
         $date = date('Y-m-d');
@@ -121,7 +121,7 @@ public function reports() {
         $username = $_SESSION['username'];
         $email = $_SESSION['email'];
         $mobile = $_SESSION['mobile'];
-        $status = 'pending';
+        $status = 'PENDING';
         $reported_person_name = $_POST['reported_person_name'];
         $subject_person = $_POST['subject_person'];
         $place_of_incident = $_POST['place_of_incident'];
@@ -172,7 +172,7 @@ public function equipments() {
         $username = $_SESSION['username'];
         $email = $_SESSION['email'];
         $mobile = $_SESSION['mobile'];
-        $status = 'pending';
+        $status = 'PENDING';
         $equipment_id = $_POST['equipment_id'];
         $total_equipment_borrowed = $_POST['total_equipment_borrowed'];
         $date = date('Y-m-d');

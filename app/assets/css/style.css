@@ -1660,3 +1660,12 @@ img.img-responsive {
   max-width: 100% !important;
   height: auto !important;
 }
+
+.modal-body-scrollable {
+  max-height: calc(100vh - 200px); /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.wrap-text {
+  white-space: nowrap;
+}

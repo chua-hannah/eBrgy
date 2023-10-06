@@ -1,6 +1,6 @@
 <h2 class="text-center mt-4 mb-4">Report Form</h2>
 <div class="col-lg-6 col-12 mx-auto">
-    <form class="custom-form contact-form" action="#" method="post" role="form">
+    <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
         <div class="row d-flex justify-content-center">
         <h3 class="mb-4">File a report or a complaint</h3>
             <div class="col-lg-12 col-md-6 col-12">
@@ -15,12 +15,12 @@
 
             <div class="col-lg-6 col-md-6 col-12">
                 <label class="labels">Date of Incident</label>
-                <input type="date" name="date_of_incident" id="date" class="form-control" placeholder="Time" required>
+                <input type="date" name="date_of_incident" id="date" class="form-control" required>
             </div>
             
             <div class="col-lg-6 col-md-6 col-12">
                 <label class="labels">Time of Incident</label>
-                <input type="time" name="time_of_incident" id="time" class="form-control" placeholder="Time" required>
+                <input type="time" name="time_of_incident" id="time" class="form-control" required>
             </div>
 
             <div class="col-lg-12 col-md-6 col-12">
