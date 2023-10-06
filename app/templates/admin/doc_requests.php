@@ -20,6 +20,7 @@
                     <th>First Name</th>
                     <th>Middle Name</th>
                     <th>Last Name</th>
+                    <th>Address</th>
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>Status</th>
@@ -45,6 +46,7 @@
                         <td><?php echo $request['firstname']; ?></td>
                         <td><?php echo $request['middlename']; ?></td>
                         <td><?php echo $request['lastname']; ?></td>
+                        <td><?php echo $request['address']; ?></td>
                         <td><?php echo $request['mobile']; ?></td>
                         <td><?php echo $request['email']; ?></td>
                         <td><?php echo $request['status']; ?></td>

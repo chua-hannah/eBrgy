@@ -118,9 +118,7 @@ public function get_doc_requests($username, $mobile, $email) {
 public function reports() {
     if (isset($_POST['report_form'])) {
         date_default_timezone_set('Asia/Manila');
-        $firstname = $_SESSION['firstname'];
-        $middlename = $_SESSION['middlename'];
-        $lastname = $_SESSION['lastname'];
+        $username = $_SESSION['username'];
         $email = $_SESSION['email'];
         $mobile = $_SESSION['mobile'];
         $status = 'pending';
@@ -137,9 +135,9 @@ public function reports() {
         $datetime = $date . ' ' . $time_in;
 
         // Check if a similar request already exists based on request_name, fullname, email, and mobile
-        $checkQuery = "SELECT COUNT(*) as count FROM report_requests WHERE reported_person = ? AND subject_person = ? AND firstname = ? AND middlename = ? AND lastname = ? AND email = ? AND mobile = ?";
+        $checkQuery = "SELECT COUNT(*) as count FROM report_requests WHERE reported_person = ? AND subject_person = ? AND username = ?  AND email = ? AND mobile = ?";
         $stmt = $this->connection->prepare($checkQuery);
-        $stmt->bind_param('sssssss', $reported_person_name, $subject_person, $firstname, $middlename, $lastname, $email, $mobile);
+        $stmt->bind_param('sssss', $reported_person_name, $subject_person, $username, $email, $mobile);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
@@ -148,9 +146,9 @@ public function reports() {
         if ($count === 0) {
             // No similar request exists with the same fullname, email, mobile, and request_name
             // Proceed to insert the new request into the database
-            $query = "INSERT INTO report_requests (reported_person, subject_person, place_of_incident, date_of_incident, time_of_incident, firstname, middlename, lastname, email, mobile, note, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO report_requests (reported_person, subject_person, place_of_incident, date_of_incident, time_of_incident, username, email, mobile, note, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param('sssssssssssss', $reported_person_name, $subject_person, $place_of_incident, $date_of_incident, $time_of_incident, $firstname, $middlename, $lastname, $email, $mobile, $note, $status, $datetime);
+            $stmt->bind_param('sssssssssss', $reported_person_name, $subject_person, $place_of_incident, $date_of_incident, $time_of_incident, $username, $email, $mobile, $note, $status, $datetime);
             if ($stmt->execute()) {
                 // Request sent successfully
                 header("Location: reports");

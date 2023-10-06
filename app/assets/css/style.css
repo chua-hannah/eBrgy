@@ -1647,10 +1647,16 @@ table.custom-table tr {
 .custom-card {
   background-color: var(--section-bg-color);
   border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
 
 .card:hover {
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+/* Add this CSS to your stylesheet */
+img.img-responsive {
+  max-width: 100% !important;
+  height: auto !important;
 }

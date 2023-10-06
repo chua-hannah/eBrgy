@@ -1,38 +1,34 @@
 <section class="section-padding">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 col-12 text-center mx-auto">
-                        <h2 class="mb-5">Requests</h2>
+            <div class="text-center">
+                        <h2 class="my-5">Requests</h2>
                     </div>
+                <div class="row text-center">
 
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
+                <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 my-2">
                             <a href="/eBrgy/app/requests/documents" class="d-block">
-                                <img src="assets/images/icons/stamp.png" class="featured-block-image img-fluid" alt="">
-
+                                <img src="assets/images/icons/stamp.png" class="featured-block-image" alt="" style="height: 120px;">
                                 <p class="featured-block-text"><strong>Documents</strong></p>
                             </a>
-                        </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
+                    <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 my-2">
                             <a href="/eBrgy/app/requests/reports" class="d-block">
-                                <img src="assets/images/icons/letter.png" class="featured-block-image img-fluid" alt="">
+                                <img src="assets/images/icons/letter.png" class="featured-block-image" alt=""style="height: 120px;" >
 
                                 <p class="featured-block-text"><strong>Reports</strong></p>
                             </a>
-                        </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
+                    <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 my-2">
                             <a href="/eBrgy/app/requests/equipments" class="d-block">
-                                <img src="assets/images/icons/chair.png" class="featured-block-image img-fluid" alt="">
-
+                                <img src="assets/images/icons/chair.png" class="featured-block-image" alt="" style="height: 120px;">
                                 <p class="featured-block-text"><strong>Equipments</strong></p>
                             </a>
-                        </div>
+                    </div>
+                     <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 my-2">
+                            <a href="/eBrgy/app/requests/schedules" class="d-block">
+                                <img src="assets/images/icons/bb.png" class="featured-block-image" alt="" style="height: 120px;">
+                                <p class="featured-block-text"><strong>Schedules</strong></p>
+                            </a>
                     </div>
                 </div>
             </div>

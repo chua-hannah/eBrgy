@@ -256,6 +256,20 @@ switch ($filename) {
                                 
                             });
                             break;
+                        case 'requests/schedules':
+                            includeAdminContent(function() use ($requestManagementController) {
+                                $requests = $requestManagementController->doc_requests();
+                                include 'templates/admin/doc_requests.php';
+                                
+                            });
+                            break; 
+                        case 'requests/schedules-management':
+                            includeAdminContent(function() use ($requestManagementController, $settingsController) {
+                                $settingsController->add_equipment_setting();
+                                $requests = $settingsController->get_equipments_list();
+                                include 'templates/admin/request_management/equipment_management.php';
+                                
+                            });   
                         case 'settings':
                             includeAdminContent(function() use ($settingsController) {
                                 $settingsController->attendance_setting();
