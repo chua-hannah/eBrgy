@@ -1654,3 +1654,13 @@ table.custom-table tr {
 .card:hover {
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
+
+
+.modal-body-scrollable {
+  max-height: calc(100vh - 200px); /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.wrap-text {
+  white-space: nowrap;
+}

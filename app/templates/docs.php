@@ -50,15 +50,18 @@
                                 <tr>
                                     <th>Document Type</th>
                                     <th>Status</th>
-                                    <th>Request Date</th>
+                                    <th>Request Date & Time</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($myrequest as $request) { ?>
+                                <?php foreach ($myrequest as $request) {
+                                    $htmlFormattedDate = date("m/d/Y", strtotime($request['created_at']));
+                                    $htmlFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                    ?>
                                     <tr>
                                         <td><?php echo $request['request_name']; ?></td>
                                         <td><?php echo $request['status']; ?></td>
-                                        <td><?php echo $request['created_at']; ?></td>
+                                        <td><?php echo $htmlFormattedDate . " " . $htmlFormattedTime; ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
