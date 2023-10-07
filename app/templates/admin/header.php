@@ -85,7 +85,7 @@
 <div class="container-fluid">
     
     <div class="row">
-    <div class="col-lg-3 bg-light">
+    <div class="col-lg-2 bg-light">
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $baseUrl;?>/dashboard">Dashboard</a>

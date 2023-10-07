@@ -37,6 +37,44 @@ class RequestManagementController {
       return $data;
   }
 
+    // Function to fetch user data from the database
+    private function getUserData($username) {
+    $sql = "SELECT u.firstname, u.middlename, u.lastname, u.address, d.*
+    FROM users u
+    JOIN report_requests d ON u.username = d.username";
+    $stmt = $this->connection->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    // Fetch user data as an associative array
+    $userData = $result->fetch_assoc();
+    
+    $stmt->close();
+
+    return $userData;
+}
+
+
+  public function edit($username) {
+    // Ensure that userId is available as a variable
+    if ($username) {
+        // Fetch user data based on the userId from the users table
+        $userData = $this->getUserData($username);
+
+        // Check if user data was found
+        if ($userData) {
+         
+            include 'templates/admin/report_edit.php';
+        } else {
+            // Handle the case when the user with the provided userId is not found
+            echo "Request not found!";
+        }
+    } else {
+        // Handle the case when userId is not provided
+        echo "Request not provided!";
+    }
+}
+
     public function doc_requests() {
       // Render the home page content
       if ($this->connection->error) {

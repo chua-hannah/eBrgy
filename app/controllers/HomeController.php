@@ -165,6 +165,30 @@ public function reports() {
     }
 }
 
+public function get_reports($username, $mobile, $email) {
+        
+    if ($this->connection->error) {
+        die("Connection failed: " . $this->connection->error);
+    }
+
+    // Use prepared statement to prevent SQL injection
+    $query = "SELECT u.firstname, u.middlename, u.lastname, u.address, d.*
+              FROM users u
+              JOIN report_requests d ON u.username = d.username";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute();
+
+    // Fetch the requested user data and doc_requests data as an associative array
+    $result = $stmt->get_result();
+    $data = array();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+    }
+    return $data;
+}
+
 public function equipments() {
     // Render the home page content
     if (isset($_POST['request_equipment'])) {

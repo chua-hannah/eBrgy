@@ -37,23 +37,23 @@
         </div>
         <div class="d-grid gap-2 col-12 mx-auto">
             <button type="submit" name="report_form" class="form-control">Submit Report</button>
-            <a href="#requestListModal" class="text-center mb-0" data-bs-toggle="modal" data-bs-target="#requestListModal">
+            <a href="#reportModal" class="text-center mb-0" data-bs-toggle="modal" data-bs-target="#reportModal">
                 View Submitted Reports
             </a>
         </div>
     </form>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="requestListModal" tabindex="-1" aria-labelledby="requestListModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Request List</h5>
+                <h5 class="modal-title">My Reports</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Modal Body (Your Table) -->
-            <div class="modal-body">
+            <div class="modal-body modal-body-scrollable">
                 <?php if (empty($myrequest)) { ?>
                     <div class="text-center"><p>No requests are currently available.</p></div>
                 <?php } else { ?>
@@ -61,20 +61,33 @@
                         <table class="table table-bordered table-striped custom-table">
                             <thead class="text-center">
                                 <tr>
-                                    <th>Document Type</th>
-                                    <th>Status</th>
-                                    <th>Request Date & Time</th>
+                                    <th class="wrap-text">Username</th>
+                                    <th class="wrap-text">Mobile</th>
+                                    <th class="wrap-text">Status</th>
+                                    <th class="wrap-text">Request Date & Time</th>
+                                    <th class="wrap-text">Processed Date & Time</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($myrequest as $request) {
-                                    $htmlFormattedDate = date("m/d/Y", strtotime($request['created_at']));
-                                    $htmlFormattedTime = date("h:i A", strtotime($request['created_at']));
-                                    ?>
+                                <?php foreach ($myrequest as $request) { 
+                                        $htmlFormattedDate = date("m/d/Y", strtotime($request['created_at']));
+                                        $htmlFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                        if ($request['created_at']== "0000-00-00 00:00:00"){
+                                            $processedFormattedDate = "-";
+                                            $processedFormattedTime = "-";
+                                        }
+                                        else {
+                                            // Convert and format date and time as before
+                                            $processedFormattedDate = date("m/d/Y", strtotime($request['created_at']));
+                                            $processedFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                        }
+                                ?>
                                     <tr>
-                                        <td><?php echo $request['request_name']; ?></td>
+                                        <td><?php echo $request['username']; ?></td>
+                                        <td><?php echo $request['mobile']; ?></td>
                                         <td><?php echo $request['status']; ?></td>
                                         <td><?php echo $htmlFormattedDate . " " . $htmlFormattedTime; ?></td>
+                                        <td><?php echo $processedFormattedDate . " " . $processedFormattedTime; ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

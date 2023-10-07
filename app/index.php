@@ -144,7 +144,7 @@ switch ($filename) {
                                 $mobile = $_SESSION['mobile'];
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();  
-                             
+                                $myrequest = $homeController->get_reports($username, $mobile, $email);   
                                 include 'templates/reports.php';      
                             });
                             break;      
@@ -204,16 +204,16 @@ switch ($filename) {
                                 $userManagementController->add();
                             });
                             break;
-                            case 'user-management/edit-user':
-                                // Check if the userId parameter is present in the POST data
-                                $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
-                                
-                                includeAdminContent(function () use ($userManagementController, $userId) {
-                                    $userManagementController->edit($userId);
-                                    $userManagementController->activate_user($userId);
-                                    $userManagementController->deactivate_user($userId);
-                                });
-                                break;
+                        case 'user-management/edit-user':
+                            // Check if the userId parameter is present in the POST data
+                            $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
+                            
+                            includeAdminContent(function () use ($userManagementController, $userId) {
+                                $userManagementController->edit($userId);
+                                $userManagementController->activate_user($userId);
+                                $userManagementController->deactivate_user($userId);
+                            });
+                            break;
                         case 'requests':
                             includeAdminContent(function() use ($requestManagementController) {
                                 include 'templates/admin/requests.php';   
@@ -241,6 +241,12 @@ switch ($filename) {
                                 
                             });
                             break;
+                        case 'requests/reports/edit-report':
+                            $username = isset($_POST['username']) ? $_POST['username'] : null;
+                            includeAdminContent(function() use ($requestManagementController, $username) {
+                                $requestManagementController->edit($username);
+                            });
+                            break;    
                         case 'requests/equipments':
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requests = $requestManagementController->equipment_requests();
