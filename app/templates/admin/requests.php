@@ -1,8 +1,7 @@
-<section class="section-padding">
-            <div class="container">
+        <div class="col-md-12 mt-4 mb-4">
             <div class="text-center">
-                        <h2 class="my-5">Requests</h2>
-                    </div>
+                <h2 class="mt-4">Manage Requests</h2>
+            </div>
                 <div class="row text-center">
 
                 <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 my-2">
@@ -31,8 +30,7 @@
                             </a>
                     </div>
                 </div>
-            </div>
-        </section>
+        </div>
 
     <!--Additional div for sidebar-->
     </div>

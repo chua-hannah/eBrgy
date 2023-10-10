@@ -1,26 +1,64 @@
-<footer class="bg-success text-light">
-        <div class="container py-4">
+</div>
+<footer class="site-footer">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <h3>About Us</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor sit amet sem non commodo. Sed vitae convallis tellus, nec eleifend enim.</p>
+                <div class="col-lg-3 col-12 mb-4">
+                    <img src="assets/images/rizal-park.png" class="logo img-fluid" alt="">
                 </div>
-                <div class="col-lg-6">
-                    <h3>Contact Us</h3>
-                    <p>123 Street, City, State, Country</p>
-                    <p>Email: info@example.com</p>
-                    <p>Phone: 123-456-7890</p>
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+
+                    <ul class="footer-menu">
+                        <li class="footer-menu-item"><a href="home" class="footer-menu-link">Home</a></li>
+
+                        <li class="footer-menu-item"><a href="officials" class="footer-menu-link">Officials</a></li>
+
+                        <li class="footer-menu-item"><a href="services" class="footer-menu-link">Services</a></li>
+
+                        <li class="footer-menu-item"><a href="contact" class="footer-menu-link">Login</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12 mx-auto">
+                    <h5 class="text-white mb-3">Contact Information</h5>
+
+                    <p class="text-white d-flex mb-2">
+                        <i class="bi-telephone me-2"></i>
+
+                        <a href="tel: 8123-4567" class="site-footer-link">
+                            8123-4567
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex mb-2">
+                        <i class="bi-envelope me-2"></i>
+                        <a href="mailto:info@yourgmail.com" class="site-footer-link">
+                            dummy@only.ph
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <i class="bi-geo-alt me-2"></i>
+                        <a class="site-footer-link" href="https://maps.app.goo.gl/JMK2TDxUKZVWfsHa6" target="_blank">
+                            Barangay 95, Manila, Philippines
+                        </a>
+                    </p>
+
                 </div>
             </div>
         </div>
-        <div class="bg-secondary text-center py-2">
-            <p>&copy; 2023 Your Website. All rights reserved.</p>
-        </div>
-    </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+        <!-- JAVASCRIPT FILES -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.sticky.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/counter.js"></script>
+        <script src="assets/js/custom.js"></script>
+        <script src="assets/js/validation.js"></script>
+
+    </footer>
 </body>
+
 </html>

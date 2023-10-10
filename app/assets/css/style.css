@@ -1,11 +1,3 @@
-/*
-
-TemplateMo 581 Kind Heart Charity
-
-https://templatemo.com/tm-581-kind-heart-charity
-
-*/
-
 @font-face {
   font-family: "Metropolis";
   src: url("../fonts/Metropolis/Metropolis-Regular.woff2") format("woff2"),
@@ -48,13 +40,13 @@ https://templatemo.com/tm-581-kind-heart-charity
 :root {
   --white-color: #ffffff;
   --primary-color: #0037ab;
-  --secondary-color: #5a6f80;
+  --secondary-color: #001e77 ;
   --section-bg-color: #f0f8ff;
-  --site-footer-bg-color: #44525d;
-  --custom-btn-bg-color: #597081;
-  --custom-btn-bg-hover-color: #0037ab;
+  --site-footer-bg-color: #001e77;
+  --custom-btn-bg-color: #0037ab;
+  --custom-btn-bg-hover-color: #001e77;
   --dark-color: #000000;
-  --p-color: #717275;
+  --p-color: #333333;
   --border-color: #e9eaeb;
 
   --body-font-family: "Metropolis", sans-serif;
@@ -1013,6 +1005,7 @@ blockquote::before {
 -----------------------------------------*/
 .contact-section {
   background: var(--white-color);
+  height: 100%;
 }
 
 .contact-form {
@@ -1033,12 +1026,18 @@ blockquote::before {
   width: 100%;
 }
 
+@media (max-width: 1200px) {
+  .long-label {
+    font-size: 13px; /* Adjust this value for screens wider than 1200px */
+  }
+}
+
 /*---------------------------------------
   CUSTOM FORM               
 -----------------------------------------*/
 .custom-form .form-control,
 .input-group-text {
-  background-color: var(--white-color);
+  background-color: white;
   box-shadow: none;
   color: var(--p-color);
   margin-bottom: 13px;
@@ -1194,11 +1193,46 @@ blockquote::before {
   border-color: transparent;
 }
 
+.custom-form .back-button {
+  background: #555;
+  border: none;
+  border-radius: var(--border-radius-large);
+  color: var(--white-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-semibold);
+  transition: all 0.3s;
+}
+
+.custom-form .back-button:hover:enabled,
+.custom-form .back-button:focus:enabled {
+  background: #333;
+  border-color: transparent;
+}
+
+.custom-button {
+  background: #00796b;
+  color: var(--white-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-semibold);
+  transition: all 0.3s;
+}
+
+.custom-button:hover:enabled,
+.custom-button:focus:enabled {
+  background: #00665c;
+  border-color: transparent;
+}
+
+
+::placeholder {
+  color: #333333;
+}
+
 /*---------------------------------------
   CONTACT SEARCH & DONATE & SUBCRIBE FORM              
 -----------------------------------------*/
 .contact-form .form-control {
-  background: var(--white-color);
+  color: var(--p-color);
 }
 
 .search-form {
@@ -1243,8 +1277,8 @@ blockquote::before {
 -----------------------------------------*/
 .site-footer {
   background-color: var(--site-footer-bg-color);
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 70px;
+  padding-bottom: 70px;
 }
 
 .site-footer-link {
@@ -1615,10 +1649,17 @@ blockquote::before {
 }
 
 /* Primary color for table headers and alternating rows */
-table.custom-table th,
-table.custom-table tr:nth-child(even) {
-  background-color: #5a6f80;
+table.custom-table th {
+  background-color: var(--primary-color);
   color: #ffffff;
+}
+
+table.custom-table tr:nth-child(even) {
+  background-color: #4e6dde;
+}
+
+table.custom-table tr:nth-child(odd) {
+  background-color: #002c92;
 }
 
 /* Secondary color for table data cells */
@@ -1670,7 +1711,6 @@ img.img-responsive {
   white-space: nowrap;
 }
 
-
 /* Custom breadcrumb styles */
 .breadcrumb {
   padding: 10px 20px;
@@ -1678,7 +1718,7 @@ img.img-responsive {
 }
 
 .breadcrumb-item {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .breadcrumb-item a {
@@ -1692,4 +1732,8 @@ img.img-responsive {
 
 .breadcrumb-item.a:hover {
   color: var(--primary-color);
+}
+
+* {
+  box-sizing: border-box;
 }

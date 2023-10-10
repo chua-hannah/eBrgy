@@ -1,8 +1,5 @@
-
-
-<!-- templates/services.php -->
 <div>
-    <h1>Documents Requests</h1>
+    <h3 class="mt-4">Documents Requests</h1>
    
        <div>
             <a href="http://localhost/eBrgy/app/requests/documents-management" style="color: white; text-decoration: none;">
@@ -12,7 +9,7 @@
                 </a>
         </div>
         <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped custom-table">
             <thead>
                 <tr>
                     <th>Action</th>

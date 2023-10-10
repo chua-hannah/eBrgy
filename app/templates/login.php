@@ -1,5 +1,5 @@
-<section class="contact-section section-padding mb-2 mt-2" id="section_4">
-  <div class="container">
+<section class="contact-section section-padding mb-4 mt-4" id="section_4">
+  <div class="container custom-height mb-4">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-lg-6 col-12">
         <h2 class="mt-4 mb-4 text-center">Login</h2>

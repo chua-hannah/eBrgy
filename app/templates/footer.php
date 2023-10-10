@@ -1,7 +1,9 @@
 <footer class="site-footer">
         <div class="container">
             <div class="row">
-
+                <div class="col-lg-3 col-12 mb-4">
+                    <img src="assets/images/rizal-park.png" class="logo img-fluid" alt="">
+                </div>
                 <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <h5 class="text-white mb-3">Quick Links</h5>
 
@@ -18,7 +20,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-12 mx-auto">
-                    <h5 class="text-white mb-3">Contact Infomation</h5>
+                    <h5 class="text-white mb-3">Contact Information</h5>
 
                     <p class="text-white d-flex mb-2">
                         <i class="bi-telephone me-2"></i>
@@ -28,7 +30,7 @@
                         </a>
                     </p>
 
-                    <p class="text-white d-flex">
+                    <p class="text-white d-flex mb-2">
                         <i class="bi-envelope me-2"></i>
 
                         <a href="mailto:info@yourgmail.com" class="site-footer-link">
@@ -36,17 +38,17 @@
                         </a>
                     </p>
 
-                    <p class="text-white d-flex mt-3">
+                    
+                    <p class="text-white d-flex">
                         <i class="bi-geo-alt me-2"></i>
-                        Barangay 95, Manila, Philippines
+                        <a class="site-footer-link" href="https://maps.app.goo.gl/JMK2TDxUKZVWfsHa6" target="_blank">
+                            Barangay 95, Manila, Philippines
+                        </a>
                     </p>
-
-                    <a href="https://maps.app.goo.gl/JMK2TDxUKZVWfsHa6" target="_blank" class="custom-btn btn mt-3">Get Direction</a>
                 </div>
             </div>
         </div>
-    </footer>
-
+    
     <!-- JAVASCRIPT FILES -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -55,7 +57,7 @@
     <script src="assets/js/counter.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/validation.js"></script>
-
+    </footer>
 </body>
 
 </html>
