@@ -164,34 +164,3 @@
         </div>
     </div>
 </section>
-<!-- Modal for success registration -->
-<div class="modal fade" id="registrationSuccessModal" tabindex="-1" role="dialog" aria-labelledby="registrationSuccessModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100" id="registrationSuccessModalLabel">Registration Success!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h6>Thank you for registering, Ka-Barangay 95.</h6>
-            <p class="mt-4 mb-0"><i class="bi bi-exclamation-circle"></i> Before you can log in, please wait for your account to be verified by the administrator within 24 hours.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-    </div>
-    <?php
-    if (isset($_SESSION['registration_successful']) && $_SESSION['registration_successful']) {
-        // Display the modal if registration was successful
-        echo '<script>$(document).ready(function() { showRegistrationSuccessModal(); });</script>';
-        // Reset the session variable
-        $_SESSION['registration_successful'] = false;
-    }
-    ?>
-    <script>
-    function showRegistrationSuccessModal() {
-        $('#registrationSuccessModal').modal('show');
-    }
-    </script>
