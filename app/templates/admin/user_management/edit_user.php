@@ -9,9 +9,9 @@ if ($userId) {
     if ($userData) {
         // Now, you can display the user data in a Bootstrap card format
         ?>
-  <div>
-    User Management
-</div>
+    <div>
+        User Management
+    </div>
 
 <div class="container mt-5">
     <h1>Edit User</h1>
@@ -58,10 +58,10 @@ if ($userId) {
                 <?php } ?>
             </div>
         </div>
-
+        <div>         
         <!-- Activation/Deactivation form -->
         <?php echo $userData['status'] === 'activated' ? 
-            '<form method="post" action="">
+            '<div><form method="post" action="">
                 <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
                 <button name="deactivate_user" type="submit" class="btn btn-danger" style="padding: 8px;">
                    Deactivate
@@ -72,9 +72,22 @@ if ($userId) {
                 <button name="activate_user" type="submit" class="btn btn-success" style="padding: 8px;">
                    Activate
                 </button>
-            </form>';
+            </form>
+            </div>';
         ?>
-    </div
+       <div>
+        
+            <form method="post" action="">
+                <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
+                <button name="delete_user" type="submit" class="btn btn-danger" style="padding: 8px;">
+                Delete
+                </button>
+            </form>
+        </div>
+        </div>
+       
+</div>
+    
 </div>
 
 

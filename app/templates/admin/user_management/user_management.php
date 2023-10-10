@@ -45,8 +45,6 @@ $users = UserManagementController::user_management();
                                 <input type="hidden" name="userId" value="<?php echo $user['user_id']; ?>">
                                 <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
                             </form>
-                                <button class="btn btn-danger" style="padding: 8px;" >Delete</button>
-                               
                             </div>
                         </td>
                     </tr>

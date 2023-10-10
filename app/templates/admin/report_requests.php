@@ -31,15 +31,12 @@
                 foreach ($requests as $request) {
                     ?>
                     <tr>
-                    <td>
-                            <div class="btn-group" style="display: flex; gap: 8px; justify-content: space-around;">
+                        <td>
                             <form action="reports/edit-report" method="post">
+                                <input type="hidden" name="report_id" value="<?php echo $request['id']; ?>">
                                 <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
-                                <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                             </form>
-                                <button class="btn btn-danger" style="padding: 8px;" >Delete</button>
-                               
-                            </div>
                         </td>
                         <td><?php echo $request['firstname'] . ' '  . $request['lastname']; ?></td>
                         <td><?php echo $request['address']; ?></td>
@@ -54,7 +51,6 @@
                         <td><?php echo $request['created_at']; ?></td>
                         <td><?php echo $request['process_at']; ?></td>
                         <td><?php echo $request['process_by']; ?></td>
-
                     </tr>
                     <?php
                 }

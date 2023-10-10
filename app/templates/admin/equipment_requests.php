@@ -15,7 +15,7 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                  
+                    <th>Action</th>
                     <th>Request Name</th>
                     <th>Username</th>
                     <th>Quantity</th>
@@ -30,7 +30,13 @@
                 foreach ($requests as $request) {
                     ?>
                     <tr>
-                       
+                        <td>
+                            <form action="equipments/edit-equipment" method="post">
+                                <input type="hidden" name="equipment_id" value="<?php echo $request['id']; ?>">
+                                <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
+                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                            </form>
+                        </td>
                         <td><?php echo $request['equipment_name']; ?></td>
                         <td><?php echo $request['username']; ?></td>
                         <td><?php echo $request['total_equipment_borrowed']; ?></td>

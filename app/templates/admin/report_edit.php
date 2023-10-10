@@ -30,37 +30,38 @@ if ($username) {
         <p class="card-text">Process by: <?php echo $userData['process_by']; ?></p>
 
         <p class="card-text">Note: "<?php echo $userData['note']; ?>"</p>
-        <p class="card-text" style="color: #ffae00;"> <?php echo $userData['status']; ?></p>
+        <p class="card-text" style="color: #ffae00;"> <?php echo strtoupper($userData['status']); ?></p>
 
-    
-
-        <!-- Activation/Deactivation form -->
-        <?php echo $userData['status'] === 'activated' ? 
+        <?php echo $userData['status'] === 'approved' ? 
+            '' : 
             '<form method="post" action="">
-                <input type="hidden" name="username" value="' . $userData['username'] . '">
-                <button name="deactivate_user" type="submit" class="btn btn-danger" style="padding: 8px;">
-                   Deactivate
-                </button>
-            </form>' : 
-            '<form method="post" action="">
-                <input type="hidden" name="username" value="' . $userData['username'] . '">
-                <button name="activate_user" type="submit" class="btn btn-success" style="padding: 8px;">
-                   Activate
+                <input type="hidden" name="report_id" value="' . $userData['id'] . '">
+                <button name="approve_report" type="submit" class="btn btn-primary" style="padding: 8px;">
+                   Approve
                 </button>
             </form>';
         ?>
-    </div
+          <div>
+        
+        <form method="post" action="">
+            <input type="hidden" name="report_id" value="<?php echo $userData['id'] ?>">
+            <button name="delete_report" type="submit" class="btn btn-danger" style="padding: 8px;">
+            Delete
+            </button>
+        </form>
+    </div>
+    </div>
 </div>
 
 
     <?php
     } else {
         // Handle the case when the user with the provided userId is not found
-        echo "User not found!";
+        echo "Report not found!";
     }
 } else {
     // Handle the case when userId is not provided
-    echo "User ID not provided!";
+    echo "Report not provided!";
 }
 ?>
     <!--Additional div for sidebar-->

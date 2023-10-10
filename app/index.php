@@ -109,6 +109,12 @@ switch ($filename) {
                     switch ($filename) {
                         case 'home':
                         case 'officials':
+                        case 'schedules':
+                    
+                            includeHeaderFooter(function() use ($homeController, $filename) {
+                                $homeController->$filename();
+                            });
+                            break;
                         case 'contact':
                       
                             includeHeaderFooter(function() use ($homeController, $filename) {
@@ -212,6 +218,7 @@ switch ($filename) {
                                 $userManagementController->edit($userId);
                                 $userManagementController->activate_user($userId);
                                 $userManagementController->deactivate_user($userId);
+                                $userManagementController->delete_user($userId);
                             });
                             break;
                         case 'requests':
@@ -226,6 +233,14 @@ switch ($filename) {
                                 
                             });
                             break;
+                        case 'requests/documents/edit-document':
+                            $doc_id = isset($_POST['doc_id']) ? $_POST['doc_id'] : null;
+                            includeAdminContent(function() use ($requestManagementController,  $doc_id) {
+                                $requestManagementController->edit_doc($doc_id);
+                                $requestManagementController->approve_doc( $doc_id);
+                                $requestManagementController->delete_doc($doc_id);
+                            });
+                            break;   
                         case 'requests/documents-management':
                             includeAdminContent(function() use ($requestManagementController, $settingsController) {
                                 $settingsController->request_setting();
@@ -242,9 +257,11 @@ switch ($filename) {
                             });
                             break;
                         case 'requests/reports/edit-report':
-                            $username = isset($_POST['username']) ? $_POST['username'] : null;
-                            includeAdminContent(function() use ($requestManagementController, $username) {
-                                $requestManagementController->edit($username);
+                            $report_id = isset($_POST['report_id']) ? $_POST['report_id'] : null;
+                            includeAdminContent(function() use ($requestManagementController, $report_id) {
+                                $requestManagementController->edit_report($report_id);
+                                $requestManagementController->approve_report($report_id);
+                                $requestManagementController->delete_report($report_id);
                             });
                             break;    
                         case 'requests/equipments':
@@ -254,6 +271,14 @@ switch ($filename) {
                                 
                             });
                             break;
+                        case 'requests/equipments/edit-equipment':
+                            $equipment_id = isset($_POST['equipment_id']) ? $_POST['equipment_id'] : null;
+                            includeAdminContent(function() use ($requestManagementController, $equipment_id) {
+                                $requestManagementController->edit_equipment($equipment_id);
+                                $requestManagementController->approve_equipment($equipment_id);
+                                $requestManagementController->delete_equipment($equipment_id);
+                            });
+                            break;     
                         case 'requests/equipments-management':
                             includeAdminContent(function() use ($requestManagementController, $settingsController) {
                                 $settingsController->add_equipment_setting();
@@ -264,8 +289,7 @@ switch ($filename) {
                             break;
                         case 'requests/schedules':
                             includeAdminContent(function() use ($requestManagementController) {
-                                $requests = $requestManagementController->doc_requests();
-                                include 'templates/admin/doc_requests.php';
+                                include 'templates/admin/schedule_requests.php';
                                 
                             });
                             break; 

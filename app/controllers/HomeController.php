@@ -12,6 +12,11 @@ class HomeController {
       include 'templates/home.php';
     }
 
+    public function schedules() {
+        // Render the home page content
+        include 'templates/schedules.php';
+      }
+
     public function officials() {
       if ($this->connection->error) {
           die("Connection failed: " . $this->connection->error);

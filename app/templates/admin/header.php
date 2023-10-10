@@ -27,6 +27,17 @@
             <?php
         }
         ?>
+
+    <script>
+            // Function to disable dates before the current date
+            function disablePastDates() {
+                var today = new Date().toISOString().split('T')[0];
+                document.getElementById("date").setAttribute("min", today);
+            }
+
+            // Call the function when the page is fully loaded
+            window.onload = disablePastDates;
+    </script>
    
 </head>
 <body>

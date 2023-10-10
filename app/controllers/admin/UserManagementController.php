@@ -234,6 +234,33 @@ class UserManagementController {
             return $deactivationMessage;
 
         }
+
+        function delete_user($user_id) {
+
+            $activationMessage = '';
+
+            if (isset($_POST['delete_user'])) {
+                // Retrieve the user ID from the form
+                $user_id = $_POST['user_id'];
+            
+                $stmt = $this->connection->prepare("DELETE FROM users WHERE user_id = ?");
+                $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+            
+                if ($stmt->execute()) {
+                    // Activation successful
+                    $activationMessage = "User deleted successfully.";
+                    header("Location: /eBrgy/app/user-management");
+                } else {
+                    // Activation failed
+                    $activationMessage = "Error updating user status: " . $stmt->error;
+                }
+            
+                // Close the prepared statement
+                $stmt->close();
+            }
+            return $activationMessage;
+
+        }
  
 }
   

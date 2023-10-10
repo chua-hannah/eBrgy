@@ -15,7 +15,7 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                  
+                    <th>Action</th>
                     <th>Request Name</th>
                     <th>First Name</th>
                     <th>Middle Name</th>
@@ -41,7 +41,16 @@
    
               
                     <tr>
+                    <td>
+                          
+                          <form action="documents/edit-document" method="post">
+                              <input type="hidden" name="doc_id" value="<?php echo $request['id']; ?>">
+                              <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
+                              <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                          </form>
+                            
                        
+                      </td>
                         <td><?php echo $request['request_name']; ?></td>
                         <td><?php echo $request['firstname']; ?></td>
                         <td><?php echo $request['middlename']; ?></td>
