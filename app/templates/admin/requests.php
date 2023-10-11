@@ -1,6 +1,6 @@
-        <div class="col-md-12 mt-4 mb-4">
+        <div class="col-md-12 mt-5 mb-5">
             <div class="text-center">
-                <h2 class="mt-4">Manage Requests</h2>
+                <h2>Manage Requests</h2>
             </div>
                 <div class="row text-center">
 

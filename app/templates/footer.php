@@ -1,10 +1,10 @@
+</main>
 <footer class="site-footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-12 mb-4">
-                    <img src="assets/images/rizal-park.png" class="logo img-fluid" alt="">
+                <div class="col-lg-3 col-12">              
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="col-lg-4 col-md-6 col-12">
                     <h5 class="text-white mb-3">Quick Links</h5>
 
                     <ul class="footer-menu">

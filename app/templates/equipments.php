@@ -4,7 +4,7 @@
     <li class="breadcrumb-item active" aria-current="page">Equipments</li>
   </ol>
 </nav>
-<h2 class="text-center mt-4 mb-4">Equipment Request Form</h2>
+<h2 class="text-center mt-2 mb-2">Equipment Request Form</h2>
 <div class="col-lg-6 col-12 mx-auto">
     <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
         <div class="row d-flex justify-content-center">
@@ -46,7 +46,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Request List</h5>
+                <h5 class="modal-title">Equipment Request</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Modal Body (Your Table) -->

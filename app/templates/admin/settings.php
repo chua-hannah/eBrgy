@@ -18,9 +18,9 @@
                 // Display the data for each request
             ?>
                 <tr>
-                    <td><?php echo $time['work_hours_start']; ?></td>
-                    <td><?php echo $time['work_hours_end']; ?></td>
-                    <td><?php echo $time['late_threshold']  ?></td>
+                    <td><?php echo date('h:i A', strtotime($time['work_hours_start'])); ?></td>
+                    <td><?php echo date('h:i A', strtotime($time['work_hours_end'])); ?></td>
+                    <td><?php echo date('h:i A', strtotime($time['late_threshold'])); ?></td>
                 </tr>
             <?php
             }

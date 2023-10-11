@@ -6,9 +6,11 @@
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.4/inputmask.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.4/inputmask.min.js"></script>
 
   <title>Barangay 95</title>
   <meta content="" name="description">
@@ -46,7 +48,7 @@
 <header>
     <?php $baseUrl = "http://localhost/eBrgy/app";?>
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
-    <div class="container">
+    <div class="container-fluid">
     <?php
         // Check the user's role from the session and conditionally show the "User Management" tab
         if ($_SESSION['role'] === 'captain') {
@@ -96,7 +98,6 @@
     </div>
 </nav>
 </header>
-
 <!-- Alerts -->
 <?php
     if(isset($_SESSION['success'])) {
@@ -125,8 +126,8 @@
     }
 ?>
 </script>
-
-<div class="container">
+<main>
+<div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
         <div class="col-lg-2 mt-4">
@@ -147,5 +148,6 @@
                 <?php } ?>
             </ul>
         </div>
+
         <div class="col-lg-10">
             <!-- Place your page content here -->
