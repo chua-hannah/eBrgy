@@ -5,7 +5,7 @@
                 <h2 class="text-center">Barangay Profile</h2>
                 <div class="row">
                     <div class="col-md-3 border-right">
-                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <div class="d-flex flex-column align-items-center text-center my-5">
                             <?php
                                 $idSelfiePath = 'uploads/id_selfie/' . $user_data['id_selfie'];
                                 if (!empty($user_data['id_selfie']) && file_exists($idSelfiePath)):
@@ -15,15 +15,15 @@
                                 <p>Profile picture is not available</p>
                             <?php endif; ?>
                             <?php if ($user_data && isset($user_data['username'])) { ?>
-                                <h3><?php echo $user_data['username']; ?></h3>
+                                <h5><?php echo $user_data['username']; ?></h5>
                             <?php } else { ?>
                                 <h3>User Data Not Available</h3>
                             <?php } ?>
                             <p>Resident</p>
                         </div>
                     </div>
-                    <div class="col-md-8 border-right">
-                        <div class="p-3 py-5">
+                    <div class="col-md-9 border-right">
+                        <div class="p-3">
                             <div class="col-lg-12 col-12">
                                 <h5 class="mb-3">Personal Information</h5>
                             </div>

@@ -162,6 +162,22 @@ strong {
 }
 
 /*---------------------------------------
+  BODY               
+-----------------------------------------*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  flex: 1; /* Allow the main content to expand to fill the available space */
+}
+
+/*---------------------------------------
   SECTION               
 -----------------------------------------*/
 .section-padding {
@@ -1277,8 +1293,8 @@ blockquote::before {
 -----------------------------------------*/
 .site-footer {
   background-color: var(--site-footer-bg-color);
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .site-footer-link {
@@ -1652,6 +1668,7 @@ blockquote::before {
 table.custom-table th {
   background-color: var(--primary-color);
   color: #ffffff;
+  text-align: center;
 }
 
 table.custom-table tr:nth-child(even) {
@@ -1692,7 +1709,7 @@ table.custom-table tr {
   transition: 0.3s;
 }
 
-.card:hover {
+.custom-card:hover {
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
 
@@ -1715,6 +1732,7 @@ img.img-responsive {
 .breadcrumb {
   padding: 10px 20px;
   border-radius: 5px;
+  margin-bottom: 0;
 }
 
 .breadcrumb-item {
@@ -1736,4 +1754,18 @@ img.img-responsive {
 
 * {
   box-sizing: border-box;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  border: none;
+  background: none;
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+  text-align: center;
+  padding: 0px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0;
 }

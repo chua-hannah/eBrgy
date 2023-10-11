@@ -1,5 +1,5 @@
-<section class="contact-section section-padding mb-5 mt-5" id="section_6">
-    <div class="container mt-5 mb-5">
+<section class="section-padding mb-5 mt-5">
+    <div class="container p-3 mt-5 mb-5">
         <div class="row">
             <div class="col-lg-10 col-12 text-center mx-auto">
                 <h2 class="mt-4 mb-4">Services</h2>

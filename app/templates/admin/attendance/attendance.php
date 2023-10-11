@@ -1,11 +1,11 @@
-<div class="col-md-12 mt-4 mb-4">
+    <div class="col-md-12 mt-2 mb-2">
         <div style="float:right;">
         <a href="http://localhost/eBrgy/app/settings" style="color: white; text-decoration: none;" <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>
             <button class="form-control custom-button">
             <i class="bi bi-clock"></i>
                 Manage Office Time
-                </button>
-            </a>
+            </button>
+        </a>
         </div>
         <div>
             <h3 class="mt-2 mb-2">Office Time</h3>
@@ -100,7 +100,7 @@
                 <button type="submit" name="check_out" class="form-control">Time Out</button>
             <?php endif; ?>
         </form>
-</div>  
+    </div>  
   <!--Additional div for sidebar-->
     </div>
     </div>
