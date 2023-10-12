@@ -34,6 +34,16 @@
                     </a>
                 </div>
             </div>
+
+            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
+                <div class="featured-block d-flex justify-content-center align-items-center">
+
+                    <a href="/eBrgy/app/schedules" class="d-block">
+                        <img src="assets/images/icons/bb.png" class="featured-block-image" alt="" style="height: 120px;">
+                        <p class="featured-block-text"><strong>Schedules</strong></p>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
