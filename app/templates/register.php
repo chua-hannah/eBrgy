@@ -1,6 +1,6 @@
 <section class="contact-section section-padding" id="section_6">
     <div class="container">
-    <h2 class="mb-4 text-center">Register an account</h2>
+    <h2 class="mt-2 mb-2 text-center">Register an account</h2>
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-lg-9 col-12">
                 <form class="custom-form contact-form mb-4 align-items-center needs-validation" id="register" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
@@ -78,7 +78,7 @@
                         </div>
 
                         <div class="col-lg-4 col-12">
-                            <label class="labels">House No./Bldg./Street Name</label>
+                            <label class="long-label">House No./Bldg./Street Name</label>
                             <input type="text" name="address" class="form-control 
                             <?php echo isset($errors["address"]) ? 'is-invalid' : ''; ?>" id="address" value="<?php if (!empty($_POST["address"])) { echo $_POST["address"]; } else { echo ''; };?>">
                             <?php if (isset($errors["address"])) : ?>

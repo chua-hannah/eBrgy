@@ -29,8 +29,8 @@ class SettingsController {
     
                 if ($updateResult === true) {
                     // Update successful
-                    echo "Update successfully";
                     header("Location:  /eBrgy/app/settings");
+                    $_SESSION["success"] = "Office hours have been successfully updated.";
                     exit();
                 } else {
                     // Error occurred
@@ -43,7 +43,7 @@ class SettingsController {
     
                 if ($insertResult === true) {
                     // Insertion successful
-                    echo "Add successfully";
+                    $_SESSION["success"] = "Office hours have been successfully updated.";
                     header("Location: /eBrgy/app/settings");
                     exit();
                 } else {
@@ -72,7 +72,7 @@ class SettingsController {
             // Prepare the statement
             if ($this->connection->query($query) === true) {
               // Registration successful
-              echo "Message sent successful";
+              $_SESSION["success"] = "Message sent successfully.";
            
           } else {
               // Error occurred
@@ -118,7 +118,8 @@ class SettingsController {
             // Prepare the statement
             if ($this->connection->query($query) === true) {
               // Registration successful
-              echo "New Equipment Added successful!";
+              header("Location:  /eBrgy/app/requests/equipments-management");
+              $_SESSION["success"] = "New equipment has been added successfully.";
            
           } else {
               // Error occurred
@@ -130,7 +131,6 @@ class SettingsController {
      
     }
 
-    
 
     public function get_equipments_list() {
         if ($this->connection->error) {
@@ -171,8 +171,6 @@ class SettingsController {
         // Return the fetched request settings data
         return $office_time;
     }
-    
-    
     
 }
 ?>

@@ -1,16 +1,20 @@
 <?php
-// Include the usersController class
 require_once 'controllers/admin/UserManagementController.php';
 
-// Retrieve user information from the database using usersController
 $users = UserManagementController::user_management();
-
-
 ?>
-<div class="container">
-        <h2>User Management</h2>
-        <button><a class="nav-link" href="user-management/add-user">+</a></button>
-        <table class="table">
+
+<div class="container mt-2 mb-2">
+    <div style="float:right;">
+        <a href="user-management/add-user" style="color: white; text-decoration: none;">
+            <button class="form-control custom-button">
+                <i class="bi bi-person-add"></i> Add User
+            </button>
+        </a>
+    </div>
+    <h3 class="mt-2 mb-2">User Management</h3>
+    <div>
+        <table class="table table-bordered table-striped custom-table" id="userTable">
             <thead>
                 <tr>
                     <th>Username</th>
@@ -20,38 +24,51 @@ $users = UserManagementController::user_management();
                     <th>Last Name</th>
                     <th>Age</th>
                     <th>Sex</th>
+                    <th>Address</th>
                     <th>Role</th>
-                    <th>Status</th>
+                    <th>Account Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($users as $user) { ?>
+                <?php foreach ($users as $user): ?>
                     <tr>
-                        <td><?php echo $user['username']; ?></td>
-                        <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['firstname'] ?></td>
-                        <td><?php echo $user['middlename'] ?></td>
-                        <td><?php echo $user['lastname']; ?></td>
-                        <td><?php echo $user['age']; ?></td>
-                        <td><?php echo $user['sex']; ?></td>
-                      
-                        <td><?php echo $user['role']; ?></td>
-                        <td style="color: <?php echo $user['status'] === 'activated' ? 'green' : 'red'; ?>;"><?php echo $user['status']; ?></td>
-
+                        <td><?= $user['username']; ?></td>
+                        <td><?= $user['email']; ?></td>
+                        <td><?= $user['firstname']; ?></td>
+                        <td><?= $user['middlename']; ?></td>
+                        <td><?= $user['lastname']; ?></td>
+                        <td><?= $user['age']; ?></td>
+                        <td><?= $user['sex']; ?></td>
+                        <td><?= $user['address']; ?></td>
+                        <td><?= $user['role']; ?></td>
+                        <td style="color: <?= $user['status'] === 'activated' ? 'green' : 'red'; ?>">
+                            <?= $user['status']; ?>
+                        </td>
                         <td>
                             <div class="btn-group" style="display: flex; gap: 8px; justify-content: space-around;">
-                            <form action="user-management/edit-user" method="post">
-                                <input type="hidden" name="userId" value="<?php echo $user['user_id']; ?>">
-                                <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
-                            </form>
+                                <form action="user-management/edit-user" method="post">
+                                    <input type="hidden" name="userId" value="<?= $user['user_id']; ?>">
+                                    <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#userTable').DataTable({
+            paging: true, // Enable pagination
+            pageLength: 10, // Number of rows per page
+            lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
+            responsive: true // Enable responsive behavior
+        });
+    });
+</script>
    <!--Additional div for sidebar-->
    </div>
     </div>
