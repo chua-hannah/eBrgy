@@ -1,13 +1,14 @@
-<div>
-    <h3 class="mt-4">Documents Requests</h1>
-   
-       <div>
-            <a href="http://localhost/eBrgy/app/requests/documents-management" style="color: white; text-decoration: none;">
-                <button class="btn btn-primary">
-                    Manage Documents
-                    </button>
-                </a>
+<div class="container-fluid">
+<div style="float:right;">
+        <a href="http://localhost/eBrgy/app/requests/documents-management" style="color: white; text-decoration: none;" <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>
+            <button class="form-control custom-button">
+            <i class="bi bi-file-text"></i>
+                Manage Document Types
+            </button>
+        </a>
         </div>
+        <div>
+        <h3 class="mt-2 mb-2">Document Requests</h3>
         <div class="table-responsive">
         <table class="table table-bordered table-striped custom-table">
             <thead>
@@ -67,7 +68,7 @@
     </div>
 </div>
 
-  
+     <!--Additional div for sidebar-->
     </div>
     </div>
 </div>

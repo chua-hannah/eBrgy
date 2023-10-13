@@ -1,4 +1,4 @@
-        <div class="col-md-12 mt-5 mb-5">
+        <div class="container-fluid">
             <div class="text-center">
                 <h2>Manage Requests</h2>
             </div>

@@ -4,7 +4,7 @@ require_once 'controllers/admin/UserManagementController.php';
 $users = UserManagementController::user_management();
 ?>
 
-<div class="container mt-2 mb-2">
+<div class="container-fluid">
     <div style="float:right;">
         <a href="user-management/add-user" style="color: white; text-decoration: none;">
             <button class="form-control custom-button">
@@ -61,11 +61,19 @@ $users = UserManagementController::user_management();
 </div>
 <script>
     $(document).ready(function () {
-        $('#userTable').DataTable({
+        var userTable = $('#userTable').DataTable({
             paging: true, // Enable pagination
             pageLength: 10, // Number of rows per page
             lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
             responsive: true // Enable responsive behavior
+        });
+
+        // Add a page change event listener to the DataTable
+        userTable.on('page.dt', function () {
+            // Smooth scroll to the top of the page
+            $('html, body').animate({
+                scrollTop: 0
+            }, 0.5); // 500ms animation duration
         });
     });
 </script>

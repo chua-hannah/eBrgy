@@ -10,7 +10,6 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.4/inputmask.min.js"></script>
 
   <title>Barangay 95</title>
   <meta content="" name="description">
@@ -76,19 +75,12 @@
     if (isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
         echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="'.$baseUrl.'/profile">'.$username.'</a>';
+        echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'profile' ? 'active' : ''; echo '"href="'.$baseUrl.'/profile">'.$username.'</a>';
         echo '</li>';
         echo '<li class="nav-item">';
         echo '<a class="nav-link" href="logout.php">Logout</a>';
         echo '</li>';
         
-    } else {
-        echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="login">Login</a>';
-        echo '</li>';
-        echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="register">Register</a>';
-        echo '</li>';
     }
   
     ?>
@@ -128,26 +120,33 @@
 </script>
 <main>
 <div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="col-lg-2 mt-4">
-            <ul class="nav flex-column mx-auto">
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="<?php echo $baseUrl; ?>/dashboard">Dashboard</a>
+<div class="row">
+    <!-- Sidebar -->
+    <div class="col-lg-2" id="sidebar">
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'dashboard' ? 'active' : ''; ?>">
+                <a class="nav-link " href="<?php echo $baseUrl; ?>/dashboard">
+                    <i class="bi bi-house-door"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'attendance' ? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo $baseUrl; ?>/attendance">
+                    <i class="bi bi-calendar"></i> Attendance
+                </a>
+            </li>
+            <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'requests' ? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo $baseUrl; ?>/requests">
+                    <i class="bi bi-file-earmark-text"></i> Requests
+                </a>
+            </li>
+            <?php if ($_SESSION['role'] === 'captain') { ?>
+                <li class="nav-item <?php echo basename($_SERVER['REQUEST_URI']) == 'user-management' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/user-management">
+                        <i class="bi bi-person"></i> User Management
+                    </a>
                 </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="<?php echo $baseUrl; ?>/attendance">Attendance</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="<?php echo $baseUrl; ?>/requests">Requests</a>
-                </li>
-                <?php if ($_SESSION['role'] === 'captain') { ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $baseUrl; ?>/user-management">User Management</a>
-                    </li>
-                <?php } ?>
-            </ul>
-        </div>
-
-        <div class="col-lg-10">
-            <!-- Place your page content here -->
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="col-lg-10" style="padding: 20px;">
+    <!-- Place your page content here -->

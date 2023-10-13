@@ -1,4 +1,4 @@
-    <div class="col-md-12 mt-2 mb-2">
+    <div class="container-fluid">
         <div style="float:right;">
         <a href="http://localhost/eBrgy/app/settings" style="color: white; text-decoration: none;" <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>
             <button class="form-control custom-button">
@@ -8,7 +8,7 @@
         </a>
         </div>
         <div>
-            <h3 class="mt-2 mb-2">Office Time</h3>
+            <h3>Office Time</h3>
             <?php 
                 if (!empty($office_time)) {
                 ?>
@@ -42,7 +42,7 @@
     <div class="mt-4">
         <h3>My Attendance</h3>
         <?php if (!empty($my_attendance)): ?>
-            <table class="table table-bordered table-striped custom-table">
+            <table class="table table-bordered table-striped custom-table" id="attendanceTable">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -101,6 +101,16 @@
             <?php endif; ?>
         </form>
     </div>  
+<script>
+$(document).ready(function () {
+    $('#attendanceTable').DataTable({
+        paging: true, // Enable pagination
+        pageLength: 5, // Number of rows per page
+        lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
+        responsive: true // Enable responsive behavior
+    });
+});
+</script>
   <!--Additional div for sidebar-->
     </div>
     </div>
