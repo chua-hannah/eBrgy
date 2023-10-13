@@ -4,7 +4,7 @@ require_once 'controllers/admin/UserManagementController.php';
 $users = UserManagementController::user_management();
 ?>
 
-<div class="container mt-2 mb-2">
+<div class="container-fluid">
     <div style="float:right;">
         <a href="user-management/add-user" style="color: white; text-decoration: none;">
             <button class="form-control custom-button">

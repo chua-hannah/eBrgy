@@ -30,7 +30,7 @@ class SettingsController {
                 if ($updateResult === true) {
                     // Update successful
                     header("Location:  /eBrgy/app/settings");
-                    $_SESSION["success"] = "Office hours have been successfully updated.";
+                    $_SESSION["success"] = "Office time settings have been updated successfully.";
                     exit();
                 } else {
                     // Error occurred

@@ -401,6 +401,12 @@ main {
   color: var(--primary-color);
 }
 
+.nav-item.active a.nav-link {
+  font-weight: var(--font-weight-bold);
+  border-left: 4px solid #007BFF;
+}
+
+
 .dropdown-menu {
   background: var(--white-color);
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
@@ -1768,4 +1774,31 @@ table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, ta
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   padding: 0;
+}
+
+
+#sidebar {
+  background-color: #f0f0f0; /* Silver background color */
+  padding: 20px;
+  height: 100vh;
+  border-right: 1px solid #ccc
+}
+
+#sidebar ul {
+  list-style: none; /* Remove list bullets */
+  padding: 0;
+  text-align: left;
+}
+
+#sidebar ul li {
+  margin-bottom: 10px; /* Adjust the spacing between list items */
+}
+
+#sidebar a {
+  color: var(--primary-color); /* Link text color */
+  transition: color 0.3s; /* Add a smooth color transition on hover */
+}
+
+#sidebar a:hover {
+  color: #0049e5; /* Change the text color on hover */
 }
