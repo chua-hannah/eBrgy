@@ -38,6 +38,7 @@ class UserController {
                     $user_id = $user['user_id'];
                     $role = $user['role'];
                     $status = $user['status'];
+                
                     // User is not yet activated
                     if ($status=="deactivate"){
                         $error = "Account is not yet activated. Please wait for your account to be verified by the administrator within 24 hours.";
@@ -53,23 +54,25 @@ class UserController {
                         $_SESSION['role'] = $role;
                         $_SESSION['mobile'] = $mobile;
                         $_SESSION['email'] = $email;
-        
                         // Redirect to appropriate page based on user role
                         switch ($role) {
                             case 'residence':
                                 header("Location: home");
                                 exit();
+                                break; // Add a "break" statement here
                             case 'captain':
                             case 'kagawad':
                                 header("Location: dashboard");
                                 exit();
+                                break; // Add a "break" statement here
                             default:
                                 echo "Invalid user role.";
                                 return;
+                                header("Location: login");
+                                exit();
                         }
                     }
     
-                    
                 } else {
                     // Invalid username or password
                     $error = "Invalid username or password.";
@@ -112,6 +115,11 @@ class UserController {
             $sex = ""; // or some default value
         }
         $status = 'deactivate';
+      
+        $four_ps = isset($_POST['membership_4ps']) ? 1 : 0;
+        $pwd = isset($_POST['membership_pwd']) ? 1 : 0;
+        $solo_parent = isset($_POST['membership_solo_parent']) ? 1 : 0;
+        $scholar = isset($_POST['membership_scholar']) ? 1 : 0;
 
         // Validate empty input fields & date pattern
 
@@ -196,7 +204,7 @@ class UserController {
             $currentTimestamp = time();
             $ageInSeconds = $currentTimestamp - $birthdateTimestamp;
             $age = floor($ageInSeconds / (365 * 24 * 3600));
-
+            $senior = $age >= 60 ? 1 : 0;
             // Handle image uploads
             $idSelfieFileName = '';
             $validIdFileName = '';
@@ -255,9 +263,9 @@ class UserController {
                 $error = "Given mobile number already exists.";
             } elseif (empty($error) && empty($errors)) {
                 // Insert the data into the database
-                $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status) 
-                            VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
-                
+                $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar)
+                VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', $senior, $four_ps, $pwd, $solo_parent, $scholar)";
+    
                 if ($this->connection->query($query) === true) {
                     // Registration successful
                     header("Location: home");

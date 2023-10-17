@@ -50,6 +50,19 @@
         </div>
     
     <!-- JAVASCRIPT FILES -->
+    <script>
+    function showRegistrationSuccessModal() {
+        $('#registrationSuccessModal').modal('show');
+    }
+
+        function disablePastDates(dateInput1Id, dateInput2Id) {
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById(dateInput1Id).setAttribute("min", today);
+            document.getElementById(dateInput2Id).setAttribute("min", today);
+        }
+
+        disablePastDates("reserved_schedule", "schedule_date");
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.sticky.js"></script>

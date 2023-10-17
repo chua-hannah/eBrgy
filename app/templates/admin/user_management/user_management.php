@@ -6,7 +6,7 @@ $users = UserManagementController::user_management();
 
 <div class="container-fluid">
     <div style="float:right;">
-        <a href="user-management/add-user" style="color: white; text-decoration: none;">
+        <a href="user-management-add-user" style="color: white; text-decoration: none;">
             <button class="form-control custom-button">
                 <i class="bi bi-person-add"></i> Add User
             </button>
@@ -47,7 +47,7 @@ $users = UserManagementController::user_management();
                         </td>
                         <td>
                             <div class="btn-group" style="display: flex; gap: 8px; justify-content: space-around;">
-                                <form action="user-management/edit-user" method="post">
+                                <form action="user-management-edit-user" method="post">
                                     <input type="hidden" name="userId" value="<?= $user['user_id']; ?>">
                                     <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
                                 </form>

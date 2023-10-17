@@ -51,7 +51,7 @@
             ?>
         </div>
        
-        <a href="http://localhost/eBrgy/app/requests/documents" style="color: white; text-decoration: none;">
+        <a href="http://localhost/eBrgy/app/requests-documents" style="color: white; text-decoration: none;">
         <button class="btn btn-secondary">
             Back to Document Requests
             </button>

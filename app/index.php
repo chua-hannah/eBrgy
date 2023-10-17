@@ -33,11 +33,6 @@ function includeHeaderFooter($controller) {
     include 'templates/footer.php';
 }
 
-function includeAdminHeaderFooter($controller) {
-    include 'templates/admin/header.php';
-    $controller();
-    include 'templates/admin/footer.php';
-}
 
 function includeAdminContent($controller) {
     include 'templates/admin/header.php';
@@ -47,8 +42,8 @@ function includeAdminContent($controller) {
 
 switch ($filename) {
     case 'login':
-        includeHeaderFooter(function() use ($userController) {
-            $userController->login();
+        includeHeaderFooter(function() use ($userController, $filename) {
+            $userController->$filename();
         });
         break;
 
@@ -101,18 +96,33 @@ switch ($filename) {
                             break;
                         default:
                         header("Location: " . $baseUrl . "/dashboard");
-                        exit;
+                        exit();
                     }
                     break;
 
                 case 'residence':
                     switch ($filename) {
                         case 'home':
+                        includeHeaderFooter(function() use ($homeController, $filename) {
+                            $homeController->$filename();
+                        });
+                        break;
                         case 'officials':
-                        case 'schedules':
-                    
                             includeHeaderFooter(function() use ($homeController, $filename) {
                                 $homeController->$filename();
+                            });
+                            break;
+                        case 'schedules':
+                            $reserved_schedule = isset($_POST['reserved_schedule']) ? $_POST['reserved_schedule'] : null;
+                            includeHeaderFooter(function() use ($homeController, $reserved_schedule) {
+                                $schedulesData = $homeController->get_schedules($reserved_schedule);
+                                include 'templates/schedules.php';      
+                            });
+                            break;
+                        case 'schedule-request':
+                            $homeController->req_schedule(); 
+                            includeHeaderFooter(function() use ($homeController) {
+                                include 'templates/schedule_request.php';   
                             });
                             break;
                         case 'contact':
@@ -181,6 +191,8 @@ switch ($filename) {
                                 $attendanceData = $dashboardController->attendance_count();
                                 $requestData = $dashboardController->request_count();
                                 $data = array_merge($userData, $attendanceData, $requestData);
+                                $families = $dashboardController->getCountOfUniqueAddressesWithMultipleUsers();
+                                var_dump($families);
                                 include 'templates/admin/dashboard.php';
                             });
                             break;
@@ -205,12 +217,12 @@ switch ($filename) {
                                 $userManagementController->index();
                             });
                             break;
-                        case 'user-management/add-user':
+                        case 'user-management-add-user':
                             includeAdminContent(function () use ($userManagementController) {
                                 $userManagementController->add();
                             });
                             break;
-                        case 'user-management/edit-user':
+                        case 'user-management-edit-user':
                             // Check if the userId parameter is present in the POST data
                             $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
                             
@@ -226,14 +238,14 @@ switch ($filename) {
                                 include 'templates/admin/requests.php';   
                             });
                             break;
-                        case 'requests/documents':
+                        case 'requests-documents':
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requests = $requestManagementController->doc_requests();
                                 include 'templates/admin/doc_requests.php';
                                 
                             });
                             break;
-                        case 'requests/documents/edit-document':
+                        case 'requests-edit-document':
                             $doc_id = isset($_POST['doc_id']) ? $_POST['doc_id'] : null;
                             includeAdminContent(function() use ($requestManagementController,  $doc_id) {
                                 $requestManagementController->edit_doc($doc_id);
@@ -241,7 +253,7 @@ switch ($filename) {
                                 $requestManagementController->delete_doc($doc_id);
                             });
                             break;   
-                        case 'requests/documents-management':
+                        case 'requests-documents-management':
                             includeAdminContent(function() use ($requestManagementController, $settingsController) {
                                 $settingsController->request_setting();
                                 $requests = $settingsController->get_request_settings();
@@ -249,14 +261,14 @@ switch ($filename) {
                                 
                             });
                             break;
-                        case 'requests/reports':
+                        case 'requests-reports':
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requests = $requestManagementController->report_requests();
                                 include 'templates/admin/report_requests.php';
                                 
                             });
                             break;
-                        case 'requests/reports/edit-report':
+                        case 'requests-edit-report':
                             $report_id = isset($_POST['report_id']) ? $_POST['report_id'] : null;
                             includeAdminContent(function() use ($requestManagementController, $report_id) {
                                 $requestManagementController->edit_report($report_id);
@@ -264,22 +276,27 @@ switch ($filename) {
                                 $requestManagementController->delete_report($report_id);
                             });
                             break;    
-                        case 'requests/equipments':
+                        case 'requests-equipments':
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requests = $requestManagementController->equipment_requests();
                                 include 'templates/admin/equipment_requests.php';
                                 
                             });
                             break;
-                        case 'requests/equipments/edit-equipment':
+                        case 'requests-edit-equipment':
                             $equipment_id = isset($_POST['equipment_id']) ? $_POST['equipment_id'] : null;
-                            includeAdminContent(function() use ($requestManagementController, $equipment_id) {
+                            $remarks = isset($_POST['remarks']) ? $_POST['remarks'] : null;
+                            $message = isset($_POST['message']) ? $_POST['message'] : null;
+                            includeAdminContent(function() use ($requestManagementController, $equipment_id, $remarks, $message) {
                                 $requestManagementController->edit_equipment($equipment_id);
-                                $requestManagementController->approve_equipment($equipment_id);
-                                $requestManagementController->delete_equipment($equipment_id);
+                                $requestManagementController->approve_equipment($equipment_id, $message);
+                                $requestManagementController->add_remarks($equipment_id, $remarks);
+                                $requestManagementController->delete_equipment($equipment_id, $remarks);
+                                $requestManagementController->returned_equipment($equipment_id);
+
                             });
                             break;     
-                        case 'requests/equipments-management':
+                        case 'requests-equipments-management':
                             includeAdminContent(function() use ($requestManagementController, $settingsController) {
                                 $settingsController->add_equipment_setting();
                                 $requests = $settingsController->get_equipments_list();
@@ -287,10 +304,16 @@ switch ($filename) {
                                 
                             });
                             break;
-                        case 'requests/schedules':
-                            includeAdminContent(function() use ($requestManagementController) {
-                                include 'templates/admin/schedule_requests.php';
-                                
+                        case 'requests-schedules':
+                            $reserved_schedule = isset($_POST['reserved_schedule']) ? $_POST['reserved_schedule'] : null;
+                            $schedule_id = isset($_POST['schedule_id']) ? $_POST['schedule_id'] : null;
+
+                            includeAdminContent(function() use ($requestManagementController, $reserved_schedule, $schedule_id) {
+                                $latestSchedulesData = $requestManagementController->get_latest_list_schedules();
+                                $latestSchedulesDataonClick = $requestManagementController->get_latest_list_schedules_onClick();
+                                $schedulesData = $requestManagementController->get_list_schedules($reserved_schedule);
+                                $requestManagementController->approve_schedule($schedule_id);
+                                include 'templates/admin/schedule_requests.php';      
                             });
                             break; 
                         case 'requests/schedules-management':
@@ -308,12 +331,10 @@ switch ($filename) {
                             });
                             break;
                         default:
-                            
                         header("Location: " . $baseUrl . "/dashboard");
                         exit;
                     }
                     break;
-
                 default:
                     includeHeaderFooter(function() use ($homeController) {
                         $homeController->home();

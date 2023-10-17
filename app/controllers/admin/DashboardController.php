@@ -76,6 +76,30 @@ class DashboardController {
         ];
     }
 
+        public function getCountOfUniqueAddressesWithMultipleUsers()
+    {
+        // SQL query to get the count of unique addresses with more than one user
+        $query = "SELECT COUNT(*) AS total_count
+        FROM (
+          SELECT address, lastname, COUNT(*) AS address_count
+          FROM users
+          GROUP BY address, lastname
+          HAVING address_count > 1
+        ) AS grouped_addresses";
+
+        // Execute the query
+        $result = $this->connection->query($query);
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return $row['total_count'];
+        } else {
+            // Handle the case where the query fails (e.g., database connection issue)
+            return 0; // You can return an error code or message as needed
+        }
+    }
+
+
     public function request_count() {
         // Check the database connection
         if ($this->connection->error) {

@@ -9,6 +9,7 @@
                     <h6>Users: <?php echo $data['totalUsers']; ?></h6>
                     <h6>Admins: <?php echo $data['totalAdmins']; ?></h6>
                     <h6>Residences: <?php echo $data['totalResidences']; ?></h6>
+                    <h6>Families: <?php echo $families; ?></h6>
                 </div>
             </div>
         </div>

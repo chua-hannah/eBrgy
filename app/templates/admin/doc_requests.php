@@ -1,6 +1,6 @@
 <div class="container-fluid">
 <div style="float:right;">
-        <a href="http://localhost/eBrgy/app/requests/documents-management" style="color: white; text-decoration: none;" <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>
+        <a href="http://localhost/eBrgy/app/requests-documents-management" style="color: white; text-decoration: none;" <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>
             <button class="form-control custom-button">
             <i class="bi bi-file-text"></i>
                 Manage Document Types
@@ -41,7 +41,7 @@
                     <tr>
                     <td>
                           
-                          <form action="documents/edit-document" method="post">
+                          <form action="requests-edit-document" method="post">
                               <input type="hidden" name="doc_id" value="<?php echo $request['id']; ?>">
                               <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
                               <button type="submit" class="btn btn-primary btn-sm">Edit</button>

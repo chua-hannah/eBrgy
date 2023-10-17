@@ -22,6 +22,10 @@
                 <label class="labels">Quantity</label>
                 <input type="text" name="total_equipment_borrowed" id="total_equipment_borrowed" class="form-control mb-4" oninput="validateNumericInput(this)" required>
             </div>
+            <div class="col-lg-12 col-md-6 col-12">
+                <label class="labels">Duration(days)</label>
+                <input type="text" name="duration" id="duration" class="form-control mb-4" oninput="validateNumericInput(this)" required>
+            </div>
             <!-- <div class="col-lg-6 col-md-6 col-12">
                 <label class="labels">Requested Borrow Date</label>
                 <input type="date" name="borrow_date" id="date" class="form-control" required>
@@ -53,33 +57,28 @@
                         <table class="table table-bordered table-striped custom-table">
                             <thead class="text-center">
                                 <tr>
-                                    <th class="wrap-text">Equipment Type</th>
+                                    <th class="wrap-text">Equipment</th>
                                     <th class="wrap-text">Quantity</th>
                                     <th class="wrap-text">Status</th>
-                                    <th class="wrap-text">Request Date & Time</th>
-                                    <th class="wrap-text">Processed Date & Time</th>
+                                    <th class="wrap-text">Duration<br />(day/s)</th>
+                                    <th class="wrap-text">Request <br />Date & Time</th>
+                                    <th class="wrap-text">Notification</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($myrequest as $request) { 
                                         $htmlFormattedDate = date("m/d/Y", strtotime($request['request_date']));
                                         $htmlFormattedTime = date("h:i A", strtotime($request['request_date']));
-                                        if ($request['processed_date']== "0000-00-00 00:00:00"){
-                                            $processedFormattedDate = "-";
-                                            $processedFormattedTime = "-";
-                                        }
-                                        else {
-                                            // Convert and format date and time as before
-                                            $processedFormattedDate = date("m/d/Y", strtotime($request['processed_date']));
-                                            $processedFormattedTime = date("h:i A", strtotime($request['processed_date']));
-                                        }
+                                      
                                 ?>
                                     <tr>
                                         <td><?php echo $request['equipment_name']; ?></td>
                                         <td><?php echo $request['total_equipment_borrowed']; ?></td>
                                         <td><?php echo $request['status']; ?></td>
+                                        <td><?php echo $request['days']; ?></td>
                                         <td><?php echo $htmlFormattedDate . " " . $htmlFormattedTime; ?></td>
-                                        <td><?php echo $processedFormattedDate . " " . $processedFormattedTime; ?></td>
+                                        <td><?php echo $request['message']; ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

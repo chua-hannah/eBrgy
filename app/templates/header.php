@@ -19,6 +19,8 @@
   
   <link href="assets/css/style.css" rel="stylesheet">
   
+ 
+  
 </head>
 
 <body>
@@ -134,8 +136,5 @@
         $_SESSION['registration_successful'] = false;
     }
     ?>
-    <script>
-    function showRegistrationSuccessModal() {
-        $('#registrationSuccessModal').modal('show');
-    }
-    </script>
+   
+  

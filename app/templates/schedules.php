@@ -1,32 +1,50 @@
-
-
-<!-- templates/services.php -->
-<div >
-    <h1>Schedules</h1>
-    <form action="process.php" method="post">
-        <label for="date">Select a Date:</label>
-        <input type="date" id="date" name="date" required>
-        <br><br>
-        
-        <label for="time">Available Time Slots for this date:</label>
-        <select id="time" name="time" required>
-            <option value="null">Select Time in schedule</option>
-            <option value="9:00 AM">9:00 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <!-- Add more options for available time slots as needed -->
-        </select>
-
-        <select id="time" name="time" required>
-            <option value="null">Select Time out schedule</option>
-            <option value="9:00 AM">9:00 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <!-- Add more options for available time slots as needed -->
-        </select>
-        <br><br>
-        
-        <input type="submit" value="Schedule">
+<div class="text-center mt-4" >
+<h1>Schedules</h1>
+    Check Schedules
+    <form method="post" action="">
+    <label for="date">Select a Date:</label>
+    <input type="date" id="reserved_schedule" name="reserved_schedule" required>
+    <button type="submit" name="showData">Show Data</button>
     </form>
+
+  
+    <div class="table-responsive text-center">
+    <?php if (is_array($schedulesData) || is_object($schedulesData)) { ?>
+        <?php if (count($schedulesData) === 0) { ?>
+            <div class="text-center">No schedules for this date</div>
+        <?php } else { ?>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Scheduled by</th>
+                        <th style="min-width: 120px;">Date</th>
+                        <th style="min-width: 120px;">Start at</th>
+                        <th style="min-width: 120px;">End at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($schedulesData as $scheduleData) { ?>
+                        <tr>
+                            <td><?php echo $scheduleData['username']; ?></td>
+                            <td><?php echo $scheduleData['schedule_date']; ?></td>
+                            <td><?php echo $scheduleData['time_in']; ?></td>
+                            <td><?php echo $scheduleData['time_out']; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        <?php } ?>
+    <?php } else { ?>
+        <div class="text-center">Select Date to check List of Schedules</div>
+    <?php } ?>
+</div>
+
+        <a href="http://localhost/eBrgy/app/schedule-request" style="color: white; text-decoration: none;">
+            <button class="btn btn-primary">
+                Request Schedule
+            </button>
+        </a>
+  
+
   
 </div>

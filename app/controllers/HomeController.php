@@ -12,10 +12,161 @@ class HomeController {
       include 'templates/home.php';
     }
 
-    public function schedules() {
-        // Render the home page content
-        include 'templates/schedules.php';
-      }
+  
+    public function req_schedule()
+    {
+        if (isset($_POST['request_schedule'])) {
+            $username = $_SESSION['username'];
+            $mobile = $_SESSION['mobile'];
+            $schedule_date = $_POST['schedule_date'];
+            $time_in = $_POST['time_in'];
+            $time_out = $_POST['time_out'];
+            $status = 'pending';
+    
+            // Validate input fields to ensure they are not empty or null
+            if (empty($schedule_date) || empty($time_in) || empty($time_out)) {
+                $_SESSION['error'] = "Please fill in all required fields.";
+                return; // Exit without performing database operations
+            }
+    
+            // Sanitize user input
+            $schedule_date = htmlspecialchars($schedule_date);
+            $time_in = htmlspecialchars($time_in);
+            $time_out = htmlspecialchars($time_out);
+    
+            if (strtotime($time_in) >= strtotime($time_out)) {
+                $_SESSION['error'] = "Time in must be earlier than time out.";
+                return; // Exit without performing database operations
+            }
+    
+            // Check if the user has already submitted a request for the same day
+            $existingRequestQuery = "SELECT COUNT(*) as count FROM schedule_requests WHERE schedule_date = ? AND username = ?";
+            $stmt = $this->connection->prepare($existingRequestQuery);
+            $stmt->bind_param('ss', $schedule_date, $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $count = $row['count'];
+    
+            if ($count > 0) {
+                $_SESSION['error'] = "You have already submitted a request for this day.";
+                return; // Exit without performing database operations
+            }
+    
+            // Check if there's an approved request for the same schedule
+            $existingApprovedRequestQuery = "SELECT COUNT(*) as count FROM schedule_requests WHERE schedule_date = ? AND time_in = ? AND time_out = ? AND status = 'approved'";
+            $stmt = $this->connection->prepare($existingApprovedRequestQuery);
+            $stmt->bind_param('sss', $schedule_date, $time_in, $time_out);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $count = $row['count'];
+    
+            if ($count > 0) {
+                $_SESSION['error'] = "The schedule is already taken by another user.";
+                return; // Exit without performing database operations
+            }
+    
+            // Proceed to insert the new request into the database
+            $query = "INSERT INTO schedule_requests (username, mobile, schedule_date, time_in, time_out, status) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('ssssss', $username, $mobile, $schedule_date, $time_in, $time_out, $status);
+            if ($stmt->execute()) {
+                // Request sent successfully
+                $_SESSION['success'] = "The Schedule request has been sent successfully.";
+                echo '<script>window.location.href = "schedules";</script>';
+                exit();
+            } else {
+                // Error occurred
+                $_SESSION['error'] = "Error: " . $stmt->error;
+            }
+        }
+    }
+    
+
+
+    // public function schedule_request()
+    // {
+    //     if (isset($_POST['schedule_request'])) {
+    //         $username = $_SESSION['username'];
+    //         $mobile = $_SESSION['mobile'];
+    //         $schedule_date = $_POST['schedule_date'];
+    //         $time_in = $_POST['time_in'];
+    //         $time_out = $_POST['time_out'];
+    //         $status = 'PENDING';
+    
+    //         // Validate input fields to ensure they are not empty or null
+    //         if (empty($schedule_date) || is_null($schedule_date) || empty($time_in) || is_null($time_in) || empty($time_out) || is_null($time_out)) {
+    //             $_SESSION['error'] = "Please fill in all required fields.";
+    //             return; // Exit without performing database operations
+    //         }
+    //     }
+    
+    //     // Check if a similar request already exists based on schedule_date, time_in, time_out, username, mobile, and status
+    //     $checkQuery = "SELECT COUNT(*) as count FROM schedule_requests WHERE schedule_date = ? AND time_in = ? AND time_out = ? AND username = ? AND mobile = ? AND status = ?";
+    //     $stmt = $this->connection->prepare($checkQuery);
+    //     $stmt->bind_param('ssssss', $schedule_date, $time_in, $time_out, $username, $mobile, $status);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
+    //     $row = $result->fetch_assoc();
+    //     $count = $row['count'];
+    
+    //     if ($count === 0) {
+    //         // No similar request exists with the same parameters
+    //         // Proceed to insert the new request into the database
+    //         $query = "INSERT INTO schedule_requests (username, mobile, schedule_date, time_in, time_out, status) VALUES (?, ?, ?, ?, ?, ?)";
+    //         $stmt = $this->connection->prepare($query);
+    //         $stmt->bind_param('ssssss', $username, $mobile, $schedule_date, $time_in, $time_out, $status);
+    //         if ($stmt->execute()) {
+    //             // Request sent successfully
+    //             $_SESSION['success'] = "The Schedule request has been sent successfully.";
+    //         } else {
+    //             // Error occurred
+    //             echo "Error: " . $this->connection->error;
+    //         }
+    //     } else {
+    //         $_SESSION['error'] = "You can only request one schedule a day.";
+    //     }
+    // }
+    
+
+
+    public function get_schedules($reserved_schedule) {
+      
+        if (isset($_POST['showData'])) {
+            // Get the selected date from the "Show Schedules" form
+            $selectedDate = $reserved_schedule;
+            $status = 'approved';
+    
+            $query = "SELECT * FROM schedule_requests WHERE schedule_date = ? AND status = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("ss", $selectedDate, $status);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $approved_schedules = array();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $approved_schedules[] = $row;
+                }
+            }
+            // Return the fetched request settings data
+            return $approved_schedules;
+            
+            }  else {
+                // Handle other cases
+                return "No Schedules found";
+            }
+    }
+    
+
+ 
+    
+
+      
+
+    
+      
 
     public function officials() {
       if ($this->connection->error) {
@@ -199,9 +350,8 @@ public function equipments() {
     if (isset($_POST['request_equipment'])) {
         date_default_timezone_set('Asia/Manila');
         $username = $_SESSION['username'];
-        $email = $_SESSION['email'];
-        $mobile = $_SESSION['mobile'];
-        $status = 'PENDING';
+        $status = 'pending';
+        $duration = $_POST['duration'];
         $equipment_id = $_POST['equipment_id'];
         $total_equipment_borrowed = $_POST['total_equipment_borrowed'];
         $date = date('Y-m-d');
@@ -209,11 +359,10 @@ public function equipments() {
 
         // Combine date and time into a single datetime string
         $datetime = $date . ' ' . $time_in;
-        $processed_date = '-';
         // Check if a similar request already exists based on equipment_id, fullname, email, and mobile
-        $checkQuery = "SELECT COUNT(*) as count FROM equipment_requests WHERE equipment_id = ? AND username = ? AND email = ? AND mobile = ? AND total_equipment_borrowed = ?";
+        $checkQuery = "SELECT COUNT(*) as count FROM equipment_requests WHERE equipment_id = ? AND username = ?  AND total_equipment_borrowed = ?";
         $stmt = $this->connection->prepare($checkQuery);
-        $stmt->bind_param('sssss', $equipment_id, $username, $email, $mobile, $total_equipment_borrowed);
+        $stmt->bind_param('sss', $equipment_id, $username, $total_equipment_borrowed);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
@@ -230,9 +379,9 @@ public function equipments() {
             $row = $result->fetch_assoc();
             $equipment_name = $row['equipment_name'];
 
-            $query = "INSERT INTO equipment_requests (equipment_id, equipment_name, username, email, mobile, total_equipment_borrowed, status, request_date, processed_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO equipment_requests (equipment_id, equipment_name, username, total_equipment_borrowed, status, days, request_date) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param('sssssssss', $equipment_id, $equipment_name, $username, $email, $mobile, $total_equipment_borrowed, $status, $datetime, $processed_date);
+            $stmt->bind_param('sssssss', $equipment_id, $equipment_name, $username, $total_equipment_borrowed, $status, $duration, $datetime);
         
         if ($stmt->execute()) {
             // Request sent successfully
@@ -248,16 +397,16 @@ public function equipments() {
 }
 
 
-      public function get_equipment_requests($username, $mobile, $email) {
+      public function get_equipment_requests($username) {
         
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);
         }
 
         // Use prepared statement to prevent SQL injection
-        $query = "SELECT * FROM equipment_requests WHERE username = ? AND mobile = ? AND email = ?";
+        $query = "SELECT * FROM equipment_requests WHERE username = ?";
         $stmt = $this->connection->prepare($query);
-        $stmt->bind_param('sss', $username, $mobile, $email);
+        $stmt->bind_param('s', $username);
         $stmt->execute();
 
         // Fetch all request settings records as an associative array

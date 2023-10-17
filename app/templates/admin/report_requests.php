@@ -21,9 +21,6 @@
                     <th>Notes</th>
                     <th>Status</th>
                     <th style="min-width: 120px;">Time of Report</th>
-                    <th style="min-width: 120px;">Processed at</th>
-                    <th style="min-width: 120px;">Process by</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +29,7 @@
                     ?>
                     <tr>
                         <td>
-                            <form action="reports/edit-report" method="post">
+                            <form action="requests-edit-report" method="post">
                                 <input type="hidden" name="report_id" value="<?php echo $request['id']; ?>">
                                 <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
                                 <button type="submit" class="btn btn-primary btn-sm">Edit</button>
@@ -49,8 +46,7 @@
                         <td><?php echo $request['note']; ?></td>
                         <td><?php echo $request['status']; ?></td>
                         <td><?php echo $request['created_at']; ?></td>
-                        <td><?php echo $request['process_at']; ?></td>
-                        <td><?php echo $request['process_by']; ?></td>
+                        
                     </tr>
                     <?php
                 }

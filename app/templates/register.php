@@ -95,25 +95,56 @@
                             <label class="labels">Barangay</label>
                             <input type="text" name="barangay" class="form-control" value="Barangay 95" disabled>
                         </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                <h5 class="card-title">Status Information</h5>
+                                <div class="membership-info">
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkbox_4ps" name="membership_4ps" value="1">
+                                    <label class="form-check-label" for="checkbox_4ps">Pantawid Pamilyang Pilipino Program (4ps)</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkbox_pwd" name="membership_pwd" value="1">
+                                    <label class="form-check-label" for="checkbox_pwd">Person with Disabilities (PWD)</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkbox_solo_parent" name="membership_solo_parent" value="1">
+                                    <label class="form-check-label" for="checkbox_solo_parent">Solo Parent</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkbox_scholar" name="membership_scholar" value="1">
+                                    <label class="form-check-label" for="checkbox_scholar">Government Scholar</label>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
 
                         <!-- Add file upload fields -->
                         <div class="col-lg-6 col-12">
-                            <label for="id_selfie">Upload Selfie w/ ID</label>
-                            <input type="file" name="id_selfie" id="id_selfie" class="form-control
-                            <?php echo isset($errors["id_selfie"]) ? 'is-invalid' : ''; ?>" accept="image/*">
-                            <?php if (isset($errors["id_selfie"])) : ?>
-                                <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
-                            <?php endif; ?>
+                            <div>
+                                <label for="id_selfie">Upload Selfie w/ ID</label>
+                                <input type="file" name="id_selfie" id="id_selfie" class="form-control
+                                <?php echo isset($errors["id_selfie"]) ? 'is-invalid' : ''; ?>" accept="image/*">
+                                <?php if (isset($errors["id_selfie"])) : ?>
+                                    <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <label for="valid_id">Upload Valid ID</label>
+                                <input type="file" name="valid_id" id="valid_id" class="form-control
+                                <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*">
+                                <?php if (isset($errors["valid_id"])) : ?>
+                                    <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
+                                <?php endif; ?>
+                            </div>
                         </div>
 
-                        <div class="col-lg-6 col-12">
-                            <label for="valid_id">Upload Valid ID</label>
-                            <input type="file" name="valid_id" id="valid_id" class="form-control
-                            <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*">
-                            <?php if (isset($errors["valid_id"])) : ?>
-                                <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
-                            <?php endif; ?>
-                        </div>
+                       
 
                         <div class="col-lg-6 col-12">
                             <label class="labels">Create Username (Must be 6 characters long)</label>

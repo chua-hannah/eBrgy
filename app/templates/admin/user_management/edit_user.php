@@ -25,6 +25,7 @@ if ($userId) {
         <p class="card-text">Email: <?php echo $userData['email']; ?></p>
         <p class="card-text">Full Name: <?php echo $userData['firstname'] . ' ' . $userData['middlename'] . ' ' . $userData['lastname']; ?></p>
         <p class="card-text">Age: <?php echo $userData['age']; ?></p>
+        <p class="card-text">Mobile: <?php echo $userData['mobile']; ?></p>
         <p class="card-text">Status: <?php echo $userData['status']; ?></p>
 
         <div class="row">
@@ -35,7 +36,7 @@ if ($userId) {
                 if (!empty($userData['id_selfie']) && file_exists($idSelfiePath)) {
                     ?>
                     <div class="text-center">
-                        <img src="<?php echo '../' . $idSelfiePath; ?>" alt="ID Selfie" class="img-thumbnail" style="width: 200px;">
+                        <img src="<?php echo './' . $idSelfiePath; ?>" alt="ID Selfie" class="img-thumbnail" style="width: 200px;">
                         <p>Selfie</p>
                     </div>
                 <?php } else { ?>
@@ -50,7 +51,7 @@ if ($userId) {
                 if (!empty($userData['valid_id']) && file_exists($validIdPath)) {
                     ?>
                     <div class="text-center">
-                        <img src="<?php echo '../' . $validIdPath; ?>" alt="Valid ID" class="img-thumbnail" style="width: 200px;">
+                        <img src="<?php echo './' . $validIdPath; ?>" alt="Valid ID" class="img-thumbnail" style="width: 200px;">
                         <p>Valid ID</p>
                     </div>
                 <?php } else { ?>

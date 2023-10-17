@@ -56,11 +56,13 @@
             }
             ?>
         </div>
-        <button class="btn btn-secondary">
-        <a href="http://localhost/eBrgy/app/requests/equipments" style="color: white; text-decoration: none;">
-            Back to Equipment Requests
+       
+        <a href="http://localhost/eBrgy/app/requests-equipments" style="color: white; text-decoration: none;">
+            <button class="btn btn-secondary">
+                Back to Equipment Requests
+            </button>
         </a>
-    </button>
+ 
         </div>
 
             <!--Additional div for sidebar-->
