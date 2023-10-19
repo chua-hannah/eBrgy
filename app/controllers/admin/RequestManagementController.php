@@ -332,16 +332,15 @@ class RequestManagementController {
         return $activationMessage;
     }
     
-
-    function approve_equipment($equipment_id, $message) {
-
+    function approve_equipment($equipment_id, $message, $total_equipment_id) {
         $activationMessage = '';
-
+    
         if (isset($_POST['approve_equipment'])) {
             date_default_timezone_set('Asia/Manila');
             $equipment_id = $_POST['equipment_id'];
             $processBy = $_SESSION['username'];
             $message = $_POST['message'];
+            $total_equipment_id = $_POST['total_equipment_id'];
             // Get the current timestamp
             $date = date('Y-m-d');
             $time_in = date('H:i:s'); 
@@ -349,50 +348,97 @@ class RequestManagementController {
             // Use prepared statements to prevent SQL injection
             $stmt = $this->connection->prepare("UPDATE equipment_requests SET status = 'approved', process_by = ?, process_at = ?, message = ? WHERE id = ?");
             $stmt->bind_param("sssi", $processBy, $processAt, $message, $equipment_id); // Assuming user_id is an integer
-        
+    
             if ($stmt->execute()) {
                 // Activation successful
-                $activationMessage = "Equipment Request successfully.";
+                $activationMessage = "Request Approved successfully.";
                 echo '<script>window.location.href = "requests-equipments";</script>';
             } else {
                 // Activation failed
                 $activationMessage = "Error updating request status: " . $stmt->error;
             }
-        
+    
             // Close the prepared statement
             $stmt->close();
+    
+            // Now, update the equipment_settings table to subtract the total_equipment_borrowed for the specific approved equipment
+            $updateEquipmentQuery = "UPDATE equipment_settings es
+            SET es.total_equipment = es.total_equipment - (
+                SELECT COALESCE(SUM(er.total_equipment_borrowed), 0)
+                FROM equipment_requests er
+                WHERE er.status = 'approved' AND er.equipment_id = ? AND er.id = ? AND es.equipment_id = er.equipment_id
+            )";
+            $stmt2 = $this->connection->prepare($updateEquipmentQuery);
+            $stmt2->bind_param("ii", $total_equipment_id, $equipment_id);
+    
+            if ($stmt2->execute()) {
+                // Equipment settings updated successfully
+            } else {
+                // Equipment settings update failed
+                $activationMessage = "Error updating equipment settings: " . $stmt2->error;
+            }
+    
+            // Close the prepared statement
+            $stmt2->close();
         }
         return $activationMessage;
     }
+    
+    
 
-    function returned_equipment($equipment_id) {
-      
+    function returned_equipment($equipment_id, $total_equipment_id) {
         $activationMessage = '';
-
+    
         if (isset($_POST['returned_equipment'])) {
             date_default_timezone_set('Asia/Manila');
             $processReturned = $_SESSION['username'];
             $date = date('Y-m-d');
-            $time_in = date('H:i:s'); 
+            $time_in = date('H:i:s');
             $returnedAt = $date . ' ' . $time_in;
             $equipment_id = $_POST['equipment_id'];
+            $total_equipment_id = $_POST['total_equipment_id'];
+    
+            // Use prepared statements to prevent SQL injection
             $stmt = $this->connection->prepare("UPDATE equipment_requests SET status = 'returned', process_return = ?, returned_at = ? WHERE id = ?");
-            $stmt->bind_param("ssi", $processReturned, $returnedAt, $equipment_id); // Assuming user_id is an integer        
+            $stmt->bind_param("ssi", $processReturned, $returnedAt, $equipment_id); // Assuming user_id is an integer
+    
             if ($stmt->execute()) {
                 // Activation successful
-                $activationMessage = "Equipment Returned successfully.";
+                $activationMessage = "Equipments Returned successfully.";
                 echo '<script>window.location.href = "requests-equipments";</script>';
             } else {
                 // Activation failed
-                $activationMessage = "Error updating user status: " . $stmt->error;
+                $activationMessage = "Error updating request status: " . $stmt->error;
             }
-        
+    
             // Close the prepared statement
             $stmt->close();
+    
+            // Update equipment_settings to add back the returned equipment
+            // Now, update the equipment_settings table to add the total_equipment_borrowed back for the specific returned equipment
+            $updateEquipmentQuery = "UPDATE equipment_settings es
+            SET es.total_equipment = es.total_equipment + (
+                SELECT COALESCE(SUM(er.total_equipment_borrowed), 0)
+                FROM equipment_requests er
+                WHERE er.status = 'returned' AND er.equipment_id = ? AND er.id = ? AND es.equipment_id = er.equipment_id
+            )";
+            $stmt2 = $this->connection->prepare($updateEquipmentQuery);
+            $stmt2->bind_param("ii", $total_equipment_id, $equipment_id);
+    
+            if ($stmt2->execute()) {
+                // Equipment settings updated successfully
+            } else {
+                // Equipment settings update failed
+                $activationMessage = "Error updating equipment settings: " . $stmt2->error;
+            }
+    
+            // Close the prepared statement
+            $stmt2->close();
         }
         return $activationMessage;
-
     }
+    
+    
 
     function delete_equipment($equipment_id) {
       
@@ -400,23 +446,50 @@ class RequestManagementController {
 
         if (isset($_POST['delete_equipment'])) {
             
-            $processBy = $_SESSION['username'];
-            $message = $_POST['message'];
-            $processAt = date('Y-m-d H:i:s');
+            date_default_timezone_set('Asia/Manila');
+            $processReturned = $_SESSION['username'];
+            $date = date('Y-m-d');
+            $time_in = date('H:i:s');
+            $returnedAt = $date . ' ' . $time_in;
             $equipment_id = $_POST['equipment_id'];
-            $stmt = $this->connection->prepare("UPDATE equipment_requests SET status = 'rejected', process_by = ?, process_at = ?, message = ? WHERE id = ?");
-            $stmt->bind_param("sssi", $processBy, $processAt, $message, $equipment_id); // Assuming user_id is an integer        
+            $total_equipment_id = $_POST['total_equipment_id'];
+    
+            // Use prepared statements to prevent SQL injection
+            $stmt = $this->connection->prepare("UPDATE equipment_requests SET status = 'rejected', process_return = ?, returned_at = ? WHERE id = ?");
+            $stmt->bind_param("ssi", $processReturned, $returnedAt, $equipment_id); // Assuming user_id is an integer
+    
             if ($stmt->execute()) {
                 // Activation successful
-                $activationMessage = "Equipment request deleted successfully.";
+                $activationMessage = "Equipments Rejected successfully.";
                 echo '<script>window.location.href = "requests-equipments";</script>';
             } else {
                 // Activation failed
-                $activationMessage = "Error updating user status: " . $stmt->error;
+                $activationMessage = "Error updating request status: " . $stmt->error;
             }
-        
+    
             // Close the prepared statement
             $stmt->close();
+    
+            // Update equipment_settings to add back the returned equipment
+            // Now, update the equipment_settings table to add the total_equipment_borrowed back for the specific returned equipment
+            $updateEquipmentQuery = "UPDATE equipment_settings es
+            SET es.total_equipment = es.total_equipment + (
+                SELECT COALESCE(SUM(er.total_equipment_borrowed), 0)
+                FROM equipment_requests er
+                WHERE er.status = 'rejected' AND er.equipment_id = ? AND er.id = ? AND es.equipment_id = er.equipment_id
+            )";
+            $stmt2 = $this->connection->prepare($updateEquipmentQuery);
+            $stmt2->bind_param("ii", $total_equipment_id, $equipment_id);
+    
+            if ($stmt2->execute()) {
+                // Equipment settings updated successfully
+            } else {
+                // Equipment settings update failed
+                $activationMessage = "Error updating equipment settings: " . $stmt2->error;
+            }
+    
+            // Close the prepared statement
+            $stmt2->close();
         }
         return $activationMessage;
 

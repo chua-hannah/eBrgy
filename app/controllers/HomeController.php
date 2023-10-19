@@ -158,15 +158,6 @@ class HomeController {
                 return "No Schedules found";
             }
     }
-    
-
- 
-    
-
-      
-
-    
-      
 
     public function officials() {
       if ($this->connection->error) {
@@ -359,17 +350,20 @@ public function equipments() {
 
         // Combine date and time into a single datetime string
         $datetime = $date . ' ' . $time_in;
-        // Check if a similar request already exists based on equipment_id, fullname, email, and mobile
-        $checkQuery = "SELECT COUNT(*) as count FROM equipment_requests WHERE equipment_id = ? AND username = ?  AND total_equipment_borrowed = ?";
-        $stmt = $this->connection->prepare($checkQuery);
-        $stmt->bind_param('sss', $equipment_id, $username, $total_equipment_borrowed);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $count = $row['count'];
 
-        
-            // No similar request exists with the same fullname, email, mobile, and request_name
+        // Check if the requested quantity is valid
+        if ($this->isRequestedQuantityValid($equipment_id, $total_equipment_borrowed)) {
+            // Valid quantity, proceed with the request
+            // Check if a similar request already exists based on equipment_id, username, and total_equipment_borrowed
+            $checkQuery = "SELECT COUNT(*) as count FROM equipment_requests WHERE equipment_id = ? AND username = ? AND total_equipment_borrowed = ?";
+            $stmt = $this->connection->prepare($checkQuery);
+            $stmt->bind_param('sss', $equipment_id, $username, $total_equipment_borrowed);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $count = $row['count'];
+
+            // No similar request exists with the same equipment_id, username, and total_equipment_borrowed
             // Proceed to insert the new request into the database
             $equipmentNameQuery = "SELECT equipment_name FROM equipment_settings WHERE equipment_id = ?";
             $stmt = $this->connection->prepare($equipmentNameQuery);
@@ -382,19 +376,43 @@ public function equipments() {
             $query = "INSERT INTO equipment_requests (equipment_id, equipment_name, username, total_equipment_borrowed, status, days, request_date) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param('sssssss', $equipment_id, $equipment_name, $username, $total_equipment_borrowed, $status, $duration, $datetime);
-        
-        if ($stmt->execute()) {
-            // Request sent successfully
-            header("Location: equipments");
-            $_SESSION['success'] = "The equipment request has been sent successfully.";
-            exit();
+
+            if ($stmt->execute()) {
+                // Request sent successfully
+                header("Location: equipments");
+                $_SESSION['success'] = "The equipment request has been sent successfully.";
+                exit();
+            } else {
+                // Error occurred
+                echo "Error: " . $this->connection->error;
+            }
         } else {
-            // Error occurred
-            echo "Error: " . $this->connection->error;
+            // Invalid quantity, show an error message
+            echo "Error: The requested quantity exceeds the available equipment.";
         }
-        
-    }     
+    }
 }
+
+public function isRequestedQuantityValid($equipment_id, $requestedQuantity) {
+    // Check if the requested quantity is less than or equal to the available equipment
+    $query = "SELECT total_equipment FROM equipment_settings WHERE equipment_id = ?";
+    $stmt = $this->connection->prepare($query);
+    $stmt->bind_param("s", $equipment_id);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows == 1) {
+        $stmt->bind_result($availableQuantity);
+        $stmt->fetch();
+
+        if ($requestedQuantity <= $availableQuantity) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 
       public function get_equipment_requests($username) {

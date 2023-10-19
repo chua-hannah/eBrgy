@@ -27,6 +27,7 @@ if ($username) {
         <p class="card-text">Requested at: <?php echo $userData['request_date']; ?></p>
         <form method="post" action="">
             <input type="hidden" name="equipment_id" value="<?php echo $userData['id']; ?>">
+            <input type="hidden" name="total_equipment_id" value="<?php echo $userData['equipment_id']; ?>">
             <input type="hidden" name="username" value="<?php echo $userData['username']; ?>">
             <label for="remarks">Remarks:</label>
             <textarea name="remarks" rows="2" class="form-control mb-4" id="remarks" <?php echo ($userData['status'] === 'pending' || !empty($userData['remarks'])) ? 'disabled' : ''; ?> value="<?php echo $userData['remarks']; ?>" required><?php echo $userData['remarks']; ?></textarea>

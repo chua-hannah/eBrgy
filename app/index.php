@@ -9,6 +9,7 @@ require_once 'controllers/admin/UserManagementController.php';
 require_once 'controllers/admin/DashboardController.php';
 require_once 'controllers/admin/RequestManagementController.php';
 require_once 'controllers/admin/AttendanceController.php';
+require_once 'controllers/admin/ReportsController.php';
 require_once 'controllers/admin/SettingsController.php';
 
 $userController = new UserController($connection);
@@ -20,6 +21,7 @@ $userManagementController = new UserManagementController($connection);
 $requestManagementController = new RequestManagementController($connection);
 $attendanceController = new AttendanceController($connection);
 $settingsController = new SettingsController($connection);
+$reportsController = new ReportsController($connection);
 
 $baseUrl = "http://localhost/eBrgy/app"; // Replace with your actual base URL
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -172,7 +174,6 @@ switch ($filename) {
                                 $homeController->$filename();   
                                 $requests = $settingsController->get_equipments_list(); // Call the function here
                                 $myrequest = $homeController->get_equipment_requests($username, $mobile, $email);   
-
                                 include 'templates/equipments.php';      
   
                             });
@@ -192,7 +193,6 @@ switch ($filename) {
                                 $requestData = $dashboardController->request_count();
                                 $data = array_merge($userData, $attendanceData, $requestData);
                                 $families = $dashboardController->getCountOfUniqueAddressesWithMultipleUsers();
-                                var_dump($families);
                                 include 'templates/admin/dashboard.php';
                             });
                             break;
@@ -287,13 +287,14 @@ switch ($filename) {
                             $equipment_id = isset($_POST['equipment_id']) ? $_POST['equipment_id'] : null;
                             $remarks = isset($_POST['remarks']) ? $_POST['remarks'] : null;
                             $message = isset($_POST['message']) ? $_POST['message'] : null;
-                            includeAdminContent(function() use ($requestManagementController, $equipment_id, $remarks, $message) {
-                                $requestManagementController->edit_equipment($equipment_id);
-                                $requestManagementController->approve_equipment($equipment_id, $message);
-                                $requestManagementController->add_remarks($equipment_id, $remarks);
-                                $requestManagementController->delete_equipment($equipment_id, $remarks);
-                                $requestManagementController->returned_equipment($equipment_id);
+                            $total_equipment_id = isset($_POST['total_equipment_id']) ? $_POST['total_equipment_id'] : null;
 
+                            includeAdminContent(function() use ($requestManagementController, $equipment_id, $remarks, $message, $total_equipment_id) {
+                                $requestManagementController->edit_equipment($equipment_id);
+                                $requestManagementController->approve_equipment($equipment_id, $message, $total_equipment_id);
+                                $requestManagementController->add_remarks($equipment_id, $remarks);
+                                $requestManagementController->delete_equipment($equipment_id, $remarks, $total_equipment_id);
+                                $requestManagementController->returned_equipment($equipment_id, $total_equipment_id);
                             });
                             break;     
                         case 'requests-equipments-management':
@@ -323,6 +324,12 @@ switch ($filename) {
                                 include 'templates/admin/request_management/equipment_management.php';
                                 
                             });   
+                        case 'users-report':
+                            includeAdminContent(function() use ($reportsController, $filename) {
+                                $usersReports = $reportsController->user_reports();
+                                include 'templates/admin/reports/users_list.php';
+                            });
+                            break;
                         case 'settings':
                             includeAdminContent(function() use ($settingsController) {
                                 $settingsController->attendance_setting();

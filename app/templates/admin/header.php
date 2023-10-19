@@ -147,7 +147,53 @@
                     </a>
                 </li>
             <?php } ?>
+           
+            <li class="nav-item mb-2">
+                <a class="nav-link" href="javascript:void(0);" id="dropdownLink">
+                    <i class="bi bi-file-earmark"></i> Report
+                </a>
+            </li>
+
+            <div class="collapse" id="dropdownTabs">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab1' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/users-report">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab2">Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab3' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab3">Free Tab</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 1</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 2</a>
+                    </li>
+                </ul>
+            </div>
         </ul>
     </div>
     <div class="col-lg-10" style="padding: 20px;">
     <!-- Place your page content here -->
+
+
+  
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const dropdownLink = document.getElementById("dropdownLink");
+    const dropdownTabs = document.getElementById("dropdownTabs");
+
+    dropdownLink.addEventListener("click", function() {
+        if (dropdownTabs.classList.contains("show")) {
+            dropdownTabs.classList.remove("show");
+        } else {
+            dropdownTabs.classList.add("show");
+        }
+    });
+});
+</script>

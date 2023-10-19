@@ -63,6 +63,7 @@
 
         disablePastDates("reserved_schedule", "schedule_date");
     </script>
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.sticky.js"></script>

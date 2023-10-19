@@ -118,7 +118,7 @@ class SettingsController {
             // Prepare the statement
             if ($this->connection->query($query) === true) {
               // Registration successful
-              header("Location:  /eBrgy/app/requests/equipments-management");
+              echo '<script>window.location.href = "requests-equipments-management";</script>';
               $_SESSION["success"] = "New equipment has been added successfully.";
            
           } else {

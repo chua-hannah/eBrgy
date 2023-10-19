@@ -40,7 +40,7 @@
 :root {
   --white-color: #ffffff;
   --primary-color: #0037ab;
-  --secondary-color: #001e77 ;
+  --secondary-color: #001e77;
   --section-bg-color: #f0f8ff;
   --site-footer-bg-color: #001e77;
   --custom-btn-bg-color: #0037ab;
@@ -403,9 +403,8 @@ main {
 
 .nav-item.active a.nav-link {
   font-weight: var(--font-weight-bold);
-  border-left: 4px solid #007BFF;
+  border-left: 4px solid #007bff;
 }
-
 
 .dropdown-menu {
   background: var(--white-color);
@@ -1245,7 +1244,6 @@ blockquote::before {
   border-color: transparent;
 }
 
-
 ::placeholder {
   color: #333333;
 }
@@ -1767,7 +1765,10 @@ img.img-responsive {
   background: none;
 }
 
-table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+table.dataTable thead th,
+table.dataTable thead td,
+table.dataTable tfoot th,
+table.dataTable tfoot td {
   text-align: center;
   padding: 0px;
 }
@@ -1776,12 +1777,11 @@ table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, ta
   padding: 0;
 }
 
-
 #sidebar {
   background-color: #f0f0f0; /* Silver background color */
   padding: 20px;
   height: 100vh;
-  border-right: 1px solid #ccc
+  border-right: 1px solid #ccc;
 }
 
 #sidebar ul {

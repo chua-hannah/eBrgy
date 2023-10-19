@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2023 at 12:04 AM
+-- Generation Time: Oct 19, 2023 at 11:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -129,16 +129,6 @@ CREATE TABLE `equipment_requests` (
   `returned_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `equipment_requests`
---
-
-INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `status`, `total_equipment_borrowed`, `days`, `username`, `request_date`, `process_by`, `message`, `remarks`, `process_at`, `process_return`, `returned_at`) VALUES
-(1, 1, 'plastic chair', 'returned', 1, 5, 'resident1', '2023-10-17 21:28:55', 'kapitantest', 'test', 'tasdasdsa', '2023-10-17 21:29:15', 'kapitantest', '2023-10-17 22:00:52'),
-(2, 1, 'plastic chair', 'rejected', 12, 12, 'resident1', '2023-10-17 21:46:56', 'kapitantest', 'Cannot be', '', '2023-10-17 15:47:19', '', '2023-10-17 21:57:58'),
-(3, 2, 'plastic chair', 'returned', 12, 4, 'resident1', '2023-10-17 21:49:12', 'kapitantest', 'Claim on Saturday', 'Helped by mister Kamao', '2023-10-17 21:49:33', 'kapitantest', '2023-10-17 22:01:03'),
-(4, 1, 'plastic chair', 'rejected', 123, 10, 'resident1', '2023-10-17 21:55:11', 'kapitantest', 'BOBO', '', '2023-10-17 15:56:06', '', '2023-10-17 21:57:58');
-
 -- --------------------------------------------------------
 
 --
@@ -158,8 +148,13 @@ CREATE TABLE `equipment_settings` (
 --
 
 INSERT INTO `equipment_settings` (`equipment_id`, `equipment_name`, `number_of_equipment`, `total_equipment`, `availability`) VALUES
-(1, 'plastic chair', '20', 40, '1'),
-(2, 'plastic chair', '20', 40, '1');
+(1, 'plastic chair', '20', 13, '1'),
+(2, 'plastic table', '100', 10, '1'),
+(3, 'router', '20', 30, '1'),
+(4, 'Jack Hammer', '20', 23, '1'),
+(5, 'NMAX', '100', 100, '1'),
+(6, 'NMAX', '100', 100, '1'),
+(7, 'VESPA JB limited edition', '300', 300, '1');
 
 -- --------------------------------------------------------
 
@@ -379,7 +374,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firs
 (22, 'user12345678', 'pass1234', 'hannahchua011113@gmail.com', '+639642411111', 'Hannah', '', 'Chua', '33 pasado talaga', '1997-12-01', 25, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'activated'),
 (23, 'useruser123', 'useruser123', 'hannahchua0134444@gmail.com', '+639064372222', 'Hannah', '', 'Chua', 'pass me sensei', '1992-11-13', 30, 'Male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'curl_request.png', 'curl_request.png', 'deactivate'),
 (24, 'resident678', 'pass123456', 'hannahchu11a013@gmail.com', '+639064376576', 'Hannah', '', 'Chua', 'pass me sensei', '2020-01-11', 3, 'Male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'curl_request.png', 'curl_request.png', 'deactivate'),
-(26, 'devtest1', 'pass1234', 'devtest1@mail.com', '+639234567890', 'devtest1', 'asddas', 'asdasdad', 'pass me sensei', '1960-02-14', 63, 'Female', 'residence', NULL, 0, 1, 0, 1, 0, '8.png', '8.png', 'deactivate'),
+(26, 'devtest1', 'pass1234', 'devtest1@mail.com', '+639234567890', 'devtest1', 'asddas', 'asdasdad', 'pass me sensei', '1960-02-14', 63, 'Female', 'residence', NULL, 0, 1, 0, 1, 0, '8.png', '8.png', 'activated'),
 (27, 'devtest2', 'pass1234', 'devtest2@mail.com', '+639999999292', 'devtest2', 'dasdas', 'qwe', '33 pasado talaga', '1950-01-01', 73, 'Male', 'residence', NULL, 1, 1, 1, 1, 0, '8.png', '8.png', 'deactivate');
 
 --
@@ -472,13 +467,13 @@ ALTER TABLE `doc_settings`
 -- AUTO_INCREMENT for table `equipment_requests`
 --
 ALTER TABLE `equipment_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `equipment_settings`
 --
 ALTER TABLE `equipment_settings`
-  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `messages`
