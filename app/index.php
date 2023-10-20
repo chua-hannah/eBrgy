@@ -115,8 +115,10 @@ switch ($filename) {
                             });
                             break;
                         case 'schedules':
+                            $username = $_SESSION['username'];
                             $reserved_schedule = isset($_POST['reserved_schedule']) ? $_POST['reserved_schedule'] : null;
-                            includeHeaderFooter(function() use ($homeController, $reserved_schedule) {
+                            includeHeaderFooter(function() use ($homeController, $username, $reserved_schedule) {
+                                $myScheduleData = $homeController->get_schedule_requests($username);
                                 $schedulesData = $homeController->get_schedules($reserved_schedule);
                                 include 'templates/schedules.php';      
                             });
@@ -173,7 +175,8 @@ switch ($filename) {
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();   
                                 $requests = $settingsController->get_equipments_list(); // Call the function here
-                                $myrequest = $homeController->get_equipment_requests($username, $mobile, $email);   
+                                $myrequest = $homeController->get_equipment_requests($username);   
+
                                 include 'templates/equipments.php';      
   
                             });

@@ -1,8 +1,3 @@
-// Automatically dismiss the alert after 5 seconds (5000 milliseconds)
-setTimeout(function () {
-    document.getElementById('alert').style.display = 'none';
-}, 5000);
-
 // Mobile number input
 function validateNumericInput(input) {
   // Remove any non-numeric characters using a regular expression
@@ -10,41 +5,31 @@ function validateNumericInput(input) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    const dateInput = document.getElementById("birthdate");
-    var errorText = document.getElementById("error_birth2");
-    var errorText2 = document.getElementById("error_birth");
-    dateInput.addEventListener('input', function () {
-        let value = this.value.replace(/\D/g, ''); // Remove non-numeric characters
-        if (value.length > 2) {
-            value = `${value.slice(0, 2)}/${value.slice(2)}`;
-        }
-        if (value.length > 5) {
-            value = `${value.slice(0, 5)}/${value.slice(5, 9)}`;
-        }
-        this.value = value;
-        // Add an input event listener to validate the date format as the user types
-        var inputValue = dateInput.value;
-        if (!isValidDateFormat(inputValue)) {
-            errorText.style.display = "block";
-            birthdate.classList.add("is-invalid");
-        } else {
-            errorText.style.display = "none";
-            birthdate.classList.remove("is-invalid");
-        }
-        if (inputValue === "") {
-            birthdate.classList.remove("is-invalid");
-            errorText2.style.display = "none";
-        }
-        else if (inputValue.length>0){
-            errorText2.style.display = "none";
-        }
+    const birthdate = document.getElementById("datepicker");
+    var errorText = document.getElementById("error_birth");
+    birthdate.addEventListener('input', function () {
+        birthdate.classList.remove("is-invalid");
+        errorText.style.display = "none";    
     });
-
-// Function to validate the "mm/dd/yyyy" date format
-function isValidDateFormat(input) {
-    var datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/\d{4}$/;
-    return datePattern.test(input);
-}
+    if (document.getElementById("error_birth")){
+        const flatpickrInstance = flatpickr("#datepicker", {
+            // Flatpickr options
+            maxDate: "today", 
+            onChange: function (selectedDates, dateStr, instance) {
+                const inputElement = instance.input;
+                const dateFormat = "m/d/Y"; // Your desired date format
+                
+                // Format the selected date according to your desired format
+                const formattedDate = instance.formatDate(selectedDates[0], dateFormat);
+                
+                // Update the input element's value with the formatted date
+                inputElement.value = formattedDate;
+                
+                // You can also remove the "is-invalid" class if needed
+                inputElement.classList.remove("is-invalid");
+            }
+        });
+    }
 });
   
 document.addEventListener("DOMContentLoaded", function() {
@@ -111,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Function to validate the "mm/dd/yyyy" date format
     function isValidEmailFormat(input) {
         var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailRegex.test(input);
@@ -178,8 +162,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const sex = document.getElementById("sex");
     const email = document.getElementById("email");
     const address = document.getElementById("address");
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
     const idSelfie = document.getElementById("id_selfie");
     const validId = document.getElementById("valid_id");
     const dpa = document.getElementById("dpa");
@@ -242,17 +224,6 @@ document.addEventListener("DOMContentLoaded", function() {
     sex.addEventListener("change", function() {
         sex.classList.remove("is-invalid");
         errorSex.style.display = "none";
-    });
-    username.addEventListener("input", function() {
-        const inputUsername= email.value.trim();
-        errorEmail.style.display = "none";
-        if (inputEmail === "") {
-            email.classList.remove("is-invalid");
-          
-        }
-        else if (inputEmail.length>0){
-            email.classList.remove("is-invalid");
-        }
     });
     address.addEventListener("input", function() {
         const inputAddress= address.value.trim();

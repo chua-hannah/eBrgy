@@ -22,6 +22,11 @@ class HomeController {
             $time_in = $_POST['time_in'];
             $time_out = $_POST['time_out'];
             $status = 'pending';
+
+            // Convert schedule date to YYYY-MM-DD format
+            $scheduledDateTimeStamp = strtotime($schedule_date);
+            // Valid date format, convert it to YYYY-MM-DD
+            $schedule_date = date('Y-m-d', $scheduledDateTimeStamp);
     
             // Validate input fields to ensure they are not empty or null
             if (empty($schedule_date) || empty($time_in) || empty($time_out)) {
@@ -132,32 +137,69 @@ class HomeController {
 
 
     public function get_schedules($reserved_schedule) {
-      
-        if (isset($_POST['showData'])) {
-            // Get the selected date from the "Show Schedules" form
-            $selectedDate = $reserved_schedule;
-            $status = 'approved';
+        $errors = array(); // Initialize an errors array
     
-            $query = "SELECT * FROM schedule_requests WHERE schedule_date = ? AND status = ?";
-            $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ss", $selectedDate, $status);
-            $stmt->execute();
-
-            $result = $stmt->get_result();
-            $approved_schedules = array();
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $approved_schedules[] = $row;
+        if (isset($_POST['showData'])) {
+            if (empty($_POST['reserved_schedule'])) {
+                $errors["reserved_schedule"] = "Enter a date";
+            } else {
+                $selectedDateTimeStamp = strtotime($reserved_schedule);
+                $selectedDate = date('Y-m-d', $selectedDateTimeStamp);
+                $status = 'approved';
+    
+                $query = "SELECT * FROM schedule_requests WHERE schedule_date = ? AND status = ?";
+                $stmt = $this->connection->prepare($query);
+                $stmt->bind_param("ss", $selectedDate, $status);
+                $stmt->execute();
+    
+                $result = $stmt->get_result();
+                $approved_schedules = array();
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $approved_schedules[] = $row;
+                    }
+                    // Return the fetched request settings data
+                    return $approved_schedules;
+                } else {
+                    // No schedules found
+                    return "No Schedules found";
                 }
             }
-            // Return the fetched request settings data
-            return $approved_schedules;
-            
-            }  else {
-                // Handle other cases
-                return "No Schedules found";
-            }
+        }
     }
+    
+    public function get_schedule_requests($username) {
+        
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+
+        // Use prepared statement to prevent SQL injection
+        $query = "SELECT * FROM schedule_requests WHERE username = ? ORDER BY schedule_date";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+
+        // Fetch all request settings records as an associative array
+        $result = $stmt->get_result();
+        $myrequests = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $myrequests[] = $row;
+            }
+        }
+
+        // Return the fetched request settings data
+        return $myrequests;
+    }
+
+ 
+    
+
+      
+
+    
+      
 
     public function officials() {
       if ($this->connection->error) {
@@ -280,6 +322,10 @@ public function reports() {
 
         // Combine date and time into a single datetime string
         $datetime = $date . ' ' . $time_in;
+        // Convert birthdate to YYYY-MM-DD format
+        $birthdateTimestamp = strtotime($date_of_incident);
+        // Valid date format, convert it to YYYY-MM-DD
+        $date_of_incident = date('Y-m-d', $birthdateTimestamp);
 
         // Check if a similar request already exists based on request_name, fullname, email, and mobile
         $checkQuery = "SELECT COUNT(*) as count FROM report_requests WHERE reported_person = ? AND subject_person = ? AND username = ?  AND email = ? AND mobile = ?";

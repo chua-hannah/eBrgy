@@ -620,7 +620,7 @@ main {
 }
 
 .featured-block:hover .featured-block-image {
-  transform: scale(0.75);
+  transform: scale(1.05);
 }
 
 .featured-block-image {
@@ -1078,6 +1078,20 @@ blockquote::before {
   outline: none;
 }
 
+.custom-form .custom-button {
+  background: #00796b;
+  color: var(--white-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-semibold);
+  transition: all 0.3s;
+}
+
+.custom-button:hover:enabled,
+.custom-button:focus:enabled {
+  background: #00665c;
+  border-color: transparent;
+}
+
 .custom-form .text-danger {
   margin-top: -6px;
   font-size: 15px;
@@ -1093,7 +1107,7 @@ blockquote::before {
 }
 
 .custom-form .form-select:disabled {
-  color: #dddddd;
+  background-color: #dddddd;
 }
 
 .custom-form .form-control:hover:enabled,
@@ -1133,7 +1147,7 @@ blockquote::before {
   border-bottom-left-radius: 0;
 }
 
-.custom-form .form-check-radio {
+.custom-form .form-check-checkbox {
   position: relative;
   height: 100%;
   padding-left: 0;
@@ -1145,7 +1159,7 @@ blockquote::before {
   color: var(--white-color);
 }
 
-.custom-form .form-check-radio .form-check-label {
+.custom-form .form-check-checkbox .form-check-label {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1153,7 +1167,7 @@ blockquote::before {
   text-align: center;
 }
 
-.form-check-radio .form-check-input[type="radio"] {
+.form-check-checkbox .form-check-input[type="checkbox"] {
   background-color: var(--section-bg-color);
   border-radius: 0.25rem;
   border: 0;
@@ -1166,12 +1180,12 @@ blockquote::before {
   transition: all 0.5s;
 }
 
-.form-check-radio .form-check-input:checked[type="radio"] {
+.form-check-checkbox .form-check-input:checked[type="checkbox"] {
   background-image: none;
 }
 
-.form-check-radio .form-check-input:hover,
-.form-check-radio .form-check-input:checked {
+.form-check-checkbox .form-check-input:hover,
+.form-check-checkbox .form-check-input:checked {
   background-color: var(--secondary-color);
   border-color: var(--white-color);
 }
@@ -1801,4 +1815,8 @@ table.dataTable tfoot td {
 
 #sidebar a:hover {
   color: #0049e5; /* Change the text color on hover */
+}
+
+.flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg { 
+  margin-bottom: 10px;
 }

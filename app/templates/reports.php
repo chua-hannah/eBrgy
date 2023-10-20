@@ -1,10 +1,9 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="services">Services</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Reports</li>
+    <li class="breadcrumb-item active" aria-current="page">Submit a Complaint or Report</li>
   </ol>
 </nav>
-<h2 class="text-center mt-2 mb-2">Report Form</h2>
 <div class="col-lg-6 col-12 mx-auto">
     <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
         <div class="row d-flex justify-content-center">
@@ -21,12 +20,22 @@
 
             <div class="col-lg-6 col-md-6 col-12">
                 <label class="labels">Date of Incident</label>
-                <input type="date" name="date_of_incident" id="date" class="form-control" required>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-calendar"></i>
+                    </span>
+                    <input type="text" name="date_of_incident" id="datepicker" class="form-control" placeholder="MM/DD/YYYY" required>
+                </div>
             </div>
             
             <div class="col-lg-6 col-md-6 col-12">
                 <label class="labels">Time of Incident</label>
-                <input type="time" name="time_of_incident" id="time" class="form-control" required>
+                <div class="input-group">
+                    <span class="input-group-text">
+                    <i class="bi bi-alarm"></i></i>
+                    </span>
+                    <input type="text" name="time_of_incident" id="timepicker" class="form-control" placeholder="HH:MM AM/PM" required>
+                </div>
             </div>
 
             <div class="col-lg-12 col-md-6 col-12">
@@ -58,36 +67,47 @@
                     <div class="text-center"><p>No requests are currently available.</p></div>
                 <?php } else { ?>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped custom-table">
+                        <table class="table table-bordered table-striped custom-table datatable">
                             <thead class="text-center">
                                 <tr>
-                                    <th class="wrap-text">Username</th>
-                                    <th class="wrap-text">Mobile</th>
+                                    <th class="wrap-text">Subject</th>
                                     <th class="wrap-text">Status</th>
                                     <th class="wrap-text">Request Date & Time</th>
                                     <th class="wrap-text">Processed Date & Time</th>
+                                    <th class="wrap-text">Processed By</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($myrequest as $request) { 
-                                        $htmlFormattedDate = date("m/d/Y", strtotime($request['created_at']));
-                                        $htmlFormattedTime = date("h:i A", strtotime($request['created_at']));
-                                        if ($request['created_at']== "0000-00-00 00:00:00"){
+                                        $createdAtFormattedDate = date("m/d/Y", strtotime($request['created_at']));
+                                        $createdAtFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                        if (!is_null($request['process_at'])) {
+                                            $processAt = strtotime($request['process_at']);
+                                        } else {
+                                            $processAt = "-";
+                                        }
+                                        
+                                        if ($request['created_at'] == "0000-00-00 00:00:00") {
                                             $processedFormattedDate = "-";
                                             $processedFormattedTime = "-";
                                         }
+
+                                        if ($processAt == "-") {
+                                            $processedAtFormattedDate = "-";
+                                            $processedAtFormattedTime = "-";
+                                        }
                                         else {
-                                            // Convert and format date and time as before
-                                            $processedFormattedDate = date("m/d/Y", strtotime($request['created_at']));
-                                            $processedFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                            $processedAtFormattedDate = date("m/d/Y", $processAt);
+                                            $processedAtFormattedTime = date("h:i A", $processAt);
+
                                         }
                                 ?>
                                     <tr>
-                                        <td><?php echo $request['username']; ?></td>
-                                        <td><?php echo $request['mobile']; ?></td>
-                                        <td><?php echo $request['status']; ?></td>
-                                        <td><?php echo $htmlFormattedDate . " " . $htmlFormattedTime; ?></td>
-                                        <td><?php echo $processedFormattedDate . " " . $processedFormattedTime; ?></td>
+                                        <td><?php echo $request['subject_person']; ?></td>
+                                        <td><?php echo strtoupper($request['status']); ?></td>
+                                        <td><?php echo $createdAtFormattedDate . " " . $createdAtFormattedTime; ?></td>
+                                        <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
+                                        <td><?php echo $request['process_by']; ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

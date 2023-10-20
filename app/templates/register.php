@@ -1,12 +1,11 @@
 <section class="contact-section section-padding" id="section_6">
     <div class="container">
-    <h2 class="mt-2 mb-2 text-center">Register an account</h2>
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-lg-9 col-12">
                 <form class="custom-form contact-form mb-4 align-items-center needs-validation" id="register" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
                     <h3 class="mb-4">Become a member today</h3>
                     <div class="row g-2">
-
+                    <h6>Personal Information</h6>
                         <div class="col-lg-4 col-12">
                             <label class="labels">First Name</label>
                             <input type="text" name="firstname" class="form-control
@@ -32,11 +31,14 @@
                         </div>
 
                         <div class="col-lg-6 col-12">
-                        <label class="labels">Birthdate</label>
-                            <input type="text" name="birthdate" class="form-control 
-                            <?php echo isset($errors["birthdate"]) ? 'is-invalid' : ''; ?>" id="birthdate" placeholder="MM/DD/YYYY" value="<?php if (!empty($_POST["birthdate"])) { echo $_POST["birthdate"]; } else { echo ''; };?>">
-                            <div class="invalid-feedback" id="error_birth2" <?php echo isset($errors["firstname"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid date format. Please use mm/dd/yyyy.</div>
-                            <?php if (isset($errors["birthdate"])) : ?>
+                            <label class="labels">Birthdate</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-calendar"></i> <!-- Bootstrap Icons calendar icon -->
+                                </span>
+                                <input type="text" name="birthdate" id="datepicker" class="form-control <?php echo isset($errors["birthdate"]) ? 'is-invalid' : ''; ?>" placeholder="MM/DD/YYYY" value="<?php if (!empty($_POST["birthdate"])) { echo $_POST["birthdate"]; } else { echo ''; }; ?>">
+                            </div>
+                        <?php if (isset($errors["birthdate"])) : ?>
                                 <div class="text-danger" id="error_birth"><?= $errors["birthdate"] ?></div>
                             <?php endif; ?>
                         </div>
@@ -95,37 +97,46 @@
                             <label class="labels">Barangay</label>
                             <input type="text" name="barangay" class="form-control" value="Barangay 95" disabled>
                         </div>
+                        
+                        <h6>Membership Information</h6>
+
                         <div class="col-lg-6 col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                <h5 class="card-title">Status Information</h5>
-                                <div class="membership-info">
-                                    <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="checkbox_4ps" name="membership_4ps" value="1">
-                                    <label class="form-check-label" for="checkbox_4ps">Pantawid Pamilyang Pilipino Program (4ps)</label>
-                                    </div>
+                        <div class="membership-info">
+                        <p>Check any applicable status (optional):</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_4ps" name="membership_4ps" value="1" <?php if (!empty($_POST["membership_4ps"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_4ps">Pantawid Pamilyang Pilipino Program (4Ps)</label>
+                        </div>
 
-                                    <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="checkbox_pwd" name="membership_pwd" value="1">
-                                    <label class="form-check-label" for="checkbox_pwd">Person with Disabilities (PWD)</label>
-                                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_pwd" name="membership_pwd" value="1" <?php if (!empty($_POST["membership_pwd"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_pwd">Person with Disabilities (PWD)</label>
+                        </div>
 
-                                    <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="checkbox_solo_parent" name="membership_solo_parent" value="1">
-                                    <label class="form-check-label" for="checkbox_solo_parent">Solo Parent</label>
-                                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_solo_parent" name="membership_solo_parent" value="1" <?php if (!empty($_POST["membership_solo_parent"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_solo_parent">Solo Parent</label>
+                        </div>
 
-                                    <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="checkbox_scholar" name="membership_scholar" value="1">
-                                    <label class="form-check-label" for="checkbox_scholar">Government Scholar</label>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_scholar" name="membership_scholar" value="1" <?php if (!empty($_POST["membership_scholar"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_scholar">Government Scholar</label>
+                        </div>
+                    </div>
+
+                        </div>
+
 
                         <!-- Add file upload fields -->
                         <div class="col-lg-6 col-12">
+                            <div>
+                                <label for="valid_id">Upload Valid ID / Proof of Membership (if any)</label>
+                                <input type="file" name="valid_id" id="valid_id" class="form-control
+                                <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*">
+                                <?php if (isset($errors["valid_id"])) : ?>
+                                    <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
+                                <?php endif; ?>
+                            </div>
                             <div>
                                 <label for="id_selfie">Upload Selfie w/ ID</label>
                                 <input type="file" name="id_selfie" id="id_selfie" class="form-control
@@ -134,17 +145,7 @@
                                     <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
                                 <?php endif; ?>
                             </div>
-                            <div>
-                                <label for="valid_id">Upload Valid ID</label>
-                                <input type="file" name="valid_id" id="valid_id" class="form-control
-                                <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*">
-                                <?php if (isset($errors["valid_id"])) : ?>
-                                    <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
-                                <?php endif; ?>
-                            </div>
                         </div>
-
-                       
 
                         <div class="col-lg-6 col-12">
                             <label class="labels">Create Username (Must be 6 characters long)</label>
@@ -166,26 +167,25 @@
                             <div class="invalid-feedback mb-2"></div>
                         </div>
                     </div>
-                     <!-- Display error message -->
-                     <?php if (isset($error)) : ?>
-                        <div class="text-danger mt-2 mb-4">Error: <?= $error ?></div>
-                     <?php endif; ?>
+                    <!-- Display error message -->
+                    <?php if (isset($error)) : ?>
+                    <div class="text-danger mt-2 mb-4">Error: <?= $error ?></div>
+                    <?php endif; ?>
 
-                    <div class="form-group mt-2">
-                        <label for="data_privacy_agreement" id="dpa" class="text-justify" style="<?php echo isset($errors["terms"]) ? 'color: #dc3545' : ''; ?>">
-                            <input type="checkbox" id="data_privacy_agreement" name="data_privacy_agreement">
-                            <strong>I have read and agree to the terms of the Republic Act No. 10173, also known as the Data Privacy Act of 2012 (DPA), and consent to the collection, processing, and storage of my personal data in accordance with its provisions.</strong>
-                        </label>
-                        <?php if (isset($errors["terms"])) : ?>
-                            <div class="text-danger mb-2" id="error_terms"><?= $errors["terms"] ?></div>
-                        <?php endif; ?>
+                    <div class="form-check mt-2">
+                    <input type="checkbox" class="form-check-input" id="data_privacy_agreement" name="data_privacy_agreement">
+                    <label for="data_privacy_agreement" id="dpa" class="text-justify form-check-label" style="<?php echo isset($errors["terms"]) ? 'color: #dc3545' : ''; ?>">
+                        <strong>I have read and agree to the terms of the Republic Act No. 10173, also known as the Data Privacy Act of 2012 (DPA), and consent to the collection, processing, and storage of my personal data in accordance with its provisions.</strong>
+                    </label>
+                    <?php if (isset($errors["terms"])) : ?>
+                        <div class="text-danger mb-2" id="error_terms"><?= $errors["terms"] ?></div>
+                    <?php endif; ?>
                     </div>
 
                     <p class="form-group text-justify">
                         <i class="bi bi-exclamation-circle"></i>
                         Please keep in mind that after a successful registration, the submitted information will be validated by the administrator within 24 hours before the user can login.
                     </p>
-                  
                     
                     <button type="submit" name="register" class="form-control mt-2">Register</button>
                     

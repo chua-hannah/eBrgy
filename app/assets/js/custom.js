@@ -30,4 +30,49 @@
     
   })(window.jQuery);
 
+  const tomorrow = new Date();
+  const oneMonthLater = new Date();
+  oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  flatpickr("#datepicker", {
+    dateFormat: "m/d/Y", // Set the desired date format
+    altInput: true,     // Show the formatted date in the input field
+    altFormat: "m/d/Y", // Use the same date format for displaying
+    maxDate: "today",    // Optionally, limit selection to today or earlier
+    disableMobile: "true"
+  });
 
+  flatpickr("#datepicker-future", {
+    dateFormat: "m/d/Y", // Set the desired date format
+    altFormat: "m/d/Y", // Use the same date format for displaying
+    minDate: tomorrow, // Disable today and past dates
+    maxDate: oneMonthLater,
+    disableMobile: "true"
+  });
+
+  flatpickr("#timepicker", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "h:i K", // "K" adds AM/PM
+    time_24hr: false, // Set to false for 12-hour format
+    minuteIncrement: 1, // Set the minute increment to 1
+});
+
+$(document).ready(function () {
+  $('.datatable').each(function() {
+      var dataTable = $(this).DataTable({
+          paging: true, // Enable pagination
+          pageLength: 10, // Number of rows per page
+          lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
+          responsive: true // Enable responsive behavior
+      });
+
+      // Add a page change event listener to each DataTable
+      dataTable.on('page.dt', function () {
+          // Smooth scroll to the top of the page
+          $('html, body').animate({
+              scrollTop: 0
+          }, 500); // 500ms animation duration
+      });
+  });
+});

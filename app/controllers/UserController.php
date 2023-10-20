@@ -103,7 +103,6 @@ class UserController {
         $address = $_POST['address'];
         $minUsernameLength = 6;
         $minPasswordLength = 8;
-        $datePattern = "/^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/\d{4}$/";
         $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
         $mobilePattern = "/^9\d{9}$/";
         // Handle undefined array error for sex
@@ -131,9 +130,6 @@ class UserController {
         }  
         if ($birthdate==="") {
             $errors["birthdate"] = "Enter your Birthdate";
-        }
-        else if (!preg_match($datePattern, $birthdate)) {
-            $errors["birthdate"] = "Invalid date format. Please use mm/dd/yyyy.";    
         }
         if (empty($sex)) {
             $errors["sex"] = "Select Gender";
@@ -189,16 +185,8 @@ class UserController {
 
             // Convert birthdate to YYYY-MM-DD format
             $birthdateTimestamp = strtotime($birthdate);
-
-            if ($birthdateTimestamp === false) {
-                // Invalid date format, handle the error
-                $errors["birthdate"] = "Invalid date format for birthdate. Please use MM/DD/YYYY format.";
-                // You can return or redirect to the registration page here.
-                return;
-            } else {
-                // Valid date format, convert it to YYYY-MM-DD
-                $birthdate = date('Y-m-d', $birthdateTimestamp);
-            }
+            // Valid date format, convert it to YYYY-MM-DD
+            $birthdate = date('Y-m-d', $birthdateTimestamp);
 
             // Calculate age from birthdate
             $currentTimestamp = time();

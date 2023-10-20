@@ -1,10 +1,9 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="services">Services</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Documents</li>
+    <li class="breadcrumb-item active" aria-current="page">Request a Document</li>
   </ol>
 </nav>
-<h2 class="text-center mt-2 mb-2">Document Request Form</h2>
 <div class="col-lg-6 col-12 mx-auto">
     <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
         <div class="row d-flex justify-content-center">
@@ -38,7 +37,7 @@
 </div>
 <!-- Modal -->
 <div class="modal fade" id="requestListModal" tabindex="-1" aria-labelledby="requestListModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
@@ -51,7 +50,7 @@
                     <div class="text-center"><p>No requests are currently available.</p></div>
                 <?php } else { ?>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped custom-table">
+                        <table class="table table-bordered table-striped custom-table datatable">
                             <thead class="text-center">
                                 <tr>
                                     <th>Document Type</th>
@@ -66,7 +65,7 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $request['request_name']; ?></td>
-                                        <td><?php echo $request['status']; ?></td>
+                                        <td><?php echo strtoupper($request['status']); ?></td>
                                         <td><?php echo $htmlFormattedDate . " " . $htmlFormattedTime; ?></td>
                                     </tr>
                                 <?php } ?>
