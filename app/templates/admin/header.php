@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
   <title>Barangay 95</title>
   <meta content="" name="description">
@@ -91,97 +93,92 @@
     </div>
 </nav>
 </header>
-<!-- Alerts -->
-<?php
-    if(isset($_SESSION['success'])) {
-?>
-    <div id="alert" class="alert alert-success mb-0" role="alert">
-        <div class="row justify-content-center">
-            <h6 class="alert-heading text-center">Success!</h6>
-            <?php echo $_SESSION['success']; ?>
-        </div>
-    </div>
-<?php 
-    unset($_SESSION['success']);
-    }
-?>
-<?php
-    if(isset($_SESSION['error'])) {
-?>
-    <div id="alert" class="alert alert-danger mb-0" role="alert">
-        <div class="row justify-content-center">
-            <h6 class="alert-heading text-center">Error!</h6>
-            <?php echo $_SESSION['error']; ?>
-        </div>
-    </div>
-<?php 
-    unset($_SESSION['error']);
-    }
-?>
-</script>
 <main>
+    <!-- Alerts -->
+    <?php
+    ob_start();
+        if(isset($_SESSION['success'])) {
+    ?>
+        <div id="alert" class="alert alert-success mb-0" role="alert">
+            <div class="row justify-content-center">
+                <h6 class="alert-heading text-center">Success!</h6>
+                <?php echo $_SESSION['success']; ?>
+            </div>
+        </div>
+    <?php 
+        unset($_SESSION['success']);
+        }
+    ?>
+    <?php
+        if(isset($_SESSION['error'])) {
+    ?>
+        <div id="alert" class="alert alert-danger mb-0" role="alert">
+            <div class="row justify-content-center">
+                <h6 class="alert-heading text-center">Error!</h6>
+                <?php echo $_SESSION['error']; ?>
+            </div>
+        </div>
+    <?php 
+        unset($_SESSION['error']);
+        }
+    ?>
 <div class="container-fluid">
-<div class="row">
-    <!-- Sidebar -->
-    <div class="col-lg-2" id="sidebar">
-        <ul class="nav flex-column">
-            <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'dashboard' ? 'active' : ''; ?>">
-                <a class="nav-link " href="<?php echo $baseUrl; ?>/dashboard">
-                    <i class="bi bi-house-door"></i> Dashboard
-                </a>
-            </li>
-            <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'attendance' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo $baseUrl; ?>/attendance">
-                    <i class="bi bi-calendar"></i> Attendance
-                </a>
-            </li>
-            <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'requests' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo $baseUrl; ?>/requests">
-                    <i class="bi bi-file-earmark-text"></i> Requests
-                </a>
-            </li>
-            <?php if ($_SESSION['role'] === 'captain') { ?>
-                <li class="nav-item <?php echo basename($_SERVER['REQUEST_URI']) == 'user-management' ? 'active' : ''; ?>">
-                    <a class="nav-link" href="<?php echo $baseUrl; ?>/user-management">
-                        <i class="bi bi-person"></i> User Management
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-2" id="sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'dashboard' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/dashboard">
+                        <i class="bi bi-house-door"></i> Dashboard
                     </a>
                 </li>
-            <?php } ?>
-           
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="javascript:void(0);" id="dropdownLink">
-                    <i class="bi bi-file-earmark"></i> Report
-                </a>
-            </li>
+                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'attendance' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/attendance">
+                        <i class="bi bi-calendar"></i> Attendance
+                    </a>
+                </li>
+                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'requests' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/requests">
+                        <i class="bi bi-file-earmark-text"></i> Requests
+                    </a>
+                </li>
+                <?php if ($_SESSION['role'] === 'captain') { ?>
+                    <li class="nav-item <?php echo basename($_SERVER['REQUEST_URI']) == 'user-management' ? 'active' : ''; ?>">
+                        <a class="nav-link" href="<?php echo $baseUrl; ?>/user-management">
+                            <i class="bi bi-person"></i> User Management
+                        </a>
+                    </li>
+                <?php } ?>
+            
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="javascript:void(0);" id="dropdownLink">
+                        <i class="bi bi-file-earmark"></i> Report
+                    </a>
+                </li>
 
-            <div class="collapse" id="dropdownTabs">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab1' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/users-report">Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab2">Requests</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab3' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab3">Free Tab</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 1</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 2</a>
-                    </li>
-                </ul>
-            </div>
-        </ul>
-    </div>
+                <div class="collapse" id="dropdownTabs">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab1' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/users-report">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab2">Requests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab3' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab3">Free Tab</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 1</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 2</a>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
     <div class="col-lg-10" style="padding: 20px;">
     <!-- Place your page content here -->
-
-
-  
-
-
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {

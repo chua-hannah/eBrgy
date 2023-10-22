@@ -160,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const lastname = document.getElementById("lastname");
     const mobile = document.getElementById("mobile");
     const sex = document.getElementById("sex");
+    const role = document.getElementById("role");
     const email = document.getElementById("email");
     const address = document.getElementById("address");
     const idSelfie = document.getElementById("id_selfie");
@@ -169,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const errorFirst = document.getElementById("error_first");
     const errorLast = document.getElementById("error_last");
     const errorSex = document.getElementById("error_sex");
+    const errorRole = document.getElementById("error_role");
     const errorMobile = document.getElementById("error_mobile");
     const errorEmail = document.getElementById("error_email");
     const errorAddress = document.getElementById("error_address");
@@ -225,6 +227,10 @@ document.addEventListener("DOMContentLoaded", function() {
         sex.classList.remove("is-invalid");
         errorSex.style.display = "none";
     });
+    role.addEventListener("change", function() {
+        role.classList.remove("is-invalid");
+        errorRole.style.display = "none";
+    });
     address.addEventListener("input", function() {
         const inputAddress= address.value.trim();
         errorAddress.style.display = "none";
@@ -254,3 +260,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+function removeIdErrorMsg(event) {
+    var errorId = document.getElementById("error_id");
+    const fileInput = event.target;
+    
+    // Check if files were selected
+    if (fileInput.files.length > 0) {
+      // You can access the selected file(s) using fileInput.files
+      const selectedFile = fileInput.files[0];
+      errorId.style.display = "none";
+    }
+}
+
+function removeIdSelfieErrorMsg(event) {
+    var errorSelfieId = document.getElementById("error_id_selfie");
+    const fileInput = event.target;
+    
+    // Check if files were selected
+    if (fileInput.files.length > 0) {
+      // You can access the selected file(s) using fileInput.files
+      const selectedFile = fileInput.files[0];
+      errorSelfieId.style.display = "none";
+    }
+}

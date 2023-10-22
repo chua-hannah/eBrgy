@@ -42,8 +42,8 @@ $users = UserManagementController::user_management();
                         <td><?= $user['sex']; ?></td>
                         <td><?= $user['address']; ?></td>
                         <td><?= $user['role']; ?></td>
-                        <td style="color: <?= $user['status'] === 'activated' ? 'green' : 'red'; ?>">
-                            <?= $user['status']; ?>
+                        <td class="<?= $user['status'] === 'activated' ? 'text-success' : 'text-danger'; ?>">
+                            <?= strToUpper($user['status']); ?>
                         </td>
                         <td>
                             <div class="btn-group" style="display: flex; gap: 8px; justify-content: space-around;">
@@ -65,7 +65,8 @@ $users = UserManagementController::user_management();
             paging: true, // Enable pagination
             pageLength: 10, // Number of rows per page
             lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
-            responsive: true // Enable responsive behavior
+            responsive: true, // Enable responsive behavior
+            order: [] // Define the initial column order
         });
 
         // Add a page change event listener to the DataTable
@@ -75,6 +76,7 @@ $users = UserManagementController::user_management();
                 scrollTop: 0
             }, 0.5); // 500ms animation duration
         });
+        
     });
 </script>
    <!--Additional div for sidebar-->

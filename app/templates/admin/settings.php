@@ -4,7 +4,7 @@
     // Check if there are any records fetched from the database
     if (!empty($office_time)) {
     ?>
-    <div class="col-md-5">
+    <div class="col-md-12">
         <table class="table table-bordered table-striped custom-table">
             <thead>
                 <tr>
@@ -35,8 +35,9 @@
         echo "No Data Available.";
     }
     ?>
-    <h3 class="mt-4">Manage Office Time</h3>
-    <form class="custom-form" action="" method="post">
+    <div class="col-md-12">
+        <h3 class="mt-4">Manage Office Time</h3>
+        <form class="custom-form" action="" method="post">
             <!-- Input for Set Time In -->
             <div class="col-md-5">
                 <label class="labels">Set Time In</label>
@@ -67,7 +68,9 @@
             <div class="col-md-5">
                 <button type="button" class="form-control back-button" onclick="goBackToAttendance()">Back to Attendance</button>
             </div>
-        </div> 
+        </form>
+    </div>
+</div> 
 <script>
     function goBackToAttendance() {
         window.location.href = "http://localhost/eBrgy/app/attendance"; // Redirect to the Attendance page

@@ -64,7 +64,8 @@ $(document).ready(function () {
           paging: true, // Enable pagination
           pageLength: 10, // Number of rows per page
           lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
-          responsive: true // Enable responsive behavior
+          responsive: true, // Enable responsive behavior
+          order: [] // Define the initial column order
       });
 
       // Add a page change event listener to each DataTable
@@ -76,3 +77,7 @@ $(document).ready(function () {
       });
   });
 });
+// Automatically dismiss the alert after 5 seconds (5000 milliseconds)
+setTimeout(function () {
+  document.getElementById('alert').style.display = 'none';
+}, 5000);

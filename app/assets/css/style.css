@@ -1796,12 +1796,16 @@ table.dataTable tfoot td {
   padding: 20px;
   height: 100vh;
   border-right: 1px solid #ccc;
+  position: sticky;
+  top: 20px; /* Adjust the top offset as needed */
 }
 
 #sidebar ul {
   list-style: none; /* Remove list bullets */
   padding: 0;
   text-align: left;
+  position: sticky;
+  top: 90px; /* Adjust the top offset as needed */
 }
 
 #sidebar ul li {
@@ -1819,4 +1823,8 @@ table.dataTable tfoot td {
 
 .flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg { 
   margin-bottom: 10px;
+}
+
+.container-fluid.edit-user p {
+  font-size: 18px;
 }

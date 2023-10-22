@@ -136,8 +136,4 @@
     function showRegistrationSuccessModal() {
         $('#registrationSuccessModal').modal('show');
     }
-    // Automatically dismiss the alert after 5 seconds (5000 milliseconds)
-    setTimeout(function () {
-        document.getElementById('alert').style.display = 'none';
-    }, 5000);
     </script>

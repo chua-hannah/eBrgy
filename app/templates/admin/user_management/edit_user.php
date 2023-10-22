@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="user-management">User Management</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+    </ol>
+</nav>
 <?php
 $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
 
@@ -9,26 +15,107 @@ if ($userId) {
     if ($userData) {
         // Now, you can display the user data in a Bootstrap card format
         ?>
-    <div>
-        User Management
-    </div>
 
-<div class="container mt-5">
-    <h1>Edit User</h1>
+<div class="container-fluid edit-user">
 
     <div class="card">
     <div class="card-header">
-        User Information
+        <h6 class="mb-0">User Information</h6>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">Username: <?php echo $userData['username']; ?></h5>
-        <p class="card-text">Email: <?php echo $userData['email']; ?></p>
-        <p class="card-text">Full Name: <?php echo $userData['firstname'] . ' ' . $userData['middlename'] . ' ' . $userData['lastname']; ?></p>
-        <p class="card-text">Age: <?php echo $userData['age']; ?></p>
-        <p class="card-text">Mobile: <?php echo $userData['mobile']; ?></p>
-        <p class="card-text">Status: <?php echo $userData['status']; ?></p>
 
+
+    <div class="card-body">
         <div class="row">
+            <div class="col-md-5">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Registered username:</strong> <?php echo $userData['username']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="mb-3">
+                    <p class="card-text <?= $userData['status'] === 'activated' ? 'text-success' : 'text-danger'; ?>">
+                        <strong>Status:</strong> <?php echo strtoupper($userData['status']); ?>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 text-end">
+                <div class="mb-3">
+                    <!-- Activation/Deactivation form -->
+                    <?php echo $userData['status'] === 'activated' ? '<div><form method="post" action="">
+                        <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
+                        <button name="deactivate_user" type="submit" class="btn btn-danger btn-md">
+                            Deactivate
+                        </button>
+                    </form></div>' : '<form method="post" action="">
+                        <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
+                        <button name="activate_user" type="submit" class="btn btn-success btn-md">
+                            Activate
+                        </button>
+                    </form>';
+                    ?>
+                </div>
+            </div>
+            <div class="col-md-1 text-end">
+                <div class="mb-3">
+                    <form method="post" action="">
+                        <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
+                        <button name="delete_user" type="submit" class="btn btn-danger btn-md">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <h6>Personal Information</h6>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>First Name:</strong> <?php echo $userData['firstname']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Middle Name:</strong> <?php echo $userData['middlename']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Last Name:</strong> <?php echo $userData['lastname']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Birthday:</strong> <?php echo $userData['birthdate']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Age:</strong> <?php echo $userData['age']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Gender:</strong> <?php echo strToUpper($userData['sex']); ?></p>
+                </div>
+            </div>
+            <h6>Contact Details</h6>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Mobile:</strong> <?php echo $userData['mobile']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Email:</strong> <?php echo $userData['email']; ?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <p class="card-text"><strong>House No./Bldg./Street Name:</strong> <?php echo $userData['address']; ?></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <h6>Submitted Documents</h6>
             <!-- Display the ID Selfie image -->
             <div class="col-md-6">
                 <?php
@@ -37,7 +124,7 @@ if ($userId) {
                     ?>
                     <div class="text-center">
                         <img src="<?php echo './' . $idSelfiePath; ?>" alt="ID Selfie" class="img-thumbnail" style="width: 200px;">
-                        <p>Selfie</p>
+                        <p><strong>Selfie w/ Valid ID</strong></p>
                     </div>
                 <?php } else { ?>
                     <p>ID Selfie not available</p>
@@ -52,46 +139,15 @@ if ($userId) {
                     ?>
                     <div class="text-center">
                         <img src="<?php echo './' . $validIdPath; ?>" alt="Valid ID" class="img-thumbnail" style="width: 200px;">
-                        <p>Valid ID</p>
+                        <p><strong>Valid ID</strong></p>
                     </div>
                 <?php } else { ?>
                     <p>Valid ID not available</p>
                 <?php } ?>
             </div>
         </div>
-        <div>         
-        <!-- Activation/Deactivation form -->
-        <?php echo $userData['status'] === 'activated' ? 
-            '<div><form method="post" action="">
-                <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
-                <button name="deactivate_user" type="submit" class="btn btn-danger" style="padding: 8px;">
-                   Deactivate
-                </button>
-            </form>' : 
-            '<form method="post" action="">
-                <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
-                <button name="activate_user" type="submit" class="btn btn-success" style="padding: 8px;">
-                   Activate
-                </button>
-            </form>
-            </div>';
-        ?>
-       <div>
-        
-            <form method="post" action="">
-                <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
-                <button name="delete_user" type="submit" class="btn btn-danger" style="padding: 8px;">
-                Delete
-                </button>
-            </form>
-        </div>
-        </div>
-       
+    </div>
 </div>
-    
-</div>
-
-
     <?php
     } else {
         // Handle the case when the user with the provided userId is not found

@@ -1,5 +1,5 @@
 <section class="contact-section section-padding" id="section_6">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-lg-9 col-12">
                 <form class="custom-form contact-form mb-4 align-items-center needs-validation" id="register" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
@@ -98,7 +98,13 @@
                             <input type="text" name="barangay" class="form-control" value="Barangay 95" disabled>
                         </div>
                         
-                        <h6>Membership Information</h6>
+                        <div class="col-lg-6 col-12">
+                            <h6>Membership Information</h6>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <h6>Document Upload</h6>
+                        </div>
 
                         <div class="col-lg-6 col-12">
                         <div class="membership-info">
@@ -126,13 +132,12 @@
 
                         </div>
 
-
                         <!-- Add file upload fields -->
                         <div class="col-lg-6 col-12">
                             <div>
                                 <label for="valid_id">Upload Valid ID / Proof of Membership (if any)</label>
                                 <input type="file" name="valid_id" id="valid_id" class="form-control
-                                <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*">
+                                <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*" onchange="removeIdErrorMsg(event)">
                                 <?php if (isset($errors["valid_id"])) : ?>
                                     <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
                                 <?php endif; ?>
@@ -140,7 +145,7 @@
                             <div>
                                 <label for="id_selfie">Upload Selfie w/ ID</label>
                                 <input type="file" name="id_selfie" id="id_selfie" class="form-control
-                                <?php echo isset($errors["id_selfie"]) ? 'is-invalid' : ''; ?>" accept="image/*">
+                                <?php echo isset($errors["id_selfie"]) ? 'is-invalid' : ''; ?>" accept="image/*" onchange="removeIdSelfieErrorMsg(event)">
                                 <?php if (isset($errors["id_selfie"])) : ?>
                                     <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
                                 <?php endif; ?>
