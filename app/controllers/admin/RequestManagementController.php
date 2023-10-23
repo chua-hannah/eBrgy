@@ -87,11 +87,17 @@ class RequestManagementController {
         $activationMessage = '';
 
         if (isset($_POST['approve_report'])) {
+            date_default_timezone_set('Asia/Manila');
+
             $report_id = $_POST['report_id'];
-        
+            $processBy = $_SESSION['username'];
+            $date = date('Y-m-d');
+            $time_in = date('H:i:s'); 
+            $processAt = $date . ' ' . $time_in;
             // Use prepared statements to prevent SQL injection
-            $stmt = $this->connection->prepare("UPDATE report_requests SET status = 'approved' WHERE id = ?");
-            $stmt->bind_param("i", $report_id); // Assuming user_id is an integer
+            $stmt = $this->connection->prepare("UPDATE report_requests SET status = 'approved', process_by = ?, process_at = ? WHERE id = ?");
+            $stmt->bind_param("ssi", $processBy, $processAt, $report_id); // Assuming user_id is an integer
+
         
             if ($stmt->execute()) {
                 // Activation successful
@@ -210,12 +216,11 @@ class RequestManagementController {
         if (isset($_POST['approve_doc'])) {
             $doc_id = $_POST['doc_id'];
     
-            // Get the session username, assuming it's stored in a session variable named 'username'
+            date_default_timezone_set('Asia/Manila');
             $processBy = $_SESSION['username'];
-    
-            // Get the current timestamp
-            $processAt = date('Y-m-d H:i:s');
-    
+            $date = date('Y-m-d');
+            $time_in = date('H:i:s'); 
+            $processAt = $date . ' ' . $time_in;
             // Use prepared statements to prevent SQL injection
             $stmt = $this->connection->prepare("UPDATE doc_requests SET status = 'approved', process_by = ?, process_at = ? WHERE id = ?");
             $stmt->bind_param("ssi", $processBy, $processAt, $doc_id); // Assuming user_id is an integer
@@ -601,11 +606,14 @@ class RequestManagementController {
     
             if (isset($_POST['approve_schedule'])) {
                 $schedule_id = $_POST['schedule_id'];
+                date_default_timezone_set('Asia/Manila');
+                $processBy = $_SESSION['username'];
+                $date = date('Y-m-d');
+                $time_in = date('H:i:s'); 
+                $processAt = $date . ' ' . $time_in;
             
-                // Use prepared statements to prevent SQL injection
-                $stmt = $this->connection->prepare("UPDATE schedule_requests SET status = 'approved' WHERE id = ?");
-                $stmt->bind_param("i", $schedule_id); // Assuming user_id is an integer
-            
+                $stmt = $this->connection->prepare("UPDATE schedule_requests SET status = 'approved', process_by = ?, process_at = ? WHERE id = ?");
+                $stmt->bind_param("ssi", $processBy, $processAt, $schedule_id); // Assuming user_id is an integer
                 if ($stmt->execute()) {
                     // Activation successful
                     $activationMessage = "Equipment Request Approved successfully.";

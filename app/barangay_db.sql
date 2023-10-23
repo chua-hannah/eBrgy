@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2023 at 11:36 PM
+-- Generation Time: Oct 23, 2023 at 10:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -129,6 +129,14 @@ CREATE TABLE `equipment_requests` (
   `returned_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `equipment_requests`
+--
+
+INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `status`, `total_equipment_borrowed`, `days`, `username`, `request_date`, `process_by`, `message`, `remarks`, `process_at`, `process_return`, `returned_at`) VALUES
+(1, 2, 'plastic table', 'returned', 5, 6, 'resident1', '2023-10-23 20:40:48', 'kapitantest', 'claim it saturday 6pm', 'helped by kagawad 1', '2023-10-23 20:41:23', 'kapitantest', '2023-10-23 20:41:45'),
+(2, 1, 'plastic chair', 'pending', 12, 6, 'resident1', '2023-10-23 20:40:55', '', '', '', '2023-10-23 20:40:55', '', '2023-10-23 20:40:55');
+
 -- --------------------------------------------------------
 
 --
@@ -231,7 +239,7 @@ CREATE TABLE `report_requests` (
 --
 
 INSERT INTO `report_requests` (`id`, `username`, `email`, `mobile`, `reported_person`, `subject_person`, `place_of_incident`, `date_of_incident`, `time_of_incident`, `note`, `status`, `created_at`, `process_at`, `process_by`) VALUES
-(4, 'resident1', 'resident1@mail.com', '1111111111', 'Jung Hilario', 'test', 'North Korea', '2023-10-18', '16:08:00', 'test', 'PENDING', '2023-10-17 18:07:46', NULL, NULL);
+(4, 'resident1', 'resident1@mail.com', '1111111111', 'Jung Hilario', 'test', 'North Korea', '2023-10-18', '16:08:00', 'test', 'approved', '2023-10-17 18:07:46', '2023-10-23 20:18:33', 'kapitantest');
 
 -- --------------------------------------------------------
 
@@ -275,28 +283,20 @@ CREATE TABLE `schedule_requests` (
   `schedule_date` date DEFAULT NULL,
   `time_in` time DEFAULT NULL,
   `time_out` time DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL
+  `status` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `process_at` timestamp NULL DEFAULT NULL,
+  `process_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `schedule_requests`
 --
 
-INSERT INTO `schedule_requests` (`id`, `username`, `mobile`, `schedule_date`, `time_in`, `time_out`, `status`) VALUES
-(1, 'resident1', '1111111111', '2023-10-17', '01:00:00', '02:00:00', 'approved'),
-(2, 'resident1', '1111111111', '2023-10-16', '01:00:00', '02:00:00', 'pending'),
-(3, 'resident1', '1111111111', '2023-10-18', '01:00:00', '02:00:00', 'pending'),
-(4, 'resident1', '1111111111', '2023-10-21', '04:00:00', '06:00:00', 'pending'),
-(5, 'resident1', '1111111111', '2023-10-31', '01:00:00', '02:00:00', 'approved'),
-(6, 'resident1', '1111111111', '2023-10-24', '01:00:00', '02:00:00', 'approved'),
-(7, 'resident1', '1111111111', '2023-10-29', '09:00:00', '10:00:00', 'pending'),
-(8, 'resident1', '1111111111', '2023-10-19', '01:00:00', '02:00:00', 'approved'),
-(9, 'resident1', '1111111111', '2023-10-30', '01:00:00', '02:00:00', 'approved'),
-(10, 'resident1', '1111111111', '2023-10-25', '01:00:00', '02:00:00', 'pending'),
-(11, 'resident2', '0000000000', '2023-10-18', '01:00:00', '02:00:00', 'approved'),
-(12, 'resident2', '0000000000', '2023-10-19', '01:00:00', '02:00:00', 'pending'),
-(13, 'resident2', '0000000000', '2023-10-30', '01:00:00', '02:00:00', 'pending'),
-(14, 'resident2', '0000000000', '2023-10-17', '01:00:00', '03:00:00', 'pending');
+INSERT INTO `schedule_requests` (`id`, `username`, `mobile`, `schedule_date`, `time_in`, `time_out`, `status`, `created_at`, `process_at`, `process_by`) VALUES
+(1, 'resident1', '1111111111', '2023-10-25', '02:00:00', '06:00:00', 'pending', '2023-10-23 20:32:20', '2023-10-23 20:32:20', NULL),
+(2, 'resident1', '1111111111', '2023-10-27', '01:00:00', '03:00:00', 'pending', '2023-10-23 20:34:07', '2023-10-23 20:34:07', NULL),
+(3, 'resident1', '1111111111', '2023-10-24', '01:00:00', '02:00:00', 'approved', '2023-10-23 20:35:22', '2023-10-23 20:37:28', 'kapitantest');
 
 -- --------------------------------------------------------
 
@@ -356,8 +356,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `sex`, `role`, `position`, `senior`, `four_ps`, `pwd`, `solo_parent`, `scholar`, `id_selfie`, `valid_id`, `status`) VALUES
 (1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', NULL, '1990-01-15', 33, 'male', 'captain', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', NULL, '1988-02-14', 35, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'deactivate'),
-(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', NULL, '1990-01-19', 33, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'deactivate'),
-(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', NULL, '1982-12-25', 40, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'deactivate'),
+(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', NULL, '1990-01-19', 33, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
+(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', NULL, '1982-12-25', 40, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (5, 'resident1', 'pass123', 'resident1@mail.com', '1111111111', 'resident1', 'resident1', 'resident1', 'Manila', '1990-12-22', 32, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '8.png', 'activated'),
 (6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', NULL, '1997-01-25', 26, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (7, 'resident3', '123456789', 'hannahchua013@gmail.com', '1', 'RResident', 'Resident', 'Resident', NULL, '2023-11-11', -1, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivated'),
@@ -467,7 +467,7 @@ ALTER TABLE `doc_settings`
 -- AUTO_INCREMENT for table `equipment_requests`
 --
 ALTER TABLE `equipment_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `equipment_settings`
@@ -491,7 +491,7 @@ ALTER TABLE `report_requests`
 -- AUTO_INCREMENT for table `schedule_requests`
 --
 ALTER TABLE `schedule_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `time_settings`

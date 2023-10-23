@@ -333,6 +333,15 @@ switch ($filename) {
                                 include 'templates/admin/reports/users_list.php';
                             });
                             break;
+                        case 'requests-report':
+                            includeAdminContent(function() use ($reportsController, $filename) {
+                                $docReports = $reportsController->request_document_reports();
+                                $reklamoReports = $reportsController->request_reklamo_reports();
+                                $scheduleReports = $reportsController->request_schedule_reports();
+                                $equipmentReports = $reportsController->request_equipment_reports();
+                                include 'templates/admin/reports/request_reports.php';
+                            });
+                            break;
                         case 'settings':
                             includeAdminContent(function() use ($settingsController) {
                                 $settingsController->attendance_setting();

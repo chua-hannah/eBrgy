@@ -14,79 +14,86 @@ class HomeController {
 
   
     public function req_schedule()
-    {
-        if (isset($_POST['request_schedule'])) {
-            $username = $_SESSION['username'];
-            $mobile = $_SESSION['mobile'];
-            $schedule_date = $_POST['schedule_date'];
-            $time_in = $_POST['time_in'];
-            $time_out = $_POST['time_out'];
-            $status = 'pending';
+{
+    if (isset($_POST['request_schedule'])) {
+        // Set the timezone to Manila
+        date_default_timezone_set('Asia/Manila');
+        
+        $username = $_SESSION['username'];
+        $mobile = $_SESSION['mobile'];
+        $schedule_date = $_POST['schedule_date'];
+        $time_in = $_POST['time_in'];
+        $time_out = $_POST['time_out'];
+        $status = 'pending';
 
-            // Convert schedule date to YYYY-MM-DD format
-            $scheduledDateTimeStamp = strtotime($schedule_date);
-            // Valid date format, convert it to YYYY-MM-DD
-            $schedule_date = date('Y-m-d', $scheduledDateTimeStamp);
-    
-            // Validate input fields to ensure they are not empty or null
-            if (empty($schedule_date) || empty($time_in) || empty($time_out)) {
-                $_SESSION['error'] = "Please fill in all required fields.";
-                return; // Exit without performing database operations
-            }
-    
-            // Sanitize user input
-            $schedule_date = htmlspecialchars($schedule_date);
-            $time_in = htmlspecialchars($time_in);
-            $time_out = htmlspecialchars($time_out);
-    
-            if (strtotime($time_in) >= strtotime($time_out)) {
-                $_SESSION['error'] = "Time in must be earlier than time out.";
-                return; // Exit without performing database operations
-            }
-    
-            // Check if the user has already submitted a request for the same day
-            $existingRequestQuery = "SELECT COUNT(*) as count FROM schedule_requests WHERE schedule_date = ? AND username = ?";
-            $stmt = $this->connection->prepare($existingRequestQuery);
-            $stmt->bind_param('ss', $schedule_date, $username);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $count = $row['count'];
-    
-            if ($count > 0) {
-                $_SESSION['error'] = "You have already submitted a request for this day.";
-                return; // Exit without performing database operations
-            }
-    
-            // Check if there's an approved request for the same schedule
-            $existingApprovedRequestQuery = "SELECT COUNT(*) as count FROM schedule_requests WHERE schedule_date = ? AND time_in = ? AND time_out = ? AND status = 'approved'";
-            $stmt = $this->connection->prepare($existingApprovedRequestQuery);
-            $stmt->bind_param('sss', $schedule_date, $time_in, $time_out);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $count = $row['count'];
-    
-            if ($count > 0) {
-                $_SESSION['error'] = "The schedule is already taken by another user.";
-                return; // Exit without performing database operations
-            }
-    
-            // Proceed to insert the new request into the database
-            $query = "INSERT INTO schedule_requests (username, mobile, schedule_date, time_in, time_out, status) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = $this->connection->prepare($query);
-            $stmt->bind_param('ssssss', $username, $mobile, $schedule_date, $time_in, $time_out, $status);
-            if ($stmt->execute()) {
-                // Request sent successfully
-                $_SESSION['success'] = "The Schedule request has been sent successfully.";
-                echo '<script>window.location.href = "schedules";</script>';
-                exit();
-            } else {
-                // Error occurred
-                $_SESSION['error'] = "Error: " . $stmt->error;
-            }
+        // Get the current time in Manila timezone
+        $currentDateTime = date('Y-m-d H:i:s');
+        
+        // Convert schedule date to YYYY-MM-DD format
+        $scheduledDateTimeStamp = strtotime($schedule_date);
+        // Valid date format, convert it to YYYY-MM-DD
+        $schedule_date = date('Y-m-d', $scheduledDateTimeStamp);
+
+        // Validate input fields to ensure they are not empty or null
+        if (empty($schedule_date) || empty($time_in) || empty($time_out)) {
+            $_SESSION['error'] = "Please fill in all required fields.";
+            return; // Exit without performing database operations
+        }
+
+        // Sanitize user input
+        $schedule_date = htmlspecialchars($schedule_date);
+        $time_in = htmlspecialchars($time_in);
+        $time_out = htmlspecialchars($time_out);
+
+        if (strtotime($time_in) >= strtotime($time_out)) {
+            $_SESSION['error'] = "Time in must be earlier than time out.";
+            return; // Exit without performing database operations
+        }
+
+        // Check if the user has already submitted a request for the same day
+        $existingRequestQuery = "SELECT COUNT(*) as count FROM schedule_requests WHERE schedule_date = ? AND username = ?";
+        $stmt = $this->connection->prepare($existingRequestQuery);
+        $stmt->bind_param('ss', $schedule_date, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $count = $row['count'];
+
+        if ($count > 0) {
+            $_SESSION['error'] = "You have already submitted a request for this day.";
+            return; // Exit without performing database operations
+        }
+
+        // Check if there's an approved request for the same schedule
+        $existingApprovedRequestQuery = "SELECT COUNT(*) as count FROM schedule_requests WHERE schedule_date = ? AND time_in = ? AND time_out = ? AND status = 'approved'";
+        $stmt = $this->connection->prepare($existingApprovedRequestQuery);
+        $stmt->bind_param('sss', $schedule_date, $time_in, $time_out);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $count = $row['count'];
+
+        if ($count > 0) {
+            $_SESSION['error'] = "The schedule is already taken by another user.";
+            return; // Exit without performing database operations
+        }
+
+        // Proceed to insert the new request into the database
+        $query = "INSERT INTO schedule_requests (username, mobile, schedule_date, time_in, time_out, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param('sssssss', $username, $mobile, $schedule_date, $time_in, $time_out, $status, $currentDateTime);
+        if ($stmt->execute()) {
+            // Request sent successfully
+            $_SESSION['success'] = "The Schedule request has been sent successfully.";
+            echo '<script>window.location.href = "schedules";</script>';
+            exit();
+        } else {
+            // Error occurred
+            $_SESSION['error'] = "Error: " . $stmt->error;
         }
     }
+}
+
     
 
 
@@ -235,7 +242,7 @@ public function documents() {
         $username = $_SESSION['username'];
         $email = $_SESSION['email'];
         $mobile = $_SESSION['mobile'];
-        $status = 'PENDING';
+        $status = 'pending';
         $request_name = $_POST['selected_service'];
         $service_message = $_POST['service_message'];
         $date = date('Y-m-d');
@@ -310,7 +317,7 @@ public function reports() {
         $username = $_SESSION['username'];
         $email = $_SESSION['email'];
         $mobile = $_SESSION['mobile'];
-        $status = 'PENDING';
+        $status = 'pending';
         $reported_person_name = $_POST['reported_person_name'];
         $subject_person = $_POST['subject_person'];
         $place_of_incident = $_POST['place_of_incident'];
