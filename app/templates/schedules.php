@@ -8,7 +8,11 @@
     <div class="col-lg-6 col-12 mx-auto mb-0">
         <form class="custom-form contact-form mb-4" action="#" id ="scheduleForm" method="post" role="form">
         <div class="row d-flex justify-content-center">
-            <h3 class="mb-4">Check Scheduled Event</h3>
+            <h3>Check Scheduled Event</h3>
+            <p class="form-group text-justify">
+                <i class="bi bi-exclamation-circle"></i>
+                Reminder: We can only accept requests for events taking place for tomorrow and within the next month.
+            </p>
             <div class="col-lg-12 col-md-6 col-12">
                 <label class="labels">Enter a date:</label>
                 <div class="input-group">
@@ -79,7 +83,7 @@
                     <button type="button" class="btn btn-primary" id="requestSchedule">
                         <i class="bi bi-calendar"></i> Request an Event Schedule
                     </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

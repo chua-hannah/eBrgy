@@ -19,26 +19,37 @@ if ($userId) {
 <div class="container-fluid edit-user">
 
     <div class="card">
-    <div class="card-header">
+    <div class="card-header text-center">
         <h6 class="mb-0">User Information</h6>
     </div>
 
 
     <div class="card-body">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="mb-3">
                     <p class="card-text"><strong>Registered username:</strong> <?php echo $userData['username']; ?></p>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="mb-3">
-                    <p class="card-text <?= $userData['status'] === 'activated' ? 'text-success' : 'text-danger'; ?>">
-                        <strong>Status:</strong> <?php echo strtoupper($userData['status']); ?>
-                    </p>
+                <strong>Account Status: 
+                    <span class="card-text 
+                        <?php 
+                            if ($userData['status'] === 'activated') {
+                                echo 'text-success';
+                            } elseif ($userData['status'] === 'pending') {
+                                echo 'text-warning';
+                            } else {
+                                echo 'text-danger';
+                            }
+                        ?>">
+                        <?php echo strtoupper($userData['status']); ?>
+                    </span>
+                </strong>
                 </div>
             </div>
-            <div class="col-md-1 text-end">
+            <div class="col-md-4 text-end">
                 <div class="mb-3">
                     <!-- Activation/Deactivation form -->
                     <?php echo $userData['status'] === 'activated' ? '<div><form method="post" action="">
@@ -49,23 +60,12 @@ if ($userId) {
                     </form></div>' : '<form method="post" action="">
                         <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
                         <button name="activate_user" type="submit" class="btn btn-success btn-md">
-                            Activate
+                            Activate user
                         </button>
                     </form>';
                     ?>
                 </div>
             </div>
-            <div class="col-md-1 text-end">
-                <div class="mb-3">
-                    <form method="post" action="">
-                        <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
-                        <button name="delete_user" type="submit" class="btn btn-danger btn-md">
-                            Delete
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <h6>Personal Information</h6>
             <div class="col-md-4">
                 <div class="mb-3">
                     <p class="card-text"><strong>First Name:</strong> <?php echo $userData['firstname']; ?></p>
@@ -96,7 +96,6 @@ if ($userId) {
                     <p class="card-text"><strong>Gender:</strong> <?php echo strToUpper($userData['sex']); ?></p>
                 </div>
             </div>
-            <h6>Contact Details</h6>
             <div class="col-md-4">
                 <div class="mb-3">
                     <p class="card-text"><strong>Mobile:</strong> <?php echo $userData['mobile']; ?></p>
@@ -115,7 +114,6 @@ if ($userId) {
         </div>
         
         <div class="row">
-            <h6>Submitted Documents</h6>
             <!-- Display the ID Selfie image -->
             <div class="col-md-6">
                 <?php
@@ -145,6 +143,20 @@ if ($userId) {
                     <p>Valid ID not available</p>
                 <?php } ?>
             </div>
+        </div>
+    </div>
+</div>
+<div class="mb-4"></div>
+<div class="row">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 text-end">
+        <div class="mb-3">
+            <form method="post" action="">
+                <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
+                <button name="delete_user" type="submit" class="btn btn-danger btn-md">
+                    Delete user
+                </button>
+            </form>
         </div>
     </div>
 </div>

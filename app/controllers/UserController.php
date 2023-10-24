@@ -40,7 +40,7 @@ class UserController {
                     $status = $user['status'];
                 
                     // User is not yet activated
-                    if ($status=="deactivate"){
+                    if ($status=="pending"){
                         $error = "Account is not yet activated. Please wait for your account to be verified by the administrator within 24 hours.";
                     }
                     // User is activated
@@ -113,7 +113,7 @@ class UserController {
             // Handle the case when 'selectOption' is not set.
             $sex = ""; // or some default value
         }
-        $status = 'deactivate';
+        $status = 'pending';
       
         $four_ps = isset($_POST['membership_4ps']) ? 1 : 0;
         $pwd = isset($_POST['membership_pwd']) ? 1 : 0;

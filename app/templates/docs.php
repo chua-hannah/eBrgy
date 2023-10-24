@@ -54,19 +54,43 @@
                             <thead class="text-center">
                                 <tr>
                                     <th>Document Type</th>
+                                    <th>Remarks</th>
                                     <th>Status</th>
                                     <th>Request Date & Time</th>
+                                    <th>Processed Date & Time</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($myrequest as $request) {
-                                    $htmlFormattedDate = date("m/d/Y", strtotime($request['created_at']));
-                                    $htmlFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                    $createdAtDateFormattedDate = date("m/d/Y", strtotime($request['created_at']));
+                                    $createdAtTimeFormattedTime = date("h:i A", strtotime($request['created_at']));
+                                    if (!is_null($request['process_at'])) {
+                                        $processAt = strtotime($request['process_at']);
+                                    } else {
+                                        $processAt = "-";
+                                    }
+                                    
+                                    if ($request['created_at'] == "0000-00-00 00:00:00") {
+                                        $processedFormattedDate = "-";
+                                        $processedFormattedTime = "-";
+                                    }
+
+                                    if ($processAt == "-") {
+                                        $processedAtFormattedDate = "-";
+                                        $processedAtFormattedTime = "-";
+                                    }
+                                    else {
+                                        $processedAtFormattedDate = date("m/d/Y", $processAt);
+                                        $processedAtFormattedTime = date("h:i A", $processAt);
+
+                                    }
                                     ?>
                                     <tr>
                                         <td><?php echo $request['request_name']; ?></td>
+                                        <td><?php echo $request['message']; ?></td>
                                         <td><?php echo strtoupper($request['status']); ?></td>
-                                        <td><?php echo $htmlFormattedDate . " " . $htmlFormattedTime; ?></td>
+                                        <td><?php echo $createdAtDateFormattedDate . " " . $createdAtTimeFormattedTime; ?></td>
+                                        <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

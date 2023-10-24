@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 pb-4"> <!-- Add pb-4 for bottom padding in mobile view -->
             <div class="card custom-card">
                 <div class="card-header">
                     <h3 class="text-center my-2">Users</h3>
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 pb-4"> <!-- Add pb-4 for bottom padding in mobile view -->
             <div class="card custom-card">
                 <div class="card-header">
                     <h3 class="text-center my-2">Request</h3>
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 pb-4"> <!-- Add pb-4 for bottom padding in mobile view -->
             <div class="card custom-card">
                 <div class="card-header">
                     <h3 class=" text-center my-2">Attendance</h3>
@@ -38,6 +38,7 @@
         </div>
     </div>
 </div>
+
 
 
     <!--Additional div for sidebar-->

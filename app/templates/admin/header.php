@@ -70,28 +70,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav"></ul>
             <ul class="navbar-nav">
+            <?php
+            if (isset($_SESSION['username'])) {
+                $username = $_SESSION['username'];
+                echo '<li class="nav-item">';
+                echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'profile' ? 'active' : ''; echo '"href="'.$baseUrl.'/profile">'.$username.'</a>';
+                echo '</li>';
+                echo '<li class="nav-item">';
+                echo '<a class="nav-link" href="logout.php">Logout</a>';
+                echo '</li>';
+                
+            }
+            ?>
             </ul>
-            <ul class="navbar-nav">
-    <?php
-
-    if (isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
-        echo '<li class="nav-item">';
-        echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'profile' ? 'active' : ''; echo '"href="'.$baseUrl.'/profile">'.$username.'</a>';
-        echo '</li>';
-        echo '<li class="nav-item">';
-        echo '<a class="nav-link" href="logout.php">Logout</a>';
-        echo '</li>';
-        
-    }
-  
-    ?>
-</ul>
-
         </div>
-    </div>
-</nav>
+    </nav>
 </header>
 <main>
     <!-- Alerts -->
