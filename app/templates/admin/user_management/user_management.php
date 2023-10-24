@@ -42,7 +42,7 @@ $users = UserManagementController::user_management();
                         <td><?= $user['sex']; ?></td>
                         <td><?= $user['address']; ?></td>
                         <td><?= $user['role']; ?></td>
-                        <td class="<?= $user['status'] === 'activated' ? 'text-success' : 'text-danger'; ?>">
+                        <td class="<?= $user['status'] === 'activated' ? 'text-success' : ($user['status'] === 'pending' ? 'text-warning' : 'text-danger'); ?>">
                             <?= strToUpper($user['status']); ?>
                         </td>
                         <td>

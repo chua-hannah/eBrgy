@@ -63,7 +63,7 @@ class UserManagementController {
             // Handle the case when 'selectOption' is not set.
             $role = ""; // or some default value
         }
-        $status = 'deactivate';
+        $status = 'pending';
 
         if (empty($firstname)) {
             $errors["firstname"] = "Enter your First name";
@@ -276,7 +276,7 @@ class UserManagementController {
 
                 } else {
                     // Activation failed
-                    $activationMessage = "Error updating user status: " . $stmt->error;
+                    $_SESSION['error'] = "Error updating user status: " . $stmt->error;
                 }
             
                 // Close the prepared statement
@@ -303,7 +303,7 @@ class UserManagementController {
                     exit();
                 } else {
                     // Activation failed
-                    $deactivationMessage = "Error updating user status: " . $stmt->error;
+                    $_SESSION['error'] = "Error updating user status: " . $stmt->error;
                 }
             
                 // Close the prepared statement
@@ -327,7 +327,7 @@ class UserManagementController {
                     exit();
                 } else {
                     // Activation failed
-                    $activationMessage = "Error updating user status: " . $stmt->error;
+                    $_SESSION['error'] = "Error updating user status: " . $stmt->error;
                 }
             
                 // Close the prepared statement

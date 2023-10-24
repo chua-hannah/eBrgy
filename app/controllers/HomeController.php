@@ -17,13 +17,12 @@ class HomeController {
 {
     if (isset($_POST['request_schedule'])) {
         // Set the timezone to Manila
-        date_default_timezone_set('Asia/Manila');
         
         $username = $_SESSION['username'];
         $mobile = $_SESSION['mobile'];
         $schedule_date = $_POST['schedule_date'];
-        $time_in = $_POST['time_in'];
-        $time_out = $_POST['time_out'];
+        $time_in = date("H:i:s", strtotime($_POST['time_in']));
+        $time_out = date("H:i:s", strtotime($_POST['time_out']));
         $status = 'pending';
 
         // Get the current time in Manila timezone
@@ -42,10 +41,8 @@ class HomeController {
 
         // Sanitize user input
         $schedule_date = htmlspecialchars($schedule_date);
-        $time_in = htmlspecialchars($time_in);
-        $time_out = htmlspecialchars($time_out);
 
-        if (strtotime($time_in) >= strtotime($time_out)) {
+        if ($time_in >= $time_out) {
             $_SESSION['error'] = "Time in must be earlier than time out.";
             return; // Exit without performing database operations
         }
@@ -167,6 +164,7 @@ class HomeController {
                     }
                     // Return the fetched request settings data
                     return $approved_schedules;
+                    
                 } else {
                     // No schedules found
                     return "No Schedules found";
@@ -252,7 +250,7 @@ public function documents() {
         $datetime = $date . ' ' . $time_in;
 
         // Check if a similar request already exists based on request_name, fullname, email, and mobile
-        $checkQuery = "SELECT COUNT(*) as count FROM doc_requests WHERE request_name = ? AND username = ? AND email = ? AND mobile = ?";
+        $checkQuery = "SELECT COUNT(*) as count FROM doc_requests WHERE request_name = ? AND username = ? AND email = ? AND mobile = ? AND status IN ('PENDING')";
         $stmt = $this->connection->prepare($checkQuery);
         $stmt->bind_param('ssss', $request_name, $username, $email, $mobile);
         $stmt->execute();

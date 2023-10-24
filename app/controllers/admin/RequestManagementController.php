@@ -117,8 +117,6 @@ class RequestManagementController {
 
     function delete_report($report_id) {
 
-        $activationMessage = '';
-
         if (isset($_POST['delete_report'])) {
             // Retrieve the user ID from the form
             $report_id = $_POST['report_id'];
@@ -127,19 +125,17 @@ class RequestManagementController {
             $stmt->bind_param("i", $report_id); // Assuming user_id is an integer
         
             if ($stmt->execute()) {
-                // Activation successful
-                $activationMessage = "User deleted successfully.";
                 header("Location: /eBrgy/app/requests/reports");
+                $_SESSION['success'] = "The report was successfully deleted.";
+                exit();
             } else {
                 // Activation failed
-                $activationMessage = "Error updating user status: " . $stmt->error;
+                $_SESSION['error'] = "Error updating user status: " . $stmt->error;
             }
         
             // Close the prepared statement
             $stmt->close();
         }
-        return $activationMessage;
-
     }
 
     //DOC
@@ -211,8 +207,7 @@ class RequestManagementController {
     }   
 
     function approve_doc($doc_id) {
-        $activationMessage = '';
-    
+
         if (isset($_POST['approve_doc'])) {
             $doc_id = $_POST['doc_id'];
     
@@ -226,24 +221,20 @@ class RequestManagementController {
             $stmt->bind_param("ssi", $processBy, $processAt, $doc_id); // Assuming user_id is an integer
     
             if ($stmt->execute()) {
-                // Activation successful
-                $activationMessage = "Report Approved successfully.";
-                echo '<script>window.location.href = "requests-documents";</script>';
+                header("Location: requests");
+                $_SESSION['success'] = "The report was successfully approved.";
+                exit();
             } else {
-                // Activation failed
-                $activationMessage = "Error updating user status: " . $stmt->error;
+                $_SESSION['error'] = "Error updating user status: " . $stmt->error;
             }
     
             // Close the prepared statement
             $stmt->close();
         }
-        return $activationMessage;
     }
     
 
     function delete_doc($doc_id) {
-
-        $activationMessage = '';
 
         if (isset($_POST['delete_doc'])) {
             $processBy = $_SESSION['username'];
@@ -256,19 +247,17 @@ class RequestManagementController {
             $stmt->bind_param("ssi", $processBy, $processAt, $doc_id); // Assuming user_id is an integer
     
             if ($stmt->execute()) {
-                // Activation successful
-                $activationMessage = "Report Approved successfully.";
-                echo '<script>window.location.href = "requests-documents";</script>';
+                header("Location: requests");
+                $_SESSION['success'] = "The report was successfully rejected.";
+                exit();
             } else {
                 // Activation failed
-                $activationMessage = "Error updating user status: " . $stmt->error;
+                $_SESSION['error'] = "Error updating user status: " . $stmt->error;
             }
     
             // Close the prepared statement
             $stmt->close();
         }
-        return $activationMessage;
-
     }
 
     //EQUIP
