@@ -132,6 +132,7 @@
                                 <th>Time in</th>
                                 <th>Time out </th>
                                 <th>Status</th>
+                                <th>Created at</th>
                                 <th>Proccess at</th>
                                 <th>Process by</th>
                               

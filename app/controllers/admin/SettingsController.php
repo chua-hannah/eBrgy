@@ -171,6 +171,69 @@ class SettingsController {
         // Return the fetched request settings data
         return $office_time;
     }
+
+    public function insertHomeSettings($announcementText, $slide1, $slide2, $slide3, $slide4) {
+        // Prepare and execute an SQL query to insert data into your "home_setting" table
+        $query = "INSERT INTO home_setting (announcement_text, slide1, slide2, slide3, slide4) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param("sssss", $announcementText, $slide1, $slide2, $slide3, $slide4);
+    
+        if ($stmt->execute()) {
+            // Insertion was successful
+            return true;
+        } else {
+            // Insertion failed
+            return false;
+        }
+    }
+
+    
+    public function home_setting()
+    {    
+        if (isset($_POST['home_page_setting'])) {
+            $announcementText = $_POST['announcement'];
+    
+            // Check if the announcement text is not empty
+            if (empty($announcementText)) {
+                $error = "Announcement text is required.";
+                // Handle the error (e.g., display an error message).
+            } else {
+                // Handle slide file uploads
+                $slideDirectory = 'uploads/homepage/';
+                $slide1 = $_FILES['slide1']['name'];
+                $slide2 = $_FILES['slide2']['name'];
+                $slide3 = $_FILES['slide3']['name'];
+                $slide4 = $_FILES['slide4']['name'];
+    
+                // Move uploaded files to the destination directory
+                if (move_uploaded_file($_FILES['slide1']['tmp_name'], $slideDirectory . $slide1) &&
+                    move_uploaded_file($_FILES['slide2']['tmp_name'], $slideDirectory . $slide2) &&
+                    move_uploaded_file($_FILES['slide3']['tmp_name'], $slideDirectory . $slide3) &&
+                    move_uploaded_file($_FILES['slide4']['tmp_name'], $slideDirectory . $slide4)) {
+    
+                    // Files were successfully uploaded
+                    // Now, insert data into your "home_setting" table
+                    $inserted = $this->insertHomeSettings($announcementText, $slide1, $slide2, $slide3, $slide4);
+    
+                    if ($inserted) {
+                        // Insertion was successful
+                        // Handle the success (e.g., redirect to a success page).
+                    } else {
+                        // Insertion failed
+                        $error = "Database insertion failed. Please try again.";
+                        // Handle the error (e.g., display an error message).
+                    }
+                } else {
+                    // Image uploads failed
+                    $error = "Image upload failed. Please try again.";
+                    // Handle the error (e.g., display an error message).
+                }
+            }
+        }
+    }
+
+    
+    
     
 }
 ?>

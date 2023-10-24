@@ -349,6 +349,12 @@ switch ($filename) {
                                 include 'templates/admin/settings.php';
                             });
                             break;
+                        case 'home-setting':
+                            includeAdminContent(function() use ($settingsController) {
+                                $settingsController->home_setting();
+                                include 'templates/admin/homepage_settings.php';
+                            });
+                            break;
                         default:
                         header("Location: " . $baseUrl . "/dashboard");
                         exit;

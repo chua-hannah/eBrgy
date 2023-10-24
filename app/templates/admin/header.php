@@ -175,6 +175,11 @@
                         </li>
                     </ul>
                 </div>
+                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'requests' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/home-setting">
+                    <i class="bi bi-gear"></i> Homepage Setting
+                    </a>
+                </li>
             </ul>
         </div>
     <div class="col-lg-10" style="padding: 20px;">
