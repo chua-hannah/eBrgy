@@ -106,8 +106,8 @@ switch ($filename) {
                     switch ($filename) {
                         case 'home':
                         includeHeaderFooter(function() use ($homeController, $filename) {
-                            $homeController->$filename();
-                        });
+                            $homeSettings = $homeController->getHomeSettings();
+                            include 'templates/home.php';                        });
                         break;
                         case 'officials':
                             includeHeaderFooter(function() use ($homeController, $filename) {
@@ -342,6 +342,13 @@ switch ($filename) {
                                 include 'templates/admin/reports/request_reports.php';
                             });
                             break;
+                        case 'masterlist':
+                            includeAdminContent(function() use ($reportsController) {
+                                $reportsController->register_to_masterlist();
+                                $masterListReports = $reportsController->masterlist_reports();
+                                include 'templates/admin/reports/users_master_list.php';
+                            });
+                            break;
                         case 'settings':
                             includeAdminContent(function() use ($settingsController) {
                                 $settingsController->attendance_setting();
@@ -350,8 +357,10 @@ switch ($filename) {
                             });
                             break;
                         case 'home-setting':
-                            includeAdminContent(function() use ($settingsController) {
+                            includeAdminContent(function() use ($settingsController, $homeController) {
+                                $homeSettings = $homeController->getHomeSettings();
                                 $settingsController->home_setting();
+                                $settingsController->update_home_setting();
                                 include 'templates/admin/homepage_settings.php';
                             });
                             break;
@@ -369,10 +378,21 @@ switch ($filename) {
         } else {
             switch ($filename) {
                 case 'home':
+                    includeHeaderFooter(function() use ($homeController, $filename) {
+                        $homeSettings = $homeController->getHomeSettings();
+                       include 'templates/home.php';
+
+                    });
+                    break;
                 case 'officials':
+                    includeHeaderFooter(function() use ($homeController, $filename) {
+                        $homeController->officials();
+
+                    });
+                    break;
                 case 'contact':
                     includeHeaderFooter(function() use ($homeController, $filename) {
-                        $homeController->$filename();
+                        $homeController->contact();
                     });
                     break;
                 default:

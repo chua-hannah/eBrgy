@@ -160,14 +160,9 @@
                             <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/requests-report">Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab3' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab3">Free Tab</a>
+                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab3' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/masterlist">Master List</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 1</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab4' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/tab4">Free Tab 2</a>
-                        </li>
+                       
                     </ul>
                 </div>
                 <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'requests' ? 'active' : ''; ?>">

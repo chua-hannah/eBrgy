@@ -1,61 +1,52 @@
+
 <main>
-<section class="hero-section hero-section-full-height">
-            <div class="container-fluid">
-                <div class="row">
 
-                    <div class="col-lg-12 col-12 p-0">
-                        <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="assets/images/carousel/Hero_Image_ColliersVP_030122.png"
+    <section class="hero-section hero-section-full-height">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-12 p-0">
+                    <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php foreach ($homeSettings as $index => $setting): ?>
+                                <div class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?>">
+                                    <img src="uploads/homepage/<?php echo $setting['slide1']; ?>"
                                         class="carousel-image img-fluid" alt="...">
-
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Carousel 1</h1>
-
-                                        <p>Dummy text</p>
+                                        <h1>Carousel <?php echo $index + 1; ?></h1>
+                                        <p><?php echo $setting['announcement_text']; ?></p>
                                     </div>
                                 </div>
-
                                 <div class="carousel-item">
-                                    <img src="assets/images/carousel/cityhall2022-05-0823-02-37_2022-07-15_23-10-24.jpg"
+                                    <img src="uploads/homepage/<?php echo $setting['slide2']; ?>"
                                         class="carousel-image img-fluid" alt="...">
-
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Carousel 2</h1>
-
-                                        <p>Dummy text</p>
+                                        <h1>Carousel <?php echo $index + 2; ?></h1>
+                                        <p><?php echo $setting['announcement_text']; ?></p>
                                     </div>
                                 </div>
-
                                 <div class="carousel-item">
-                                    <img src="assets/images/carousel/manila-4503501_1280.jpeg"
+                                    <img src="uploads/homepage/<?php echo $setting['slide3']; ?>"
                                         class="carousel-image img-fluid" alt="...">
-
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Carousel 3</h1>
-
-                                        <p>Dummy text</p>
+                                        <h1>Carousel <?php echo $index + 3; ?></h1>
+                                        <p><?php echo $setting['announcement_text']; ?></p>
                                     </div>
                                 </div>
-                            </div>
-
-                            <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-
-                            <button class="carousel-control-next" type="button" data-bs-target="#hero-slide"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                            <?php endforeach; ?>
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#hero-slide" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" ariahidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
         <section class="section-padding">
             <div class="container">
@@ -113,7 +104,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="assets/images/carousel/cityhall2022-05-0823-02-37_2022-07-15_23-10-24.jpg"
+                        <img src="uploads/homepage/<?php echo $setting['slide4']; ?>"
                             class="custom-text-box-image img-fluid" alt="">
                     </div>
 

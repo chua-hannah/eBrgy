@@ -7,10 +7,7 @@ class HomeController {
   {
       $this->connection = $connection;
   }
-    public function home() {
-      // Render the home page content
-      include 'templates/home.php';
-    }
+  
 
   
     public function req_schedule()
@@ -532,6 +529,26 @@ public function isRequestedQuantityValid($equipment_id, $requestedQuantity) {
       // Render the home page content
       include 'templates/admin/dashboard.php';
     }
+
+    public function getHomeSettings() {
+        // Prepare and execute an SQL query to retrieve all data from the "home_setting" table
+        $query = "SELECT * FROM home_setting";
+        $result = $this->connection->query($query);
+    
+        if ($result) {
+            $settings = array();
+    
+            while ($row = $result->fetch_assoc()) {
+                $settings[] = $row;
+            }
+    
+            return $settings;
+        } else {
+            // Query failed
+            return false;
+        }
+    }
+    
   }
   
 ?>
