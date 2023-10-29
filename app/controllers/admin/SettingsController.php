@@ -174,7 +174,7 @@ class SettingsController {
 
     public function insertHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4) {
         // Prepare and execute an SQL query to insert data into your "home_setting" table
-        $query = "INSERT INTO home_setting (announcement_text, mission_text, vision_text slide1, slide2, slide3, slide4) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO home_setting (announcement_text, mission_text, vision_text, slide1, slide2, slide3, slide4) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param("sssssss", $announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4);
     
