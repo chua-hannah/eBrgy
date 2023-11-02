@@ -8,7 +8,40 @@ class HomeController {
       $this->connection = $connection;
   }
   
+ // Function to fetch user data from the database
+ private function getRequestDocData($docId) {
+    $sql = "SELECT * FROM doc_requests WHERE id = ?";
+    $stmt = $this->connection->prepare($sql);
+    $stmt->bind_param("i", $docId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    // Fetch user data as an associative array
+    $userData = $result->fetch_assoc();
+    
+    $stmt->close();
 
+    return $userData;
+}
+
+public function print_doc($docId) {
+    // Ensure that docId is available as a variable
+    if ($docId) {
+        // Fetch user data based on the docId from the users table
+        $userData = $this->getRequestDocData($docId);
+
+        // Check if user data was found
+        if ($userData) {
+            return $userData;
+        } else {
+            // Handle the case when the user with the provided userId is not found
+            echo "test";
+        }
+    } else {
+        // Handle the case when userId is not provided
+        echo "no DATA FOUND";
+    }
+}
   
     public function req_schedule()
 {

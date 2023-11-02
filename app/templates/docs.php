@@ -96,19 +96,27 @@
                                         <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
                                         <td><?php echo strtoupper($request['status']); ?></td>
                                         <td>
-                                            <?php 
+                                        <?php
                                             $status = strtoupper($request['status']);
                                             if ($status == 'APPROVED') {
-                                                // If the status is 'APPROVED', add a button to redirect to a specific page.
-                                                echo '<a href="barangay-certificate" target="_blank" class="btn btn-secondary">Print</a>';
+                                                // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
+                                                echo '<form method="POST" action="barangay-certificate" target="_blank">
+                                                        <input type="hidden" name="id" value="' . $request['id'] . '">
+                                                        <button type="submit" class="btn btn-secondary" name="print_request_doc">Print</button>
+                                                    </form>';
                                             } elseif ($status == 'PENDING') {
-                                                // If the status is 'PENDING', add a button to cancel.
-                                                echo '<button class="btn btn-danger" name="cancel">Cancel</button>';
+                                                // If the status is 'PENDING', add a button to cancel with a form and an invisible input to pass the $request['id'].
+                                                echo '<form method="POST" action="">
+                                                        <input type="hidden" name="id" value="' . $request['id'] . '">
+                                                        <button type="submit" class="btn btn-danger" name="cancel_request_doc">Cancel</button>
+                                                    </form>';
                                             } else {
                                                 // If the status is 'REJECTED', echo an empty string.
                                                 echo '';
                                             }
                                             ?>
+
+
                                         </td>
                                     </tr>
                                 <?php } ?>

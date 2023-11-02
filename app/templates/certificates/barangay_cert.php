@@ -8,7 +8,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 12px; 
+            font-size: 16px;
+             
 
         }
         .container {
@@ -24,12 +25,14 @@
         .header2 {
             text-align: center;
             margin-top: 60px;
+            font-weight: bold;
+
         }
         .content {
-            margin-top: 20px;
+            margin-top: 100px;
         }
         .footer {
-            margin-top: 20px;
+            margin-top: 100px;
             text-align: right;
         }
         .printable {
@@ -40,6 +43,18 @@
                 display: none;
             }
         }
+        .logo {
+            position: absolute;
+            right: 100px;
+            top: 100px;
+            height: 200px;
+            weight: 200px;
+        }
+        /* styles.css */
+        .indented-paragraph {
+            margin-left: 20px; /* Adjust the margin value as needed for your desired indentation. */
+        }
+
     </style>
 </head>
 <body>
@@ -51,31 +66,55 @@
             <p>BARANGAY 95 - ZONE 8</p>
             <p>DISTRICT 1</p>
             <p>TELEPHONE NO. 8-294-47-66</p>
+            <img src="./templates/certificates/brgy_cert_logo.png" alt="Description of the image" class="logo">
+
         </div>
+
         <div class="header2">
         <u><h2>BARANGAY CERTIFICATION</h2></u>
             <p>(First Time Jobseekers Assistance Act - RA 11261)</p>
         </div>
+
         <div class="content">
-            <p>This is to certify that Mr./Ms. <input type="text" id="full-name" placeholder="Full Name">, a resident of</p>
+            <p class="indented-paragraph">This is to certify that Mr./Ms. <input type="text" id="full-name" placeholder="Full Name">, a resident of</p>
             <p><input type="text" id="address" placeholder="Address">, for 18 years 7 months, is a qualified availee of <strong>RA 11261</strong> or the <strong>First Time Jobseekers Assistance Act of 2019</strong>.</p>
-            <p>I further certify that the holder/bearer was informed of his/her rights, including the duties and responsibilities accorded by RA 11261 through the Oath of Undertaking he/she has signed and executed in the presence of Barangay Official/s.</p>
-            <p>Signed this <input type="text" id="cert-date" placeholder="Certification Date">, in the City/Municipality of <input type="text" id="city" placeholder="City/Municipality"></p>
+            <p class="indented-paragraph">I further certify that the holder/bearer was informed of his/her rights, including the duties and responsibilities accorded by RA 11261 through the Oath of</p><p> Undertaking he/she has signed and executed in the presence of Barangay Official/s.</p>
+            <p>Signed this <?php
+            $datetime = $docRequestUserData['process_at'];
+            $date = date("jS \d\a\y \of F, Y", strtotime($datetime));
+            echo $date;
+            ?>
+            , in the City/Municipality of Manila</p>
         </div>
         <div class="footer">
-            <p>This certification is valid only until <input type="text" id="valid-until" placeholder="Valid Until">, one (1) year from the issuance.</p>
+        <p>This certification is valid only until <?php
+        $datetime = $docRequestUserData['process_at'];
+        $newDate = date("Y-m-d", strtotime($datetime . ' +1 year'));
+        $formattedDate = date("jS \d\a\y \of F, Y", strtotime($newDate));
+        echo $formattedDate;
+        ?>
+        , one (1) year from the issuance.</p>
             <br>
             <div><strong>RONALD M. LEE</strong></div>
             <div>Punong Barangay</div>
             <br>
-            <p><input type="text" id="punong-barangay-date" placeholder="Punong Barangay Date"></p>
+            <p><?php
+            $datetime = $docRequestUserData['process_at'];
+            $date = date("F j, Y", strtotime($datetime));
+            echo $date;
+            ?>
+            </p>
         </div>
         <div class="footer">
-            <p>Witnessed by:</p>
+            <p><strong>Witnessed by:</strong></p>
             <p><strong>ELJUN C. SAYO</strong></p>
             <p>Barangay Secretary</p>
-            <p><input type="text" id="secretary-date" placeholder="Secretary Date"></p>
-        </div>
+            <p><?php
+            $datetime = $docRequestUserData['process_at'];
+            $date = date("F j, Y", strtotime($datetime));
+            echo $date;
+            ?>
+            </p>        </div>
       
     </div>
 

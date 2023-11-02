@@ -159,7 +159,18 @@ switch ($filename) {
                             });
                             break;
                         case 'barangay-certificate':
+                            $docId = $_POST['id'];
+                            $docRequestUserData = $homeController->print_doc($docId);
+                            
+                            // Check conditions and redirect if necessary.
+                            if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                header("Location: documents"); // Redirect to the 'documents.php' page
+                                exit; // Terminate the script to ensure the redirect takes effect.
+                            }
+                            
+                            // If the conditions are met, include the certificate template.
                             include 'templates/certificates/barangay_cert.php';
+                            
                             // includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
                             //     // $username = $_SESSION['username'];
                             //     // $mobile = $_SESSION['mobile'];
