@@ -55,9 +55,12 @@
                                 <tr>
                                     <th>Document Type</th>
                                     <th>Remarks</th>
-                                    <th>Status</th>
+                                    
                                     <th>Request Date & Time</th>
                                     <th>Processed Date & Time</th>
+                                    <th>Status</th>
+                                    <th>action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,9 +91,25 @@
                                     <tr>
                                         <td><?php echo $request['request_name']; ?></td>
                                         <td><?php echo $request['message']; ?></td>
-                                        <td><?php echo strtoupper($request['status']); ?></td>
+                                       
                                         <td><?php echo $createdAtDateFormattedDate . " " . $createdAtTimeFormattedTime; ?></td>
                                         <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
+                                        <td><?php echo strtoupper($request['status']); ?></td>
+                                        <td>
+                                            <?php 
+                                            $status = strtoupper($request['status']);
+                                            if ($status == 'APPROVED') {
+                                                // If the status is 'APPROVED', add a button to redirect to a specific page.
+                                                echo '<a href="barangay-certificate" target="_blank" class="btn btn-secondary">Print</a>';
+                                            } elseif ($status == 'PENDING') {
+                                                // If the status is 'PENDING', add a button to cancel.
+                                                echo '<button class="btn btn-danger" name="cancel">Cancel</button>';
+                                            } else {
+                                                // If the status is 'REJECTED', echo an empty string.
+                                                echo '';
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

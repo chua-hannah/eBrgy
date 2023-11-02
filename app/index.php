@@ -153,10 +153,22 @@ switch ($filename) {
                                 $mobile = $_SESSION['mobile'];
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();
-                                $requests = $settingsController->get_request_settings(); // Call the function here
+                                $requests = $settingsController->get_request_settings();
                                 $myrequest = $homeController->get_doc_requests($username, $mobile, $email);
                                 include 'templates/docs.php';
                             });
+                            break;
+                        case 'barangay-certificate':
+                            include 'templates/certificates/barangay_cert.php';
+                            // includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
+                            //     // $username = $_SESSION['username'];
+                            //     // $mobile = $_SESSION['mobile'];
+                            //     // $email = $_SESSION['email'];
+                            //     // $homeController->$filename();
+                            //     // $requests = $settingsController->get_request_settings();
+                            //     // $myrequest = $homeController->get_doc_requests($username, $mobile, $email);
+                              
+                            // });
                             break;
                         case 'reports':
                             includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
