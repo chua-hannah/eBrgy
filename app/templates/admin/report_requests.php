@@ -10,15 +10,15 @@
     <table class="table table-bordered table-striped custom-table" id="reportsTable">
             <thead>
                 <tr>
-                    <th>Informant Name</th>
-                    <th>Informant Address</th>
-                    <th>Person to Report</th>
-                    <th>Subject</th>
-                    <th>Place of Incident</th>
-                    <th>Date of Incident</th>
-                    <th>Date & Time Submitted</th>
-                    <th>Status</th>
-                    <th>Action/s</th>
+                    <th class="wrap-text">Informant Name</th>
+                    <th class="wrap-text">Informant Address</th>
+                    <th class="wrap-text">Person to Report</th>
+                    <th class="wrap-text">Subject</th>
+                    <th class="wrap-text">Place of Incident</th>
+                    <th class="wrap-text">Date of Incident</th>
+                    <th class="wrap-text">Date & Time Submitted</th>
+                    <th class="wrap-text">Status</th>
+                    <th class="wrap-text">Action/s</th>
                 </tr>
             </thead>
             <tbody>

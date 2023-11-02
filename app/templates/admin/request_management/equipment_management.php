@@ -49,10 +49,10 @@
                 <table class="table table-bordered table-striped custom-table datatable">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Number to Borrow</th>
-                            <th>Total Number of Equipment</th>
+                            <th class="wrap-text">Name</th>
+                            <th class="wrap-text">Status</th>
+                            <th class="wrap-text">Number to Borrow</th>
+                            <th class="wrap-text">Total Number of Equipment</th>
                         </tr>
                     </thead>
                     <tbody>

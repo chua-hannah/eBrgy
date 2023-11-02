@@ -181,7 +181,7 @@
                             <tr>
                                 <th>Equipment name</th>
                                 <th>Quantity</th>
-                                <th>Duration</th>
+                                <th>Return date</th>
                                 <th>Username</th>
                                 <th>Fullname</th>
                                 <th>Status </th>
@@ -199,7 +199,7 @@
                                 <tr>
                                     <td><?php echo $equipmentReport['equipment_name']; ?></td>
                                     <td><?php echo $equipmentReport['total_equipment_borrowed']; ?></td>
-                                    <td><?php echo $equipmentReport['days']; ?></td>
+                                    <td><?php echo $equipmentReport['return_date']; ?></td>
                                     <td><?php echo $equipmentReport['username']; ?></td>
                                     <td><?php echo $equipmentReport['firstname'] . ' ' . $equipmentReport['middlename'] . ' ' . $equipmentReport['lastname']; ?></td>
                                     <td><?php echo $equipmentReport['status']; ?></td>

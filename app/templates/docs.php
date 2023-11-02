@@ -59,7 +59,7 @@
                                     <th>Request Date & Time</th>
                                     <th>Processed Date & Time</th>
                                     <th>Status</th>
-                                    <th>action</th>
+                                    <th>Action/s</th>
 
                                 </tr>
                             </thead>
@@ -94,7 +94,22 @@
                                        
                                         <td><?php echo $createdAtDateFormattedDate . " " . $createdAtTimeFormattedTime; ?></td>
                                         <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
-                                        <td><?php echo strtoupper($request['status']); ?></td>
+                                        <td>
+                                            <?php
+                                            $status = strtoupper($request['status']);
+                                            
+                                            if ($status === 'PENDING') {
+                                                echo '<span class="text-warning">' . $status . '</span>';
+                                            } elseif ($status === 'APPROVED') {
+                                                echo '<span class="text-success">' . $status . '</span>';
+                                            } elseif ($status === 'REJECTED') {
+                                                echo '<span class="text-danger">' . $status . '</span>';
+                                            } else {
+                                                // Handle other statuses here if needed
+                                                echo $status; // Display the status as is
+                                            }
+                                            ?>
+                                        </td>
                                         <td>
                                         <?php
                                             $status = strtoupper($request['status']);
@@ -102,7 +117,7 @@
                                                 // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
                                                 echo '<form method="POST" action="barangay-certificate" target="_blank">
                                                         <input type="hidden" name="id" value="' . $request['id'] . '">
-                                                        <button type="submit" class="btn btn-secondary" name="print_request_doc">Print</button>
+                                                        <button type="submit" class="btn btn-primary" name="print_request_doc">Print</button>
                                                     </form>';
                                             } elseif ($status == 'PENDING') {
                                                 // If the status is 'PENDING', add a button to cancel with a form and an invisible input to pass the $request['id'].
@@ -112,11 +127,9 @@
                                                     </form>';
                                             } else {
                                                 // If the status is 'REJECTED', echo an empty string.
-                                                echo '';
+                                                echo 'N/A';
                                             }
                                             ?>
-
-
                                         </td>
                                     </tr>
                                 <?php } ?>

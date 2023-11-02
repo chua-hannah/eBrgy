@@ -15,9 +15,9 @@
                     <table class="table table-bordered table-striped custom-table">
                         <thead>
                             <tr>
-                                <th>Time in</th>
-                                <th>Time out</th>
-                                <th>Late Threshold</th>
+                                <th class="wrap-text">Time in</th>
+                                <th class="wrap-text">Time out</th>
+                                <th class="wrap-text">Late Threshold</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,11 +45,11 @@
             <table class="table table-bordered table-striped custom-table" id="attendanceTable">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Time In</th>
-                        <th>Time Out</th>
-                        <th>Status</th>
-                        <th>Remarks</th>
+                        <th class="wrap-text">Date</th>
+                        <th class="wrap-text">Time In</th>
+                        <th class="wrap-text">Time Out</th>
+                        <th class="wrap-text">Status</th>
+                        <th class="wrap-text">Remarks</th>
                     </tr>
                 </thead>
                 <tbody>

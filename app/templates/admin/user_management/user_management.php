@@ -13,21 +13,21 @@ $users = UserManagementController::user_management();
         </a>
     </div>
     <h3 class="mt-2 mb-2">User Management</h3>
-    <div>
+    <div class="container-fluid">
         <table class="table table-bordered table-striped custom-table" id="userTable">
             <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Age</th>
-                    <th>Sex</th>
-                    <th>Address</th>
-                    <th>Role</th>
-                    <th>Account Status</th>
-                    <th>Actions</th>
+                    <th class="wrap-text">Username</th>
+                    <th class="wrap-text">Email</th>
+                    <th class="wrap-text">First Name</th>
+                    <th class="wrap-text">Middle Name</th>
+                    <th class="wrap-text">Last Name</th>
+                    <th class="wrap-text">Age</th>
+                    <th class="wrap-text">Sex</th>
+                    <th class="wrap-text">Address</th>
+                    <th class="wrap-text">Role</th>
+                    <th class="wrap-text">Account Status</th>
+                    <th class="wrap-text">Actions</th>
                 </tr>
             </thead>
             <tbody>

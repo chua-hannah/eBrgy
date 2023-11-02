@@ -14,9 +14,9 @@
         <table class="table table-bordered table-striped custom-table">
             <thead>
                 <tr>
-                    <th>Time in</th>
-                    <th>Time out</th>
-                    <th>Late Threshold</th>
+                    <th class="wrap-text">Time in</th>
+                    <th class="wrap-text">Time out</th>
+                    <th class="wrap-text">Late Threshold</th>
                 </tr>
             </thead>
             <tbody>

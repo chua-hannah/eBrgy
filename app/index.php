@@ -120,6 +120,7 @@ switch ($filename) {
                             includeHeaderFooter(function() use ($homeController, $username, $reserved_schedule) {
                                 $myScheduleData = $homeController->get_schedule_requests($username);
                                 $schedulesData = $homeController->get_schedules($reserved_schedule);
+                                $reject_schedule = $homeController->reject_schedules($username);
                                 include 'templates/schedules.php';      
                             });
                             break;
@@ -155,6 +156,7 @@ switch ($filename) {
                                 $homeController->$filename();
                                 $requests = $settingsController->get_request_settings();
                                 $myrequest = $homeController->get_doc_requests($username, $mobile, $email);
+                                $reject_document = $homeController->reject_document($username);
                                 include 'templates/docs.php';
                             });
                             break;
@@ -188,6 +190,7 @@ switch ($filename) {
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();  
                                 $myrequest = $homeController->get_reports($username, $mobile, $email);   
+                                $reject_reports = $homeController->reject_reports($username);   
                                 include 'templates/reports.php';      
                             });
                             break;      
@@ -199,7 +202,7 @@ switch ($filename) {
                                 $homeController->$filename();   
                                 $requests = $settingsController->get_equipments_list(); // Call the function here
                                 $myrequest = $homeController->get_equipment_requests($username);   
-
+                                $reject_equipments= $homeController->reject_equipments($username);
                                 include 'templates/equipments.php';      
   
                             });

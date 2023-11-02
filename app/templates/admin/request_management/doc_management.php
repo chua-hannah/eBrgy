@@ -43,10 +43,10 @@
                 <table class="table table-bordered table-striped custom-table datatable">
                     <thead>
                         <tr>
-                            <th>Document Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Created Date</th>
+                            <th class="wrap-text">Document Name</th>
+                            <th class="wrap-text">Description</th>
+                            <th class="wrap-text">Status</th>
+                            <th class="wrap-text">Created Date</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -111,7 +111,7 @@ public function print_doc($docId) {
         $stmt->bind_param('sssssss', $username, $mobile, $schedule_date, $time_in, $time_out, $status, $currentDateTime);
         if ($stmt->execute()) {
             // Request sent successfully
-            $_SESSION['success'] = "The Schedule request has been sent successfully.";
+            $_SESSION['success'] = "Schedule request has been sent successfully.";
             echo '<script>window.location.href = "schedules";</script>';
             exit();
         } else {
@@ -227,14 +227,24 @@ public function print_doc($docId) {
         // Return the fetched request settings data
         return $myrequests;
     }
-
- 
-    
-
-      
-
-    
-      
+    function reject_schedules($schedule_id) {
+        if (isset($_POST['cancel_request_schedule'])) {
+            $schedule_id = $_POST['id']; // Update this line to match the name of the hidden input in your form
+        
+            $stmt = $this->connection->prepare("DELETE FROM schedule_requests WHERE id = ?");
+            $stmt->bind_param("i", $schedule_id); // Assuming doc_id is an integer
+            if ($stmt->execute()) {
+                header("Location: /eBrgy/app/schedules");
+                $_SESSION['success'] = "Schedule request was successfully cancelled.";
+                exit();
+            } else {
+                $_SESSION['error'] = "Error cancelling schedule request: " . $stmt->error;
+            }
+        
+            // Close the prepared statement
+            $stmt->close();
+        }
+    }      
 
     public function officials() {
       if ($this->connection->error) {
@@ -323,9 +333,9 @@ public function get_doc_requests($username, $mobile, $email) {
     }
 
     // Use prepared statement to prevent SQL injection
-    $query = "SELECT * FROM doc_requests WHERE username = ? AND mobile = ? AND email = ?";
+    $query = "SELECT * FROM doc_requests WHERE username = ?";
     $stmt = $this->connection->prepare($query);
-    $stmt->bind_param('sss', $username, $mobile, $email);
+    $stmt->bind_param('s', $username);
     $stmt->execute();
 
     // Fetch all request settings records as an associative array
@@ -341,6 +351,24 @@ public function get_doc_requests($username, $mobile, $email) {
     return $myrequests;
 }
 
+function reject_document($doc_id) {
+    if (isset($_POST['cancel_request_doc'])) {
+        $doc_id = $_POST['id']; // Update this line to match the name of the hidden input in your form
+    
+        $stmt = $this->connection->prepare("DELETE FROM doc_requests WHERE id = ?");
+        $stmt->bind_param("i", $doc_id); // Assuming doc_id is an integer
+        if ($stmt->execute()) {
+            header("Location: /eBrgy/app/documents");
+            $_SESSION['success'] = "Document request was successfully cancelled.";
+            exit();
+        } else {
+            $_SESSION['error'] = "Error cancelling document request: " . $stmt->error;
+        }
+    
+        // Close the prepared statement
+        $stmt->close();
+    }
+}
 
 public function reports() {
     if (isset($_POST['report_form'])) {
@@ -420,13 +448,32 @@ public function get_reports($username, $mobile, $email) {
     return $data;
 }
 
+function reject_reports($report_id) {
+    if (isset($_POST['cancel_request_report'])) {
+        $report_id = $_POST['id']; // Update this line to match the name of the hidden input in your form
+    
+        $stmt = $this->connection->prepare("DELETE FROM report_requests WHERE id = ?");
+        $stmt->bind_param("i", $report_id); // Assuming doc_id is an integer
+        if ($stmt->execute()) {
+            header("Location: /eBrgy/app/reports");
+            $_SESSION['success'] = "Report / Complaint request was successfully cancelled.";
+            exit();
+        } else {
+            $_SESSION['error'] = "Error cancelling report request: " . $stmt->error;
+        }
+    
+        // Close the prepared statement
+        $stmt->close();
+    }
+}
+
 public function equipments() {
     // Render the home page content
     if (isset($_POST['request_equipment'])) {
         date_default_timezone_set('Asia/Manila');
         $username = $_SESSION['username'];
         $status = 'pending';
-        $duration = $_POST['duration'];
+        $return_date = $_POST['return_date'];
         $equipment_id = $_POST['equipment_id'];
         $total_equipment_borrowed = $_POST['total_equipment_borrowed'];
         $date = date('Y-m-d');
@@ -434,6 +481,8 @@ public function equipments() {
 
         // Combine date and time into a single datetime string
         $datetime = $date . ' ' . $time_in;
+
+        $return_date = date('Y-m-d');
 
         // Check if the requested quantity is valid
         if ($this->isRequestedQuantityValid($equipment_id, $total_equipment_borrowed)) {
@@ -457,9 +506,9 @@ public function equipments() {
             $row = $result->fetch_assoc();
             $equipment_name = $row['equipment_name'];
 
-            $query = "INSERT INTO equipment_requests (equipment_id, equipment_name, username, total_equipment_borrowed, status, days, request_date) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO equipment_requests (equipment_id, equipment_name, username, total_equipment_borrowed, status, return_date, request_date) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param('sssssss', $equipment_id, $equipment_name, $username, $total_equipment_borrowed, $status, $duration, $datetime);
+            $stmt->bind_param('sssssss', $equipment_id, $equipment_name, $username, $total_equipment_borrowed, $status, $return_date, $datetime);
 
             if ($stmt->execute()) {
                 // Request sent successfully
@@ -474,6 +523,25 @@ public function equipments() {
             // Invalid quantity, show an error message
             echo "Error: The requested quantity exceeds the available equipment.";
         }
+    }
+}
+
+function reject_equipments($equipment_id) {
+    if (isset($_POST['cancel_request_equipment'])) {
+        $equipment_id = $_POST['id']; // Update this line to match the name of the hidden input in your form
+    
+        $stmt = $this->connection->prepare("DELETE FROM equipment_requests WHERE id = ?");
+        $stmt->bind_param("i", $equipment_id); // Assuming doc_id is an integer
+        if ($stmt->execute()) {
+            header("Location: /eBrgy/app/equipments");
+            $_SESSION['success'] = "Equipment request was successfully cancelled.";
+            exit();
+        } else {
+            $_SESSION['error'] = "Error cancelling equipment request: " . $stmt->error;
+        }
+    
+        // Close the prepared statement
+        $stmt->close();
     }
 }
 

@@ -17,14 +17,15 @@
         <table class="table table-bordered table-striped custom-table" id="equipTable">
             <thead>
                 <tr>
-                    <th>Equipment</th>
-                    <th>Quantity</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Request Date and Time</th>
-                    <th>Status</th>
-                    <th>Action/s</th>
+                    <th class="text-wrap">Equipment</th>
+                    <th class="wrap-text">Quantity</th>
+                    <th class="wrap-text">Return Date</th>
+                    <th class="wrap-text">First Name</th>
+                    <th class="wrap-text">Middle Name</th>
+                    <th class="wrap-text">Last Name</th>
+                    <th class="wrap-text">Request Date and Time</th>
+                    <th class="wrap-text">Status</th>
+                    <th class="wrap-text">Action/s</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                     <tr>
                         <td><?php echo $request['equipment_name']; ?></td>
                         <td><?php echo $request['total_equipment_borrowed']; ?></td>
+                        <td><?php echo date('m/d/Y', strtotime($request['return_date'])); ?></td>
                         <td><?php echo $request['firstname']; ?></td>
                         <td>                    
                         <?php

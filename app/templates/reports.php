@@ -8,12 +8,12 @@
     <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
         <div class="row d-flex justify-content-center">
         <h3 class="mb-4">File a report or a complaint</h3>
-            <div class="col-lg-12 col-md-6 col-12">
+            <div class="col-lg-12 col-md-12 col-12">
                 <label class="labels">Person to Report (if applicable)</label>
                 <input type="text" name="reported_person_name" id="reported_person_name" class="form-control" placeholder="Full name (Optional)">
             </div>  
 
-            <div class="col-lg-12 col-md-6 col-12">
+            <div class="col-lg-12 col-md-12 col-12">
                 <label class="labels">Place of Incident</label>
                 <input type="text" name="place_of_incident" id="place" class="form-control" placeholder="Location" required>
             </div>
@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-12 col-md-6 col-12">
+            <div class="col-lg-12 col-md-12 col-12">
                 <label class="labels">Details of the Incident</label>
                 <input type="text" name="subject_person" id="subject" class="form-control" placeholder="Subject" required>
                 <textarea name="note" rows="5" class="form-control mb-4" id="note" placeholder="Complaint"></textarea>
@@ -75,6 +75,7 @@
                                     <th class="wrap-text">Request Date & Time</th>
                                     <th class="wrap-text">Processed Date & Time</th>
                                     <th class="wrap-text">Processed By</th>
+                                    <th class="wrap-text">Action/s</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,10 +110,39 @@
                                 ?>
                                     <tr>
                                         <td><?php echo $request['subject_person']; ?></td>
-                                        <td><?php echo strtoupper($request['status']); ?></td>
+                                        <td>
+                                            <?php
+                                            $status = strtoupper($request['status']);
+                                            
+                                            if ($status === 'PENDING') {
+                                                echo '<span class="text-warning">' . $status . '</span>';
+                                            } elseif ($status === 'APPROVED') {
+                                                echo '<span class="text-success">' . $status . '</span>';
+                                            } elseif ($status === 'REJECTED') {
+                                                echo '<span class="text-danger">' . $status . '</span>';
+                                            } else {
+                                                // Handle other statuses here if needed
+                                                echo $status; // Display the status as is
+                                            }
+                                            ?>
+                                        </td>
                                         <td><?php echo $createdAtFormattedDate . " " . $createdAtFormattedTime; ?></td>
                                         <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
                                         <td><?php echo $process_by; ?></td>
+                                        <td>
+                                        <?php
+                                            $status = strtoupper($request['status']);
+                                            if ($status == 'PENDING') {
+                                                // If the status is 'PENDING', add a button to cancel with a form and an invisible input to pass the $request['id'].
+                                                echo '<form method="POST" action="">
+                                                        <input type="hidden" name="id" value="' . $request['id'] . '">
+                                                        <button type="submit" class="btn btn-danger" name="cancel_request_report">Cancel</button>
+                                                    </form>';
+                                            } else {                                            
+                                                echo 'N/A';
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

@@ -37,12 +37,12 @@
                         <table class="table table-bordered table-striped custom-table datatable">
                             <thead>
                                 <tr>                          
-                                    <th>Scheduled by</th>
-                                    <th>Date</th>
-                                    <th>Start at</th>
-                                    <th>End at</th>
-                                    <th>Status</th>
-                                    <th>Action/s</th>
+                                    <th class="wrap-text">Scheduled by</th>
+                                    <th class="wrap-text">Date</th>
+                                    <th class="wrap-text">Start at</th>
+                                    <th class="wrap-text">End at</th>
+                                    <th class="wrap-text">Status</th>
+                                    <th class="wrap-text">Action/s</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -141,14 +141,14 @@
                         <table class="table table-bordered table-striped custom-table datatable">
                             <thead>
                                 <tr>
-                                    <th>Scheduled Date</th>
-                                    <th>First Name</th>
-                                    <th>Middle Name</th>
-                                    <th>Last Name</th>
-                                    <th>Mobile Number</th>
-                                    <th>Start at</th>
-                                    <th>End at</th>
-                                    <th>Status</th>
+                                    <th class="wrap-text">Scheduled Date</th>
+                                    <th class="wrap-text">First Name</th>
+                                    <th class="wrap-text">Middle Name</th>
+                                    <th class="wrap-text">Last Name</th>
+                                    <th class="wrap-text">Mobile Number</th>
+                                    <th class="wrap-text">Start at</th>
+                                    <th class="wrap-text">End at</th>
+                                    <th class="wrap-text">Status</th>
                                 </tr>
                             </thead>
                             <tbody>

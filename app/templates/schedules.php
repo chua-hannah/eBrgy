@@ -109,10 +109,11 @@
                                         <table class="table table-bordered table-striped custom-table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>Scheduled Date</th>
-                                                    <th>Start at</th>
-                                                    <th>End at</th>
-                                                    <th>Status</th>
+                                                    <th class="wrap-text">Scheduled Date</th>
+                                                    <th class="wrap-text">Start at</th>
+                                                    <th class="wrap-text">End at</th>
+                                                    <th class="wrap-text">Status</th>
+                                                    <th class="wrap-text">Action/s</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -125,7 +126,36 @@
                                                         <td><?php echo $requestScheduleDate; ?></td>
                                                         <td><?php echo $requestScheduleStart; ?></td>
                                                         <td><?php echo $requestScheduleEnd; ?></td>
-                                                        <td><?php echo strtoupper($request['status']); ?></td>
+                                                        <td>
+                                                            <?php
+                                                            $status = strtoupper($request['status']);
+                                                            
+                                                            if ($status === 'PENDING') {
+                                                                echo '<span class="text-warning">' . $status . '</span>';
+                                                            } elseif ($status === 'APPROVED') {
+                                                                echo '<span class="text-success">' . $status . '</span>';
+                                                            } elseif ($status === 'REJECTED') {
+                                                                echo '<span class="text-danger">' . $status . '</span>';
+                                                            } else {
+                                                                // Handle other statuses here if needed
+                                                                echo $status; // Display the status as is
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                        <?php
+                                                            $status = strtoupper($request['status']);
+                                                            if ($status == 'PENDING') {
+                                                                // If the status is 'PENDING', add a button to cancel with a form and an invisible input to pass the $request['id'].
+                                                                echo '<form method="POST" action="">
+                                                                        <input type="hidden" name="id" value="' . $request['id'] . '">
+                                                                        <button type="submit" class="btn btn-danger" name="cancel_request_schedule">Cancel</button>
+                                                                    </form>';
+                                                            } else {                                            
+                                                                echo 'N/A';
+                                                            }
+                                                            ?>
+                                                        </td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>

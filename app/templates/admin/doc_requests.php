@@ -21,15 +21,15 @@
             <table class="table table-bordered table-striped custom-table" id="docuTable">
                 <thead>
                     <tr>
-                    <th>Document</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Address</th>
-                    <th>Mobile</th>
-                    <th>Date & Time Submitted</th>
-                    <th>Status</th>
-                    <th>Action/s</th>
+                    <th class="wrap-text">Document</th>
+                    <th class="wrap-text">First Name</th>
+                    <th class="wrap-text">Middle Name</th>
+                    <th class="wrap-text">Last Name</th>
+                    <th class="wrap-text">Address</th>
+                    <th class="wrap-text">Mobile</th>
+                    <th class="wrap-text">Date & Time Submitted</th>
+                    <th class="wrap-text">Status</th>
+                    <th class="wrap-text">Action/s</th>
                     </tr>
                 </thead>
                 <tbody>

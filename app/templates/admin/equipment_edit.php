@@ -59,7 +59,7 @@ if ($username) {
                 <p class="card-text"><strong>Quantity:</strong> <?php echo $userData['total_equipment_borrowed']; ?></p>
             </div>
             <div class="col-md-12 mb-3">
-                <p class="card-text"><strong>Duration (days):</strong> <?php echo $userData['days']; ?></p>
+                <p class="card-text"><strong>Return Date:</strong> <?php echo date('m/d/Y', strtotime($userData['return_date'])); ?></p>
             </div>
             <?php
             if ($status === "APPROVED" || $status === "REJECTED" || $status === "RETURNED") {
