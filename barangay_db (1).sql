@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2023 at 10:48 PM
+-- Generation Time: Nov 02, 2023 at 04:00 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -80,7 +80,8 @@ CREATE TABLE `doc_requests` (
 --
 
 INSERT INTO `doc_requests` (`id`, `request_name`, `username`, `email`, `mobile`, `status`, `message`, `created_at`, `process_by`, `process_at`) VALUES
-(8, 'POSTAL ID', 'resident1', 'resident1@mail.com', '1111111111', 'rejected', 'qweqweqweq', '2023-10-17 17:02:01', 'kapitantest', '2023-10-17 12:05:51');
+(8, 'POSTAL ID', 'resident1', 'resident1@mail.com', '1111111111', 'rejected', 'qweqweqweq', '2023-10-17 17:02:01', 'kapitantest', '2023-10-17 12:05:51'),
+(9, 'Barangay Certificate', 'resident1', 'resident1@mail.com', '1111111111', 'approved', 'test', '2023-10-30 22:32:46', 'kapitantest', '2023-10-30 22:33:02');
 
 -- --------------------------------------------------------
 
@@ -163,6 +164,31 @@ INSERT INTO `equipment_settings` (`equipment_id`, `equipment_name`, `number_of_e
 (5, 'NMAX', '100', 100, '1'),
 (6, 'NMAX', '100', 100, '1'),
 (7, 'VESPA JB limited edition', '300', 300, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `home_setting`
+--
+
+CREATE TABLE `home_setting` (
+  `id` int(11) NOT NULL,
+  `announcement_text` varchar(255) DEFAULT NULL,
+  `mission_text` varchar(255) DEFAULT NULL,
+  `vision_text` varchar(255) DEFAULT NULL,
+  `slide1` varchar(255) DEFAULT NULL,
+  `slide2` varchar(255) DEFAULT NULL,
+  `slide3` varchar(255) DEFAULT NULL,
+  `slide4` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `home_setting`
+--
+
+INSERT INTO `home_setting` (`id`, `announcement_text`, `mission_text`, `vision_text`, `slide1`, `slide2`, `slide3`, `slide4`) VALUES
+(1, 'qweqweqwe', 'qweqwewq', 'test', 'images.jpg', 'images.jpg', 'bb.png', '8.png'),
+(2, 'qweqweqwe', 'qweqwewq', 'test', 'images.jpg', 'images.jpg', 'bb.png', '8.png');
 
 -- --------------------------------------------------------
 
@@ -377,6 +403,40 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firs
 (26, 'devtest1', 'pass1234', 'devtest1@mail.com', '+639234567890', 'devtest1', 'asddas', 'asdasdad', 'pass me sensei', '1960-02-14', 63, 'Female', 'residence', NULL, 0, 1, 0, 1, 0, '8.png', '8.png', 'activated'),
 (27, 'devtest2', 'pass1234', 'devtest2@mail.com', '+639999999292', 'devtest2', 'dasdas', 'qwe', '33 pasado talaga', '1950-01-01', 73, 'Male', 'residence', NULL, 1, 1, 1, 1, 0, '8.png', '8.png', 'deactivate');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_masterlist`
+--
+
+CREATE TABLE `users_masterlist` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `middlename` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
+  `senior` tinyint(1) DEFAULT NULL,
+  `pwd` tinyint(1) DEFAULT NULL,
+  `four_ps` tinyint(1) DEFAULT NULL,
+  `solo_parent` tinyint(1) DEFAULT NULL,
+  `scholar` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users_masterlist`
+--
+
+INSERT INTO `users_masterlist` (`id`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `gender`, `role`, `position`, `senior`, `pwd`, `four_ps`, `solo_parent`, `scholar`) VALUES
+(1, 'test@mail.com', '+639712312312', 'test', 'test', 'test', 'test', '1960-08-02', 63, 'Male', NULL, 'residence', 1, 1, 0, 1, 1),
+(2, 'sheeesh@mail.com', '+639000000200', 'tesatqweq', 'sheeesh', 'sheeesh', 'tqewqweqwe', '2000-10-20', 23, 'Female', NULL, 'residence', 0, 0, 0, 0, 1);
+
 --
 -- Indexes for dumped tables
 --
@@ -412,6 +472,12 @@ ALTER TABLE `equipment_settings`
   ADD PRIMARY KEY (`equipment_id`);
 
 --
+-- Indexes for table `home_setting`
+--
+ALTER TABLE `home_setting`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
@@ -442,6 +508,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `users_masterlist`
+--
+ALTER TABLE `users_masterlist`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -455,7 +527,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `doc_requests`
 --
 ALTER TABLE `doc_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `doc_settings`
@@ -474,6 +546,12 @@ ALTER TABLE `equipment_requests`
 --
 ALTER TABLE `equipment_settings`
   MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `home_setting`
+--
+ALTER TABLE `home_setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -504,6 +582,12 @@ ALTER TABLE `time_settings`
 --
 ALTER TABLE `users`
   MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `users_masterlist`
+--
+ALTER TABLE `users_masterlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
