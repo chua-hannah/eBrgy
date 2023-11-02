@@ -36,7 +36,9 @@ $users = UserManagementController::user_management();
                         <td><?= $user['username']; ?></td>
                         <td><?= $user['email']; ?></td>
                         <td><?= $user['firstname']; ?></td>
-                        <td><?= $user['middlename']; ?></td>
+                        <td>
+                            <?= empty($user['middlename']) ? "-" : $user['middlename']; ?>
+                        </td>
                         <td><?= $user['lastname']; ?></td>
                         <td><?= $user['age']; ?></td>
                         <td><?= $user['sex']; ?></td>
@@ -66,7 +68,7 @@ $users = UserManagementController::user_management();
             pageLength: 10, // Number of rows per page
             lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
             responsive: true, // Enable responsive behavior
-            order: [] // Define the initial column order
+            order: [[9, 'desc']], // Sort the first column (index 0) in descending order
         });
 
         // Add a page change event listener to the DataTable

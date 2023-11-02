@@ -79,16 +79,22 @@ class AttendanceController {
 
                 // Execute the query
                 if ($this->connection->query($query) === true) {
-                    echo "Attendance check-in successful";
+                    header("Location: /eBrgy/app/attendance");
+                    $_SESSION['success'] = "You've successfully clocked in for the day! Your attendance has been recorded.";
                     $isCheckIn = true; // Set $isCheckIn to true after successful check-in
+                    exit();
                 } else {
                     echo "Error: " . $this->connection->error;
                 }
             } else {
-                echo "No late threshold found in settings.";
+                header("Location: /eBrgy/app/attendance");
+                $_SESSION['error'] = "No late threshold found in settings.";
+                exit();
             }
         } else {
-            echo "You have already checked in for today.";
+            header("Location: /eBrgy/app/attendance");
+            $_SESSION['error'] = "You have already checked in for today.";
+            exit();
         }
     } elseif (isset($_POST['check_out'])) {
         if ($isCheckIn && !$isCheckOut) {
@@ -99,27 +105,29 @@ class AttendanceController {
 
             // Execute the query
             if ($this->connection->query($query) === true) {
-                echo "Attendance check-out successful";
+                header("Location: /eBrgy/app/attendance");
+                $_SESSION['success'] = "Great job! You've successfully clocked out for the day. Your attendance has been logged.";
                 $isCheckOut = true; // Set $isCheckOut to true after successful check-out
+                exit();
             } else {
                 echo "Error: " . $this->connection->error;
             }
         } elseif (!$isCheckIn) {
-            echo "You need to check-in first before checking out.";
+            header("Location: /eBrgy/app/attendance");
+            $_SESSION['error'] = "You need to check-in first before checking out.";
+            exit();
+
         } else {
-            echo "You have already checked out for today.";
+            header("Location: /eBrgy/app/attendance");
+            $_SESSION['error'] = "You have already checked out for today.";
         }
     }
 
     // Save the updated flag values in session variables
     $_SESSION['isCheckIn'] = $isCheckIn;
     $_SESSION['isCheckOut'] = $isCheckOut;
-
-  
 }
-
-    
-        
+       
 
     public function my_attendance(){
         // Check the connection

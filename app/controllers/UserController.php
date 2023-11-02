@@ -14,7 +14,7 @@ class UserController {
     public function login()
     {
         if (isset($_POST['login'])) {
-            $username = $_POST['username'];
+            $username = trim($_POST['username']);
             $password = $_POST['password'];
     
             // Validate username and password

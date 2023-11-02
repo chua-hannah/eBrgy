@@ -104,6 +104,7 @@
 <script>
 $(document).ready(function () {
     $('#attendanceTable').DataTable({
+        order: [[0, 'desc']], // Sort the first column (index 0) in descending order
         paging: true, // Enable pagination
         pageLength: 5, // Number of rows per page
         lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page

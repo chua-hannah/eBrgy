@@ -84,8 +84,6 @@ class RequestManagementController {
 
     function approve_report($report_id) {
 
-        $activationMessage = '';
-
         if (isset($_POST['approve_report'])) {
             date_default_timezone_set('Asia/Manila');
 
@@ -100,36 +98,38 @@ class RequestManagementController {
 
         
             if ($stmt->execute()) {
-                // Activation successful
-                $activationMessage = "Report Approved successfully.";
-                header("Location: /eBrgy/app/requests/reports");
+                header("Location: /eBrgy/app/requests-reports");
+                $_SESSION['success'] = "The report was successfully approved.";
+                exit();
             } else {
-                // Activation failed
-                $activationMessage = "Error updating user status: " . $stmt->error;
+                $_SESSION['error'] = "Error updating report status: " . $stmt->error;
             }
         
             // Close the prepared statement
             $stmt->close();
         }
-        return $activationMessage;
-
     }
 
     function delete_report($report_id) {
+        $processBy = $_SESSION['username'];
+    
+        date_default_timezone_set('Asia/Manila');
+
+        // Get the current timestamp
+        $processAt = date('Y-m-d H:i:s');
 
         if (isset($_POST['delete_report'])) {
             // Retrieve the user ID from the form
             $report_id = $_POST['report_id'];
         
-            $stmt = $this->connection->prepare("DELETE FROM report_requests WHERE id = ?");
-            $stmt->bind_param("i", $report_id); // Assuming user_id is an integer
+            $stmt = $this->connection->prepare("UPDATE report_requests SET status = 'rejected', process_by = ?, process_at = ? WHERE id = ?");
+            $stmt->bind_param("ssi", $processBy, $processAt, $report_id); // Assuming user_id is an integer
         
             if ($stmt->execute()) {
-                header("Location: /eBrgy/app/requests/reports");
-                $_SESSION['success'] = "The report was successfully deleted.";
+                header("Location: /eBrgy/app/requests-reports");
+                $_SESSION['success'] = "The report was successfully rejected.";
                 exit();
             } else {
-                // Activation failed
                 $_SESSION['error'] = "Error updating user status: " . $stmt->error;
             }
         
@@ -168,8 +168,7 @@ class RequestManagementController {
     // Use prepared statement to prevent SQL injection
     $query = "SELECT u.firstname, u.middlename, u.lastname, u.address, d.*
               FROM users u
-              JOIN doc_requests d ON u.username = d.username
-              WHERE d.status = 'pending'";
+              JOIN doc_requests d ON u.username = d.username";
     $stmt = $this->connection->prepare($query);
     $stmt->execute();
 
@@ -221,8 +220,8 @@ class RequestManagementController {
             $stmt->bind_param("ssi", $processBy, $processAt, $doc_id); // Assuming user_id is an integer
     
             if ($stmt->execute()) {
-                header("Location: requests");
-                $_SESSION['success'] = "The report was successfully approved.";
+                header("Location: /eBrgy/app/requests-documents");
+                $_SESSION['success'] = "The document request was successfully approved.";
                 exit();
             } else {
                 $_SESSION['error'] = "Error updating user status: " . $stmt->error;
@@ -247,8 +246,8 @@ class RequestManagementController {
             $stmt->bind_param("ssi", $processBy, $processAt, $doc_id); // Assuming user_id is an integer
     
             if ($stmt->execute()) {
-                header("Location: requests");
-                $_SESSION['success'] = "The report was successfully rejected.";
+                header("Location: /eBrgy/app/requests-documents");
+                $_SESSION['success'] = "The document request was successfully rejected.";
                 exit();
             } else {
                 // Activation failed
@@ -262,7 +261,7 @@ class RequestManagementController {
 
     //EQUIP
     private function getEquipmentUserData($equipment_id) {
-        $sql = "SELECT u.firstname, u.middlename, u.lastname, u.address, d.*
+        $sql = "SELECT u.firstname, u.middlename, u.lastname, u.address, u.mobile, u.email, d.*
         FROM users u
         JOIN equipment_requests d ON u.username = d.username
         WHERE d.id = ?";
@@ -301,8 +300,6 @@ class RequestManagementController {
     }   
 
     function add_remarks($equipment_id, $remarks) {
-        $activationMessage = '';
-    
         if (isset($_POST['add_remarks'])) {
             $equipment_id = $_POST['equipment_id'];
             $remarks = $_POST['remarks'];
@@ -313,22 +310,20 @@ class RequestManagementController {
     
             if ($stmt->execute()) {
                 // Remarks updated successfully
-                $activationMessage = "Remarks updated successfully.";
-                echo '<script>window.location.href = "requests-equipments";</script>';
+                header("Location: /eBrgy/app/requests-equipments");
+                $_SESSION['success'] = "A remarks was added successfully.";
+                exit();
             } else {
                 // Update failed
-                $activationMessage = "Error updating remarks: " . $stmt->error;
+                $_SESSION['error'] = "Error updating remarks: " . $stmt->error;
             }
     
             // Close the prepared statement
             $stmt->close();
         }
-        return $activationMessage;
     }
     
     function approve_equipment($equipment_id, $message, $total_equipment_id) {
-        $activationMessage = '';
-    
         if (isset($_POST['approve_equipment'])) {
             date_default_timezone_set('Asia/Manila');
             $equipment_id = $_POST['equipment_id'];
@@ -344,12 +339,12 @@ class RequestManagementController {
             $stmt->bind_param("sssi", $processBy, $processAt, $message, $equipment_id); // Assuming user_id is an integer
     
             if ($stmt->execute()) {
-                // Activation successful
-                $activationMessage = "Request Approved successfully.";
-                echo '<script>window.location.href = "requests-equipments";</script>';
+                header("Location: /eBrgy/app/requests-equipments");
+                $_SESSION['success'] = "Equipment request was successfully approved.";
+                exit();
             } else {
                 // Activation failed
-                $activationMessage = "Error updating request status: " . $stmt->error;
+                $_SESSION['error'] = "Error updating request status: " . $stmt->error;
             }
     
             // Close the prepared statement
@@ -369,19 +364,17 @@ class RequestManagementController {
                 // Equipment settings updated successfully
             } else {
                 // Equipment settings update failed
-                $activationMessage = "Error updating equipment settings: " . $stmt2->error;
+                $_SESSION['error'] =  "Error updating equipment settings: " . $stmt2->error;
             }
     
             // Close the prepared statement
             $stmt2->close();
         }
-        return $activationMessage;
     }
     
     
 
     function returned_equipment($equipment_id, $total_equipment_id) {
-        $activationMessage = '';
     
         if (isset($_POST['returned_equipment'])) {
             date_default_timezone_set('Asia/Manila');
@@ -397,12 +390,12 @@ class RequestManagementController {
             $stmt->bind_param("ssi", $processReturned, $returnedAt, $equipment_id); // Assuming user_id is an integer
     
             if ($stmt->execute()) {
-                // Activation successful
-                $activationMessage = "Equipments Returned successfully.";
-                echo '<script>window.location.href = "requests-equipments";</script>';
+                header("Location: /eBrgy/app/requests-equipments");
+                $_SESSION['success'] = "Equipment was returned successfully.";
+                exit();
             } else {
                 // Activation failed
-                $activationMessage = "Error updating request status: " . $stmt->error;
+                $_SESSION['error'] = "Error updating request status: " . $stmt->error;
             }
     
             // Close the prepared statement
@@ -423,22 +416,19 @@ class RequestManagementController {
                 // Equipment settings updated successfully
             } else {
                 // Equipment settings update failed
-                $activationMessage = "Error updating equipment settings: " . $stmt2->error;
+                $_SESSION['error'] = "Error updating equipment settings: " . $stmt2->error;
             }
     
             // Close the prepared statement
             $stmt2->close();
         }
-        return $activationMessage;
     }
     
     
 
     function delete_equipment($equipment_id) {
-      
-        $activationMessage = '';
 
-        if (isset($_POST['delete_equipment'])) {
+            if (isset($_POST['delete_equipment'])) {
             
             date_default_timezone_set('Asia/Manila');
             $processReturned = $_SESSION['username'];
@@ -454,11 +444,12 @@ class RequestManagementController {
     
             if ($stmt->execute()) {
                 // Activation successful
-                $activationMessage = "Equipments Rejected successfully.";
-                echo '<script>window.location.href = "requests-equipments";</script>';
+                header("Location: /eBrgy/app/requests-equipments");
+                $_SESSION['success'] = "Equipment request was successfully rejected.";
+                exit();
             } else {
                 // Activation failed
-                $activationMessage = "Error updating request status: " . $stmt->error;
+                $_SESSION['error'] = "Error updating request status: " . $stmt->error;
             }
     
             // Close the prepared statement
@@ -479,14 +470,12 @@ class RequestManagementController {
                 // Equipment settings updated successfully
             } else {
                 // Equipment settings update failed
-                $activationMessage = "Error updating equipment settings: " . $stmt2->error;
+                $_SESSION['error'] = "Error updating equipment settings: " . $stmt2->error;
             }
     
             // Close the prepared statement
             $stmt2->close();
         }
-        return $activationMessage;
-
     }
   
 
@@ -497,7 +486,9 @@ class RequestManagementController {
         }
     
         // Use a prepared statement to prevent SQL injection
-        $query = "SELECT * FROM equipment_requests WHERE status IN ('pending', 'approved')";
+        $query = "SELECT u.firstname, u.middlename, u.lastname, u.address, d.*
+        FROM users u
+        JOIN equipment_requests d ON u.username = d.username";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
     
@@ -519,7 +510,9 @@ class RequestManagementController {
       
             $currentDate = date('Y-m-d');
             
-            $query = "SELECT * FROM schedule_requests WHERE schedule_date >= ? ORDER BY schedule_date ASC LIMIT 10";
+            $query = "SELECT u.firstname, u.middlename, u.lastname, u.address, u.mobile, u.email, s.* 
+            FROM users u
+            JOIN schedule_requests s ON u.username = s.username WHERE s.schedule_date >= ?   ORDER BY s.schedule_date ASC LIMIT 10";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $currentDate);
             $stmt->execute();
@@ -565,8 +558,12 @@ class RequestManagementController {
     public function get_list_schedules($reserved_schedule) {
       
         if (isset($_POST['showData'])) {
-            // Get the selected date from the "Show Schedules" form
+            // Convert birthdate to YYYY-MM-DD format
             $selectedDate = $reserved_schedule;
+            $selectedDateTimestamp = strtotime($selectedDate);
+            // Valid date format, convert it to YYYY-MM-DD
+            $selectedDate = date('Y-m-d', $selectedDateTimestamp);
+            // Get the selected date from the "Show Schedules" form
     
             $query = "SELECT * FROM schedule_requests WHERE schedule_date = ?";
             $stmt = $this->connection->prepare($query);
@@ -590,8 +587,6 @@ class RequestManagementController {
         }
 
         function approve_schedule($schedule_id) {
-
-            $activationMessage = '';
     
             if (isset($_POST['approve_schedule'])) {
                 $schedule_id = $_POST['schedule_id'];
@@ -604,20 +599,41 @@ class RequestManagementController {
                 $stmt = $this->connection->prepare("UPDATE schedule_requests SET status = 'approved', process_by = ?, process_at = ? WHERE id = ?");
                 $stmt->bind_param("ssi", $processBy, $processAt, $schedule_id); // Assuming user_id is an integer
                 if ($stmt->execute()) {
-                    // Activation successful
-                    $activationMessage = "Equipment Request Approved successfully.";
-                    echo '<script>window.location.href = "requests-schedules";</script>';
+                    header("Location: /eBrgy/app/requests-schedules");
+                    $_SESSION['success'] = "Schedule request was successfully approved.";
+                    exit();
                 } else {
-                    // Activation failed
-                    $activationMessage = "Error updating request status: " . $stmt->error;
+                    $_SESSION['error'] = "Error updating request status: " . $stmt->error;
                 }
             
                 // Close the prepared statement
                 $stmt->close();
-            }
-            return $activationMessage;
-    
+            }    
         }
-  }
-  
+
+        function reject_schedule($schedule_id) {
+    
+            if (isset($_POST['reject_schedule'])) {
+                $schedule_id = $_POST['schedule_id'];
+                date_default_timezone_set('Asia/Manila');
+                $processBy = $_SESSION['username'];
+                $date = date('Y-m-d');
+                $time_in = date('H:i:s'); 
+                $processAt = $date . ' ' . $time_in;
+            
+                $stmt = $this->connection->prepare("UPDATE schedule_requests SET status = 'rejected', process_by = ?, process_at = ? WHERE id = ?");
+                $stmt->bind_param("ssi", $processBy, $processAt, $schedule_id); // Assuming user_id is an integer
+                if ($stmt->execute()) {
+                    header("Location: /eBrgy/app/requests-schedules");
+                    $_SESSION['success'] = "Schedule request was successfully rejected.";
+                    exit();
+                } else {
+                    $_SESSION['error'] = "Error updating request status: " . $stmt->error;
+                }
+            
+                // Close the prepared statement
+                $stmt->close();
+            }    
+        }
+  }  
 ?>
