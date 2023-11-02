@@ -1,29 +1,52 @@
-<div>Add Equipment </div>
-    <div>
-    <form action="" method="post">
-        <input type="text" name="equipment_name" placeholder="Equipment Name" required>
-        <input type="text" name="number_of_equipment" placeholder="Number of Equipment" required>
-        <input type="text" name="total_equipment" placeholder="Total Number of Equipment" required>
-
-        <select name="availability" required>
-            <option value="">Choose status</option>
-            <option value="1">Available</option>
-            <option value="2">Not Available</option>
-        </select>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="requests">Manage Requests</a></li>
+    <li class="breadcrumb-item"><a href="requests-equipments">Equipments</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage Equipment</li>
+  </ol>
+</nav>
+</nav>
+<div class="container-fluid">
+<h3>Manage Equipment</h3>
+<div class="col-md-12">
+    <form class="custom-form mb-4" action="" method="post">
+    <div class="row">
+        <div class="col-md-3">
+            <label class="labels">Equipment Name</label>
+            <input type="text" class="form-control" name="equipment_name" placeholder="ex. Tables, Chairs" required>
+        </div>
+        <div class="col-md-3">
+            <label class="labels">Number of Equipment</label>
+            <input type="number" class="form-control" name="number_of_equipment" oninput="validateNumericInput(this)" required>
+        </div>
+        <div class="col-md-3">
+            <label class="labels">Total Number of Equipment</label>
+            <input type="number" class="form-control" name="total_equipment" oninput="validateNumericInput(this)" required>
+        </div>
+        <div class="col-md-3">
+            <label class="labels">Availability</label>
+            <select class="form-select" name="availability" required>
+                <option value="" disabled selected>Choose status</option>
+                <option value="1">Available</option>
+                <option value="2">Not Available</option>
+            </select>
+        </div>
         <!-- <textarea name="description" placeholder="Description" required></textarea> -->
         <!-- Add more fields as needed -->
-        <button type="submit" name="add_equipment">Submit</button>
+        <div class="col-md-12">
+            <button type="submit" class="form-control mt-2" name="add_equipment">Add Equipment</button>
+        </div>
+    </div>
     </form>
     </div>
-
     <div>
-         List of Equipments
+    <h3>List of Equipments</h3>
         <div>
             <?php
             // Check if there are any records fetched from the database
             if (!empty($requests)) {
             ?>
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped custom-table datatable">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -55,14 +78,7 @@
                 echo "No Data Available.";
             }
             ?>
-        </div>
-       
-        <a href="http://localhost/eBrgy/app/requests-equipments" style="color: white; text-decoration: none;">
-            <button class="btn btn-secondary">
-                Back to Equipment Requests
-            </button>
-        </a>
- 
+        </div> 
         </div>
 
             <!--Additional div for sidebar-->

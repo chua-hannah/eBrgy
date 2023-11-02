@@ -1845,3 +1845,91 @@ table.dataTable tfoot td {
 .container-fluid.edit-user p {
   font-size: 18px;
 }
+
+/* Style for the enlarged image container */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 10%;
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-bottom: 10%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+/* Style the modal */
+.modal-img {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 200px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Modal content (the image) */
+.modal-img-content {
+  display: block;
+  margin: 0 auto;
+  max-width: 80%;
+  max-height: 90%;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* Adjust padding for medium-sized screens */
+@media (min-width: 768px) {
+  .modal-img {
+    padding-top: 150px; /* Change this value for medium-sized screens */
+  }
+}
+
+/* Adjust padding for larger screens */
+@media (min-width: 992px) {
+  .modal-img {
+    padding-top: 200px; /* Change this value for larger screens */
+  }
+}
+
+/* Adjust padding for extra-large screens */
+@media (min-width: 1200px) {
+  .modal-img {
+    padding-top: 250px; /* Change this value for extra-large screens */
+  }
+}
+
+/* Adjust size for medium-sized screens */
+@media (min-width: 768px) {
+  .modal-img-content {
+    max-width: 80%; /* Change this value for medium-sized screens */
+    max-height: 70%; /* Change this value for medium-sized screens */
+  }
+}
+
+/* Adjust size for larger screens */
+@media (min-width: 992px) {
+  .modal-img-content {
+    max-width: 70%; /* Change this value for larger screens */
+    max-height: 60%; /* Change this value for larger screens */
+  }
+}
+
+/* Adjust size for extra-large screens */
+@media (min-width: 1200px) {
+  .modal-img-content {
+    max-width: 20%; /* Change this value for extra-large screens */
+    max-height: 90%; /* Change this value for extra-large screens */
+  }
+}

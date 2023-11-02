@@ -1,52 +1,61 @@
-
-
-<!-- templates/services.php -->
-<div>
-    <h1>Reports</h1>
-   
-
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="requests">Manage Requests</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage Report Requests</li>
+  </ol>
+</nav>
+<div class="container-fluid">
+    <h3>Report / Complaint Requests</h3>
     <div class="table-responsive text-center">
-        <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped custom-table" id="reportsTable">
             <thead>
                 <tr>
-                    <th>action</th>
-                    <th style="min-width: 220px;">Informant Name</th>
+                    <th>Informant Name</th>
                     <th>Informant Address</th>
-                    <th>Informant Mobile</th>
-                    <th style="min-width: 220px;">Person to report</th>
-                    <th style="min-width: 220px;">Subject</th>
+                    <th>Person to Report</th>
+                    <th>Subject</th>
                     <th>Place of Incident</th>
-                    <th style="min-width: 120px;">Date of Incident</th>
-                    <th style="min-width: 120px;">Time of Incident</th>
-                    <th>Notes</th>
+                    <th>Date of Incident</th>
+                    <th>Date & Time Submitted</th>
                     <th>Status</th>
-                    <th style="min-width: 120px;">Time of Report</th>
+                    <th>Action/s</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 foreach ($requests as $request) {
+                    $createdAtFormattedDate = date("m/d/Y", strtotime($request['created_at']));
+                    $createdAtFormattedTime = date("h:i A", strtotime($request['created_at']));
                     ?>
                     <tr>
+                        <td><?php echo $request['firstname'] . ' '  . $request['lastname']; ?></td>
+                        <td><?php echo $request['address']; ?></td>
+                        <td><?php echo $request['reported_person']; ?></td>
+                        <td><?php echo $request['subject_person']; ?></td>
+                        <td><?php echo $request['place_of_incident']; ?></td>
+                        <td><?php echo date('m/d/Y', strtotime($request['date_of_incident'])); ?></td>
+                        <td><?php echo $createdAtFormattedDate . " " . $createdAtFormattedTime; ?></td>
+                        <?php
+                        $status = strtoupper($request['status']);
+                        $statusClass = '';
+
+                        if ($status === 'PENDING') {
+                            $statusClass = 'text-warning';
+                        } elseif ($status === 'APPROVED') {
+                            $statusClass = 'text-success';
+                        } elseif ($status === 'REJECTED') {
+                            $statusClass = 'text-danger';
+                        }
+
+                        echo '<td class="' . $statusClass . '">' . $status . '</td>';
+                        ?>
                         <td>
                             <form action="requests-edit-report" method="post">
                                 <input type="hidden" name="report_id" value="<?php echo $request['id']; ?>">
                                 <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
-                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
                             </form>
                         </td>
-                        <td><?php echo $request['firstname'] . ' '  . $request['lastname']; ?></td>
-                        <td><?php echo $request['address']; ?></td>
-                        <td><?php echo $request['mobile']; ?></td>
-                        <td><?php echo $request['reported_person']; ?></td>
-                        <td><?php echo $request['subject_person']; ?></td>
-                        <td><?php echo $request['place_of_incident']; ?></td>
-                        <td><?php echo $request['date_of_incident']; ?></td>
-                        <td><?php echo $request['time_of_incident']; ?></td>
-                        <td><?php echo $request['note']; ?></td>
-                        <td><?php echo $request['status']; ?></td>
-                        <td><?php echo $request['created_at']; ?></td>
-                        
                     </tr>
                     <?php
                 }
@@ -61,3 +70,23 @@
     </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        var userTable = $('#reportsTable').DataTable({
+            paging: true, // Enable pagination
+            pageLength: 10, // Number of rows per page
+            lengthMenu: [10, 25, 50, 100], // Dropdown for rows per page
+            responsive: true, // Enable responsive behavior
+            order: [[6, 'desc']], // Sort the first column (index 0) in descending order
+        });
+
+        // Add a page change event listener to the DataTable
+        userTable.on('page.dt', function () {
+            // Smooth scroll to the top of the page
+            $('html, body').animate({
+                scrollTop: 0
+            }, 0.5); // 500ms animation duration
+        });
+        
+    });
+</script>

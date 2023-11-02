@@ -317,6 +317,7 @@ switch ($filename) {
                                 $latestSchedulesDataonClick = $requestManagementController->get_latest_list_schedules_onClick();
                                 $schedulesData = $requestManagementController->get_list_schedules($reserved_schedule);
                                 $requestManagementController->approve_schedule($schedule_id);
+                                $requestManagementController->reject_schedule($schedule_id);
                                 include 'templates/admin/schedule_requests.php';      
                             });
                             break; 

@@ -9,8 +9,8 @@
         <div class="row d-flex justify-content-center">
         <h3 class="mb-4">File a report or a complaint</h3>
             <div class="col-lg-12 col-md-6 col-12">
-                <label class="labels">Person to Report</label>
-                <input type="text" name="reported_person_name" id="reported_person_name" class="form-control" placeholder="Full name" required>
+                <label class="labels">Person to Report (if applicable)</label>
+                <input type="text" name="reported_person_name" id="reported_person_name" class="form-control" placeholder="Full name (Optional)">
             </div>  
 
             <div class="col-lg-12 col-md-6 col-12">
@@ -34,7 +34,7 @@
                     <span class="input-group-text">
                     <i class="bi bi-alarm"></i></i>
                     </span>
-                    <input type="text" name="time_of_incident" id="timepicker" class="form-control" placeholder="HH:MM AM/PM" required>
+                    <input type="time" name="time_of_incident" class="form-control" required>
                 </div>
             </div>
 
@@ -101,13 +101,18 @@
                                             $processedAtFormattedTime = date("h:i A", $processAt);
 
                                         }
+                                        
+                                        $process_by = $request['process_by'];
+                                        if ($process_by == "") {
+                                            $process_by = "-";
+                                        }
                                 ?>
                                     <tr>
                                         <td><?php echo $request['subject_person']; ?></td>
                                         <td><?php echo strtoupper($request['status']); ?></td>
                                         <td><?php echo $createdAtFormattedDate . " " . $createdAtFormattedTime; ?></td>
                                         <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
-                                        <td><?php echo $request['process_by']; ?></td>
+                                        <td><?php echo $process_by; ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

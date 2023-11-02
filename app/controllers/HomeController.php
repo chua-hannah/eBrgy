@@ -245,6 +245,9 @@ public function documents() {
 
         // Combine date and time into a single datetime string
         $datetime = $date . ' ' . $time_in;
+        // Add mobile prefix
+        $prefixMobileNumber = "+63";
+        $mobile = $prefixMobileNumber . $mobile;
 
         // Check if a similar request already exists based on request_name, fullname, email, and mobile
         $checkQuery = "SELECT COUNT(*) as count FROM doc_requests WHERE request_name = ? AND username = ? AND email = ? AND mobile = ? AND status IN ('PENDING')";
@@ -258,9 +261,9 @@ public function documents() {
         if ($count === 0) {
             // No similar request exists with the same fullname, email, mobile, and request_name
             // Proceed to insert the new request into the database
-            $query = "INSERT INTO doc_requests (request_name, username, email, mobile, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO doc_requests (request_name, username, email, mobile, status, message, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param('sssssss', $request_name, $username, $email, $mobile, $service_message, $status, $datetime);
+            $stmt->bind_param('sssssss', $request_name, $username, $email, $mobile, $status, $service_message, $datetime);
             if ($stmt->execute()) {
                 // Request sent successfully
                 header("Location: documents");

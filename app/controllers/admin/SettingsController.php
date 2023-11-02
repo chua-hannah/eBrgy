@@ -65,19 +65,37 @@ class SettingsController {
     
             // Combine date and time into a single datetime string
             $datetime = $date . ' ' . $time_in;
-    
-            // Use prepared statement to insert data into the database
-            $query = "INSERT INTO doc_settings (request_name, request_status, description, created_at) VALUES ('$request_name', '$status', '$description', '$datetime')";
-    
-            // Prepare the statement
-            if ($this->connection->query($query) === true) {
-              // Registration successful
-              $_SESSION["success"] = "Message sent successfully.";
-           
-          } else {
-              // Error occurred
-              echo "Error: " . $this->connection->error;
-          }
+            $db_request_name = $this->connection->real_escape_string($request_name); // Sanitize input
+
+            // Check if the request_name already exists in the database
+            $check_query = "SELECT request_name FROM doc_settings WHERE request_name = '$db_request_name'";
+            $result = $this->connection->query($check_query);
+
+            if ($result) {
+                if ($result->num_rows > 0) {
+                    // Request_name already exists
+                    header("Location: /eBrgy/app/requests-documents-management");
+                    $_SESSION["error"] = "Document name already exists.";
+                    exit();
+                } else {
+                    // Use prepared statement to insert data into the database
+                    $query = "INSERT INTO doc_settings (request_name, request_status, description, created_at) VALUES ('$db_request_name', '$status', '$description', '$datetime')";
+                    
+                    // Prepare the statement
+                    if ($this->connection->query($query) === true) {
+                        // Registration successful
+                        header("Location: /eBrgy/app/requests-documents-management");
+                        $_SESSION["success"] = "A new document type has been successfully created.";
+                        exit();
+                    } else {
+                        // Error occurred
+                        echo "Error: " . $this->connection->error;
+                    }
+                }
+            } else {
+                // Error occurred in the query
+                echo "Error: " . $this->connection->error;
+            }
         }
     
         // Render the contact page content
@@ -120,7 +138,7 @@ class SettingsController {
               // Registration successful
               header("Location: requests-equipments-management");
               $_SESSION["success"] = "New equipment has been added successfully.";
-           
+              exit();           
           } else {
               // Error occurred
               echo "Error: " . $this->connection->error;

@@ -1,3 +1,10 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="requests">Requests</a></li>
+        <li class="breadcrumb-item"><a href="/eBrgy/app/requests-equipments">Equipments</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><?php echo $userData['username']; ?>'s Equipment Request</li>
+    </ol>
+</nav>
 <?php
 $username = isset($_POST['username']) ? $_POST['username'] : null;
 
@@ -9,50 +16,134 @@ if ($username) {
   <div>
 </div>
 
-<div class="container mt-5">
-    <h1>Manage Equipment Request</h1>
-
+<div class="container-fluid edit-user">
+    <h5>Manage Equipment Request</h5>
     <div class="card">
-    <div class="card-header text-center">
-        Requestor Informations
+        <div class="card-header">
+            <h6 class="mb-0">Equipment Request Details</h6>
+        </div>
+        <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>Equipment: </strong><?php echo $userData['equipment_name']; ?></p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>Status:
+                <?php
+                $status = strtoupper($userData['status']);
+                $colorClass = '';
+
+                switch ($status) {
+                    case 'REJECTED':
+                        $colorClass = 'text-danger';
+                        break;
+                    case 'PENDING':
+                        $colorClass = 'text-warning';
+                        break;
+                    case 'APPROVED':
+                        $colorClass = 'text-success';
+                        break;
+                    case 'RETURNED':
+                        $colorClass = 'text-primary';
+                        break;        
+                    default:
+                        // Handle other statuses if needed
+                        break;
+                }
+                ?>
+
+                <span class="<?php echo $colorClass; ?>"><?php echo $status; ?></strong></span>
+            </div>
+            <div class="col-md-4 mb-3"></div>
+            <div class="col-md-12 mb-3">
+                <p class="card-text"><strong>Quantity:</strong> <?php echo $userData['total_equipment_borrowed']; ?></p>
+            </div>
+            <div class="col-md-12 mb-3">
+                <p class="card-text"><strong>Duration (days):</strong> <?php echo $userData['days']; ?></p>
+            </div>
+            <?php
+            if ($status === "APPROVED" || $status === "REJECTED" || $status === "RETURNED") {
+                echo '<div class="col-md-12 mb-3">';
+                echo '<p class="card-text"><strong>Processed by: </strong>';
+                if (empty($userData['process_by'])) {
+                    echo "-";
+                } else {
+                    echo $userData['process_by'];
+                }
+                echo '</p>';
+                echo '</div>';
+                echo '<div class="col-md-12 mb-3">';
+                echo '<p class="card-text"><strong>Processed at (Date & Time): </strong>';
+                if (empty($userData['process_at'])) {
+                    echo "-";
+                } else {
+                    echo date('m/d/Y h:i A', strtotime($userData['process_at']));
+                }
+                echo '</p>';
+                echo '</div>';
+            }
+            ?>
+            <div class="col-md-12 mb-3"></div>
+            <h6 class="mb-3">Requestor Details</h6>
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>First Name:</strong> <?php echo $userData['firstname']; ?></p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>Middle Name:</strong>
+                <?php
+                    if (empty($userData['middlename'])) {
+                        echo "-";
+                    } else {
+                        echo $userData['middlename'];
+                    }
+                ?>
+                </p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>Last Name:</strong> <?php echo $userData['lastname']; ?></p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>Address:</strong> <?php echo $userData['address']; ?></p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>Mobile:</strong> <?php echo $userData['mobile']; ?></p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="card-text"><strong>Email:</strong> <?php echo $userData['email']; ?></p>
+            </div>
+            <div class="col-md-12 mb-3">
+            <p class="card-text"><strong>Date and Time Requested:</strong> <?php echo date('m/d/Y h:i A', strtotime($userData['request_date'])); ?></p>
+            </div>
+            <div class="col-md-12 mb-3"></div>
+            <div class="col-md-12 mb-3">
+                <form method="post" action="">
+                    <input type="hidden" name="equipment_id" value="<?php echo $userData['id']; ?>">
+                    <input type="hidden" name="total_equipment_id" value="<?php echo $userData['equipment_id']; ?>">
+                    <input type="hidden" name="username" value="<?php echo $userData['username']; ?>">
+                        <?php if ($userData['status'] !== 'pending') { ?>
+                        <p class="mb-3"><strong>Admin Remarks:</strong></p>
+                        <textarea name="remarks" rows="2" class="form-control mb-3" id="remarks" <?php
+                            echo ($userData['status'] === 'rejected' || $userData['status'] === 'returned' || !empty($userData['remarks'])) ? 'disabled' : '';
+                        ?> required><?php echo $userData['remarks']; ?></textarea>
+                    <?php } ?>
+
+                    <p class="mb-3"><strong>Message to Requestor:</strong></p>
+                    <textarea name="message" rows="2" class="form-control mb-3" id="message" <?php echo ($userData['status'] === 'pending') ? '' : 'disabled'; ?> required><?php echo $userData['message']; ?></textarea>
+
+                    <?php if ($userData['status'] === 'approved' && !empty($userData['remarks'])) { ?>
+                        <button name="returned_equipment" type="submit" class="btn btn-primary" style="padding: 8px;">Tag as Returned</button>
+                    <?php } elseif ($userData['status'] === 'approved') { ?>
+                        <button name="add_remarks" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">Add Remarks</button>
+                        <button name="delete_equipment" type="submit" class="btn btn-danger" style="padding: 8px;">Reject</button>
+                    <?php } elseif ($userData['status'] === 'pending') { ?>
+                        <button name="approve_equipment" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">Approve</button>
+                        <button name="delete_equipment" type="submit" class="btn btn-danger" style="padding: 8px;">Reject</button>
+                    <?php } ?>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-       
-        <p class="card-text">Fullname: <?php echo $userData['firstname'] . ' ' . $userData['middlename'] . ' ' . $userData['lastname']; ?></p>
-        <p class="card-text"> Address: <?php echo $userData['address']; ?></p>
-        <p class="card-text">Request: <?php echo $userData['equipment_name']; ?></p>
-        <p class="card-text">Status: <?php echo $userData['status']; ?></p>
-        <p class="card-text">Quantity: <?php echo $userData['total_equipment_borrowed']; ?></p>
-        <p class="card-text">Durations(days): <?php echo $userData['days']; ?></p>
-        <p class="card-text">Requested at: <?php echo $userData['request_date']; ?></p>
-        <form method="post" action="">
-            <input type="hidden" name="equipment_id" value="<?php echo $userData['id']; ?>">
-            <input type="hidden" name="total_equipment_id" value="<?php echo $userData['equipment_id']; ?>">
-            <input type="hidden" name="username" value="<?php echo $userData['username']; ?>">
-            <label for="remarks">Remarks:</label>
-            <textarea name="remarks" rows="2" class="form-control mb-4" id="remarks" <?php echo ($userData['status'] === 'pending' || !empty($userData['remarks'])) ? 'disabled' : ''; ?> value="<?php echo $userData['remarks']; ?>" required><?php echo $userData['remarks']; ?></textarea>
-            <label for="message">Message:</label>
-            <textarea name="message" rows="2" class="form-control mb-4" id="message" <?php echo ($userData['status'] === 'approved') ? 'disabled' : ''; ?> value="<?php echo $userData['message']; ?>" required><?php echo $userData['message']; ?></textarea>
 
-            <?php if ($userData['status'] === 'approved' && !empty($userData['remarks'])) { ?>
-                <button name="returned_equipment" type="submit" class="btn btn-warning" style="padding: 8px;">Returned</button>
-            <?php } elseif ($userData['status'] === 'approved') { ?>
-                <button name="add_remarks" type="submit" class="btn btn-primary" style="padding: 8px;">Add Remarks</button>
-                <button name="delete_equipment" type="submit" class="btn btn-danger" style="padding: 8px;">Delete</button>
-            <?php } elseif ($userData['status'] === 'pending') { ?>
-                <button name="approve_equipment" type="submit" class="btn btn-primary" style="padding: 8px;">Approve Equipment</button>
-                <button name="delete_equipment" type="submit" class="btn btn-danger" style="padding: 8px;">Delete</button>
-            <?php } ?>
-
-            
-
-
-           
-        </form>
-
-
-          <div>
-    </div>
     </div>
 </div>
 

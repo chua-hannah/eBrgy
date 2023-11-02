@@ -50,6 +50,14 @@
     disableMobile: "true"
   });
 
+  flatpickr("#datepicker-regular", {
+    dateFormat: "m/d/Y", // Set the desired date format
+    altInput: true,     // Show the formatted date in the input field
+    altFormat: "m/d/Y", // Use the same date format for displaying
+    disableMobile: "true"
+  });
+
+
   flatpickr("#timepicker", {
     enableTime: true,
     noCalendar: true,
@@ -77,6 +85,7 @@ $(document).ready(function () {
       });
   });
 });
+
 // Automatically dismiss the alert after 5 seconds (5000 milliseconds)
 setTimeout(function () {
   document.getElementById('alert').style.display = 'none';
