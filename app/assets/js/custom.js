@@ -39,7 +39,7 @@
     altInput: true,     // Show the formatted date in the input field
     altFormat: "m/d/Y", // Use the same date format for displaying
     maxDate: "today",    // Optionally, limit selection to today or earlier
-    disableMobile: "true"
+    disableMobile: true
   });
 
   flatpickr("#datepicker-future", {
@@ -47,14 +47,14 @@
     altFormat: "m/d/Y", // Use the same date format for displaying
     minDate: tomorrow, // Disable today and past dates
     maxDate: oneMonthLater,
-    disableMobile: "true"
+    disableMobile: true
   });
 
   flatpickr("#datepicker-regular", {
     dateFormat: "m/d/Y", // Set the desired date format
     altInput: true,     // Show the formatted date in the input field
     altFormat: "m/d/Y", // Use the same date format for displaying
-    disableMobile: "true"
+    disableMobile: true
   });
 
 

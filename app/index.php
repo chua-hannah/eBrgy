@@ -375,8 +375,10 @@ switch ($filename) {
                             break;
                         case 'masterlist':
                             includeAdminContent(function() use ($reportsController) {
+                                $resident_id = $_SESSION['id'];
                                 $reportsController->register_to_masterlist();
                                 $masterListReports = $reportsController->masterlist_reports();
+                                $delete_resident = $reportsController->delete_resident($resident_id);
                                 include 'templates/admin/reports/users_master_list.php';
                             });
                             break;

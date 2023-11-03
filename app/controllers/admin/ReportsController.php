@@ -21,6 +21,7 @@ class ReportsController {
         $pwdCount = 0;
         $fourPsCount = 0;
         $soloParentCount = 0;
+        $scholarCount = 0;
     
         // Fetch all user records as an associative array
         $users = array();
@@ -41,6 +42,9 @@ class ReportsController {
                 if ($row['solo_parent'] == 1) {
                     $soloParentCount++;
                 }
+                if ($row['scholar'] == 1) {
+                    $scholarCount++;
+                }
             }
         }
     
@@ -51,6 +55,7 @@ class ReportsController {
             'pwdCount' => $pwdCount,
             'fourPsCount' => $fourPsCount,
             'soloParentCount' => $soloParentCount,
+            'scholarCount' => $scholarCount,
         );
     
         return $userReports;
@@ -259,6 +264,8 @@ class ReportsController {
         $position = 'residence';
     
         if (isset($_POST['add_to_user_masterlist'])) {
+            $error = '';
+            $errors = array();
             $email = $_POST['email'];
             $mobile = $_POST['mobile'];
             $firstname = $_POST['firstname'];
@@ -321,28 +328,22 @@ class ReportsController {
                 $senior = $age >= 60 ? 1 : 0;
                
                 // Check if the username or email already exists in the database
-                $query = "SELECT * FROM users WHERE mobile = '$mobile'";
+                $query = "SELECT * FROM users_masterlist WHERE firstname = '$firstname' AND lastname = '$lastname' AND birthdate = '$birthdate'";
                 $result = $this->connection->query($query);
-                $existingMobile = false;
     
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        if ($row['mobile'] == $mobile) {
-                            $existingMobile = true;
-                        }
-                        if ($row['email'] == $email) {
-                            $existingEmail = true;
+                        if ($row['firstname'] == $firstname && $row['lastname'] == $lastname && $row['birthdate'] == $birthdate) {
+                            $duplicateFirstNameLastNameBirthdate = true;
                         }
                     }
                 }
     
-                if ($existingMobile) {
+                if ($duplicateFirstNameLastNameBirthdate) {
                     // Mobile number already exists, display an error message
-                    $error = "Given mobile number already exists.";
-                }
-                elseif ($existingEmail) {
-                    // Email already exists, display an error message
-                    $error = "Given email already exists.";
+                    header("Location: masterlist");
+                    $_SESSION['error'] = "A resident with the same first name, last name, and birthdate already exists.";
+                    exit();
                 } elseif (empty($error) && empty($errors)) {
                     // Insert the data into the database
                     $query = "INSERT INTO users_masterlist ( mobile, email, firstname, middlename, lastname, birthdate, age, gender, address, position, senior, four_ps, pwd, solo_parent, scholar)
@@ -351,16 +352,36 @@ class ReportsController {
                     if ($this->connection->query($query) === true) {
                         // Registration successful
                         header("Location: masterlist");
-                        $_SESSION['Added Successfully'] = true;
+                        $_SESSION['success'] = "Resident was successfully added to the masterlist";
                         exit();
                     } else {
                         // Error occurred
-                        $_SESSION['registerFailed'] = "Error: " . $this->connection->error;
+                        $_SESSION['error'] = "Error: " . $this->connection->error;
                     }
                 }
             }
         }
     }
+    function delete_resident($resident_id) {
+        if (isset($_POST['delete_resident'])) {
+            // Retrieve the resident_id from the form input
+            $resident_id = $_POST['id'];
+    
+            $stmt = $this->connection->prepare("DELETE FROM users_masterlist WHERE id = ?");
+            $stmt->bind_param("i", $resident_id); // Assuming id is an integer
+            if ($stmt->execute()) {
+                header("Location: /eBrgy/app/masterlist");
+                $_SESSION['success'] = "Resident was successfully deleted.";
+                exit();
+            } else {
+                $_SESSION['error'] = "Error deleting resident: " . $stmt->error;
+            }
+    
+            // Close the prepared statement
+            $stmt->close();
+        }
+    }
+    
     
     public function masterlist_reports() {
         if ($this->connection->error) {
@@ -375,6 +396,7 @@ class ReportsController {
         $pwdCount = 0;
         $fourPsCount = 0;
         $soloParentCount = 0;
+        $scholarCount = 0;
     
         // Fetch all user records as an associative array
         $users = array();
@@ -395,6 +417,9 @@ class ReportsController {
                 if ($row['solo_parent'] == 1) {
                     $soloParentCount++;
                 }
+                if ($row['scholar'] == 1) {
+                    $scholarCount++;
+                }
             }
         }
     
@@ -405,6 +430,7 @@ class ReportsController {
             'pwdCount' => $pwdCount,
             'fourPsCount' => $fourPsCount,
             'soloParentCount' => $soloParentCount,
+            'scholarCount' => $scholarCount,
         );
     
         return $userReports;

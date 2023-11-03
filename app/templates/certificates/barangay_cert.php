@@ -9,8 +9,6 @@
         body {
             font-family: Arial, sans-serif;
             font-size: 16px;
-             
-
         }
         .container {
             width: 80%;
@@ -19,12 +17,11 @@
         .header {
             text-align: center;
             font-weight: bold;
-            margin-top: 100px;
-
+            margin-top: 60px;
         }
         .header2 {
             text-align: center;
-            margin-top: 60px;
+            margin-top: 20px;
             font-weight: bold;
 
         }
@@ -43,7 +40,6 @@
            width: 70%;
            margin-left: 16px;
            margin-top: 16px;
-
         }
         .footer {
             margin-top: 60px;
@@ -65,7 +61,7 @@
             right: 100px;
             top: 100px;
             height: 200px;
-            weight: 200px;
+            width: 200px;
         }
         .logo1 {
             position: absolute;
@@ -92,11 +88,12 @@
             margin-top: 16px;
         }
         input[type="checkbox"] {
-        border: 2px solid #000; 
-        width: 20px; 
-        height: 20px; 
-        border-radius: 0; 
+            border: 2px solid #000; 
+            width: 20px; 
+            height: 20px; 
+            border-radius: 0; 
         }
+
         /* styles.css */
         .indented-paragraph {
             margin-left: 20px; /* Adjust the margin value as needed for your desired indentation. */
@@ -107,18 +104,17 @@
 <body>
     <div class="container">
         <div class="header">
-            <p>City of Manila</p>
             <p class="fw-bold">REPUBLIC OF THE PHILIPPINES</p>
+            <p>City of Manila</p>
             <p>OFFICE OF THE BARANGAY CHAIRMAN</p>
-            <p>BARANGAY 95 - ZONE 8</p>
-            <p>DISTRICT 1</p>
-            <p>TELEPHONE NO. 8-294-47-66</p>
+            <p>BARANGAY 95 - ZONE 8 DISTRICT 1</p>
+            <p>TELEPHONE NO. 08-294-47-66</p>
             <img src="./templates/certificates/brgy_cert_logo.png" alt="brgy logo" class="logo">
             <img src="./templates/certificates/brgy_cert_logo1.svg" alt="brgy logo" class="logo1">
         </div>
 
         <div class="header2">
-        <u><h2>CERTIFICATE OF INDIGENCY</h2></u>
+        <u><h2>BARANGAY CERTIFICATE</h2></u>
            
         </div>
 
@@ -177,7 +173,9 @@
 
                 <div class="mt-3">
                 <div><strong>ANTONIO P. GARRA</strong></div>
-                <div>Brgy. TreasurerECS 2018</div>
+                <div>Brgy. Treasurer</div>
+                <br>
+                <div>ECS 2018</div>
                 </div>
             </div>
             <div class="content2">
@@ -190,43 +188,42 @@
             Deragatory Record or pending case filed against him/her in his barangay.</p>
             <div class="indented-paragraph mt-5"><strong><u>REQUIREMENT IN SUPPORT OF HIS/HER DOCUMENT:</u></strong></div>
             <div class="checkbox-container mt-2">
-                <!-- First Column with 6 Checkboxes -->
                 <label>
-                    <input type="checkbox" name="option" id="option1" <?php if ($docRequestUserData['message'] === 'Requirement for Employment') echo ' checked '; ?>  disabled> Requirement for Employment
+                    <input type="checkbox" name="option" id="option1" <?php if ($docRequestUserData['message'] === 'Requirement for Employment') echo ' checked '; ?> > Requirement for Employment
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option2"  <?php if ($docRequestUserData['message'] === 'Medical Purposet') echo ' checked '; ?> disabled> Medical Purpose ___________________
+                    <input type="checkbox" name="option" id="option2"  <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo ' checked '; ?> > Medical Purpose <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option3"  <?php if ($docRequestUserData['message'] === 'School Requirement') echo ' checked '; ?> disabled> School Requirement <u>ADMISSION</u>
+                    <input type="checkbox" name="option" id="option3"  <?php if ($docRequestUserData['message'] === 'School Requirement') echo ' checked '; ?> > School Requirement <u>ADMISSION</u>
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option4" <?php if ($docRequestUserData['message'] === 'Vending Permit') echo ' checked '; ?> disabled> Vending Permit _____________
+                    <input type="checkbox" name="option" id="option4" <?php if ($docRequestUserData['message'] === 'Vending Permit') echo ' checked '; ?> > Vending Permit <?php if ($docRequestUserData['message'] === 'Vending Permit') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option5"  <?php if ($docRequestUserData['message'] === 'Hospital Purposes') echo ' checked '; ?> disabled> Hospital Purposes
+                    <input type="checkbox" name="option" id="option5"  <?php if ($docRequestUserData['message'] === 'Hospital Purposes') echo ' checked '; ?> > Hospital Purposes
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option6" <?php if ($docRequestUserData['message'] === 'Bank Requirements') echo ' checked '; ?> disabled> Bank Requirements _____________
+                    <input type="checkbox" name="option" id="option6" <?php if ($docRequestUserData['message'] === 'Bank Requirements') echo ' checked '; ?>> Bank Requirements <?php if ($docRequestUserData['message'] === 'Bank Requirements') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
                 </label>
                 
                 <label>
-                    <input type="checkbox" name="option" id="option7" <?php if ($docRequestUserData['message'] === 'SSS/GSIS Requirement') echo ' checked '; ?> disabled> SSS/GSIS Requirement
+                    <input type="checkbox" name="option" id="option7" <?php if ($docRequestUserData['message'] === 'SSS/GSIS Requirement') echo ' checked '; ?>> SSS/GSIS Requirement
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option8" <?php if ($docRequestUserData['message'] === 'Transfer of Resident') echo ' checked '; ?>>Transfer of Resident
+                    <input type="checkbox" name="option" id="option8" <?php if ($docRequestUserData['message'] === 'Transfer of Resident') echo ' checked '; ?>> Transfer of Resident
                 </label>
                 <label>
                     <input type="checkbox" name="option" id="option9" <?php if ($docRequestUserData['message'] === 'Calamity / Livelihood Loan') echo ' checked '; ?>> Calamity / Livelihood Loan
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option10" <?php if ($docRequestUserData['message'] === 'SENIOR ID') echo ' checked '; ?>> ID for <u>SENIOR ID REPLACEMENT</u>
+                    <input type="checkbox" name="option" id="option10" <?php if ($docRequestUserData['message'] === 'ID for') echo ' checked '; ?>> ID for <?php if ($docRequestUserData['message'] === 'ID for') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
                 </label>
                 <label>
-                    <input type="checkbox" name="option" id="option11" <?php if ($docRequestUserData['message'] === 'LEGAL PURPOSE') echo ' checked '; ?>> Others: <u>LEGAL PURPOSE</u>
+                    <input type="checkbox" name="option" id="option11" <?php if ($docRequestUserData['message'] === 'Others') echo ' checked '; ?>> Others: <?php if ($docRequestUserData['message'] === 'Others') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
                 </label>
             </div>
-            <div class="indented-paragraph mt-2">IN WITNESS WHEREOF I have here unto set my hand and affixed the official seal of
+            <div class="indented-paragraph mt-2">IN WITNESS WHEREOF I have hereunto set my hand and affixed the official seal of
             this office.</div> <?php
             $datetime = $docRequestUserData['process_at'];
             $date = date("jS \d\a\y \of F, Y", strtotime($datetime));
@@ -252,7 +249,6 @@
             <div>Certified by:</div>
             <div><strong>Hon. RONALD M. LEE</strong></div>
             <div>Punong Barangay</div>
-            <br>
             <p><?php
             $datetime = $docRequestUserData['process_at'];
             $date = date("F j, Y", strtotime($datetime));
@@ -274,6 +270,14 @@
         window.print();
 
     });
+    var checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default click action
+        });
+    });
+    
 </script>
 
 

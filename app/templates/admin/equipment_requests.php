@@ -35,7 +35,7 @@
                     <tr>
                         <td><?php echo $request['equipment_name']; ?></td>
                         <td><?php echo $request['total_equipment_borrowed']; ?></td>
-                        <td><?php echo date('m/d/Y', strtotime($request['return_date'])); ?></td>
+                        <td><?php echo !empty($request['return_date']) ? date('m/d/Y', strtotime($request['return_date'])) : '-'; ?></td>
                         <td><?php echo $request['firstname']; ?></td>
                         <td>                    
                         <?php

@@ -22,11 +22,10 @@
                 <thead>
                     <tr>
                     <th class="wrap-text">Document</th>
+                    <th class="wrap-text">Purpose / Remarks</th>
                     <th class="wrap-text">First Name</th>
                     <th class="wrap-text">Middle Name</th>
                     <th class="wrap-text">Last Name</th>
-                    <th class="wrap-text">Address</th>
-                    <th class="wrap-text">Mobile</th>
                     <th class="wrap-text">Date & Time Submitted</th>
                     <th class="wrap-text">Status</th>
                     <th class="wrap-text">Action/s</th>
@@ -36,6 +35,7 @@
                     <?php foreach ($requests as $request): ?>
                     <tr>
                         <td><?php echo $request['request_name']; ?></td>
+                        <td><?php echo !empty($request['message']) ? $request['message'] : '-'; ?></td>
                         <td><?php echo $request['firstname']; ?></td>
                         <td>                    
                         <?php
@@ -47,8 +47,6 @@
                         ?>
                         </td>
                         <td><?php echo $request['lastname']; ?></td>
-                        <td><?php echo $request['address']; ?></td>
-                        <td><?php echo $request['mobile']; ?></td>
                         <?php
                         $createdAt = strtotime($request['created_at']);
 

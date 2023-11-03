@@ -288,6 +288,7 @@ public function documents() {
         $status = 'pending';
         $request_name = $_POST['selected_service'];
         $service_message = $_POST['service_message'];
+        $purpose = $_POST['purpose'];
         $date = date('Y-m-d');
         $time_in = date('H:i:s'); // Philippine time
 
@@ -309,9 +310,9 @@ public function documents() {
         if ($count === 0) {
             // No similar request exists with the same fullname, email, mobile, and request_name
             // Proceed to insert the new request into the database
-            $query = "INSERT INTO doc_requests (request_name, username, email, mobile, status, message, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO doc_requests (request_name, username, email, mobile, status, message, purpose, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param('sssssss', $request_name, $username, $email, $mobile, $status, $service_message, $datetime);
+            $stmt->bind_param('ssssssss', $request_name, $username, $email, $mobile, $status, $service_message, $purpose, $datetime);
             if ($stmt->execute()) {
                 // Request sent successfully
                 header("Location: documents");

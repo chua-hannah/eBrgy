@@ -565,7 +565,9 @@ class RequestManagementController {
             $selectedDate = date('Y-m-d', $selectedDateTimestamp);
             // Get the selected date from the "Show Schedules" form
     
-            $query = "SELECT * FROM schedule_requests WHERE schedule_date = ?";
+            $query = "SELECT u.firstname, u.middlename, u.lastname, u.address, u.mobile, u.email, s.* 
+            FROM users u
+            JOIN schedule_requests s ON u.username = s.username WHERE s.schedule_date = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $selectedDate);
             $stmt->execute();

@@ -20,6 +20,7 @@
                         <?php
                     }
                 ?>
+
             </select>
         </div>
         <div class="col-lg-12 col-md-6 col-12">
@@ -27,6 +28,10 @@
             <div id="remarks_field">
                 <textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>
             </div>
+        </div>
+        <div class="col-lg-12 col-md-6 col-12" id="purpose_field" style="display: none;">
+            <label class="labels" id="purpose_label">Remarks</label>
+            <input type="text" name="purpose" rows="3" class="form-control mb-4" id="purpose_input">
         </div>
     </div>
     <div class="d-grid gap-2 col-12 mx-auto">
@@ -57,8 +62,8 @@
                             <thead class="text-center">
                                 <tr>
                                     <th>Document Type</th>
-                                    <th>Remarks</th>
-                                    
+                                    <th>Purpose / Remarks</th>
+                                    <th>Additional Details</th>
                                     <th>Request Date & Time</th>
                                     <th>Processed Date & Time</th>
                                     <th>Status</th>
@@ -93,8 +98,8 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $request['request_name']; ?></td>
-                                        <td><?php echo $request['message']; ?></td>
-                                       
+                                        <td><?php echo !empty($request['message']) ? $request['message'] : '-'; ?></td>
+                                        <td><?php echo !empty($request['purpose']) ? $request['purpose'] : '-'; ?></td>
                                         <td><?php echo $createdAtDateFormattedDate . " " . $createdAtTimeFormattedTime; ?></td>
                                         <td><?php echo $processedAtFormattedDate . " " . $processedAtFormattedTime; ?></td>
                                         <td>
@@ -163,39 +168,77 @@
 
 
 <script>
-    // Get references to the document type and remarks field
-    const selectedService = document.getElementById('selected_service');
-    const remarksLabel = document.getElementById('remarks_label');
-    const remarksField = document.getElementById('remarks_field');
+  // Get references to the document type and remarks field
+const selectedService = document.getElementById('selected_service');
+const remarksLabel = document.getElementById('remarks_label');
+const remarksField = document.getElementById('remarks_field');
+const purposeField = document.getElementById('purpose_field');
+const purposeInput = document.getElementById('purpose_input');
 
-    // Define the options for the "Barangay Certificate" document
-    const barangayCertificateOptions = [
-        "Requirement for Employment",
-        "Medical Purpose",
-        "School Requirement",
-        "Vending Permit",
-        "Hospital Purposes",
-        "Bank Requirements",
-        "SSS/GSIS Requirement",
-        "Transfer of Resident",
-        "Calamity / Livelihood Loan",
-        "SENIOR ID",
-        "LEGAL PURPOSE"
-    ];
+// Define the options for the "Barangay Certificate" document
+const barangayCertificateOptions = [
+    "Requirement for Employment",
+    "Medical Purpose",
+    "School Requirement",
+    "Vending Permit",
+    "Hospital Purposes",
+    "Bank Requirements",
+    "SSS/GSIS Requirement",
+    "Transfer of Resident",
+    "Calamity / Livelihood Loan",
+    "ID for",
+    "Others"
+];
 
-    // Add an event listener to the document type selection
-    selectedService.addEventListener('change', function() {
-        if (selectedService.value === "barangay certificate") {
-            // If "Barangay Certificate" is selected, change the field to an option select input
-            remarksLabel.innerText = "Select an option";
-            remarksField.innerHTML = '<select name="service_message" class="form-select" required>' +
-                '<option value="" disabled selected>Select Purpose</option>' +
-                barangayCertificateOptions.map(option => `<option value="${option}">${option}</option>`).join('') +
-                '</select>';
+const allowedValues = ["Medical Purpose", "School Requirement", "Vending Permit", "Bank Requirements", "ID for", "Others"];
+
+// Add an event listener to the document type selection
+selectedService.addEventListener('change', function() {
+    if (selectedService.value === "barangay certificate") {
+        // If "Barangay Certificate" is selected, change the field to an option select input
+        remarksLabel.innerText = "Purpose";
+        remarksField.innerHTML = '<select name="service_message" class="form-select" required>' +
+            '<option value="" disabled selected>Select Purpose</option>' +
+            barangayCertificateOptions.map(option => `<option value="${option}">${option}</option>`).join('') +
+            '</select>';
+    } else {
+        // If a different document type is selected, revert to the text area
+        remarksLabel.innerText = "Remarks";
+        remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>';
+    }
+});
+
+// Add an event listener to the "service_message" select to check if one of the allowed values is selected
+document.addEventListener('change', function(e) {
+    if (e.target.name === "service_message") {
+        const selectedValue = e.target.value;
+        // Check if the selected value is in the allowed values array
+        if (allowedValues.includes(selectedValue)) {
+            // Show the "Purpose" field
+            purposeField.style.display = 'block';
+
+            // Dynamically change the placeholder for the "Purpose" field
+            if (selectedValue === "School Requirement") {
+                purposeInput.placeholder = "Ex. Admission";
+            } else if (selectedValue === "ID for") {
+                purposeInput.placeholder = "Ex. Senior ID Replacement";
+            }
+            else if (selectedValue === "Others") {
+                purposeInput.placeholder = "Ex. Legal Purposes";
+            }
+            else {
+                // Reset the placeholder for other cases
+                purposeInput.placeholder = "Details";
+            }
         } else {
-            // If a different document type is selected, revert to the text area
-            remarksLabel.innerText = "Remarks";
-            remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>';
+            // Hide the "Purpose" field and reset the placeholder
+            purposeField.style.display = 'none';
+            purposeInput.placeholder = "";
         }
-    });
+    }
+});
+selectedService.addEventListener("change", function() {
+    purposeField.style.display = 'none';
+    purposeInput.placeholder = "";
+});
 </script>

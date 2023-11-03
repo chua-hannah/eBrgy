@@ -25,7 +25,7 @@ if ($username) {
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-4 mb-3">
-                    <p class="card-text"><strong>Document Type: <?php echo $userData['request_name']; ?></strong></p>
+                    <p class="card-text"><strong>Document Type: </strong><?php echo $userData['request_name']; ?></p>
                 </div>
                 <div class="col-md-4 mb-3">
                     <p class="card-text"><strong>Status:
@@ -43,6 +43,26 @@ if ($username) {
                     </p>
                 </div>
                 <div class="col-md-4 mb-3"></div>
+                <div class="col-md-12 mb-3">
+                    <p class="card-text"><strong>Purpose / Remarks:</strong>
+                    <?php
+                    if (empty($userData['message'])) {
+                        echo "-";
+                    } else {
+                        echo "{$userData['message']}</p>";
+                    }
+                    ?>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <p class="card-text"><strong>Additional Remarks:</strong>
+                    <?php
+                    if (empty($userData['purpose'])) {
+                        echo "-";
+                    } else {
+                        echo "{$userData['purpose']}</p>";
+                    }
+                    ?>
+                </div>
                 <?php
                 $status = strtoupper($userData['status']);
                 if ($status === "APPROVED" || $status === "REJECTED") {
@@ -93,16 +113,6 @@ if ($username) {
                 </div>
                 <div class="col-md-4 mb-3">
                     <p class="card-text"><strong>Email:</strong> <?php echo $userData['email']; ?></p>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <p class="card-text"><strong>Remarks:</strong>
-                    <?php
-                    if (empty($userData['message'])) {
-                        echo "-";
-                    } else {
-                        echo "{$userData['message']}</p>";
-                    }
-                    ?>
                 </div>
                 <div class="col-md-12 mb-3">
                     <p class="card-text"><strong>Date and Time Requested:</strong> <?php echo date('m/d/Y h:i A', strtotime($userData['created_at'])); ?></p>

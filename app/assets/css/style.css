@@ -1053,6 +1053,12 @@ blockquote::before {
   }
 }
 
+@media (max-width: 1200px) {
+  .long-label {
+    font-size: 13px; /* Adjust this value for screens wider than 1200px */
+  }
+}
+
 /*---------------------------------------
   CUSTOM FORM               
 -----------------------------------------*/
@@ -1225,6 +1231,22 @@ blockquote::before {
 .custom-form button[type="submit"]:hover:enabled,
 .custom-form button[type="submit"]:focus:enabled {
   background: var(--custom-btn-bg-hover-color);
+  border-color: transparent;
+}
+
+.custom-form button[type="cancel"] {
+  background: #dc3545;
+  border: none;
+  border-radius: var(--border-radius-large);
+  color: var(--white-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-semibold);
+  transition: all 0.3s;
+}
+
+.custom-form button[type="cancel"]:hover:enabled,
+.custom-form button[type="cancel"]:focus:enabled {
+  background: #990000;
   border-color: transparent;
 }
 
@@ -1932,4 +1954,45 @@ table.dataTable tfoot td {
     max-width: 20%; /* Change this value for extra-large screens */
     max-height: 90%; /* Change this value for extra-large screens */
   }
+}
+.link-button {
+  font-size: 1.1em !important;
+  background: none;
+  border: none;
+  color: blue; /* Set the desired text color */
+  text-decoration: underline; /* Add underline to make it look like a link */
+  cursor: pointer; /* Change the cursor to a pointer to indicate it's clickable */
+  padding: 0; /* Remove padding */
+  font: inherit; /* Inherit the parent font */
+  margin: 0; /* Remove margin */
+  outline: none; /* Remove the focus outline, if desired */
+  /* Add other styling as needed */
+}
+
+/* Define a custom style for the print button */
+#printTableButton {
+  background-color: var(--primary-color); /* Blue background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none;
+  cursor: pointer;
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+/* Define a hover effect for the button */
+#printTableButton:hover {
+  background-color: var(--secondary-color); /* Darker blue on hover */
+}
+
+#printContainer {
+  display: none; /* Hide the print container by default */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: auto;
+  border: 1px solid #000;
+  padding: 10px;
+  background-color: white;
 }
