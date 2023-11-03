@@ -144,28 +144,33 @@
                         </a>
                     </li>
                 <?php } ?>
+                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'masterlist' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/masterlist">
+                        <i class="bi bi-list-ul"></i> Barangay Masterlist
+                    </a>
+                </li>
             
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="javascript:void(0);" id="dropdownLink">
-                        <i class="bi bi-file-earmark"></i> Report
+                        <i class="bi bi-file-earmark"></i> Reports
                     </a>
                 </li>
 
                 <div class="collapse" id="dropdownTabs">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab1' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/users-report">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/requests-report">Requests</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab3' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/masterlist">Master List</a>
-                        </li>
-                       
+                    <li class="nav-item ms-3">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab1' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/users-report">
+                            <i class="bi bi-person"></i> Users
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/requests-report">
+                            <i class="bi bi-journal-text"></i> Requests
+                        </a>
+                    </li>                      
                     </ul>
                 </div>
-                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'requests' ? 'active' : ''; ?>">
+                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'home-setting' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo $baseUrl; ?>/home-setting">
                     <i class="bi bi-gear"></i> Homepage Setting
                     </a>

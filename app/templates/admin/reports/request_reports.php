@@ -1,6 +1,4 @@
-<button id="printTableButton">Print Table</button>
-
-
+<div class="container-fluid">
 <ul class="nav nav-tabs" id="myTabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Reklamo Report</a>
@@ -27,16 +25,16 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Reported Person</th>
-                            <th>Username</th>
-                            <th>Fullname</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Status</th>
-                            <th>Created at<br />(YY-MM-DD)</th>
-                            <th>Proccess at</th>
-                            <th>Process by</th>
-                            <th>Message</th>
+                            <th class="wrap-text">Reported Person</th>
+                            <th class="wrap-text">Username</th>
+                            <th class="wrap-text">Fullname</th>
+                            <th class="wrap-text">Email</th>
+                            <th class="wrap-text">Mobile</th>
+                            <th class="wrap-text">Status</th>
+                            <th class="wrap-text">Created at</th>
+                            <th class="wrap-text">Proccessed at</th>
+                            <th class="wrap-text">Processed by</th>
+                            <th class="wrap-text">Message</th>
 
                         </tr>
                     </thead>
@@ -78,16 +76,16 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Document Name</th>
-                            <th>Username</th>
-                            <th>Fullname</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Status</th>
-                            <th>Created at<br />(YY-MM-DD)</th>
-                            <th>Proccess at</th>
-                            <th>Process by</th>
-                            <th>Message</th>
+                            <th class="wrap-text">Document Name</th>
+                            <th class="wrap-text">Username</th>
+                            <th class="wrap-text">Fullname</th>
+                            <th class="wrap-text">Email</th>
+                            <th class="wrap-text">Mobile</th>
+                            <th class="wrap-text">Status</th>
+                            <th class="wrap-text">Created at<br />(YY-MM-DD)</th>
+                            <th class="wrap-text">Proccess at</th>
+                            <th class="wrap-text">Process by</th>
+                            <th class="wrap-text">Message</th>
 
                         </tr>
                     </thead>
@@ -128,16 +126,16 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Mobile</th>
-                                <th>Fullname</th>
-                                <th>Schedule Date</th>
-                                <th>Time in</th>
-                                <th>Time out </th>
-                                <th>Status</th>
-                                <th>Created at</th>
-                                <th>Proccess at</th>
-                                <th>Process by</th>
+                                <th class="wrap-text">Username</th>
+                                <th class="wrap-text">Mobile</th>
+                                <th class="wrap-text">Fullname</th>
+                                <th class="wrap-text">Schedule Date</th>
+                                <th class="wrap-text">Time in</th>
+                                <th class="wrap-text">Time out </th>
+                                <th class="wrap-text">Status</th>
+                                <th class="wrap-text">Created at</th>
+                                <th class="wrap-text">Proccess at</th>
+                                <th class="wrap-text">Process by</th>
                               
 
                             </tr>
@@ -179,15 +177,15 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Equipment name</th>
-                                <th>Quantity</th>
-                                <th>Return date</th>
-                                <th>Username</th>
-                                <th>Fullname</th>
-                                <th>Status </th>
-                                <th>Request Date</th>
-                                <th>Proccess at</th>
-                                <th>Process by</th>
+                                <th class="wrap-text">Equipment name</th>
+                                <th class="wrap-text">Quantity</th>
+                                <th class="wrap-text">Return date</th>
+                                <th class="wrap-text">Username</th>
+                                <th class="wrap-text">Fullname</th>
+                                <th class="wrap-text">Status </th>
+                                <th class="wrap-text">Request Date</th>
+                                <th class="wrap-text">Proccess at</th>
+                                <th class="wrap-text">Process by</th>
                               
 
                             </tr>
@@ -217,6 +215,17 @@
                 </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+        <!-- Content in the left side of the row (if any) -->
+        </div>
+        <div class="col">
+        <div class="d-flex justify-content-end mt-4">
+            <button id="printTableButton">Print Table</button>
+        </div>
+    </div>
+</div>
+</div>
 
        <!--Additional div for sidebar-->
        </div>
@@ -224,50 +233,53 @@
 </div>
 
 <script>
-    document.getElementById("printTableButton").addEventListener("click", function() {
-        var activeTab = document.querySelector('.nav-link.active'); // Get the active tab link
-        var tabContentId = activeTab.getAttribute('href').substring(1); // Get the tab content ID
+document.getElementById("printTableButton").addEventListener("click", function() {
+    var activeTab = document.querySelector('.nav-link.active'); // Get the active tab link
+    var tabContentId = activeTab.getAttribute('href').substring(1); // Get the tab content ID
 
-        var tableToPrint = document.getElementById(tabContentId).querySelector('table'); // Get the table in the active tab
-        var username = "<?php echo $_SESSION['username']; ?>"; // Get the username from the PHP session
+    var tableToPrint = document.getElementById(tabContentId).querySelector('table'); // Get the table in the active tab
+    var username = "<?php echo $_SESSION['username']; ?>"; // Get the username from the PHP session
 
-        // Apply CSS styles to add borders, center text in cells, and other styling
-        tableToPrint.style.borderCollapse = "collapse";
-        tableToPrint.style.border = "1px solid #000";
-        tableToPrint.style.textAlign = "center"; // Center align the text in cells
+    // Apply CSS styles to add borders, center text in cells, and other styling
+    tableToPrint.style.borderCollapse = "collapse";
+    tableToPrint.style.border = "1px solid #000";
+    tableToPrint.style.textAlign = "center"; // Center align the text in cells
 
-        var newWin = window.open('', '', 'width=600,height=600');
-        newWin.document.open();
-        newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
-        newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
+    var newWin = window.open('', '', 'width=600,height=600');
+    newWin.document.open();
+    newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
+    newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
 
-        // Get the table's content dynamically
-        var tableRows = tableToPrint.getElementsByTagName('tr');
+    // Get the table's content dynamically
+    var tableRows = tableToPrint.getElementsByTagName('tr');
 
-        // Add column headers
-        var headerRow = tableRows[0];
-        newWin.document.write('<table>');
+    // Add column headers
+    var headerRow = tableRows[0];
+    newWin.document.write('<table>');
+    newWin.document.write('<tr>');
+    newWin.document.write('<th>#</th>'); // Add Row Number header
+    var headerCells = headerRow.getElementsByTagName('th');
+    for (var h = 0; h < headerCells.length; h++) {
+        newWin.document.write('<th>' + headerCells[h].innerHTML + '</th>');
+    }
+    newWin.document.write('</tr>');
+
+    // Print the table, including all pages, with row numbers
+    for (var i = 1; i < tableRows.length; i++) {
         newWin.document.write('<tr>');
-        var headerCells = headerRow.getElementsByTagName('th');
-        for (var h = 0; h < headerCells.length; h++) {
-            newWin.document.write('<th>' + headerCells[h].innerHTML + '</th>');
+        newWin.document.write('<td>' + i + '</td>'); // Add Row Number
+        var tableCells = tableRows[i].getElementsByTagName('td');
+        for (var j = 0; j < tableCells.length; j++) {
+            newWin.document.write('<td>' + tableCells[j].innerHTML + '</td>');
         }
         newWin.document.write('</tr>');
+    }
 
-        // Print the table, including all pages
-        for (var i = 1; i < tableRows.length; i++) {
-            newWin.document.write('<tr>');
-            var tableCells = tableRows[i].getElementsByTagName('td');
-            for (var j = 0; j < tableCells.length; j++) {
-                newWin.document.write('<td>' + tableCells[j].innerHTML + '</td>');
-            }
-            newWin.document.write('</tr>');
-        }
+    newWin.document.write('</table>');
+    newWin.document.write('</body></html>');
+    newWin.document.close();
+    newWin.print();
+    newWin.close();
+});
 
-        newWin.document.write('</table>');
-        newWin.document.write('</body></html>');
-        newWin.document.close();
-        newWin.print();
-        newWin.close();
-    });
 </script>

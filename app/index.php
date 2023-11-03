@@ -205,8 +205,8 @@ switch ($filename) {
                                 $email = $_SESSION['email'];
                                 $homeController->$filename();   
                                 $requests = $settingsController->get_equipments_list(); // Call the function here
-                                $myrequest = $homeController->get_equipment_requests($username);   
-                                $reject_equipments= $homeController->reject_equipments($username);
+                                $myrequest = $homeController->get_equipment_requests($username, $mobile, $email);   
+                                $reject_equipment = $homeController->reject_equipments();
                                 include 'templates/equipments.php';      
   
                             });
@@ -375,10 +375,9 @@ switch ($filename) {
                             break;
                         case 'masterlist':
                             includeAdminContent(function() use ($reportsController) {
-                                $resident_id = $_SESSION['id'];
                                 $reportsController->register_to_masterlist();
                                 $masterListReports = $reportsController->masterlist_reports();
-                                $delete_resident = $reportsController->delete_resident($resident_id);
+                                $delete_resident = $reportsController->delete_resident();
                                 include 'templates/admin/reports/users_master_list.php';
                             });
                             break;

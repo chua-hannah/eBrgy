@@ -13,7 +13,7 @@ class ReportsController {
             die("Connection failed: " . $this->connection->error);
         }
     
-        $query = "SELECT * FROM users WHERE status = 'activated'";
+        $query = "SELECT * FROM users";
         $result = $this->connection->query($query);
     
         // Initialize counts for senior, PWD, 4Ps, and solo parent
@@ -362,10 +362,10 @@ class ReportsController {
             }
         }
     }
-    function delete_resident($resident_id) {
+    function delete_resident() {
         if (isset($_POST['delete_resident'])) {
             // Retrieve the resident_id from the form input
-            $resident_id = $_POST['id'];
+            $resident_id = $_POST['resident_id'];
     
             $stmt = $this->connection->prepare("DELETE FROM users_masterlist WHERE id = ?");
             $stmt->bind_param("i", $resident_id); // Assuming id is an integer
@@ -375,6 +375,8 @@ class ReportsController {
                 exit();
             } else {
                 $_SESSION['error'] = "Error deleting resident: " . $stmt->error;
+                header("Location: /eBrgy/app/masterlist"); // Redirect even on error
+                exit();
             }
     
             // Close the prepared statement

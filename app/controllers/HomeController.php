@@ -532,7 +532,7 @@ public function equipments() {
     }
 }
 
-function reject_equipments($equipment_id) {
+function reject_equipments() {
     if (isset($_POST['cancel_request_equipment'])) {
         $equipment_id = $_POST['id']; // Update this line to match the name of the hidden input in your form
     

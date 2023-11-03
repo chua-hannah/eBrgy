@@ -4,7 +4,7 @@
     <i class="bi bi-person"></i> Add Resident
 </button>
 </div>
-<h3 class="mt-2 mb-2">Resident Masterlist</h3>
+<h3 class="mt-2 mb-2 text-center">Resident Masterlist</h3>
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -138,7 +138,8 @@
 
 
 <div>
-    <div class="table-responsive text-center" id="myTable">
+    <div class="table-responsive">
+    <h4 class="mt-2 mb-2">Demographic Information</h4>
         <table class="table table-bordered table-striped custom-table">
             <thead>
                 <tr>
@@ -158,9 +159,9 @@
             </tbody>
         </table>
     </div>
-
-    <div class="table-responsive text-center" id="myTable">
-        <table class="table table-bordered table-striped custom-table datatable">
+    <div class="table-responsive">
+    <h4 class="mt-2 mb-2">Resident Information</h4>
+        <table class="table table-bordered table-striped custom-table datatable" id="myTable">
             <thead>
                 <tr>
                     <th class="wrap-text">First name</th>
@@ -184,7 +185,6 @@
                 foreach ($masterListReports['users'] as $masterListReport) {
                     ?>
                     <tr>
-                       
                         <td><?php echo $masterListReport['firstname']; ?></td>
                         <td><?php echo $masterListReport['middlename']; ?></td>
                         <td><?php echo $masterListReport['lastname']; ?></td>
@@ -200,8 +200,8 @@
                         <td><?php echo $masterListReport['scholar'] == 1 ? '&#10003;' : ''; ?></td>
                         <td>
                         <form method="POST" action="">
-                            <input type="" name="resident_id" value="' . $resident_id['resident_id'] . '">
-                            <button type="submit" class="btn btn-danger" name="delete_resident">Delete</button>
+                            <input type="hidden" name="resident_id" value="<?php echo $masterListReport['id'] ?>">
+                            <button type="" class="btn btn-danger" name="delete_resident">Delete</button>
                         </form>
                         </td>
                     </tr>
@@ -228,54 +228,49 @@
     </div>
 </div>
 <script>
-    document.getElementById("printTableButton").addEventListener("click", function() {
-        var tableToPrint = document.getElementById("myTable");
-        var username = "<?php echo $_SESSION['username']; ?>"; // Get the username from the PHP session
+document.getElementById("printTableButton").addEventListener("click", function() {
+    var table = $('#myTable').DataTable(); // Initialize DataTables on your table
+    var username = "<?php echo $_SESSION['username']; ?>"; // Get the username from the PHP session
+    var newWin = window.open('', '_blank', 'width=800,height=1100');
+   
+    newWin.document.open();
+    newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
 
-        // Apply CSS styles to add borders and center text in cells
-        tableToPrint.style.borderCollapse = "collapse";
-        tableToPrint.style.border = "1px solid #000";
-        tableToPrint.style.textAlign = "center"; // Center align the text in cells
+    // Add a header above the table
+    newWin.document.write('<h1>Users Report</h1>');
+    newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
 
-        var newWin = window.open('', '', 'width=600,height=600');
-        newWin.document.open();
-        newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
+    var tableData = table.data().toArray(); // Get all the data from DataTables
 
-        // Add a header above the table
-        newWin.document.write('<h1>Resident Masterlist</h1>');
+    newWin.document.write('<table>');
 
-        newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
-
-        // Get the table's content dynamically
-        var tableRows = tableToPrint.getElementsByTagName('tr');
-        newWin.document.write('<table>');
-
-        // Add column headers
-        var headerRow = tableRows[0];
-        newWin.document.write('<tr>');
-        var headerCells = headerRow.getElementsByTagName('th');
-        for (var h = 0; h < headerCells.length; h++) {
-            newWin.document.write('<th class="wrap-text">' + headerCells[h].innerHTML + '</th>');
-        }
-        newWin.document.write('</tr>');
-
-        // Add data rows
-        for (var i = 1; i < tableRows.length; i++) {
-            newWin.document.write('<tr>');
-            var tableCells = tableRows[i].getElementsByTagName('td');
-            for (var j = 0; j < tableCells.length; j++) {
-                newWin.document.write('<td>' + tableCells[j].innerHTML + '</td>');
-            }
-            newWin.document.write('</tr>');
-        }
-
-        newWin.document.write('</table>');
-
-        newWin.document.write('</body></html>');
-        newWin.document.close();
-        newWin.print();
-        newWin.close();
+    // Add column headers, including the "Row Number" column
+    var headerCells = $('#myTable thead th:not(:last-child)'); // Get column headers from the table
+    newWin.document.write('<tr>');
+    newWin.document.write('<th class="wrap-text">#</th>'); // Add Row Number header
+    headerCells.each(function () {
+        newWin.document.write('<th class="wrap-text">' + $(this).text() + '</th>');
     });
+    newWin.document.write('</tr>');
+
+    // Add data rows with row numbers
+    tableData.forEach(function (dataRow, rowIndex) {
+        newWin.document.write('<tr>');
+        newWin.document.write('<td>' + (rowIndex + 1) + '</td>'); // Add Row Number
+        dataRow.slice(0, -1).forEach(function (cellData) {
+            newWin.document.write('<td>' + cellData + '</td>');
+        });
+        newWin.document.write('</tr>');
+    });
+
+    newWin.document.write('</table>');
+
+    newWin.document.write('</body></html>');
+    newWin.document.close();
+    newWin.print();
+    newWin.close();
+});
+
     // Display error messages
     document.addEventListener("DOMContentLoaded", function () {
     const registerForm = document.getElementById("register-form");
