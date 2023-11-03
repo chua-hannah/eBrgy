@@ -169,6 +169,15 @@ switch ($filename) {
                             }
                             include 'templates/certificates/indigency_cert.php';
                             break;
+                        case 'first-job-certificate':
+                            $docId = $_POST['id'];
+                            $docRequestUserData = $homeController->print_doc($docId);
+                            if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                header("Location: documents"); // Redirect to the 'documents.php' page
+                                exit; 
+                            }
+                            include 'templates/certificates/firstjob_cert.php';
+                            break;
                         case 'barangay-certificate':
                             $docId = $_POST['id'];
                             $docRequestUserData = $homeController->print_doc($docId);

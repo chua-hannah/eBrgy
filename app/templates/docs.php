@@ -5,35 +5,38 @@
   </ol>
 </nav>
 <div class="col-lg-6 col-12 mx-auto">
-    <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
-        <div class="row d-flex justify-content-center">
+<form class="custom-form contact-form mb-4" action="#" method="post" role="form">
+    <div class="row d-flex justify-content-center">
         <h3 class="mb-4">Get a Barangay Document</h3>
-            <div class="col-lg-12 col-md-6 col-12">
-                <label class="labels">Document Type</label>
-                <select class="form-select" name="selected_service" required>
-                    <option value="" disabled selected>Select a document</option>
-                    <?php
-                        foreach ($requests as $request) {
-                            // Display the data for each request
-                            ?>
-                            <option value="<?php echo $request['request_name']; ?>"><?php echo $request['request_name']; ?></option>    
-                            <?php
-                        }
-                    ?>
-                </select>
-            </div>
-            <div class="col-lg-12 col-md-6 col-12">
-                <label class="labels">Remarks (Optional)</label>
+        <div class="col-lg-12 col-md-6 col-12">
+            <label class="labels">Document Type</label>
+            <select class="form-select" name="selected_service" id="selected_service" required>
+                <option value="" disabled selected>Select a document</option>
+                <?php
+                    foreach ($requests as $request) {
+                        // Display the data for each request
+                        ?>
+                        <option value="<?php echo $request['request_name']; ?>"><?php echo $request['request_name']; ?></option>
+                        <?php
+                    }
+                ?>
+            </select>
+        </div>
+        <div class="col-lg-12 col-md-6 col-12">
+            <label class="labels" id="remarks_label">Remarks</label>
+            <div id="remarks_field">
                 <textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>
             </div>
         </div>
-        <div class="d-grid gap-2 col-12 mx-auto">
-            <button type="submit" name="request_service" class="form-control">Submit Request</button>
-            <a href="#requestListModal" class="text-center mb-0" data-bs-toggle="modal" data-bs-target="#requestListModal">
-                View Submitted Requests
-            </a>
-        </div>
-    </form>
+    </div>
+    <div class="d-grid gap-2 col-12 mx-auto">
+        <button type="submit" name="request_service" class="form-control">Submit Request</button>
+        <a href="#requestListModal" class="text-center mb-0" data-bs-toggle="modal" data-bs-target="#requestListModal">
+            View Submitted Requests
+        </a>
+    </div>
+</form>
+
 </div>
 <!-- Modal -->
 <div class="modal fade" id="requestListModal" tabindex="-1" aria-labelledby="requestListModalLabel" aria-hidden="true">
@@ -117,10 +120,13 @@
                                                 // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
                                                 $action = ''; // Initialize the action variable
                                             
-                                                if ($request['request_name'] === 'barangay certificate') {
-                                                    $action = 'barangay-certificate';
+                                                if ($request['request_name'] === 'firstjob certificate') {
+                                                    $action = 'first-job-certificate';
                                                 } elseif ($request['request_name'] === 'indigency certificate') {
                                                     $action = 'indigency-certificate';
+                                                }
+                                                elseif ($request['request_name'] === 'barangay certificate') {
+                                                    $action = 'barangay-certificate';
                                                 }
                                             
                                                 if (!empty($action)) {
@@ -156,4 +162,40 @@
 
 
 
-  
+<script>
+    // Get references to the document type and remarks field
+    const selectedService = document.getElementById('selected_service');
+    const remarksLabel = document.getElementById('remarks_label');
+    const remarksField = document.getElementById('remarks_field');
+
+    // Define the options for the "Barangay Certificate" document
+    const barangayCertificateOptions = [
+        "Requirement for Employment",
+        "Medical Purpose",
+        "School Requirement",
+        "Vending Permit",
+        "Hospital Purposes",
+        "Bank Requirements",
+        "SSS/GSIS Requirement",
+        "Transfer of Resident",
+        "Calamity / Livelihood Loan",
+        "SENIOR ID",
+        "LEGAL PURPOSE"
+    ];
+
+    // Add an event listener to the document type selection
+    selectedService.addEventListener('change', function() {
+        if (selectedService.value === "barangay certificate") {
+            // If "Barangay Certificate" is selected, change the field to an option select input
+            remarksLabel.innerText = "Select an option";
+            remarksField.innerHTML = '<select name="service_message" class="form-select" required>' +
+                '<option value="" disabled selected>Select Purpose</option>' +
+                barangayCertificateOptions.map(option => `<option value="${option}">${option}</option>`).join('') +
+                '</select>';
+        } else {
+            // If a different document type is selected, revert to the text area
+            remarksLabel.innerText = "Remarks";
+            remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>';
+        }
+    });
+</script>
