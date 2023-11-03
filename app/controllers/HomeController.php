@@ -8,9 +8,13 @@ class HomeController {
       $this->connection = $connection;
   }
   
- // Function to fetch user data from the database
- private function getRequestDocData($docId) {
-    $sql = "SELECT * FROM doc_requests WHERE id = ?";
+// Function to fetch user data including user details from the 'users' table, including the 'sex' column
+private function getRequestDocData($docId) {
+    $sql = "SELECT dr.*, u.firstname, u.middlename, u.lastname, u.address, u.sex, u.age 
+            FROM doc_requests dr
+            LEFT JOIN users u ON dr.username = u.username
+            WHERE dr.id = ?";
+    
     $stmt = $this->connection->prepare($sql);
     $stmt->bind_param("i", $docId);
     $stmt->execute();
@@ -27,21 +31,22 @@ class HomeController {
 public function print_doc($docId) {
     // Ensure that docId is available as a variable
     if ($docId) {
-        // Fetch user data based on the docId from the users table
+        // Fetch user data including user details from the 'users' table, including 'sex', based on the docId
         $userData = $this->getRequestDocData($docId);
 
         // Check if user data was found
         if ($userData) {
             return $userData;
         } else {
-            // Handle the case when the user with the provided userId is not found
+            // Handle the case when the doc request with the provided docId is not found
             echo "test";
         }
     } else {
-        // Handle the case when userId is not provided
+        // Handle the case when docId is not provided
         echo "no DATA FOUND";
     }
 }
+
   
     public function req_schedule()
 {

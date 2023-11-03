@@ -76,8 +76,8 @@
         </div>
 
         <div class="content">
-            <p class="indented-paragraph">This is to certify that Mr./Ms. <input type="text" id="full-name" placeholder="Full Name">, a resident of</p>
-            <p><input type="text" id="address" placeholder="Address">, for 18 years 7 months, is a qualified availee of <strong>RA 11261</strong> or the <strong>First Time Jobseekers Assistance Act of 2019</strong>.</p>
+            <p class="indented-paragraph">This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo $docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname'] ;?>, a resident of</p>
+            <p><?php echo $docRequestUserData['address'];?>, for 18 years 7 months, is a qualified availee of <strong>RA 11261</strong> or the <strong>First Time Jobseekers Assistance Act of 2019</strong>.</p>
             <p class="indented-paragraph">I further certify that the holder/bearer was informed of his/her rights, including the duties and responsibilities accorded by RA 11261 through the Oath of</p><p> Undertaking he/she has signed and executed in the presence of Barangay Official/s.</p>
             <p>Signed this <?php
             $datetime = $docRequestUserData['process_at'];

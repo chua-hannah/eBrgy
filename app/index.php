@@ -160,28 +160,23 @@ switch ($filename) {
                                 include 'templates/docs.php';
                             });
                             break;
+                        case 'indigency-certificate':
+                            $docId = $_POST['id'];
+                            $docRequestUserData = $homeController->print_doc($docId);
+                            if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                header("Location: documents"); // Redirect to the 'documents.php' page
+                                exit; 
+                            }
+                            include 'templates/certificates/indigency_cert.php';
+                            break;
                         case 'barangay-certificate':
                             $docId = $_POST['id'];
                             $docRequestUserData = $homeController->print_doc($docId);
-                            
-                            // Check conditions and redirect if necessary.
                             if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
                                 header("Location: documents"); // Redirect to the 'documents.php' page
-                                exit; // Terminate the script to ensure the redirect takes effect.
+                                exit; 
                             }
-                            
-                            // If the conditions are met, include the certificate template.
                             include 'templates/certificates/barangay_cert.php';
-                            
-                            // includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {
-                            //     // $username = $_SESSION['username'];
-                            //     // $mobile = $_SESSION['mobile'];
-                            //     // $email = $_SESSION['email'];
-                            //     // $homeController->$filename();
-                            //     // $requests = $settingsController->get_request_settings();
-                            //     // $myrequest = $homeController->get_doc_requests($username, $mobile, $email);
-                              
-                            // });
                             break;
                         case 'reports':
                             includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {

@@ -115,10 +115,20 @@
                                             $status = strtoupper($request['status']);
                                             if ($status == 'APPROVED') {
                                                 // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
-                                                echo '<form method="POST" action="barangay-certificate" target="_blank">
-                                                        <input type="hidden" name="id" value="' . $request['id'] . '">
-                                                        <button type="submit" class="btn btn-primary" name="print_request_doc">Print</button>
-                                                    </form>';
+                                                $action = ''; // Initialize the action variable
+                                            
+                                                if ($request['request_name'] === 'barangay certificate') {
+                                                    $action = 'barangay-certificate';
+                                                } elseif ($request['request_name'] === 'indigency certificate') {
+                                                    $action = 'indigency-certificate';
+                                                }
+                                            
+                                                if (!empty($action)) {
+                                                    echo '<form method="POST" action="' . $action . '" target="_blank">
+                                                            <input type="hidden" name="id" value="' . $request['id'] . '">
+                                                            <button type="submit" class="btn btn-primary" name="print_request_doc">Print</button>
+                                                        </form>';
+                                                }
                                             } elseif ($status == 'PENDING') {
                                                 // If the status is 'PENDING', add a button to cancel with a form and an invisible input to pass the $request['id'].
                                                 echo '<form method="POST" action="">
@@ -126,9 +136,10 @@
                                                         <button type="submit" class="btn btn-danger" name="cancel_request_doc">Cancel</button>
                                                     </form>';
                                             } else {
-                                                // If the status is 'REJECTED', echo an empty string.
+                                                // If the status is 'REJECTED', echo 'N/A'.
                                                 echo 'N/A';
                                             }
+                                            
                                             ?>
                                         </td>
                                     </tr>
