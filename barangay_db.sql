@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2023 at 07:05 PM
+-- Generation Time: Nov 03, 2023 at 03:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -71,8 +71,8 @@ CREATE TABLE `doc_requests` (
   `status` varchar(255) DEFAULT NULL,
   `message` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `process_by` varchar(255) DEFAULT NULL,
-  `process_at` timestamp NULL DEFAULT NULL
+  `process_by` varchar(255) NOT NULL,
+  `process_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -81,11 +81,9 @@ CREATE TABLE `doc_requests` (
 
 INSERT INTO `doc_requests` (`id`, `request_name`, `username`, `email`, `mobile`, `status`, `message`, `created_at`, `process_by`, `process_at`) VALUES
 (8, 'POSTAL ID', 'resident1', 'resident1@mail.com', '1111111111', 'rejected', 'qweqweqweq', '2023-10-17 17:02:01', 'kapitantest', '2023-10-17 12:05:51'),
-(9, 'Barangay Certificate', 'resident1', 'resident1@mail.com', '1111111111', 'approved', 'test', '2023-10-30 22:32:46', 'kapitantest', '2023-10-30 22:33:02'),
-(11, 'POSTAL ID', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', '3', '2023-11-02 17:02:00', '', '2023-11-02 17:02:00'),
-(12, 'PSA', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', '3', '2023-11-02 17:06:17', '', '2023-11-02 17:06:17'),
-(13, 'Barangay Certificate', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', '', '2023-11-02 17:06:21', '', '2023-11-02 17:06:21'),
-(16, 'POSTAL ID', 'resident1', 'resident1@mail.com', '+631111111111', 'pending', '2', '2023-11-02 17:26:19', '', '2023-11-02 17:26:19');
+(9, 'firstjob certificate', 'resident1', 'resident1@mail.com', '1111111111', 'approved', 'test', '2023-10-30 22:32:46', 'kapitantest', '2023-10-30 22:33:02'),
+(10, 'indigency certificate', 'resident1', 'resident1@mail.com', '+631111111111', 'approved', 'test', '2023-11-03 09:21:15', 'kapitantest', '2023-11-03 09:21:28'),
+(14, 'barangay certificate', 'resident1', 'resident1@mail.com', '+631111111111', 'approved', 'School Requirement', '2023-11-03 13:50:45', 'kapitantest', '2023-11-03 13:51:20');
 
 -- --------------------------------------------------------
 
@@ -106,9 +104,9 @@ CREATE TABLE `doc_settings` (
 --
 
 INSERT INTO `doc_settings` (`request_type_id`, `request_name`, `request_status`, `description`, `created_at`) VALUES
-(1, 'Barangay Certificate', '1', 'Certificate', '2023-07-20'),
-(2, 'PSA', '1', 'Birth Certificate', '2023-07-20'),
-(3, 'TIN ID', '1', 'Taxpayer Identification Number\r\n', '2023-07-20'),
+(1, 'firstjob certificate', '1', 'Certificate', '2023-07-20'),
+(2, 'indigency certificate', '1', 'Birth Certificate', '2023-07-20'),
+(3, 'barangay certificate', '1', 'Taxpayer Identification Number\r\n', '2023-07-20'),
 (4, 'POSTAL ID', '2', 'POST OFFICE VALID ID', '2023-09-18');
 
 -- --------------------------------------------------------
@@ -123,7 +121,7 @@ CREATE TABLE `equipment_requests` (
   `equipment_name` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `total_equipment_borrowed` int(11) DEFAULT NULL,
-  `return_date` date DEFAULT NULL,
+  `days` int(11) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `request_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `process_by` varchar(255) NOT NULL,
@@ -138,8 +136,9 @@ CREATE TABLE `equipment_requests` (
 -- Dumping data for table `equipment_requests`
 --
 
-INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `status`, `total_equipment_borrowed`, `return_date`, `username`, `request_date`, `process_by`, `message`, `remarks`, `process_at`, `process_return`, `returned_at`) VALUES
-(8, 3, 'router', 'pending', 3, '2023-11-03', 'resident1', '2023-11-02 17:53:15', '', '', '', '2023-11-02 17:53:15', '', '2023-11-02 17:53:15');
+INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `status`, `total_equipment_borrowed`, `days`, `username`, `request_date`, `process_by`, `message`, `remarks`, `process_at`, `process_return`, `returned_at`) VALUES
+(1, 2, 'plastic table', 'returned', 5, 6, 'resident1', '2023-10-23 20:40:48', 'kapitantest', 'claim it saturday 6pm', 'helped by kagawad 1', '2023-10-23 20:41:23', 'kapitantest', '2023-10-23 20:41:45'),
+(2, 1, 'plastic chair', 'pending', 12, 6, 'resident1', '2023-10-23 20:40:55', '', '', '', '2023-10-23 20:40:55', '', '2023-10-23 20:40:55');
 
 -- --------------------------------------------------------
 
@@ -323,8 +322,9 @@ CREATE TABLE `schedule_requests` (
 --
 
 INSERT INTO `schedule_requests` (`id`, `username`, `mobile`, `schedule_date`, `time_in`, `time_out`, `status`, `created_at`, `process_at`, `process_by`) VALUES
-(3, 'resident1', '1111111111', '2023-10-24', '01:00:00', '02:00:00', 'approved', '2023-10-23 20:35:22', '2023-10-23 20:37:28', 'kapitantest'),
-(6, 'devtest1', '+639234567890', '2023-11-24', '14:00:00', '23:00:00', 'pending', '2023-11-02 11:04:05', NULL, NULL);
+(1, 'resident1', '1111111111', '2023-10-25', '02:00:00', '06:00:00', 'pending', '2023-10-23 20:32:20', '2023-10-23 20:32:20', NULL),
+(2, 'resident1', '1111111111', '2023-10-27', '01:00:00', '03:00:00', 'pending', '2023-10-23 20:34:07', '2023-10-23 20:34:07', NULL),
+(3, 'resident1', '1111111111', '2023-10-24', '01:00:00', '02:00:00', 'approved', '2023-10-23 20:35:22', '2023-10-23 20:37:28', 'kapitantest');
 
 -- --------------------------------------------------------
 
@@ -529,7 +529,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `doc_requests`
 --
 ALTER TABLE `doc_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `doc_settings`
@@ -541,7 +541,7 @@ ALTER TABLE `doc_settings`
 -- AUTO_INCREMENT for table `equipment_requests`
 --
 ALTER TABLE `equipment_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `equipment_settings`
@@ -565,13 +565,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `report_requests`
 --
 ALTER TABLE `report_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `schedule_requests`
 --
 ALTER TABLE `schedule_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `time_settings`
