@@ -243,6 +243,7 @@ switch ($filename) {
                             includeAdminContent(function() use ($profileController, $filename) {
                                 $user_id = $_SESSION['user_id'];
                                 $user_data = $profileController->$filename($user_id);
+                                $profileController->update_admin_profile($user_id);
                                 include 'templates/admin/profile.php';
                             });
                             break;
@@ -389,6 +390,23 @@ switch ($filename) {
                                 $masterListReports = $reportsController->masterlist_reports();
                                 $delete_resident = $reportsController->delete_resident();
                                 include 'templates/admin/reports/users_master_list.php';
+                            });
+                            break;
+                        case 'health-information':
+                            includeAdminContent(function() use ($reportsController) {
+                                $headers = $reportsController->getColumnNamesFromHealthInfoTable();
+                                $healthInfos = $reportsController->getAllHealthInfo();
+                                $reportsController->addHealthInfoColumn();
+                                // $masterListReports = $reportsController->masterlist_reports();
+                                // $delete_resident = $reportsController->delete_resident();
+                                include 'templates/admin/health_info.php';
+                            });
+                            break;
+                        case 'edit-health-information':
+                            includeAdminContent(function() use ($reportsController) {
+                                $usersHealthInfo = $reportsController->getHealthInfoById();
+                                $reportsController->save_new_health_information();
+                                include 'templates/admin/health_info_edit.php';
                             });
                             break;
                         case 'settings':

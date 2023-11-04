@@ -67,6 +67,48 @@ class ProfileController {
 
 }
 
+function update_admin_profile($user_id) {
+    $activationMessage = '';
+
+    if (isset($_POST['save_changes'])) {
+        // Retrieve the user ID from the form
+        $user_id = $_POST['user_id'];
+        $newFirstname = $_POST['firstname'];
+        $newMiddlename = $_POST['middlename']; // Fix variable names
+        $newLastname = $_POST['lastname']; // Fix variable names
+        $newSex = $_POST['sex'];
+        $newMobile = $_POST['mobile'];
+        $newEmail = $_POST['email'];
+        $newAddress = $_POST['address'];
+        $newBirthdate = $_POST['birthdate']; // Added Birthdate
+
+        // Calculate age based on the updated Birthdate
+        $birthdate = new DateTime($newBirthdate);
+        $today = new DateTime();
+        $age = $today->diff($birthdate)->y;
+
+        // Use prepared statements to prevent SQL injection
+        $stmt = $this->connection->prepare("UPDATE users SET mobile = ?, email = ?, address = ?, birthdate = ?, age = ? WHERE user_id = ?");
+        $stmt->bind_param("sssssi", $newMobile, $newEmail, $newAddress, $newBirthdate, $age, $user_id);
+
+        if ($stmt->execute()) {
+            // Activation successful
+            header("Location: /eBrgy/app/profile");
+            $_SESSION['success'] = "Profile updated successfully.";
+            exit();
+        } else {
+            // Activation failed
+            $_SESSION['error'] = "Error updating user profile: " . $stmt->error;
+        }
+
+        // Close the prepared statement
+        $stmt->close();
+    }
+
+    return $activationMessage;
+}
+
+
 
 
 
