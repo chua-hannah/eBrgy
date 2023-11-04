@@ -213,106 +213,124 @@ class SettingsController {
             $missionText = $_POST['mission'];
             $visionText = $_POST['vision'];
     
-            // Check if the announcement text is not empty
-            if (empty($announcementText) && empty($missionText) && empty($vision)) {
-                $error = "Announcement text is required.";
-                // Handle the error (e.g., display an error message).
-            } else {
-                // Handle slide file uploads
-                $slideDirectory = 'uploads/homepage/';
-                $slide1 = $_FILES['slide1']['name'];
-                $slide2 = $_FILES['slide2']['name'];
-                $slide3 = $_FILES['slide3']['name'];
-                $slide4 = $_FILES['slide4']['name'];
-    
-                // Move uploaded files to the destination directory
-                if (move_uploaded_file($_FILES['slide1']['tmp_name'], $slideDirectory . $slide1) &&
-                    move_uploaded_file($_FILES['slide2']['tmp_name'], $slideDirectory . $slide2) &&
-                    move_uploaded_file($_FILES['slide3']['tmp_name'], $slideDirectory . $slide3) &&
-                    move_uploaded_file($_FILES['slide4']['tmp_name'], $slideDirectory . $slide4)) {
-    
-                    // Files were successfully uploaded
-                    // Now, insert data into your "home_setting" table
-                    $inserted = $this->insertHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4);
-    
-                    if ($inserted) {
-                        // Insertion was successful
-                        // Handle the success (e.g., redirect to a success page).
-                    } else {
-                        // Insertion failed
-                        $error = "Database insertion failed. Please try again.";
-                        // Handle the error (e.g., display an error message).
-                    }
+            // Handle slide file uploads
+            $slideDirectory = 'uploads/homepage/';
+            $slide1 = $_FILES['slide1']['name'];
+            $slide2 = $_FILES['slide2']['name'];
+            $slide3 = $_FILES['slide3']['name'];
+            $slide4 = $_FILES['slide4']['name'];
+
+            // Move uploaded files to the destination directory
+            if (move_uploaded_file($_FILES['slide1']['tmp_name'], $slideDirectory . $slide1) &&
+                move_uploaded_file($_FILES['slide2']['tmp_name'], $slideDirectory . $slide2) &&
+                move_uploaded_file($_FILES['slide3']['tmp_name'], $slideDirectory . $slide3) &&
+                move_uploaded_file($_FILES['slide4']['tmp_name'], $slideDirectory . $slide4)) {
+
+                // Files were successfully uploaded
+                // Now, insert data into your "home_setting" table
+                $inserted = $this->insertHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4);
+
+                if ($inserted) {
+                    // Insertion was successful
+                    // Handle the success (e.g., redirect to a success page).
+                    $_SESSION['success'] = "Homepage settings were successfully added.";
+                    header("Location: home-setting");
+                    exit();
                 } else {
-                    // Image uploads failed
-                    $error = "Image upload failed. Please try again.";
+                    // Insertion failed
+                    $error = "Database insertion failed. Please try again.";
                     // Handle the error (e.g., display an error message).
                 }
+            } else {
+                // Image uploads failed
+                $error = "Image upload failed. Please try again.";
+                // Handle the error (e.g., display an error message).
             }
         }
     }
 
     public function update_home_setting()
-    {    
-        if (isset($_POST['edit_home_page_setting'])) {
-            $announcementText = $_POST['announcement'];
-            $missionText = $_POST['mission'];
-            $visionText = $_POST['vision'];
-            // Check if the announcement text is not empty
-            if (empty($announcementText)) {
-                $error = "Announcement text is required.";
-                // Handle the error (e.g., display an error message).
-            } else {
-                // Handle slide file uploads
-                $slideDirectory = 'uploads/homepage/';
-                $slide1 = $_FILES['slide1']['name'];
-                $slide2 = $_FILES['slide2']['name'];
-                $slide3 = $_FILES['slide3']['name'];
-                $slide4 = $_FILES['slide4']['name'];
-    
-                // Move uploaded files to the destination directory
-                if (move_uploaded_file($_FILES['slide1']['tmp_name'], $slideDirectory . $slide1) &&
-                    move_uploaded_file($_FILES['slide2']['tmp_name'], $slideDirectory . $slide2) &&
-                    move_uploaded_file($_FILES['slide3']['tmp_name'], $slideDirectory . $slide3) &&
-                    move_uploaded_file($_FILES['slide4']['tmp_name'], $slideDirectory . $slide4)) {
-    
-                    // Files were successfully uploaded
-                    // Now, update data in your "home_setting" table
-                    $updated = $this->updateHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4);
-    
-                    if ($updated) {
-                        // Update was successful
-                        // Use JavaScript to reload the page
-                        echo '<script>window.location.href = window.location.href;</script>';
-                    } else {
-                        // Update failed
-                        $error = "Database update failed. Please try again.";
-                        // Handle the error (e.g., display an error message).
-                    }
-                } else {
-                    // Image uploads failed
-                    $error = "Image upload failed. Please try again.";
-                    // Handle the error (e.g., display an error message).
-                }
-            }
+{    
+    if (isset($_POST['edit_home_page_setting'])) {
+        $announcementText = $_POST['announcement'];
+        $missionText = $_POST['mission'];
+        $visionText = $_POST['vision'];
+
+        // Handle slide file uploads
+        $slideDirectory = 'uploads/homepage/';
+        $slide1 = $_FILES['slide1']['name'];
+        $slide2 = $_FILES['slide2']['name'];
+        $slide3 = $_FILES['slide3']['name'];
+        $slide4 = $_FILES['slide4']['name'];
+
+        // Check if new files are uploaded or not
+        $newFilesUploaded = false;
+        
+        // Move uploaded files to the destination directory only if they are uploaded
+        if (!empty($slide1) && move_uploaded_file($_FILES['slide1']['tmp_name'], $slideDirectory . $slide1)) {
+            $newFilesUploaded = true;
+        }
+        if (!empty($slide2) && move_uploaded_file($_FILES['slide2']['tmp_name'], $slideDirectory . $slide2)) {
+            $newFilesUploaded = true;
+        }
+        if (!empty($slide3) && move_uploaded_file($_FILES['slide3']['tmp_name'], $slideDirectory . $slide3)) {
+            $newFilesUploaded = true;
+        }
+        if (!empty($slide4) && move_uploaded_file($_FILES['slide4']['tmp_name'], $slideDirectory . $slide4)) {
+            $newFilesUploaded = true;
+        }
+
+        // Now, update data in your "home_setting" table only if new files were uploaded
+        if ($newFilesUploaded) {
+            $updated = $this->updateHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4);
+        } else {
+            // No new files were uploaded, just update the text data
+            $updated = $this->updateHomeSettings($announcementText, $missionText,  $visionText, null, null, null, null);
+        }
+
+        if ($updated) {
+            $_SESSION['success'] = "Homepage settings were successfully updated.";
+            header("Location: home-setting");
+            exit();
+        } else {
+            // Update failed
+            $error = "Database update failed. Please try again.";
+            // Handle the error (e.g., display an error message).
         }
     }
-    
+}
 
-// Create a new function to update the data in your "home_setting" table
-public function updateHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4) {
+// Modify your updateHomeSettings function to handle the scenario where no new files are uploaded
+public function updateHomeSettings($announcementText, $missionText, $visionText, $slide1, $slide2, $slide3, $slide4) {
     // Assuming you have an established database connection
     $connection = $this->connection;
 
     // Sanitize input data to prevent SQL injection (you may need to use prepared statements)
     $announcementText = $connection->real_escape_string($announcementText);
-    $slide1 = $connection->real_escape_string($slide1);
-    $slide2 = $connection->real_escape_string($slide2);
-    $slide3 = $connection->real_escape_string($slide3);
-    $slide4 = $connection->real_escape_string($slide4);
 
     // Construct the SQL query to update the data
-    $query = "UPDATE home_setting SET announcement_text = '$announcementText', mission_text = '$missionText', vision_text = '$visionText', slide1 = '$slide1', slide2 = '$slide2', slide3 = '$slide3', slide4 = '$slide4' WHERE id = 1";
+    $query = "UPDATE home_setting SET announcement_text = '$announcementText', mission_text = '$missionText', vision_text = '$visionText'";
+
+    // Check if new slide files are provided and update them in the query if necessary
+    if ($slide1 !== null) {
+        $slide1 = $connection->real_escape_string($slide1);
+        $query .= ", slide1 = '$slide1'";
+    }
+    if ($slide2 !== null) {
+        $slide2 = $connection->real_escape_string($slide2);
+        $query .= ", slide2 = '$slide2'";
+    }
+    if ($slide3 !== null) {
+        $slide3 = $connection->real_escape_string($slide3);
+        $query .= ", slide3 = '$slide3'";
+    }
+    if ($slide4 !== null) {
+        $slide4 = $connection->real_escape_string($slide4);
+        $query .= ", slide4 = '$slide4'";
+    }
+
+    // Add the WHERE clause to specify which row to update
+    $query .= " WHERE id = 1";
 
     // Execute the query
     $result = $connection->query($query);
@@ -324,6 +342,7 @@ public function updateHomeSettings($announcementText, $missionText,  $visionText
         return false; // Update failed
     }
 }
+
 
 
     

@@ -28,7 +28,7 @@
             <img src="assets/images/Barangay.png" class="logo img-fluid" alt="Barangay 95">
             <span>
                 Barangay 95
-                <small>Manila</small>
+                <small>Zone 8, District 1, Manila</small>
             </span>
         </a>
         

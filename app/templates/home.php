@@ -1,6 +1,24 @@
 
 <main>
+<?php
+$announcementText = ''; // Initialize the announcement text variable
 
+foreach ($homeSettings as $setting) {
+    $announcementText = $setting['announcement_text'];
+    // Assuming $setting['announcement_text'] contains the announcement text
+    if (!empty($announcementText)) {
+        break; // Stop the loop when a non-empty announcement text is found
+    }
+}
+?>
+
+<?php if (!empty($announcementText)): ?>
+    <div class="announcement">
+        <p class="mb-0"><strong><i class="bi bi-megaphone-fill"></i> <!-- Megaphone icon -->Announcement:</strong>
+            <?php echo $announcementText; ?>
+        </p>
+    </div>
+<?php endif; ?>
     <section class="hero-section hero-section-full-height">
         <div class="container-fluid">
             <div class="row">
@@ -109,58 +127,33 @@
                     </div>
 
                     <div class="col-lg-6 col-12">
-                        <div class="custom-text-box">
-                            <h2 class="mb-2">Our Story</h2>
+    <div class="custom-text-box">
+        <div class="col-lg-12 col-12">
+            <h2 class="mb-2" style="margin-bottom: 10px;">Our Story</h2>
 
-                            <h5 class="mb-3">Barangay 95</h5>
+            <h5 class="mb-3" style="margin-bottom: 10px;">Barangay 95</h5>
 
-                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa sed metus ultrices dictum. Ut interdum urna vitae eros condimentum, fringilla faucibus risus semper. Maecenas rhoncus facilisis augue, a tristique tortor lacinia vitae.</p>
-                        </div>
+            <p class="mb-0" style="text-align: justify;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa sed metus ultrices dictum. Ut interdum urna vitae eros condimentum, fringilla faucibus risus semper. Maecenas rhoncus facilisis augue, a tristique tortor lacinia vitae.
+            </p>
+            </div>
+            <div class="col-lg-12 col-12 mt-3">
+                <h5 class="mb-3" style="margin-bottom: 10px;">Our Mission</h5>
 
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="custom-text-box mb-lg-0">
-                                    <h5 class="mb-3">Our Mission</h5>
+                <p class="mb-0" style="text-align: justify;">
+                    <?php echo $setting['mission_text']?>
+                </p>
+            </div>
+            <div class="col-lg-12 col-12 mt-3">
+                <h5 class="mb-3" style="margin-bottom: 10px;">Our Vision</h5>
 
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor quis metus</p>
+                <p class="mb-0" style="text-align: justify;">
+                    <?php echo $setting['vision_text']?>
+                </p>
+            </div>
+        </div>
+    </div>
 
-                                    <ul class="custom-list mt-2">
-                                        <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            List 1
-                                        </li>
-
-                                        <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            List 2
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="custom-text-box mb-lg-0">
-                                    <h5 class="mb-3">Our Vision</h5>
-
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor quis metus</p>
-
-                                    <ul class="custom-list mt-2">
-                                        <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            List 1
-                                        </li>
-
-                                        <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            List 2
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
