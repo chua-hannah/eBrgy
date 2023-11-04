@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>FIRST JOB CERTIFICATION</title>
+    <title>OATH OF UNDERTAKING CERTIFICATE</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
@@ -79,14 +79,23 @@
         </div>
 
         <div class="header2">
-        <u><h2>BARANGAY CERTIFICATION</h2></u>
-            <p>(First Time Jobseekers Assistance Act - RA 11261)</p>
+        <u><h2>OATH OF UNDERTAKING CERTIFICATE</h2></u>
         </div>
 
         <div class="content">
-            <p class="indented-paragraph">This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo $docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname'] ;?>, a resident of</p>
-            <p><?php echo $docRequestUserData['address'];?>, for 18 years 7 months, is a qualified availee of <strong>RA 11261</strong> or the <strong>First Time Jobseekers Assistance Act of 2019</strong>.</p>
-            <p class="indented-paragraph">I further certify that the holder/bearer was informed of his/her rights, including the duties and responsibilities accorded by RA 11261 through the Oath of</p><p> Undertaking he/she has signed and executed in the presence of Barangay Official/s.</p>
+
+            <p class="indented-paragraph">I, <?php echo $docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname'] ;?>, <?php echo $docRequestUserData['age'];?> years of age, resident of <?php echo $docRequestUserData['address'];?> BARANGAY 95 ZONE 8, TONDO MANILA for 18 years 7 months, availing the benefits</p><p> of <strong>Republic Acts 11261</strong>, otherwise known as the <strong>First Time Jobseeker Act of 2019</strong>   , do hereby declare, agree, and undertake to abide and be bound by the following:</p>
+                <ol>
+                    <li>That this is the first time that I will actively look for a job, and therefore requesting that a Barangay Certification be issued in my favor to avail the benefits of the law.</li>
+                    <li>That I am aware that the benefit and privilege/s under the said law shall be valid only for one (1) year from the date that the Barangay Certification is issued.</li>
+                    <li>That I can avail the benefits of the law only once.</li>
+                    <li>That I understand that my personal information shall be included in the roster/list of First Time Jobseekers and will not be used for unlawful purposes.</li>
+                    <li>That I will inform and/or report to the Barangay personally, through text or other means, or through my family/relative once I get employed.</li>
+                    <li>That I am not a beneficiary of the Jobstart Program under R.A No. 10869 and other laws that give similar exemptions for the documents or transactions exempted under R.A No. 11261.</li>
+                    <li>That if issued the requested Certification, I will not use the same in any fraud, neither falsify nor help and/or assist in the fabrication of the said certification.</li>
+                    <li>That this undertaking is made solely for the purpose of obtaining a Barangay Certification consistent with the objective of R.A No. 11261 and not for any other purpose.</li>
+                    <li>That I consent to the use of my personal information pursuant to the Data Privacy Act and other applicable laws, rules, and regulations.</li>
+                </ol>            
             <p>Signed this <?php
             $datetime = $docRequestUserData['process_at'];
             $date = date("jS \d\a\y \of F, Y", strtotime($datetime));
@@ -103,18 +112,9 @@
         ?>
         , one (1) year from the issuance.</p>
             <br>
-            <div><strong>RONALD M. LEE</strong></div>
-            <div>Punong Barangay</div>
-            <br>
-            <p><?php
-            $datetime = $docRequestUserData['process_at'];
-            $date = date("F j, Y", strtotime($datetime));
-            echo $date;
-            ?>
-            </p>
         </div>
         <div class="footer">
-            <p><strong>Witnessed by:</strong></p>
+            <p><strong>Signed by:</strong></p>
             <p><strong>ELJUN C. SAYO</strong></p>
             <p>Barangay Secretary</p>
             <p><?php

@@ -140,6 +140,7 @@ switch ($filename) {
                             includeHeaderFooter(function() use ($profileController, $filename) {
                                 $user_id = $_SESSION['user_id'];
                                 $user_data = $profileController->$filename($user_id);
+                                $profileController->update_user_profile($user_id);
                                 include 'templates/profile.php';
                             });
                             break;
@@ -186,6 +187,15 @@ switch ($filename) {
                                 exit; 
                             }
                             include 'templates/certificates/barangay_cert.php';
+                            break;
+                        case 'oath-certificate':
+                            $docId = $_POST['id'];
+                            $docRequestUserData = $homeController->print_doc($docId);
+                            if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                header("Location: documents"); // Redirect to the 'documents.php' page
+                                exit; 
+                            }
+                            include 'templates/certificates/oath_cert.php';
                             break;
                         case 'reports':
                             includeHeaderFooter(function() use ($homeController, $filename, $settingsController) {

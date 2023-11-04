@@ -34,6 +34,42 @@ class ProfileController {
           return null;
       }
   }
+
+  function update_user_profile($user_id) {
+
+    $activationMessage = '';
+
+    if (isset($_POST['save_changes'])) {
+        // Retrieve the user ID from the form
+        $user_id = $_POST['user_id'];
+        $newMobile = $_POST['mobile'];
+        $newEmail = $_POST['email'];
+        $newAddress = $_POST['address'];
+        // Use prepared statements to prevent SQL injection
+        $stmt = $this->connection->prepare("UPDATE users SET mobile = ?, email = ?, address = ? WHERE user_id = ?");
+        $stmt->bind_param("sssi", $newMobile, $newEmail, $newAddress, $user_id); // Assuming user_id is an integer
+    
+        if ($stmt->execute()) {
+            // Activation successful
+            header("Location: /eBrgy/app/profile");
+            $_SESSION['success'] = "Profile Update successfully.";
+            exit();
+
+        } else {
+            // Activation failed
+            $_SESSION['error'] = "Error updating user status: " . $stmt->error;
+        }
+    
+        // Close the prepared statement
+        $stmt->close();
+    }
+    return $activationMessage;
+
+}
+
+
+
+
   
 }
   
