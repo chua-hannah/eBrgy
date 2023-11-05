@@ -26,7 +26,7 @@
         <div class="col-lg-12 col-md-6 col-12">
             <label class="labels" id="remarks_label">Remarks</label>
             <div id="remarks_field">
-                <textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>
+                <textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details" required></textarea>
             </div>
         </div>
         <div class="col-lg-12 col-md-6 col-12" id="purpose_field" style="display: none;">
@@ -132,6 +132,9 @@
                                                 }
                                                 elseif ($request['request_name'] === 'barangay certificate') {
                                                     $action = 'barangay-certificate';
+                                                }
+                                                elseif ($request['request_name'] === 'oath certificate') {
+                                                    $action = 'oath-certificate';
                                                 }
                                             
                                                 if (!empty($action)) {

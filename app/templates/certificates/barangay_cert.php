@@ -63,6 +63,13 @@
             height: 200px;
             width: 200px;
         }
+        .logo0 {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            height: 200px;
+            width: 200px;
+        }
         .logo1 {
             position: absolute;
             top: 50%;
@@ -110,6 +117,7 @@
             <p>BARANGAY 95 - ZONE 8 DISTRICT 1</p>
             <p>TELEPHONE NO. 08-294-47-66</p>
             <img src="./templates/certificates/brgy_cert_logo.png" alt="brgy logo" class="logo">
+            <img src="./templates/certificates/brgy_logo2.jpg" alt="brgy logo" class="logo0">
             <img src="./templates/certificates/brgy_cert_logo1.svg" alt="brgy logo" class="logo1">
         </div>
 

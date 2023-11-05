@@ -164,6 +164,7 @@
         <table class="table table-bordered table-striped custom-table datatable" id="myTable">
             <thead>
                 <tr>
+                    <th class="wrap-text">Action/s</th>
                     <th class="wrap-text">First name</th>
                     <th class="wrap-text">Middle name</th>
                     <th class="wrap-text">Last name</th>
@@ -177,7 +178,7 @@
                     <th class="wrap-text">PWD</th>
                     <th class="wrap-text">Solo Parent</th>
                     <th class="wrap-text">Scholar</th>
-                    <th class="wrap-text">Action/s</th>
+                   
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -185,6 +186,12 @@
                 foreach ($masterListReports['users'] as $masterListReport) {
                     ?>
                     <tr>
+                    <td>
+                        <form method="POST" action="">
+                            <input type="hidden" name="resident_id" value="<?php echo $masterListReport['id'] ?>">
+                            <button type="" class="btn btn-danger" name="delete_resident">Delete</button>
+                        </form>
+                        </td>
                         <td><?php echo $masterListReport['firstname']; ?></td>
                         <td><?php echo $masterListReport['middlename']; ?></td>
                         <td><?php echo $masterListReport['lastname']; ?></td>
@@ -198,12 +205,7 @@
                         <td><?php echo $masterListReport['pwd'] == 1 ? '&#10003;' : ''; ?></td>
                         <td><?php echo $masterListReport['solo_parent'] == 1 ? '&#10003;' : ''; ?></td>
                         <td><?php echo $masterListReport['scholar'] == 1 ? '&#10003;' : ''; ?></td>
-                        <td>
-                        <form method="POST" action="">
-                            <input type="hidden" name="resident_id" value="<?php echo $masterListReport['id'] ?>">
-                            <button type="" class="btn btn-danger" name="delete_resident">Delete</button>
-                        </form>
-                        </td>
+                       
                     </tr>
                     <?php
                 }
