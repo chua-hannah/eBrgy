@@ -639,9 +639,11 @@ public function isRequestedQuantityValid($equipment_id, $requestedQuantity) {
       // Render the home page content
       include 'templates/admin/dashboard.php';
     }
-
+    
     public function getHomeSettings() {
-        // Prepare and execute an SQL query to retrieve all data from the "home_setting" table
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
         $query = "SELECT * FROM home_setting";
         $result = $this->connection->query($query);
     
@@ -658,6 +660,8 @@ public function isRequestedQuantityValid($equipment_id, $requestedQuantity) {
             return false;
         }
     }
+    
+    
     
   }
   

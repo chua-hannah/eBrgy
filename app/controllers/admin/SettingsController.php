@@ -256,6 +256,10 @@ class SettingsController {
         $announcementText = $_POST['announcement'];
         $missionText = $_POST['mission'];
         $visionText = $_POST['vision'];
+        $contact = $_POST['contact'];
+        $facebook = $_POST['facebook'];
+        $messenger = $_POST['messenger'];
+
 
         // Handle slide file uploads
         $slideDirectory = 'uploads/homepage/';
@@ -283,10 +287,10 @@ class SettingsController {
 
         // Now, update data in your "home_setting" table only if new files were uploaded
         if ($newFilesUploaded) {
-            $updated = $this->updateHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4);
+            $updated = $this->updateHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4, $contact, $facebook, $messenger);
         } else {
             // No new files were uploaded, just update the text data
-            $updated = $this->updateHomeSettings($announcementText, $missionText,  $visionText, null, null, null, null);
+            $updated = $this->updateHomeSettings($announcementText, $missionText,  $visionText, $slide1, $slide2, $slide3, $slide4, $contact, $facebook, $messenger);
         }
 
         if ($updated) {
@@ -302,7 +306,7 @@ class SettingsController {
 }
 
 // Modify your updateHomeSettings function to handle the scenario where no new files are uploaded
-public function updateHomeSettings($announcementText, $missionText, $visionText, $slide1, $slide2, $slide3, $slide4) {
+public function updateHomeSettings($announcementText, $missionText, $visionText, $slide1, $slide2, $slide3, $slide4, $contact, $facebook, $messenger) {
     // Assuming you have an established database connection
     $connection = $this->connection;
 
@@ -310,7 +314,7 @@ public function updateHomeSettings($announcementText, $missionText, $visionText,
     $announcementText = $connection->real_escape_string($announcementText);
 
     // Construct the SQL query to update the data
-    $query = "UPDATE home_setting SET announcement_text = '$announcementText', mission_text = '$missionText', vision_text = '$visionText'";
+    $query = "UPDATE home_setting SET announcement_text = '$announcementText', mission_text = '$missionText', vision_text = '$visionText', contact = '$contact', facebook = '$facebook', messenger = '$messenger'";
 
     // Check if new slide files are provided and update them in the query if necessary
     if ($slide1 !== null) {

@@ -1,3 +1,10 @@
+<?php
+require_once 'controllers/HomeController.php';
+global $connection; // Access the $connection variable from the global scope
+$homeController = new HomeController($connection); // Create an instance of HomeController
+
+$homeSettings = $homeController->getHomeSettings();
+?>
 <div class="spacer"></div>
 </main>
 <footer class="site-footer">
@@ -27,7 +34,7 @@
 
                     <p class="text-white d-flex mb-2">
                         <i class="bi-telephone me-2"></i>
-                        <a href="tel:82944766" class="site-footer-link">8-294-47-66</a>
+                        <a href="tel:82944766" class="site-footer-link"><?php echo isset($homeSettings[0]['contact']) ? $homeSettings[0]['contact'] : ''; ?></a>
                     </p>
 
                     <p class="text-white d-flex mb-2">
@@ -36,17 +43,17 @@
                             Barangay 95, Zone 8, District 1, City of Manila
                         </a>
                     </p>
-
-                    <div class="text-white d-flex mb-2">
-                        <div class="col-6">
-                            <i class="bi bi-facebook me-2"></i>
-                            <a href="https://www.facebook.com/Barangay95" target="_blank" class="site-footer-link">Visit our page</a>
-                        </div>
-                        <div class="col-6">
-                            <i class="bi bi-messenger me-2"></i>
-                            <a href="https://m.me/Barangay95" target="_blank" class="site-footer-link">Chat us</a>
-                        </div>
-                    </div>
+                    <p class="text-white d-flex mb-2">
+                    <i class="bi bi-facebook me-2"></i>
+                            <a href="<?php echo isset($homeSettings[0]['facebook']) ? $homeSettings[0]['facebook'] : ''; ?>" target="_blank" class="site-footer-link"><?php echo isset($homeSettings[0]['facebook']) ? $homeSettings[0]['facebook'] : ''; ?></a>
+                       
+                    </p>
+                    <p class="text-white d-flex mb-2">
+                    <i class="bi bi-messenger me-2"></i>
+                            <a href="https://m.me/Barangay95" target="_blank" class="site-footer-link"><?php echo isset($homeSettings[0]['messenger']) ? $homeSettings[0]['messenger'] : ''; ?></a>
+                       
+                    </p>
+                   
                 </div>
 
             </div>

@@ -1824,20 +1824,20 @@ table.dataTable tfoot td {
 
 @media (min-width: 992px) {
   #sidebar {
-      height: 100vh;
-      position: sticky;
-      top: 0;
+    height: 100vh;
+    position: sticky;
+    top: 0;
   }
-  
+
   #sidebar.collapse {
-      height: auto;
+    height: auto;
   }
 }
 
 @media (max-width: 991px) {
   #sidebar {
-      height: auto; /* Adjust this to the desired mobile height */
-      position: relative;
+    height: auto; /* Adjust this to the desired mobile height */
+    position: relative;
   }
 }
 
@@ -1860,7 +1860,8 @@ table.dataTable tfoot td {
   color: #0049e5; /* Change the text color on hover */
 }
 
-.flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg { 
+.flatpickr-months .flatpickr-prev-month svg,
+.flatpickr-months .flatpickr-next-month svg {
   margin-bottom: 10px;
 }
 
@@ -1877,7 +1878,7 @@ table.dataTable tfoot td {
   padding-left: 20%;
   padding-right: 20%;
   padding-bottom: 10%;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Style the modal */
@@ -1999,7 +2000,7 @@ table.dataTable tfoot td {
 
 /* CSS for the announcement container */
 .announcement {
-  background-color: #FFFF99; /* Light yellow background color */
+  background-color: #ffff99; /* Light yellow background color */
   padding: 20px;
   border: 1px solid #ccc;
   text-align: center;

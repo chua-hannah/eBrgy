@@ -45,6 +45,38 @@
             <label class="custom-file-label" for="slide4">For Our Story Image</label>
             <input type="file" class="form-control mt-3" style="width: 50%" id="slide4" name="slide4" accept="image/*">           
         </div>
+        <hr class="mt-2 mb-2">
+        <h6 class="mt-2">Footer</h6>
+     
+        <div class="row">
+        <div style="display: flex; flex-direction: column;">
+  <div class="col-md-6 mb-3">
+    <div class="form-group">
+      <label for="contact">Contact Number:</label>
+      <input class="form-control" id="contact" name="contact" 
+             value="<?php echo isset($homeSettings[0]['contact']) ? $homeSettings[0]['contact'] : ''; ?>">
+    </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <div class="form-group">
+      <label for="facebook">Facebook:</label>
+      <input class="form-control" id="facebook" name="facebook" 
+             value="<?php echo isset($homeSettings[0]['facebook']) ? $homeSettings[0]['facebook'] : ''; ?>">
+    </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <div class="form-group">
+      <label for="messenger">Messenger:</label>
+      <input class="form-control" id="messenger" name="messenger" 
+             value="<?php echo isset($homeSettings[0]['messenger']) ? $homeSettings[0]['messenger'] : ''; ?>">
+    </div>
+  </div>
+</div>
+
+
+
+        </div>
+
         <div class="col-md-10 mb-3"></div>
         <div class="col-md-2 text-end">
           <?php if (!empty($homeSettings)): ?>
@@ -56,6 +88,7 @@
           <?php endif; ?>
         </div>
       </div>
+    
     </form>
   </div>
 </div>

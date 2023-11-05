@@ -107,7 +107,8 @@ switch ($filename) {
                         case 'home':
                         includeHeaderFooter(function() use ($homeController, $filename) {
                             $homeSettings = $homeController->getHomeSettings();
-                            include 'templates/home.php';                        });
+                            include 'templates/home.php';                        
+                        });
                         break;
                         case 'officials':
                             includeHeaderFooter(function() use ($homeController, $filename) {
@@ -232,9 +233,14 @@ switch ($filename) {
                         case 'dashboard':
                             includeAdminContent(function() use ($dashboardController) {
                                 $userData = $dashboardController->users_count();
+                                $masterlistData = $dashboardController->masterlist_count();
                                 $attendanceData = $dashboardController->attendance_count();
+                                $equipRequestData = $dashboardController->equipment_request_count();
+                                $scheduleRequestData = $dashboardController->schedule_request_count();
+                                $reportsRequestData = $dashboardController->reports_request_count();
                                 $requestData = $dashboardController->request_count();
-                                $data = array_merge($userData, $attendanceData, $requestData);
+                                $attendees = $dashboardController->attendees();
+                                $data = array_merge($userData, $masterlistData, $attendanceData, $requestData, $equipRequestData, $scheduleRequestData, $reportsRequestData,  $attendees );
                                 $families = $dashboardController->getCountOfUniqueAddressesWithMultipleUsers();
                                 include 'templates/admin/dashboard.php';
                             });
@@ -439,7 +445,7 @@ switch ($filename) {
             switch ($filename) {
                 case 'home':
                     includeHeaderFooter(function() use ($homeController, $filename) {
-                        $homeSettings = $homeController->getHomeSettings();
+                       $homeSettings = $homeController->getHomeSettings();
                        include 'templates/home.php';
 
                     });
