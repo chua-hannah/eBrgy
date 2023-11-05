@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 06:33 PM
+-- Generation Time: Nov 05, 2023 at 07:07 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -92,7 +92,8 @@ INSERT INTO `doc_requests` (`id`, `request_name`, `username`, `email`, `mobile`,
 (21, 'firstjob certificate', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', '', '', '2023-11-03 17:20:08', '', NULL),
 (22, 'indigency certificate', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', '', '', '2023-11-03 17:20:11', '', NULL),
 (23, 'barangay certificate', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', 'Others', 'Hahaha', '2023-11-03 17:20:28', '', NULL),
-(24, 'POSTAL ID', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', '', '', '2023-11-03 17:20:31', '', NULL);
+(24, 'POSTAL ID', 'devtest1', 'devtest1@mail.com', '+63+639234567890', 'pending', '', '', '2023-11-03 17:20:31', '', NULL),
+(25, 'oath certificate', 'resident1', 'resident1@mail.com', '+631111111111', 'approved', 'test', '', '2023-11-04 05:22:15', 'kapitantest', '2023-11-04 05:23:12');
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,7 @@ INSERT INTO `doc_settings` (`request_type_id`, `request_name`, `request_status`,
 (1, 'firstjob certificate', '1', 'Certificate', '2023-07-20'),
 (2, 'indigency certificate', '1', 'Birth Certificate', '2023-07-20'),
 (3, 'barangay certificate', '1', 'Taxpayer Identification Number\r\n', '2023-07-20'),
-(4, 'POSTAL ID', '2', 'POST OFFICE VALID ID', '2023-09-18');
+(4, 'oath certificate', '1', 'POST OFFICE VALID ID', '2023-09-18');
 
 -- --------------------------------------------------------
 
@@ -176,6 +177,32 @@ INSERT INTO `equipment_settings` (`equipment_id`, `equipment_name`, `number_of_e
 (5, 'NMAX', '100', 100, '1'),
 (6, 'NMAX', '100', 100, '1'),
 (7, 'VESPA JB limited edition', '300', 300, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `health_info`
+--
+
+CREATE TABLE `health_info` (
+  `id` int(11) NOT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `middlename` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `VAX1` varchar(255) DEFAULT NULL,
+  `VAX2` varchar(255) DEFAULT NULL,
+  `VAX3` varchar(255) DEFAULT NULL,
+  `VAX4` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `health_info`
+--
+
+INSERT INTO `health_info` (`id`, `firstname`, `middlename`, `lastname`, `age`, `VAX1`, `VAX2`, `VAX3`, `VAX4`) VALUES
+(3, 'Lebron', 'King', 'James', 33, '02/20/2023', '', '', ''),
+(4, 'healtthier', 'healtthier2', 'healtthier3', 24, 'test22', 'tes22', 'test3t', 'test45');
 
 -- --------------------------------------------------------
 
@@ -393,11 +420,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `sex`, `role`, `position`, `senior`, `four_ps`, `pwd`, `solo_parent`, `scholar`, `id_selfie`, `valid_id`, `status`) VALUES
-(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', NULL, '1990-01-15', 33, 'male', 'captain', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
+(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', 'test', '1986-06-17', 37, 'male', 'captain', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', NULL, '1988-02-14', 35, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'deactivate'),
 (3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', NULL, '1990-01-19', 33, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', NULL, '1982-12-25', 40, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
-(5, 'resident1', 'pass123', 'resident1@mail.com', '1111111111', 'resident1', 'resident1', 'resident1', 'Manila', '1990-12-22', 32, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '8.png', 'activated'),
+(5, 'resident1', 'pass123', 'TSTUASDAAS@mail.com', '2232323223', 'resident1', 'resident1', 'resident1', '3022 Masayahin Street', '1990-12-22', 32, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '8.png', 'activated'),
 (6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', NULL, '1997-01-25', 26, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (7, 'resident3', '123456789', 'hannahchua013@gmail.com', '1', 'RResident', 'Resident', 'Resident', NULL, '2023-11-11', -1, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivated'),
 (8, 'resident4', 'pass123456', 'hannahchua11@gmail.com', '9412611555', 'Resident', 'Resident', 'Resident', NULL, '1997-11-11', 25, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
@@ -448,7 +475,9 @@ CREATE TABLE `users_masterlist` (
 
 INSERT INTO `users_masterlist` (`id`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `gender`, `role`, `position`, `senior`, `pwd`, `four_ps`, `solo_parent`, `scholar`) VALUES
 (1, 'test@mail.com', '+639712312312', 'test', 'test', 'test', 'test', '1960-08-02', 63, 'Male', NULL, 'residence', 1, 1, 0, 1, 1),
-(2, 'sheeesh@mail.com', '+639000000200', 'tesatqweq', 'sheeesh', 'sheeesh', 'tqewqweqwe', '2000-10-20', 23, 'Female', NULL, 'residence', 0, 0, 0, 0, 1);
+(2, 'sheeesh@mail.com', '+639000000200', 'tesatqweq', 'sheeesh', 'sheeesh', 'tqewqweqwe', '2000-10-20', 23, 'Female', NULL, 'residence', 0, 0, 0, 0, 1),
+(3, 'dito@ditolang.com', '+639123456789', 'Lebron', 'King', 'James', 'purok999', '1990-11-01', 33, 'Male', NULL, 'residence', 0, 1, 1, 1, 0),
+(4, 'healtthier@optiuons.com', '+639123761287', 'healtthier', 'healtthier2', 'healtthier3', 'healtthier222', '1999-01-02', 24, 'Male', NULL, 'residence', 0, 1, 1, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -483,6 +512,12 @@ ALTER TABLE `equipment_requests`
 --
 ALTER TABLE `equipment_settings`
   ADD PRIMARY KEY (`equipment_id`);
+
+--
+-- Indexes for table `health_info`
+--
+ALTER TABLE `health_info`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `home_setting`
@@ -540,7 +575,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `doc_requests`
 --
 ALTER TABLE `doc_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `doc_settings`
@@ -559,6 +594,12 @@ ALTER TABLE `equipment_requests`
 --
 ALTER TABLE `equipment_settings`
   MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `health_info`
+--
+ALTER TABLE `health_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `home_setting`
@@ -600,7 +641,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_masterlist`
 --
 ALTER TABLE `users_masterlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
