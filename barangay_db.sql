@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2023 at 07:07 AM
+-- Generation Time: Nov 05, 2023 at 06:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,7 +54,8 @@ INSERT INTO `attendance` (`id`, `user_id`, `username`, `date`, `time_in`, `time_
 (9, 1, 'lance chua', '2023-08-02', '20:12:08', '20:12:20', 'Late', ''),
 (10, 1, 'lance chua', '2023-09-02', '13:12:44', '13:12:45', 'Present', ''),
 (11, 1, 'lance chua', '2023-09-18', '21:12:48', '21:18:43', 'Late', ''),
-(12, 1, 'kapitantest', '2023-10-18', '05:36:16', NULL, 'Present', '');
+(12, 1, 'kapitantest', '2023-10-18', '05:36:16', NULL, 'Present', ''),
+(13, 1, 'kapitantest', '2023-11-06', '01:16:51', NULL, 'Present', '');
 
 -- --------------------------------------------------------
 
@@ -193,16 +194,17 @@ CREATE TABLE `health_info` (
   `VAX1` varchar(255) DEFAULT NULL,
   `VAX2` varchar(255) DEFAULT NULL,
   `VAX3` varchar(255) DEFAULT NULL,
-  `VAX4` varchar(255) DEFAULT NULL
+  `VAX4` varchar(255) DEFAULT NULL,
+  `test2` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `health_info`
 --
 
-INSERT INTO `health_info` (`id`, `firstname`, `middlename`, `lastname`, `age`, `VAX1`, `VAX2`, `VAX3`, `VAX4`) VALUES
-(3, 'Lebron', 'King', 'James', 33, '02/20/2023', '', '', ''),
-(4, 'healtthier', 'healtthier2', 'healtthier3', 24, 'test22', 'tes22', 'test3t', 'test45');
+INSERT INTO `health_info` (`id`, `firstname`, `middlename`, `lastname`, `age`, `VAX1`, `VAX2`, `VAX3`, `VAX4`, `test2`) VALUES
+(3, 'Lebron', 'King', 'James', 33, '02/20/2023', '', '', '', NULL),
+(4, 'healtthier', 'healtthier2', 'healtthier3', 24, 'test22', 'tes22', 'test3t', 'test45', 'testest');
 
 -- --------------------------------------------------------
 
@@ -218,16 +220,18 @@ CREATE TABLE `home_setting` (
   `slide1` varchar(255) DEFAULT NULL,
   `slide2` varchar(255) DEFAULT NULL,
   `slide3` varchar(255) DEFAULT NULL,
-  `slide4` varchar(255) DEFAULT NULL
+  `slide4` varchar(255) DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
+  `messenger` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `home_setting`
 --
 
-INSERT INTO `home_setting` (`id`, `announcement_text`, `mission_text`, `vision_text`, `slide1`, `slide2`, `slide3`, `slide4`) VALUES
-(1, 'qweqweqwe', 'qweqwewq', 'test', 'images.jpg', 'images.jpg', 'bb.png', '8.png'),
-(2, 'qweqweqwe', 'qweqwewq', 'test', 'images.jpg', 'images.jpg', 'bb.png', '8.png');
+INSERT INTO `home_setting` (`id`, `announcement_text`, `mission_text`, `vision_text`, `slide1`, `slide2`, `slide3`, `slide4`, `contact`, `facebook`, `messenger`) VALUES
+(1, 'qweqweqwe', 'qweqwewq', 'test', '', '', '', '', '099999', 'https://www.facebook.com/Barangay95/', 'loqhwje;oqje;qwjeq');
 
 -- --------------------------------------------------------
 
@@ -382,7 +386,7 @@ CREATE TABLE `time_settings` (
 --
 
 INSERT INTO `time_settings` (`setting_id`, `work_hours_start`, `work_hours_end`, `late_threshold`) VALUES
-(1, '05:36:00', '14:00:00', '06:00:00');
+(1, '01:00:00', '08:00:00', '01:20:00');
 
 -- --------------------------------------------------------
 
@@ -420,11 +424,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `sex`, `role`, `position`, `senior`, `four_ps`, `pwd`, `solo_parent`, `scholar`, `id_selfie`, `valid_id`, `status`) VALUES
-(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', 'test', '1986-06-17', 37, 'male', 'captain', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
+(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', 'test244', '1986-06-17', 37, 'male', 'captain', NULL, NULL, NULL, NULL, NULL, NULL, '20070322_041721_shooter300.webp', '8.png', 'activated'),
 (2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', NULL, '1988-02-14', 35, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'deactivate'),
 (3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', NULL, '1990-01-19', 33, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', NULL, '1982-12-25', 40, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
-(5, 'resident1', 'pass123', 'TSTUASDAAS@mail.com', '2232323223', 'resident1', 'resident1', 'resident1', '3022 Masayahin Street', '1990-12-22', 32, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '8.png', 'activated'),
+(5, 'resident1', 'pass123', 'TSTUASDAAS@mail.com', '2232323223', 'resident1', 'resident1', 'resident1', '3022 Masayahin Street2', NULL, 0, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '94871234_252475826139607_9092101356499501056_n.jpg', '8.png', 'activated'),
 (6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', NULL, '1997-01-25', 26, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (7, 'resident3', '123456789', 'hannahchua013@gmail.com', '1', 'RResident', 'Resident', 'Resident', NULL, '2023-11-11', -1, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivated'),
 (8, 'resident4', 'pass123456', 'hannahchua11@gmail.com', '9412611555', 'Resident', 'Resident', 'Resident', NULL, '1997-11-11', 25, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
@@ -569,7 +573,7 @@ ALTER TABLE `users_masterlist`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `doc_requests`
