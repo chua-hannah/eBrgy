@@ -89,6 +89,7 @@ class UserController {
     public function register()
 {
     $role = 'residence';
+    $errorMessages = [];
 
     if (isset($_POST['register'])) {
         // Retrieve the submitted form data
@@ -177,6 +178,11 @@ class UserController {
         if (empty($_FILES['valid_id']['name'])) {
             $errors ["valid_id"] = "Please upload your Valid ID";
         }
+
+        if (!empty($errors) || !empty($error)) {
+            // If there are errors, set them in the $errorMessages array
+            $errorMessages[] = "There are one or more errors in the form";
+        }   
 
         if (empty($errors)) {
             // Add prefix in mobile number input

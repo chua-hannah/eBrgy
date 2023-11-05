@@ -1,7 +1,7 @@
 <div class="spacer"></div>
 </main>
 <footer class="site-footer">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-12">              
                 </div>
@@ -13,9 +13,11 @@
 
                         <li class="footer-menu-item"><a href="officials" class="footer-menu-link">Officials</a></li>
 
-                        <li class="footer-menu-item"><a href="services" class="footer-menu-link">Services</a></li>
+                        <li class="footer-menu-item"><a href="contact" class="footer-menu-link">Contact</a></li>
 
-                        <li class="footer-menu-item"><a href="contact" class="footer-menu-link">Login</a></li>
+                        <li class="footer-menu-item"><a href="login" class="footer-menu-link">Login</a></li>
+
+                        <li class="footer-menu-item"><a href="register" class="footer-menu-link">Register</a></li>
 
                     </ul>
                 </div>
@@ -25,28 +27,28 @@
 
                     <p class="text-white d-flex mb-2">
                         <i class="bi-telephone me-2"></i>
-
-                        <a href="tel: 8123-4567" class="site-footer-link">
-                            8123-4567
-                        </a>
+                        <a href="tel:82944766" class="site-footer-link">8-294-47-66</a>
                     </p>
 
                     <p class="text-white d-flex mb-2">
-                        <i class="bi-envelope me-2"></i>
-
-                        <a href="mailto:info@yourgmail.com" class="site-footer-link">
-                            dummy@only.ph
-                        </a>
-                    </p>
-
-                    
-                    <p class="text-white d-flex">
                         <i class="bi-geo-alt me-2"></i>
                         <a class="site-footer-link" href="https://maps.app.goo.gl/JMK2TDxUKZVWfsHa6" target="_blank">
-                            Barangay 95, Manila, Philippines
+                            Barangay 95, Zone 8, District 1, City of Manila
                         </a>
                     </p>
+
+                    <div class="text-white d-flex mb-2">
+                        <div class="col-6">
+                            <i class="bi bi-facebook me-2"></i>
+                            <a href="https://www.facebook.com/Barangay95" target="_blank" class="site-footer-link">Visit our page</a>
+                        </div>
+                        <div class="col-6">
+                            <i class="bi bi-messenger me-2"></i>
+                            <a href="https://m.me/Barangay95" target="_blank" class="site-footer-link">Chat us</a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     

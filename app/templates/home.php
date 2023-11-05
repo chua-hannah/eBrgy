@@ -87,9 +87,9 @@ foreach ($homeSettings as $setting) {
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="services" class="d-block">
-                                <img src="assets/images/icons/letter.png" class="featured-block-image img-fluid" alt="">
+                                <img src="assets/images/icons/new-features.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"><strong>Report</strong> Complaint</p>
+                                <p class="featured-block-text"><strong>Check our</strong> Online Services</p>
                             </a>
                         </div>
                     </div>
@@ -127,24 +127,22 @@ foreach ($homeSettings as $setting) {
                     </div>
 
                     <div class="col-lg-6 col-12">
-    <div class="custom-text-box">
+    <div class="custom-text-box mb-0">
         <div class="col-lg-12 col-12">
-            <h2 class="mb-2" style="margin-bottom: 10px;">Our Story</h2>
-
-            <h5 class="mb-3" style="margin-bottom: 10px;">Barangay 95</h5>
+            <h2 class="mb-2" style="margin-bottom: 10px;">Our Barangay</h2>
 
             <p class="mb-0" style="text-align: justify;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus massa sed metus ultrices dictum. Ut interdum urna vitae eros condimentum, fringilla faucibus risus semper. Maecenas rhoncus facilisis augue, a tristique tortor lacinia vitae.
+            Barangay 95 is a vibrant and diverse community nestled in the heart of Manila, the bustling capital city of the Philippines. This barangay, with its rich history and unique character, plays a vital role in the daily life of its residents. 
             </p>
             </div>
-            <div class="col-lg-12 col-12 mt-3">
+            <div class="col-lg-12 col-12 mt-2">
                 <h5 class="mb-3" style="margin-bottom: 10px;">Our Mission</h5>
 
                 <p class="mb-0" style="text-align: justify;">
                     <?php echo $setting['mission_text']?>
                 </p>
             </div>
-            <div class="col-lg-12 col-12 mt-3">
+            <div class="col-lg-12 col-12 mt-2">
                 <h5 class="mb-3" style="margin-bottom: 10px;">Our Vision</h5>
 
                 <p class="mb-0" style="text-align: justify;">

@@ -1,3 +1,13 @@
+<?php if (!empty($errorMessages)) { ?>
+    <div id="alert-error" class="alert alert-danger mb-0" role="alert">
+        <div class="row justify-content-center">
+            <h6 class="alert-heading text-center">Error!</h6>
+                <?php foreach ($errorMessages as $errorMessage) { ?>
+                    <p class="text-center mb-0"><?php echo $errorMessage; ?></p>
+                <?php } ?>  
+        </div>
+    </div>
+<?php } ?>
 <section class="contact-section section-padding" id="section_6">
     <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center">
@@ -201,7 +211,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">Data Privacy Notice</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -257,7 +267,7 @@
 
                                     <p><strong>Contact Us</strong></p>
 
-                                    <p>If you have any questions or concerns regarding your personal data and our data processing practices, please contact us at 8123-4567.</p>
+                                    <p>If you have any questions or concerns regarding your personal data and our data processing practices, please contact us at 8-294-47-66.</p>
 
                                     <p><strong>Changes to this Notice</strong></p>
 
@@ -267,7 +277,7 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>

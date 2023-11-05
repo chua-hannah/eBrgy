@@ -96,7 +96,7 @@
 <?php
     if(isset($_SESSION['error'])) {
 ?>
-    <div id="alert" class="alert alert-danger mb-0" role="alert">
+    <div id="alert-error" class="alert alert-danger mb-0" role="alert">
         <div class="row justify-content-center">
             <h6 class="alert-heading text-center">Error!</h6>
             <?php echo $_SESSION['error']; ?>
