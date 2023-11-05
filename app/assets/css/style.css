@@ -1234,7 +1234,7 @@ blockquote::before {
   border-color: transparent;
 }
 
-.custom-form button[type="button"] {
+.custom-form button[type="custom-button"] {
   background: var(--custom-btn-bg-color);
   border: none;
   border-radius: var(--border-radius-large);
@@ -1244,8 +1244,8 @@ blockquote::before {
   transition: all 0.3s;
 }
 
-.custom-form button[type="button"]:hover:enabled,
-.custom-form button[type="button"]:focus:enabled {
+.custom-form button[type="custom-button"]:hover:enabled,
+.custom-form button[type="custom-button"]:focus:enabled {
   background: var(--custom-btn-bg-hover-color);
   border-color: transparent;
 }
@@ -1918,15 +1918,6 @@ table.dataTable tfoot td {
   max-height: 90%;
 }
 
-/* Close button */
-.close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-}
 /* Adjust padding for medium-sized screens */
 @media (min-width: 768px) {
   .modal-img {

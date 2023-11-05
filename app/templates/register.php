@@ -206,12 +206,12 @@
                     
                     <p class="text-center" style="margin-bottom: -8px"><a href="login">I am already a member</a></p>
                     <!-- Modal -->
-                    <div class="modal" tabindex="-1" role="dialog" id="dpnModal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
                                     <h5 class="modal-title">Data Privacy Notice</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>

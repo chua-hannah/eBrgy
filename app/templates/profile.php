@@ -121,7 +121,7 @@
                             </div>
                             <div class="text-center mt-2">
                                 <!-- Button to edit the profile -->
-                                <button type="button" name="edit_profile" id="edit_profile" class="form-control">Edit Profile</button>
+                                <button type="custom-button" name="edit_profile" id="edit_profile" class="form-control">Edit Profile</button>
                                 <!-- Button to save changes (initially hidden) -->
                                 <button type="submit" name="save_changes" id="save_changes" class="form-control"
                                     style="display: none;">Save Changes</button>
