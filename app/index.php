@@ -132,10 +132,10 @@ switch ($filename) {
                             });
                             break;
                         case 'contact':
-                      
                             includeHeaderFooter(function() use ($homeController, $filename) {
                                 $homeController->$filename();
                             });
+                            $homeSettings = $homeController->getHomeSettings();
                             break;
                         case 'profile':
                             includeHeaderFooter(function() use ($profileController, $filename) {

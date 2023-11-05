@@ -72,8 +72,8 @@
                                 <span class="input-group-text">+63</span>
                                 <input type="text" class="form-control 
                                 <?php echo isset($errors["mobile"]) ? 'is-invalid' : ''; ?>" name="mobile" id="mobile" oninput="validateNumericInput(this)" maxlength="10" value="<?php if (!empty($_POST["mobile"])) { echo $_POST["mobile"]; } else { echo ''; };?>">
-                                <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                             </div>
+                            <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                             <?php if (isset($errors["mobile"])) : ?>
                                 <div class="text-danger" id="error_mobile"><?= $errors["mobile"] ?></div>
                             <?php endif; ?>

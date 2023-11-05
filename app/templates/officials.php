@@ -22,9 +22,9 @@
                                             <p>ID Selfie not available</p>
                                         <?php endif; ?>
                                         <h6 class="card-title mt-2 mb-0" style="color: #0037ab">
-                                        <?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?>
+                                        <?php echo strtoupper($user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']); ?>
                                         </h6>
-                                        <strong><?php echo $user['role']; ?></strong>
+                                        <strong><?php echo strtoupper($user['role']); ?></strong>
                                     </div>
                                 </div>
                             </div>
@@ -63,9 +63,9 @@
                                         <p>ID Selfie not available</p>
                                     <?php endif; ?>
                                     <h6 class="card-title mt-2 mb-0" style="color: #0037ab">
-                                        <?php echo $user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']; ?>
+                                        <?php echo strtoupper($user['firstname'] . ' ' . $user['middlename'] . ' ' . $user['lastname']); ?>
                                     </h6>
-                                    <strong><?php echo $user['role']; ?></strong>
+                                    <strong><?php echo strtoupper($user['role']); ?></strong>
                                 </div>
                             </div>
                         </div>
