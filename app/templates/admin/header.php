@@ -151,7 +151,7 @@
                 </li>
                 <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'health-information' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo $baseUrl; ?>/health-information">
-                        <i class="bi bi-list-ul"></i> Health Information
+                        <i class="bi bi-file-earmark-medical"></i> Health Information
                     </a>
                 </li>
                 <li class="nav-item mb-2">

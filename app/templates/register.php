@@ -180,7 +180,7 @@
                     <div class="form-check mt-2">
                     <input type="checkbox" class="form-check-input" id="data_privacy_agreement" name="data_privacy_agreement">
                     <label for="data_privacy_agreement" id="dpa" class="text-justify form-check-label" style="<?php echo isset($errors["terms"]) ? 'color: #dc3545' : ''; ?>">
-                        <strong>I have read and agree to the terms of the Republic Act No. 10173, also known as the Data Privacy Act of 2012 (DPA), and consent to the collection, processing, and storage of my personal data in accordance with its provisions.</strong>
+                        <strong>I have read and agree to the <a href="#" id="openDpnModal" class="blue-link">Data Privacy Act (Republic Act No. 10173 of 2012)</a> and consent to the collection, processing, and storage of my personal data in accordance with its provisions.</strong>
                     </label>
                     <?php if (isset($errors["terms"])) : ?>
                         <div class="text-danger mb-2" id="error_terms"><?= $errors["terms"] ?></div>
@@ -195,8 +195,94 @@
                     <button type="submit" name="register" class="form-control mt-2">Register</button>
                     
                     <p class="text-center" style="margin-bottom: -8px"><a href="login">I am already a member</a></p>
+                    <!-- Modal -->
+                    <div class="modal" tabindex="-1" role="dialog" id="dpnModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Data Privacy Notice</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Data Privacy Notice</strong></p>
+
+                                    <p>We respect your privacy and are committed to protecting your personal information. This Data Privacy Notice explains how we collect, use, and protect your data when you use our Barangay Registration Account website. By using our services, you consent to the practices described in this notice.</p>
+
+                                    <p><strong>Information We Collect</strong></p>
+
+                                    <p>We may collect the following types of personal data:</p>
+
+                                    <ul>
+                                        <li>Name</li>
+                                        <li>Address</li>
+                                        <li>Contact information (e.g., email address, phone number)</li>
+                                        <li>Date of birth</li>
+                                        <li>Barangay registration details</li>
+                                        <li>Other information relevant to the registration process</li>
+                                    </ul>
+
+                                    <p><strong>How We Use Your Information</strong></p>
+
+                                    <p>We use the information we collect for the following purposes:</p>
+
+                                    <ul>
+                                        <li>To process and manage Barangay registration applications</li>
+                                        <li>To verify your identity</li>
+                                        <li>To communicate with you regarding your registration</li>
+                                        <li>To improve our services</li>
+                                        <li>To comply with legal and regulatory requirements</li>
+                                    </ul>
+
+                                    <p><strong>Data Security</strong></p>
+
+                                    <p>We are committed to ensuring the security of your personal data. We implement appropriate technical and organizational measures to protect your data from unauthorized access, disclosure, alteration, and destruction.</p>
+
+                                    <p><strong>Sharing of Information</strong></p>
+
+                                    <p>We do not sell, trade, or otherwise transfer your personal data to third parties without your consent, except as required by law or for the purposes mentioned in this notice.</p>
+
+                                    <p><strong>Your Rights</strong></p>
+
+                                    <p>You have the right to:</p>
+
+                                    <ul>
+                                        <li>Access the personal data we hold about you</li>
+                                        <li>Correct any inaccuracies in your personal data</li>
+                                        <li>Delete your personal data, subject to legal and regulatory requirements</li>
+                                        <li>Object to the processing of your data</li>
+                                        <li>Withdraw your consent for data processing</li>
+                                    </ul>
+
+                                    <p><strong>Contact Us</strong></p>
+
+                                    <p>If you have any questions or concerns regarding your personal data and our data processing practices, please contact us at 8123-4567.</p>
+
+                                    <p><strong>Changes to this Notice</strong></p>
+
+                                    <p>We may update this Data Privacy Notice from time to time to reflect changes in our practices or for legal reasons. Please review this notice periodically for any updates.</p>
+
+                                    <p>By using our website and services, you acknowledge that you have read and understood this Data Privacy Notice. If you do not agree with our data processing practices, please do not use our website.</p>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<!-- Add this JavaScript code at the bottom of your HTML page -->
+<script>
+    $(document).ready(function() {
+        // Open the DPN modal when the link is clicked
+        $('#openDpnModal').click(function() {
+            $('#dpnModal').modal('show');
+        });
+    });
+</script>

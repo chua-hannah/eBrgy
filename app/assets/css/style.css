@@ -2004,3 +2004,9 @@ table.dataTable tfoot td {
   border: 1px solid #ccc;
   text-align: center;
 }
+
+.blue-link {
+  color: blue; /* Set the font color to blue */
+  text-decoration: underline; /* Underline the link for better visibility */
+  cursor: pointer; /* Show a pointer cursor on hover to indicate it's clickable */
+}
