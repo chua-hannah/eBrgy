@@ -10,7 +10,7 @@
                             class="img-fluid avatar-image" alt="">
 
                         <div class="d-flex flex-column justify-content-center ms-3">
-                            <p class="mb-0">Juan Dela Cruz</p>
+                            <p class="mb-0">ELJUN C. SAYO</p>
                             <p class="mb-0"><strong>Barangay Secretary</strong></p>
                         </div>
                     </div>
