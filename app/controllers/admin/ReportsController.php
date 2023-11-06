@@ -291,15 +291,15 @@ class ReportsController {
                 if (empty($sex)) {
                     $errors["sex"] = "Select Gender";
                 }
-                if (empty($mobile)) {
-                    $errors["mobile"] = "Enter Mobile number";
-                } else if (!preg_match($mobilePattern, $mobile)) {
+                if (!empty($mobile)) {
+                  if (!preg_match($mobilePattern, $mobile)) {
                     $errors["mobile"] = "Invalid mobile number format.";
+                  }
                 }
-                if (empty($email)) {
-                    $errors["email"] = "Enter Email address";
-                } else if (!preg_match($emailPattern, $email)) {
+                if (!empty($email)) {
+                    if (!preg_match($emailPattern, $email)) {
                     $errors["email"] = "Invalid email format";
+                    }
                 }
                 if (empty($address)) {
                     $errors["address"] = "Enter Address";
@@ -307,8 +307,10 @@ class ReportsController {
         
                 if (empty($errors)) {
                     // Add prefix in mobile number input
-                    $prefixMobileNumber = "+63";
-                    $mobile = $prefixMobileNumber . $mobile;
+                    if (!empty($mobile)){
+                        $prefixMobileNumber = "+63";
+                        $mobile = $prefixMobileNumber . $mobile;
+                    }
         
                     // Convert birthdate to YYYY-MM-DD format
                     $birthdateTimestamp = strtotime($birthdate);
@@ -328,13 +330,14 @@ class ReportsController {
                         while ($row = $result->fetch_assoc()) {
                             if ($row['firstname'] == $firstname && $row['lastname'] == $lastname && $row['birthdate'] == $birthdate) {
                                 $duplicateFirstNameLastNameBirthdate = true;
+                                $error = "A resident with the same first name, last name, and birthdate already exists.";
                             }
                         }
                     }
         
                     if ($duplicateFirstNameLastNameBirthdate) {
+                        $_SESSION['error'] = $error;
                         header("Location: masterlist");
-                        $_SESSION['error'] = "A resident with the same first name, last name, and birthdate already exists.";
                         exit();
                     } elseif (empty($error) && empty($errors)) {
                         // Insert the data into the users_masterlist table
