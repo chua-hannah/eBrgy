@@ -127,7 +127,8 @@
                                             
                                                 if ($request['request_name'] === 'barangay certification (first time jobseekers assistance act - ra 11261)') {
                                                     $action = 'first-job-certificate';
-                                                } elseif ($request['request_name'] === 'certificate of indigency') {
+                                                } 
+                                                elseif ($request['request_name'] === 'certificate of indigency') {
                                                     $action = 'indigency-certificate';
                                                 }
                                                 elseif ($request['request_name'] === 'barangay certificate') {
@@ -173,6 +174,7 @@
 <script>
   // Get references to the document type and remarks field
 const selectedService = document.getElementById('selected_service');
+const serviceMessage = document.getElementById('service_message');
 const remarksLabel = document.getElementById('remarks_label');
 const remarksField = document.getElementById('remarks_field');
 const purposeField = document.getElementById('purpose_field');
@@ -197,14 +199,20 @@ const allowedValues = ["Medical Purpose", "School Requirement", "Vending Permit"
 
 // Add an event listener to the document type selection
 selectedService.addEventListener('change', function() {
-    if (selectedService.value === "barangay certificate") {
+    if (selectedService.value.toLowerCase() === "barangay certificate") {
         // If "Barangay Certificate" is selected, change the field to an option select input
         remarksLabel.innerText = "Purpose";
         remarksField.innerHTML = '<select name="service_message" class="form-select" required>' +
             '<option value="" disabled selected>Select Purpose</option>' +
             barangayCertificateOptions.map(option => `<option value="${option}">${option}</option>`).join('') +
             '</select>';
-    } else {
+    }
+    else if (selectedService.value.toLowerCase() === "certificate of indigency") {
+        // If "Barangay Certificate" is selected, change the field to an option select input
+        remarksLabel.innerText = "Purpose";
+        remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. Financial Assistance" required></textarea>';
+    }
+     else {
         // If a different document type is selected, revert to the text area
         remarksLabel.innerText = "Remarks";
         remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>';
