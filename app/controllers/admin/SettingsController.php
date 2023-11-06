@@ -57,7 +57,7 @@ class SettingsController {
     public function request_setting() {
         if (isset($_POST['add_request'])) {
             date_default_timezone_set('Asia/Manila');
-            $request_name = $_POST['request_name'];
+            $request_name = strtolower($_POST['request_name']);
             $status = $_POST['status'];
             $description = $_POST['description'];
             $date = date('Y-m-d');

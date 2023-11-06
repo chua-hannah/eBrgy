@@ -551,7 +551,7 @@ main {
 
 #hero-slide .carousel-caption {
   background: var(--white-color);
-  clip-path: polygon(100% 100%, 100% 150px, 0 100%);
+  clip-path: polygon(100% 100%, 100% 20px, 0 100%);
   color: var(--secondary-color);
   top: 1px;
   bottom: -1px;
@@ -1230,22 +1230,6 @@ blockquote::before {
 
 .custom-form button[type="submit"]:hover:enabled,
 .custom-form button[type="submit"]:focus:enabled {
-  background: var(--custom-btn-bg-hover-color);
-  border-color: transparent;
-}
-
-.custom-form button[type="custom-button"] {
-  background: var(--custom-btn-bg-color);
-  border: none;
-  border-radius: var(--border-radius-large);
-  color: var(--white-color);
-  font-size: var(--p-font-size);
-  font-weight: var(--font-weight-semibold);
-  transition: all 0.3s;
-}
-
-.custom-form button[type="custom-button"]:hover:enabled,
-.custom-form button[type="custom-button"]:focus:enabled {
   background: var(--custom-btn-bg-hover-color);
   border-color: transparent;
 }
@@ -2033,4 +2017,16 @@ table.dataTable tfoot td {
 
 .text-bottom {
   margin-top: auto;
+}
+
+.slideImage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 250px; /* Set a fixed height to align the containers */
+}
+
+.slideImage-label {
+  margin-top: 10px;
 }

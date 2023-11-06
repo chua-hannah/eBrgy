@@ -16,7 +16,7 @@
                     foreach ($requests as $request) {
                     // Display the data for each request
                     ?>
-                    <option value="<?php echo $request['equipment_id']; ?>" data-max-quantity="<?php echo $request['total_equipment']; ?>"><?php echo $request['equipment_name']; ?></option>
+                    <option value="<?php echo $request['equipment_id']; ?>" data-max-quantity="<?php echo $request['total_equipment']; ?>"><?php echo strtoupper($request['equipment_name']); ?></option>
                     <?php
                     }
                     ?>
@@ -74,7 +74,7 @@
                                       
                                 ?>
                                     <tr>
-                                        <td><?php echo $request['equipment_name']; ?></td>
+                                        <td><?php echo strtoupper($request['equipment_name']); ?></td>
                                         <td><?php echo $request['total_equipment_borrowed']; ?></td>
                                         <td><?php echo  date("m/d/Y", strtotime($request['return_date']));?></td>
                                         <td><?php echo $requestDate . " " . $requestTime; ?></td>

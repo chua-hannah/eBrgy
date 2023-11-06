@@ -16,7 +16,7 @@
                     foreach ($requests as $request) {
                         // Display the data for each request
                         ?>
-                        <option value="<?php echo $request['request_name']; ?>"><?php echo $request['request_name']; ?></option>
+                        <option value="<?php echo $request['request_name']; ?>"><?php echo strtoupper($request['request_name']); ?></option>
                         <?php
                     }
                 ?>
@@ -97,7 +97,7 @@
                                     }
                                     ?>
                                     <tr>
-                                        <td><?php echo $request['request_name']; ?></td>
+                                        <td><?php echo strtoupper($request['request_name']); ?></td>
                                         <td><?php echo !empty($request['message']) ? $request['message'] : '-'; ?></td>
                                         <td><?php echo !empty($request['purpose']) ? $request['purpose'] : '-'; ?></td>
                                         <td><?php echo $createdAtDateFormattedDate . " " . $createdAtTimeFormattedTime; ?></td>
@@ -125,15 +125,15 @@
                                                 // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
                                                 $action = ''; // Initialize the action variable
                                             
-                                                if ($request['request_name'] === 'firstjob certificate') {
+                                                if ($request['request_name'] === 'barangay certification (first time jobseekers assistance act - ra 11261)') {
                                                     $action = 'first-job-certificate';
-                                                } elseif ($request['request_name'] === 'indigency certificate') {
+                                                } elseif ($request['request_name'] === 'certificate of indigency') {
                                                     $action = 'indigency-certificate';
                                                 }
                                                 elseif ($request['request_name'] === 'barangay certificate') {
                                                     $action = 'barangay-certificate';
                                                 }
-                                                elseif ($request['request_name'] === 'oath certificate') {
+                                                elseif ($request['request_name'] === 'oath of undertaking') {
                                                     $action = 'oath-certificate';
                                                 }
                                             

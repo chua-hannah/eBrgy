@@ -62,6 +62,7 @@
                         // Display the data for each request
                     ?>
                         <tr>
+<<<<<<< Updated upstream
                         <td style="display: flex; justify-content: space-around;">
                                 <form method="post" action="edit-documents-management">
                                     <input type="hidden" name="equipment_id" value="<?php echo $request['equipment_id']; ?>">
@@ -69,6 +70,9 @@
                                 </form>                                
                             </td>      
                             <td><?php echo $request['equipment_name']; ?></td>
+=======
+                            <td><?php echo strtoupper($request['equipment_name']); ?></td>
+>>>>>>> Stashed changes
                             <td><?php echo $request['availability'] = "1" ? "Available" : "Not Available"; ?></td>
                             <td><?php echo $request['number_of_equipment']; ?></td>
                             <td><?php echo $request['total_equipment']; ?></td>

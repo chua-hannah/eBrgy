@@ -9,19 +9,24 @@
                     </h3>
                 </div>
                 <div class="card-body">
+                    <h4>User List</h4>
                     <h6><i class="bi bi-person" style="font-size: 1rem;"></i> Active Users: <?php echo $data['totalActiveUsers']; ?></h6>
                     <h6><i class="bi bi-clock" style="font-size: 1rem;"></i> Pending Users: <?php echo $data['totalUsers']; ?></h6>
                     <h6><i class="bi bi-person-fill" style="font-size: 1rem;"></i> Admins: <?php echo $data['totalAdmins']; ?></h6>
                     <h6><i class="bi bi-house" style="font-size: 1rem;"></i> Resident Users: <?php echo $data['totalResidences']; ?></h6>
+                    <h6><i class="bi bi-people" style="font-size: 1rem;"></i> Seniors: <?php echo $data['totalSenior']; ?></h6>                    
+                    <h6><i class="bi bi-bank" style="font-size: 1rem;"></i> 4PS: <?php echo $data['totalFourps']; ?></h6>
+                    <h6><i class="bi bi-person" style="font-size: 1rem;"></i> PWD : <?php echo $data['totalPwd']; ?></h6>
+                    <h6><i class="bi bi-person-arms-up" style="font-size: 1rem;"></i> Solo Parent : <?php echo $data['totalSoloParent']; ?></h6>
+                    <h6><i class="bi bi-book" style="font-size: 1rem;"></i> Scholar: <?php echo $data['totalScholar']; ?></h6>
                     <h4 class="mt-5">Master List</h4>
                     <h6><i class="bi bi-people-fill" style="font-size: 1rem;"></i> Families: <?php echo $families; ?></h6>
                     <h6><i class="bi bi-house" style="font-size: 1rem;"></i> Residences: <?php echo $data['masterlistUsers']; ?></h6>
                     <h6><i class="bi bi-people" style="font-size: 1rem;"></i> Seniors: <?php echo $data['masterlistSenior']; ?></h6>
-                    <h6><i class="bi bi-person" style="font-size: 1rem;"></i> PWD : <?php echo $data['masterlistPwd']; ?></h6>
                     <h6><i class="bi bi-bank" style="font-size: 1rem;"></i> 4PS: <?php echo $data['masterlistFourps']; ?></h6>
+                    <h6><i class="bi bi-person" style="font-size: 1rem;"></i> PWD : <?php echo $data['masterlistPwd']; ?></h6>
+                    <h6><i class="bi bi-person-arms-up" style="font-size: 1rem;"></i> Solo Parent : <?php echo $data['masterlistSoloParent']; ?></h6>
                     <h6><i class="bi bi-book" style="font-size: 1rem;"></i> Scholar: <?php echo $data['masterlistScholar']; ?></h6>
-
-
                 </div>
               
             </div>
@@ -70,18 +75,18 @@
                 </div>
                 <div class="card-body">
                     <!-- Present Section -->
-                    <h6><i class="bi bi-person-check" style="font-size: 1rem;"></i> Present: <?php echo $data['totalPresentAttendee'] . '/' . $data['totalKagawad']; ?></h6>
+                    <h5><i class="bi bi-person-check" style="font-size: 1rem;"></i> Present: <?php echo $data['totalPresentAttendee'] . '/' . $data['totalKagawad']; ?></h5>
                     <?php foreach ($data['presentAttendees'] as $presentAttendee) { ?>
-                        <p class="attendee-name present-attendee text-success">
+                        <h6 class="attendee-name present-attendee text-success" style="margin-left: 20px;">
                             <?php echo $presentAttendee['firstname'] . ' ' . $presentAttendee['middlename'] . ' ' . $presentAttendee['lastname']; ?>
                             <!-- Include other details you want to display -->
-                        </p>
+                        </h6>
                     <?php } ?>
 
                     <!-- Late Section -->
-                    <h6><i class="bi bi-person-dash" style="font-size: 1rem;"></i> Late: <?php echo $data['totalLateAttendee'] . '/' . $data['totalKagawad']; ?></h6>
+                    <h5><i class="bi bi-person-dash" style="font-size: 1rem;"></i> Late: <?php echo $data['totalLateAttendee'] . '/' . $data['totalKagawad']; ?></h5>
                     <?php foreach ($data['lateAttendees'] as $lateAttendee) { ?>
-                        <p class="attendee-name late-attendee text-warning">
+                        <p class="attendee-name late-attendee text-warning" style="margin-left: 20px;">
                             <?php echo $lateAttendee['firstname'] . ' ' . $lateAttendee['middlename'] . ' ' . $lateAttendee['lastname']; ?>
                             <!-- Include other details you want to display -->
                         </p>

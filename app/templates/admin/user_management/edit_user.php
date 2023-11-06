@@ -124,6 +124,20 @@ if ($userId) {
                     <p class="card-text"><strong>House No./Bldg./Street Name:</strong> <?php echo $userData['address']; ?></p>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <p class="card-text"><strong>Is 4P's member?</strong> <?php echo $userData['four_ps'] == 1 ? 'YES' : 'NO'; ?></p>
+                </div>
+                <div class="mb-3">
+                    <p class="card-text"><strong>Is PWD?</strong> <?php echo $userData['pwd'] == 1 ? 'YES' : 'NO'; ?></p>
+                </div>
+                <div class="mb-3">
+                    <p class="card-text"><strong>Is Solo Parent?</strong> <?php echo $userData['solo_parent'] == 1 ? 'YES' : 'NO'; ?></p>
+                </div>
+                <div class="mb-3">
+                    <p class="card-text"><strong>Is Scholar?</strong> <?php echo $userData['scholar'] == 1 ? 'YES' : 'NO'; ?></p>
+                </div>
+            </div>
         </div>
         <div id="imageModal" class="modal-img">
             <span class="close" id="closeModal">&times;</span>

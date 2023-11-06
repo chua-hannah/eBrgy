@@ -34,7 +34,7 @@
                 <tbody>
                     <?php foreach ($requests as $request): ?>
                     <tr>
-                        <td><?php echo $request['request_name']; ?></td>
+                        <td><?php echo strtoupper($request['request_name']); ?></td>
                         <td><?php echo !empty($request['message']) ? $request['message'] : '-'; ?></td>
                         <td><?php echo $request['firstname']; ?></td>
                         <td>                    
