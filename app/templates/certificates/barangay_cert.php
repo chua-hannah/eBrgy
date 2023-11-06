@@ -189,36 +189,38 @@
             <div class="content2">
                 <div>
                 <p><strong>TO WHOM IT MAY CONCERN</strong></p>
-                <p class="indented-paragraph mb-0">This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo strtoupper($docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname']);?>, <?php echo $docRequestUserData['age'];?> years old with a postal address at</p>
-                <p><?php echo $docRequestUserData['address'];?> Tondo, Manila is a <strong>bonafide resident of this Barangay, Barangay 95 Zone 8 District 1, Manila.</strong></p>
+                <p class="indented-paragraph mb-0" style="text-indent: 20px;">
+                    This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo strtoupper($docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname']);?>, <?php echo $docRequestUserData['age'];?> years old with a postal address at 
+                    <?php echo $docRequestUserData['address'];?> Tondo, Manila is a <strong>bonafide resident of this Barangay, Barangay 95 Zone 8 District 1, Manila.</strong>
+                </p>
+
                 
-                <p class="indented-paragraph mb-0">This Certification was issued upon the request of the above mentioned
-                name for legal purpose that may </p>
-                <p>serve him/her best, <strong>That he/she has No
-                Deragatory Record or pending case filed against him/her in his barangay.</strong></p>
+                <p class="indented-paragraph mt-2 mb-0" style="text-indent: 20px;">
+                    This Certification was issued upon the request of the above mentioned name for legal purpose that may serve him/her best, <strong>That he/she has No Derogatory Record or pending case filed against him/her in his barangay.</strong>
+                </p>
+
                
-                <div class="indented-paragraph mt-5"><strong><u>REQUIREMENT IN SUPPORT OF HIS/HER DOCUMENT:</u></strong></div>
+                <div class="indented-paragraph mt-3"><strong><u>REQUIREMENT IN SUPPORT OF HIS/HER DOCUMENT:</u></strong></div>
                 
                 <div class="checkbox-container mt-2">
                     <label>
                         <input type="checkbox" name="option" id="option1" <?php if ($docRequestUserData['message'] === 'Requirement for Employment') echo ' checked '; ?> > Requirement for Employment
                     </label>
                     <label>
-                        <input type="checkbox" name="option" id="option2"  <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo ' checked '; ?> > Medical Purpose <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
+                        <input type="checkbox" name="option" id="option2"  <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo ' checked '; ?> > Medical Purpose <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
                     </label>
                     <label>
                         <input type="checkbox" name="option" id="option3"  <?php if ($docRequestUserData['message'] === 'School Requirement') echo ' checked '; ?> > School Requirement <u>ADMISSION</u>
                     </label>
                     <label>
-                        <input type="checkbox" name="option" id="option4" <?php if ($docRequestUserData['message'] === 'Vending Permit') echo ' checked '; ?> > Vending Permit <?php if ($docRequestUserData['message'] === 'Vending Permit') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
+                        <input type="checkbox" name="option" id="option4" <?php if ($docRequestUserData['message'] === 'Vending Permit') echo ' checked '; ?> > Vending Permit <?php if ($docRequestUserData['message'] === 'Vending Permit') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
                     </label>
                     <label>
                         <input type="checkbox" name="option" id="option5"  <?php if ($docRequestUserData['message'] === 'Hospital Purposes') echo ' checked '; ?> > Hospital Purposes
                     </label>
                     <label>
-                        <input type="checkbox" name="option" id="option6" <?php if ($docRequestUserData['message'] === 'Bank Requirements') echo ' checked '; ?>> Bank Requirements <?php if ($docRequestUserData['message'] === 'Bank Requirements') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
-                    </label>
-                    
+                        <input type="checkbox" name="option" id="option6" <?php if ($docRequestUserData['message'] === 'Bank Requirements') echo ' checked '; ?>> Bank Requirements <?php if ($docRequestUserData['message'] === 'Bank Requirements') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
+                    </label>                    
                     <label>
                         <input type="checkbox" name="option" id="option7" <?php if ($docRequestUserData['message'] === 'SSS/GSIS Requirement') echo ' checked '; ?>> SSS/GSIS Requirement
                     </label>
@@ -229,15 +231,15 @@
                         <input type="checkbox" name="option" id="option9" <?php if ($docRequestUserData['message'] === 'Calamity / Livelihood Loan') echo ' checked '; ?>> Calamity / Livelihood Loan
                     </label>
                     <label>
-                        <input type="checkbox" name="option" id="option10" <?php if ($docRequestUserData['message'] === 'ID for') echo ' checked '; ?>> ID for <?php if ($docRequestUserData['message'] === 'ID for') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
+                        <input type="checkbox" name="option" id="option10" <?php if ($docRequestUserData['message'] === 'ID for') echo ' checked '; ?>> ID for <?php if ($docRequestUserData['message'] === 'ID for') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
                     </label>
                     <label>
-                        <input type="checkbox" name="option" id="option11" <?php if ($docRequestUserData['message'] === 'Others') echo ' checked '; ?>> Others: <?php if ($docRequestUserData['message'] === 'Others') echo '<u>' . $docRequestUserData['purpose'] . '</u>'; ?>
+                        <input type="checkbox" name="option" id="option11" <?php if ($docRequestUserData['message'] === 'Others') echo ' checked '; ?>> Others: <?php if ($docRequestUserData['message'] === 'Others') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
                     </label>
                 </div>
                 <div class="indented-paragraph mt-2">IN WITNESS WHEREOF I have hereunto set my hand and affixed the official seal of
                 this office.</div> 
-                <p class="indented-paragraph mt-3 mb-0">Issued at the Office of the Barangay Chairman, Barangay 95 Zone 8, District I</p>
+                <p class="indented-paragraph mt-2 mb-0">Issued at the Office of the Barangay Chairman, Barangay 95 Zone 8, District I</p>
                 <p class="mb-0">this <?php
                 $datetime = $docRequestUserData['process_at'];
                 $date = date("jS \d\a\y \of F, Y", strtotime($datetime));

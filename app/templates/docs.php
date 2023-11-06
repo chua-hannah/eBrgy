@@ -212,10 +212,15 @@ selectedService.addEventListener('change', function() {
         remarksLabel.innerText = "Purpose";
         remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. Financial Assistance" required></textarea>';
     }
+    else if (selectedService.value.toLowerCase() === "oath of undertaking" || selectedService.value.toLowerCase() === "barangay certification (first time jobseekers assistance act - ra 11261)") {
+        // If "Barangay Certificate" is selected, change the field to an option select input
+        remarksLabel.innerText = "Years of Residency";
+        remarksField.innerHTML = '<input text name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. 5 years and 3 months" required>';
+    }
      else {
         // If a different document type is selected, revert to the text area
         remarksLabel.innerText = "Remarks";
-        remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>';
+        remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. Special Requests"></textarea>';
     }
 });
 

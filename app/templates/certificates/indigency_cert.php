@@ -186,28 +186,25 @@
                 <div>ECS 2018</div>
                 </div>
             </div>
-            <div class="content2">
+            <div class="content2 justify-content">
                 <div>
                 <p><strong>TO WHOM IT MAY CONCERN</strong></p>
-                <p class="indented-paragraph mb-0">This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo strtoupper($docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname']);?>, <?php echo $docRequestUserData['age'];?> years old with a postal address at</p>
-            
-                <p><?php echo " " . strtoupper($docRequestUserData['address']);?> Tondo, Manila is a bonafide resident of this Barangay, Barangay 95 Zone 8 District 1, Manila.</p>
-                
-                <p class="indented-paragraph mb-0">This further certifies that the subject person concerned is known to us that belong to </p>
-                <p>the INDIGENT FAMILY of this Barangay. Their family has no sufficient income and barely
-                enough to meet their day to day needs as well as their <?php echo strtoupper($docRequestUserData['message']);?>.</p>
-            
-                <p class="indented-paragraph mb-0">This Certification was issued upon the request of the above mentioned person for </p>
-                <p><?php echo strtoupper($docRequestUserData['message']);?>.</p>
-                
-                <div class="indented-paragraph mt-2">IN WITNESS WHEREOF I have hereunto set my hand and affixed the official seal of
-                this office.</div> 
-                <p class="indented-paragraph mt-3">This <?php
+                <p class="indented-paragraph mb-0" style="text-indent: 20px;">This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo strtoupper($docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname']);?>, <?php echo $docRequestUserData['age'];?> years old with a postal address at
+                <?php echo strtoupper($docRequestUserData['address']); ?> Tondo, Manila is a bonafide resident of this Barangay, Barangay 95 Zone 8 District 1, Manila.</p>
+
+                <p class="indented-paragraph mt-2 mb-0" style="text-indent: 20px;">This further certifies that the subject person concerned is known to us that belong to
+             the INDIGENT FAMILY of this Barangay. Their family has no sufficient income and barely enough to meet their day-to-day needs as well as their <?php echo strtoupper($docRequestUserData['message']);?>.</p>
+
+                <p class="indented-paragraph mt-2 mb-0" style="text-indent: 20px;">This Certification was issued upon the request of the above-mentioned person for
+                <?php echo strtoupper($docRequestUserData['message']);?>.</p>
+
+                <p class="indented-paragraph mt-3 mb-0">IN WITNESS WHEREOF I have hereunto set my hand and affixed the official seal of this office.</p>
+
+                <p class="indented-paragraph mt-2">This <?php
                 $datetime = $docRequestUserData['process_at'];
                 $date = date("jS \d\a\y \of F, Y", strtotime($datetime));
                 echo $date . ", ";
-                ?>
-                in the City of Manila.</p>
+                ?> in the City of Manila.</p>
             </div>
        <div>
        <div class="footer">
