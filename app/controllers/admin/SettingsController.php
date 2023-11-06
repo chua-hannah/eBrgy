@@ -107,7 +107,7 @@ class SettingsController {
             die("Connection failed: " . $this->connection->error);
         }
     
-        $query = "SELECT * FROM doc_settings WHERE request_status = 1"; // Updated query
+        $query = "SELECT * FROM doc_settings"; // Updated query
         $result = $this->connection->query($query);
     
         // Fetch all request settings records as an associative array

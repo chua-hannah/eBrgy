@@ -231,6 +231,57 @@ class RequestManagementController {
             $stmt->close();
         }
     }
+
+   
+    public function getDocById() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+        
+        if (isset($_POST['edit_request_doc'])) {
+            $id = $_POST['request_type_id'];
+            $id = $this->connection->real_escape_string($id);
+    
+            // Create a SQL query to retrieve the health information for the given ID
+            $query = "SELECT * FROM doc_settings WHERE request_type_id = '$id'";
+    
+            $result = $this->connection->query($query);
+    
+            if ($result) {
+                $docdatas[] = $result->fetch_assoc(); 
+                return $docdatas; // Return the data as an associative array
+            }
+        }
+    
+        return array(); // Return an empty array if the condition is not met or if the query fails
+    }
+
+    function updateDocbyId() {
+
+        if (isset($_POST['update_doc_by_id'])) {
+            $doc_id = $_POST['doc_id'];
+            $status = $_POST['status'];
+            $documentName = $_POST['documentName'];
+            $purposeRemarks = $_POST['purposeRemarks'];
+
+          
+         
+            // Use prepared statements to prevent SQL injection
+            $stmt = $this->connection->prepare("UPDATE doc_settings SET request_status = ?, request_name = ?, description = ? WHERE request_type_id = ?");
+            $stmt->bind_param("sssi", $status, $documentName, $purposeRemarks, $doc_id); // Assuming user_id is an integer
+    
+            if ($stmt->execute()) {
+                header("Location: /eBrgy/app/requests-documents-management");
+                $_SESSION['success'] = "The document updated successfully approved.";
+                exit();
+            } else {
+                $_SESSION['error'] = "Error updating user status: " . $stmt->error;
+            }
+    
+            // Close the prepared statement
+            $stmt->close();
+        }
+    }
     
 
     function delete_doc($doc_id) {
@@ -637,5 +688,7 @@ class RequestManagementController {
                 $stmt->close();
             }    
         }
+
+
   }  
 ?>

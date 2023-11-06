@@ -43,6 +43,7 @@
                 <table class="table table-bordered table-striped custom-table datatable">
                     <thead>
                         <tr>
+                            <th class="wrap-text">Action/s</th>
                             <th class="wrap-text">Document Name</th>
                             <th class="wrap-text">Description</th>
                             <th class="wrap-text">Status</th>
@@ -55,6 +56,12 @@
                         // Display the data for each request
                     ?>
                         <tr>
+                            <td style="display: flex; justify-content: space-around;">
+                                <form method="post" action="edit-documents-management">
+                                    <input type="hidden" name="request_type_id" value="<?php echo $request['request_type_id']; ?>">
+                                    <button type="submit" name="edit_request_doc" class="btn btn-primary">Edit</button>
+                                </form>                                
+                            </td>                           
                             <td><?php echo $request['request_name']; ?></td>
                             <td><?php echo empty($request['description']) ? "-" : $request['description']; ?></td>
                             <td>

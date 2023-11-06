@@ -311,6 +311,14 @@ switch ($filename) {
                                 
                             });
                             break;
+                        case 'edit-documents-management':
+                            includeAdminContent(function() use ($requestManagementController, $settingsController) {
+                                $docDatas = $requestManagementController->getDocById();
+                                $requestManagementController->updateDocbyId();
+                                include 'templates/admin/request_management/edit_doc_management.php';
+                                
+                            });
+                            break;
                         case 'requests-reports':
                             includeAdminContent(function() use ($requestManagementController) {
                                 $requests = $requestManagementController->report_requests();

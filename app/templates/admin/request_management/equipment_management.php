@@ -49,6 +49,7 @@
                 <table class="table table-bordered table-striped custom-table datatable">
                     <thead>
                         <tr>
+                            <th class="wrap-text">Action/s</th>
                             <th class="wrap-text">Name</th>
                             <th class="wrap-text">Status</th>
                             <th class="wrap-text">Number to Borrow</th>
@@ -61,6 +62,12 @@
                         // Display the data for each request
                     ?>
                         <tr>
+                        <td style="display: flex; justify-content: space-around;">
+                                <form method="post" action="edit-documents-management">
+                                    <input type="hidden" name="equipment_id" value="<?php echo $request['equipment_id']; ?>">
+                                    <button type="submit" name="edit_request_doc" class="btn btn-primary">Edit</button>
+                                </form>                                
+                            </td>      
                             <td><?php echo $request['equipment_name']; ?></td>
                             <td><?php echo $request['availability'] = "1" ? "Available" : "Not Available"; ?></td>
                             <td><?php echo $request['number_of_equipment']; ?></td>
