@@ -20,22 +20,14 @@
 
                         <p class="d-flex mb-2">
                             <i class="bi-geo-alt me-2"></i>
-                            Barangay 95, Manila, Philippines
+                            Barangay 95, Zone 8, District 1, Manila, Philippines
                         </p>
 
                         <p class="d-flex mb-2">
                             <i class="bi-telephone me-2"></i>
 
-                            <a href="tel: 8123-4567">
-                                8123-4567
-                            </a>
-                        </p>
-
-                        <p class="d-flex">
-                            <i class="bi-envelope me-2"></i>
-
-                            <a href="mailto:info@yourgmail.com">
-                                dummy@only.ph
+                            <a href="tel: 8-294-47-66">
+                                8-294-47-66
                             </a>
                         </p>
 

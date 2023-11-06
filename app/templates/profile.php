@@ -5,22 +5,24 @@
             <form method="post" action="" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-3 border-right">
-                        <div class="d-flex flex-column align-items-center text-center my-5">
+                        <div class="d-flex flex-column align-items-center text-center my-3">
                             <?php
                             $idSelfiePath = 'uploads/id_selfie/' . $user_data['id_selfie'];
                             if (!empty($user_data['id_selfie']) && file_exists($idSelfiePath)):
                             ?>
-                            <img class="about-image ms-md-auto bg-light shadow-lg img-fluid mb-4" width="150px"
-                                src="<?php echo $idSelfiePath; ?>" alt="profilepic">
+                            <div class="image-container">
+                                <img class="about-image ms-md-auto bg-light shadow-lg img-fluid mb-4" width="150px"
+                                    src="<?php echo $idSelfiePath; ?>" alt="profilepic">
+                                <?php if ($user_data && isset($user_data['username'])) { ?>
+                                <h5><?php echo $user_data['username']; ?></h5>
+                                <?php } else { ?>
+                                <h3>User Data Not Available</h3>
+                                <?php } ?>
+                                <p class="text-bottom mb-0">Resident</p>
+                            </div>
                             <?php else: ?>
                             <p>Profile picture is not available</p>
                             <?php endif; ?>
-                            <?php if ($user_data && isset($user_data['username'])) { ?>
-                            <h5><?php echo $user_data['username']; ?></h5>
-                            <?php } else { ?>
-                            <h3>User Data Not Available</h3>
-                            <?php } ?>
-                            <p>Resident</p>
                         </div>
                     </div>
                     <div class="col-md-9 border-right">
@@ -73,13 +75,18 @@
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <label class="labels">Mobile Number</label>
-                                    <input type="text" class="form-control" id="mobile" name="mobile"
-                                        value="<?php echo $user_data['mobile']; ?>" disabled>
+                                    <div class="input-group">
+                                        <span class="input-group-text">+63</span>
+                                        <input type="text" class="form-control" id="mobile" name="mobile"
+                                            value="<?php echo $user_data['mobile']; ?>" oninput="validateNumericInput(this)" maxlength="10" required disabled>
+                                    </div>
+                                        <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <label class="labels">Email</label>
                                     <input type="text" class="form-control" id="email" name="email"
-                                        value="<?php echo $user_data['email']; ?>" disabled>
+                                        value="<?php echo $user_data['email']; ?>" required disabled>
+                                        <div class="invalid-feedback" id="error_email2" <?php echo isset($errors["email"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid email format</div>
                                 </div>
                                 <input type="hidden" name="user_id" value="<?php echo $user_data['user_id']; ?>">
                                 <div class="col-lg-12 col-12 mt-2">
@@ -88,7 +95,7 @@
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">House No./Bldg./Street Name</label>
                                     <input type="text" class="form-control" id="address" name="address"
-                                        value="<?php echo $user_data['address']; ?>" disabled>
+                                        value="<?php echo $user_data['address']; ?>" required disabled>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">City</label>
@@ -114,7 +121,7 @@
                             </div>
                             <div class="text-center mt-2">
                                 <!-- Button to edit the profile -->
-                                <button type="button" name="edit_profile" id="edit_profile" class="form-control">Edit Profile</button>
+                                <button type="custom-button" name="edit_profile" id="edit_profile" class="form-control">Edit Profile</button>
                                 <!-- Button to save changes (initially hidden) -->
                                 <button type="submit" name="save_changes" id="save_changes" class="form-control"
                                     style="display: none;">Save Changes</button>

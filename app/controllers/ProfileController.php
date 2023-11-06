@@ -37,8 +37,7 @@ class ProfileController {
 
   
   function update_user_profile($user_id) {
-    $activationMessage = '';
-
+    $errorMessages = [];
     if (isset($_POST['save_changes'])) {
         // Retrieve the user ID from the form
         $user_id = $_POST['user_id'];
@@ -46,6 +45,8 @@ class ProfileController {
         $newMobile = $_POST['mobile'];
         $newEmail = $_POST['email'];
         $newAddress = $_POST['address'];
+        $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
+        $mobilePattern = "/^9\d{9}$/";
         $newProfilePicture = null;
 
         // Handle profile picture upload
@@ -65,33 +66,42 @@ class ProfileController {
             $stmt = $this->connection->prepare("UPDATE users SET mobile = ?, email = ?, address = ? WHERE user_id = ?");
             $stmt->bind_param("sssi", $newMobile, $newEmail, $newAddress, $user_id);
         }
-
-        if ($stmt->execute()) {
-            // Activation successful
-            echo '<script>window.location.href = "profile";</script>';
-            $_SESSION['success'] = "Profile updated successfully.";
+        if (!preg_match($mobilePattern, $newMobile)) {
+            $errorMessages["mobile"] = "Invalid mobile number format";    
+        }
+        if (!preg_match($emailPattern, $newEmail)) {
+            $errorMessages["email"] = "Invalid email format";
+        }
+        if (!empty($errorMessages)) {
+            // If there are errors, set them in the $errorMessages array
+            $_SESSION['error'] = "There are one or more errors in the form:\n" . implode("\n& ", $errorMessages);
+            header("Location: /eBrgy/app/profile");
             exit();
-        } else {
-            // Activation failed
-            $_SESSION['error'] = "Error updating user profile: " . $stmt->error;
+        }
+        else {
+            if ($stmt->execute()) {
+                // Activation successful
+                header("Location: /eBrgy/app/profile");
+                $_SESSION['success'] = "Your profile has been successfully updated.";
+                exit();
+            } else {
+                // Activation failed
+                $_SESSION['error'] = "Error updating user profile: " . $stmt->error;
+            }
         }
 
         // Close the prepared statement
         $stmt->close();
     }
-
-    return $activationMessage;
 }
 
 
 
 function update_admin_profile($user_id) {
-    $activationMessage = '';
-
+    $errorMessages = [];
     if (isset($_POST['save_changes'])) {
         // Retrieve the user ID from the form
         $user_id = $_POST['user_id'];
-       
         $newMobile = $_POST['mobile'];
         $newEmail = $_POST['email'];
         $newAddress = $_POST['address'];
@@ -100,11 +110,13 @@ function update_admin_profile($user_id) {
         $newMiddlename = $_POST['middlename']; // Fix variable names
         $newLastname = $_POST['lastname']; // Fix variable names
         $newSex = $_POST['sex'];
+        $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
+        $mobilePattern = "/^9\d{9}$/";
         // Calculate age based on the updated Birthdate
         $birthdate = new DateTime($newBirthdate);
         $today = new DateTime();
         $age = $today->diff($birthdate)->y;
-
+        
         // Use prepared statements to prevent SQL injection
         if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
             $newProfilePicture = $_FILES['profile_picture']['name'];
@@ -112,37 +124,41 @@ function update_admin_profile($user_id) {
             move_uploaded_file($_FILES['profile_picture']['tmp_name'], $profilePicturePath);
 
             // Update with the new profile picture
-            $stmt = $this->connection->prepare("UPDATE users SET mobile = ?, email = ?, address = ?, birthdate = ?, age = ?, id_selfie = ? WHERE user_id = ?");
-            $stmt->bind_param("ssssssi", $newMobile, $newEmail, $newAddress, $newBirthdate, $age, $newProfilePicture, $user_id);
+            $stmt = $this->connection->prepare("UPDATE users SET firstname = ?, middlename = ?, lastname = ?, mobile = ?, email = ?, address = ?, birthdate = ?, age = ?, id_selfie = ? WHERE user_id = ?");
+            $stmt->bind_param("sssssssssi", $newFirstname, $newMiddlename, $newLastname, $newMobile, $newEmail, $newAddress, $newBirthdate, $age, $newProfilePicture, $user_id);
         } else {
             // Update without changing the profile picture
-            $stmt = $this->connection->prepare("UPDATE users SET mobile = ?, email = ?, address = ?, birthdate = ?, age = ? WHERE user_id = ?");
-            $stmt->bind_param("sssssi", $newMobile, $newEmail, $newAddress, $newBirthdate, $age, $user_id);
+            $stmt = $this->connection->prepare("UPDATE users SET firstname = ?, middlename = ?, lastname = ?, mobile = ?, email = ?, address = ?, birthdate = ?, age = ? WHERE user_id = ?");
+            $stmt->bind_param("ssssssssi", $newFirstname, $newMiddlename, $newLastname, $newMobile, $newEmail, $newAddress, $newBirthdate, $age, $user_id);
         }
-
-        if ($stmt->execute()) {
-            // Activation successful
+        if (!preg_match($mobilePattern, $newMobile)) {
+            $errorMessages["mobile"] = "Invalid mobile number format.";    
+        }
+        if (!preg_match($emailPattern, $newEmail)) {
+            $errorMessages["email"] = "Invalid email format";
+        }
+        if (!empty($errorMessages)) {
+            // If there are errors, set them in the $errorMessages array
+            $_SESSION['error'] = "There are one or more errors in the form:\n" . implode("\n& ", $errorMessages);
             header("Location: profile");
-            $_SESSION['success'] = "Profile updated successfully.";
             exit();
-        } else {
-            // Activation failed
-            $_SESSION['error'] = "Error updating user profile: " . $stmt->error;
+        } 
+        else {
+            if ($stmt->execute()) {
+                // Activation successful
+                header("Location: profile");
+                $_SESSION['success'] = "Your profile has been successfully updated.";
+                exit();
+            } else {
+                // Activation failed
+                $_SESSION['error'] = "Error updating user profile: " . $stmt->error;
+            }
         }
 
         // Close the prepared statement
         $stmt->close();
     }
-
-    return $activationMessage;
 }
-
-
-
-
-
-
-  
 }
   
 ?>

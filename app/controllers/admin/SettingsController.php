@@ -310,28 +310,22 @@ public function updateHomeSettings($announcementText, $missionText, $visionText,
     // Assuming you have an established database connection
     $connection = $this->connection;
 
-    // Sanitize input data to prevent SQL injection (you may need to use prepared statements)
+    // Sanitize input data to prevent SQL injection
     $announcementText = $connection->real_escape_string($announcementText);
+    $missionText = $connection->real_escape_string($missionText);
+    $visionText = $connection->real_escape_string($visionText);
 
     // Construct the SQL query to update the data
     $query = "UPDATE home_setting SET announcement_text = '$announcementText', mission_text = '$missionText', vision_text = '$visionText', contact = '$contact', facebook = '$facebook', messenger = '$messenger'";
 
     // Check if new slide files are provided and update them in the query if necessary
-    if ($slide1 !== null) {
-        $slide1 = $connection->real_escape_string($slide1);
-        $query .= ", slide1 = '$slide1'";
-    }
-    if ($slide2 !== null) {
-        $slide2 = $connection->real_escape_string($slide2);
-        $query .= ", slide2 = '$slide2'";
-    }
-    if ($slide3 !== null) {
-        $slide3 = $connection->real_escape_string($slide3);
-        $query .= ", slide3 = '$slide3'";
-    }
-    if ($slide4 !== null) {
-        $slide4 = $connection->real_escape_string($slide4);
-        $query .= ", slide4 = '$slide4'";
+    $slides = array($slide1, $slide2, $slide3, $slide4);
+    for ($i = 0; $i < 4; $i++) {
+        if (!empty($slides[$i])) {
+            // If a new file is provided, update the database column
+            $slides[$i] = $connection->real_escape_string($slides[$i]);
+            $query .= ", slide" . ($i + 1) . " = '$slides[$i]'";
+        }
     }
 
     // Add the WHERE clause to specify which row to update
@@ -347,6 +341,7 @@ public function updateHomeSettings($announcementText, $missionText, $visionText,
         return false; // Update failed
     }
 }
+
 
 
 

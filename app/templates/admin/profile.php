@@ -10,17 +10,19 @@
                             $idSelfiePath = 'uploads/id_selfie/' . $user_data['id_selfie'];
                             if (!empty($user_data['id_selfie']) && file_exists($idSelfiePath)):
                             ?>
-                            <img class="about-image ms-md-auto bg-light shadow-lg img-fluid mb-4" width="150px"
-                                src="<?php echo $idSelfiePath; ?>" alt="profilepic">
+                            <div class="image-container">
+                                <img class="about-image ms-md-auto bg-light shadow-lg img-fluid mb-4" width="150px"
+                                    src="<?php echo $idSelfiePath; ?>" alt="profilepic">
+                                <?php if ($user_data && isset($user_data['username'])) { ?>
+                                <h5><?php echo $user_data['username']; ?></h5>
+                                <?php } else { ?>
+                                <h3>User Data Not Available</h3>
+                                <?php } ?>
+                                <p class="text-bottom">Resident</p>
+                            </div>
                             <?php else: ?>
                             <p>Profile picture is not available</p>
                             <?php endif; ?>
-                            <?php if ($user_data && isset($user_data['username'])) { ?>
-                            <h5><?php echo $user_data['username']; ?></h5>
-                            <?php } else { ?>
-                            <h3>User Data Not Available</h3>
-                            <?php } ?>
-                            <p><?php echo $user_data['role']; ?></p>
                         </div>
                     </div>
                     <div class="col-md-9 border-right">
@@ -33,21 +35,21 @@
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">First Name</label>
                                     <input type="text" class="form-control" id="firstname" name="firstname"
-                                        value="<?php echo $user_data['firstname']; ?>" disabled>
+                                        value="<?php echo $user_data['firstname']; ?>" required disabled>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Middle Name</label>
                                     <input type="text" class="form-control" id="middlename" name="middlename"
-                                        value="<?php echo $user_data['middlename']; ?>" disabled>
+                                        value="<?php echo $user_data['middlename']; ?>" required disabled>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Last Name</label>
                                     <input type="text" class="form-control" id="lastname" name="lastname"
-                                        value="<?php echo $user_data['lastname']; ?>" disabled>
+                                        value="<?php echo $user_data['lastname']; ?>" required disabled>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Gender</label>
-                                    <select class="form-control" id="sex" name="sex" disabled>
+                                    <select class="form-control" id="sex" name="sex" required disabled>
                                         <option value="male" <?php if ($user_data['sex'] === 'male') echo 'selected'; ?>>Male
                                         </option>
                                         <option value="female" <?php if ($user_data['sex'] === 'female') echo 'selected'; ?>>
@@ -60,7 +62,7 @@
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Birthdate</label>
                                     <input type="date" class="form-control" id="birthdate" name="birthdate"
-                                        value="<?php echo $user_data['birthdate']; ?>" disabled>
+                                        value="<?php echo $user_data['birthdate']; ?>" required disabled>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Age</label>
@@ -73,13 +75,18 @@
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <label class="labels">Mobile Number</label>
-                                    <input type="text" class="form-control" id="mobile" name="mobile"
-                                        value="<?php echo $user_data['mobile']; ?>" disabled>
+                                    <div class="input-group">
+                                        <span class="input-group-text">+63</span>
+                                        <input type="text" class="form-control" id="mobile" name="mobile" oninput="validateNumericInput(this)" maxlength="10"
+                                            value="<?php echo $user_data['mobile']; ?>" required disabled>
+                                    </div>
+                                        <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <label class="labels">Email</label>
                                     <input type="text" class="form-control" id="email" name="email"
-                                        value="<?php echo $user_data['email']; ?>" disabled>
+                                        value="<?php echo $user_data['email']; ?>" required disabled>
+                                        <div class="invalid-feedback" id="error_email2" <?php echo isset($errors["email"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid email format</div>
                                 </div>
                                 <input type="hidden" name="user_id" value="<?php echo $user_data['user_id']; ?>">
                                 <div class="col-lg-12 col-12 mt-2">
@@ -88,7 +95,7 @@
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">House No./Bldg./Street Name</label>
                                     <input type="text" class="form-control" id="address" name="address"
-                                        value="<?php echo $user_data['address']; ?>" disabled>
+                                        value="<?php echo $user_data['address']; ?>" required disabled>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">City</label>
@@ -114,7 +121,7 @@
                             </div>
                             <div class="text-center mt-2">
                                 <!-- Button to edit the profile -->
-                                <button type="button" name="edit_profile" id="edit_profile" class="form-control">Edit Profile</button>
+                                <button type="custom-button" name="edit_profile" id="edit_profile" class="form-control">Edit Profile</button>
                                 <!-- Button to save changes (initially hidden) -->
                                 <button type="submit" name="save_changes" id="save_changes" class="form-control"
                                     style="display: none;">Save Changes</button>

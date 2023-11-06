@@ -72,8 +72,8 @@
                                 <span class="input-group-text">+63</span>
                                 <input type="text" class="form-control 
                                 <?php echo isset($errors["mobile"]) ? 'is-invalid' : ''; ?>" name="mobile" id="mobile" oninput="validateNumericInput(this)" maxlength="10" value="<?php if (!empty($_POST["mobile"])) { echo $_POST["mobile"]; } else { echo ''; };?>">
-                                <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                             </div>
+                            <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                             <?php if (isset($errors["mobile"])) : ?>
                                 <div class="text-danger" id="error_mobile"><?= $errors["mobile"] ?></div>
                             <?php endif; ?>
@@ -206,12 +206,12 @@
                     
                     <p class="text-center" style="margin-bottom: -8px"><a href="login">I am already a member</a></p>
                     <!-- Modal -->
-                    <div class="modal" tabindex="-1" role="dialog" id="dpnModal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
                                     <h5 class="modal-title">Data Privacy Notice</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>

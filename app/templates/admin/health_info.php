@@ -1,13 +1,13 @@
 <div class="container-fluid">
     <div style="float: right;">
         <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#registrationModal">
-            <i class="bi bi-person"></i> Add Health Information
+            <i class="bi bi-plus-square"></i> Add New Health Information
         </button>
     </div>
-    <h3 class="mt-2 mb-2 text-center">Resident Health Information</h3>
+    <h3>Resident Health Information</h3>
     <!-- Bootstrap Modal -->
     <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="registrationModalLabel">Add new column</h5>
@@ -16,12 +16,14 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row d-flex justify-content-center align-items-center">
-                            <div class="col-lg-12 col-12">
-                                <form method="post" action="">
-                                    <input type="text" name="new_column_name" placeholder="New Column Name">
-                                    <button type="submit" name="add_health_info_column">Add Column</button>
-                                </form>
-                            </div>
+                            <form class="custom-form" method="post" action="">
+                                <div class="col-lg-12 col-12">
+                                    <input type="text" name="new_column_name" class="form-control"  placeholder="New Column Name" required>
+                                </div>
+                                <div class="col-lg-12 col-12">
+                                    <button type="submit" class="form-control" name="add_health_info_column">Add Column</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -32,8 +34,7 @@
 
 <div>
     <div class="table-responsive">
-        <h4 class="mt-2 mb-2">Resident Information</h4>
-        <table class="table table-bordered table-striped custom-table datatable" id="myTable">
+        <table class="table table-bordered table-striped custom-table datatable">
             <thead>
                 <tr>
                     <?php

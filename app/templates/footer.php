@@ -34,7 +34,7 @@ $homeSettings = $homeController->getHomeSettings();
 
                     <p class="text-white d-flex mb-2">
                         <i class="bi-telephone me-2"></i>
-                        <a href="tel:82944766" class="site-footer-link"><?php echo isset($homeSettings[0]['contact']) ? $homeSettings[0]['contact'] : ''; ?></a>
+                        <a href="tel:<?php echo isset($homeSettings[0]['contact']) ? $homeSettings[0]['contact'] : ''; ?>" class="site-footer-link"><?php echo isset($homeSettings[0]['contact']) ? $homeSettings[0]['contact'] : ''; ?></a>
                     </p>
 
                     <p class="text-white d-flex mb-2">
@@ -45,12 +45,12 @@ $homeSettings = $homeController->getHomeSettings();
                     </p>
                     <p class="text-white d-flex mb-2">
                     <i class="bi bi-facebook me-2"></i>
-                            <a href="<?php echo isset($homeSettings[0]['facebook']) ? $homeSettings[0]['facebook'] : ''; ?>" target="_blank" class="site-footer-link"><?php echo isset($homeSettings[0]['facebook']) ? $homeSettings[0]['facebook'] : ''; ?></a>
+                            <a href="<?php echo isset($homeSettings[0]['facebook']) ? $homeSettings[0]['facebook'] : ''; ?>" target="_blank" class="site-footer-link">Visit our page</a>
                        
                     </p>
                     <p class="text-white d-flex mb-2">
                     <i class="bi bi-messenger me-2"></i>
-                            <a href="https://m.me/Barangay95" target="_blank" class="site-footer-link"><?php echo isset($homeSettings[0]['messenger']) ? $homeSettings[0]['messenger'] : ''; ?></a>
+                            <a href="<?php echo isset($homeSettings[0]['messenger']) ? $homeSettings[0]['messenger'] : ''; ?>" target="_blank" class="site-footer-link">Chat us</a>
                        
                     </p>
                    

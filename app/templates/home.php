@@ -30,24 +30,24 @@ foreach ($homeSettings as $setting) {
                                     <img src="uploads/homepage/<?php echo $setting['slide1']; ?>"
                                         class="carousel-image img-fluid" alt="...">
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Carousel <?php echo $index + 1; ?></h1>
-                                        <p><?php echo $setting['announcement_text']; ?></p>
+                                        <h1>Welcome!</h1>
+                                        <p>Explore our online services and stay informed about Barangay 95's latest updates.</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <img src="uploads/homepage/<?php echo $setting['slide2']; ?>"
                                         class="carousel-image img-fluid" alt="...">
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Carousel <?php echo $index + 2; ?></h1>
-                                        <p><?php echo $setting['announcement_text']; ?></p>
+                                        <h1>Online Services</h1>
+                                        <p>Access essential online services with ease. From requesting documents to filing complaints, we've got you covered. Experience the convenience of E-Barangay.</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <img src="uploads/homepage/<?php echo $setting['slide3']; ?>"
                                         class="carousel-image img-fluid" alt="...">
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Carousel <?php echo $index + 3; ?></h1>
-                                        <p><?php echo $setting['announcement_text']; ?></p>
+                                        <h1>Community<br>Announcements</h1>
+                                        <p>Stay in the loop with the latest news and announcements from your barangay. Be part of our thriving community, and make sure you never miss an important update.</p>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -129,7 +129,7 @@ foreach ($homeSettings as $setting) {
                     <div class="col-lg-6 col-12">
     <div class="custom-text-box mb-0">
         <div class="col-lg-12 col-12">
-            <h2 class="mb-2" style="margin-bottom: 10px;">Our Barangay</h2>
+            <h2 class="mb-2" style="margin-bottom: 10px;">About Barangay 95</h2>
 
             <p class="mb-0" style="text-align: justify;">
             Barangay 95 is a vibrant and diverse community nestled in the heart of Manila, the bustling capital city of the Philippines. This barangay, with its rich history and unique character, plays a vital role in the daily life of its residents. 

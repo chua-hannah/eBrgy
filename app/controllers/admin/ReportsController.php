@@ -352,13 +352,13 @@ class ReportsController {
                             if ($this->connection->query($query) === true) {
                                 // Both inserts were successful
                                 header("Location: masterlist");
-                                $_SESSION['success'] = "Resident was successfully added to the masterlist and health_info table.";
+                                $_SESSION['success'] =  "The resident has been successfully added to both the masterlist and health information pages.";
                                 exit();
                             } else {
-                                $_SESSION['error'] = "Error inserting data into the health_info table: " . $this->connection->error;
+                                $_SESSION['error'] = "Error inserting data into the health_info table." . $this->connection->error;
                             }
                         } else {
-                            $_SESSION['error'] = "Error inserting data into the users_masterlist table: " . $this->connection->error;
+                            $_SESSION['error'] = "Error inserting data into the users_masterlist table." . $this->connection->error;
                         }
                     }
                 }
@@ -468,33 +468,60 @@ class ReportsController {
     } 
 
     public function addHealthInfoColumn() {
-        if ($this->connection->error) {
-            die("Connection failed: " . $this->connection->error);
-        }
-        
+
         if (isset($_POST['add_health_info_column'])) {
-            $newColumnName = $_POST['new_column_name'];
+            $newColumnName = strtolower($_POST['new_column_name']);
+    
+            // Check if the new column name is not empty
+            if (empty($newColumnName)) {
+                $_SESSION['error'] = "Column name cannot be empty.";
+                header("Location: health-information");
+                exit();
+            }
     
             // Sanitize the input to prevent SQL injection
             $newColumnName = $this->connection->real_escape_string($newColumnName);
+    
+            // Check if the column name already exists in the table
+            $existingColumns = $this->getExistingColumns(); // Create a function to retrieve existing column names
+            if (in_array($newColumnName, $existingColumns)) {
+                $_SESSION['error'] = "Column name already exists in the table.";
+                header("Location: health-information");
+                exit();
+            }
     
             // SQL statement to add a new VARCHAR column with a length of 255 to the table
             $sql = "ALTER TABLE health_info ADD $newColumnName VARCHAR(255)";
     
             // Execute the SQL statement
             if ($this->connection->query($sql) === TRUE) {
-                // Redirect to the current page after successfully adding the column
+                $_SESSION['success'] = "New Column was added successfully.";
                 header("Location: health-information");
                 exit;
             } else {
-                return "Error adding new column: " . $this->connection->error;
+                $_SESSION['error'] = "Error adding new column: " . $this->connection->error;
                 header("Location: health-information");
-
+                exit();
             }
-        } else {
-            return "Column name cannot be empty.";
         }
     }
+
+    // Create a function to retrieve existing column names
+    private function getExistingColumns() {
+        $existingColumns = array();
+        $query = "SHOW COLUMNS FROM health_info";
+        $result = $this->connection->query($query);
+    
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $existingColumns[] = strtolower($row['Field']); // Convert to lowercase for case-insensitive comparison
+            }
+            $result->free();
+        }
+    
+        return $existingColumns;
+    }
+    
     
 
     function getAllHealthInfo() {
