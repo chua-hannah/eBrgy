@@ -186,7 +186,11 @@
                 foreach ($masterListReports['users'] as $masterListReport) {
                     ?>
                     <tr>
-                    <td>
+                    <td style="display: flex;"> 
+                        <form method="POST" action="masterlist-edit-user">
+                            <input type="hidden" name="resident_id" value="<?php echo $masterListReport['id'] ?>">
+                            <button type="" class="btn btn-primary me-2" name="edit_resident">Edit</button>
+                        </form>
                         <form method="POST" action="">
                             <input type="hidden" name="resident_id" value="<?php echo $masterListReport['id'] ?>">
                             <button type="" class="btn btn-danger" name="delete_resident">Delete</button>

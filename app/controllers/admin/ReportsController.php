@@ -445,6 +445,56 @@ class ReportsController {
         return $userReports;
     }
 
+    public function getUserInMasterList() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+        
+        if (isset($_POST['edit_resident'])) {
+            $id = $_POST['resident_id'];
+            $id = $this->connection->real_escape_string($id);
+    
+            // Create a SQL query to retrieve the health information for the given ID
+            $query = "SELECT * FROM users_masterlist WHERE id = '$id'";
+    
+            $result = $this->connection->query($query);
+    
+            if ($result) {
+                $docdatas[] = $result->fetch_assoc(); 
+                return $docdatas; // Return the data as an associative array
+            }
+        }
+    
+        return array(); // Return an empty array if the condition is not met or if the query fails
+    }
+
+    function updateUserInMasterList() {
+
+        if (isset($_POST['update_masterlist_user'])) {
+            $id = $_POST['id'];
+            $mobile = $_POST['mobile'];
+            $address = $_POST['address'];
+            $scholar = $_POST['scholar'];
+            $four_ps = $_POST['four_ps'];
+            $solo_parent = $_POST['solo_parent'];
+            $senior = $_POST['senior'];
+            // Use prepared statements to prevent SQL injection
+            $stmt = $this->connection->prepare("UPDATE users_masterlist SET mobile = ?, address = ?, scholar = ?, four_ps = ?, solo_parent = ?, senior = ?  WHERE id = ?");
+            $stmt->bind_param("ssssssi", $mobile, $address, $scholar, $four_ps, $solo_parent, $senior, $id); // Assuming user_id is an integer
+    
+            if ($stmt->execute()) {
+                header("Location: /eBrgy/app/masterlist");
+                $_SESSION['success'] = "The masterlist updated successfully approved.";
+                exit();
+            } else {
+                $_SESSION['error'] = "Error updating user status: " . $stmt->error;
+            }
+    
+            // Close the prepared statement
+            $stmt->close();
+        }
+    }
+
     function getColumnNamesFromHealthInfoTable() {
         $columnNames = array();
     

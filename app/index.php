@@ -527,7 +527,6 @@ switch ($filename) {
                         case 'user-management-edit-user':
                             // Check if the userId parameter is present in the POST data
                             $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
-                            
                             includeAdminContent(function () use ($userManagementController, $userId) {
                                 $userManagementController->edit($userId);
                                 $userManagementController->activate_user($userId);
@@ -661,6 +660,14 @@ switch ($filename) {
                                 $masterListReports = $reportsController->masterlist_reports();
                                 $delete_resident = $reportsController->delete_resident();
                                 include 'templates/admin/reports/users_master_list.php';
+                            });
+                            break;
+                        case 'masterlist-edit-user':
+                            includeAdminContent(function() use ($reportsController) {
+                                $userDatas = $reportsController->getUserInMasterList();
+                                $reportsController->updateUserInMasterList();
+                                var_dump($userDatas);
+                                include 'templates/admin/reports/edit_user_master_list.php';
                             });
                             break;
                         case 'health-information':
