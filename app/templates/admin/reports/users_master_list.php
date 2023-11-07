@@ -239,7 +239,7 @@ document.getElementById("printTableButton").addEventListener("click", function()
     newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
 
     // Add a header above the table
-    newWin.document.write('<h1>Users Report</h1>');
+    newWin.document.write('<h1>Resident Master list Report</h1>');
     newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
 
     var tableData = table.data().toArray(); // Get all the data from DataTables
