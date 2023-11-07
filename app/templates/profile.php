@@ -69,6 +69,10 @@
                                     <input type="text" class="form-control" id="age" value="<?php echo $user_data['age']; ?>"
                                         disabled>
                                 </div>
+                                <p class="form-group text-justify">
+                                        <i class="bi bi-exclamation-circle"></i>
+                                        Please contact the administrator in case of a personal information discrepancy.
+                                    </p>
 
                                 <div class="col-lg-12 col-12 mt-2">
                                     <h5 class="mb-3">Contact Details</h5>
@@ -78,7 +82,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
                                         <input type="text" class="form-control" id="mobile" name="mobile"
-                                            value="<?php echo $user_data['mobile']; ?>" oninput="validateNumericInput(this)" maxlength="10" required disabled>
+                                            value="<?php echo substr($user_data['mobile'], 3); ?>" oninput="validateNumericInput(this)" maxlength="10" required disabled>
                                     </div>
                                         <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                                 </div>

@@ -7,10 +7,10 @@
             <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Document Report</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Schedules Report</a>
+            <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Schedule Report</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Equipments Report</a>
+            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Equipment Report</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabsContent">
@@ -49,7 +49,7 @@
 
                                 <td><?php echo $reklamoReport['email']; ?></td>
                                 <td><?php echo $reklamoReport['mobile']; ?></td>
-                                <td><?php echo $reklamoReport['status']; ?></td>
+                                <td><?php echo strtoupper($reklamoReport['status']); ?></td>
                                 <td><?php echo $reklamoReport['created_at']; ?></td>
                                 <td><?php echo $reklamoReport['process_at']; ?></td>
                                 <td><?php echo $reklamoReport['process_by']; ?></td>
@@ -94,13 +94,13 @@
                         foreach ($docReports['documents'] as $docReport) {
                             ?>
                             <tr>
-                                <td><?php echo $docReport['request_name']; ?></td>
+                                <td><?php echo strtoupper($docReport['request_name']); ?></td>
                                 <td><?php echo $docReport['username']; ?></td>
                                 <td><?php echo $docReport['firstname'] . ' ' . $docReport['middlename'] . ' ' . $docReport['lastname']; ?></td>
 
                                 <td><?php echo $docReport['email']; ?></td>
                                 <td><?php echo $docReport['mobile']; ?></td>
-                                <td><?php echo $docReport['status']; ?></td>
+                                <td><?php echo strtoupper($docReport['status']); ?></td>
                                 <td><?php echo $docReport['created_at']; ?></td>
                                 <td><?php echo $docReport['process_at']; ?></td>
                                 <td><?php echo $docReport['process_by']; ?></td>
@@ -152,7 +152,7 @@
                                     <td><?php echo $scheduleReport['schedule_date']; ?></td>
                                     <td><?php echo $scheduleReport['time_in']; ?></td>
                                     <td><?php echo $scheduleReport['time_out']; ?></td>
-                                    <td><?php echo $scheduleReport['status']; ?></td>
+                                    <td><?php echo strtoupper($scheduleReport['status']); ?></td>
                                     <td><?php echo $scheduleReport['created_at']; ?></td>
                                     <td><?php echo $scheduleReport['process_at']; ?></td>
                                     <td><?php echo $scheduleReport['process_by']; ?></td>
@@ -195,12 +195,12 @@
                             foreach ($equipmentReports['equipments'] as $equipmentReport) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $equipmentReport['equipment_name']; ?></td>
+                                    <td><?php echo strtoupper($equipmentReport['equipment_name']); ?></td>
                                     <td><?php echo $equipmentReport['total_equipment_borrowed']; ?></td>
                                     <td><?php echo $equipmentReport['return_date']; ?></td>
                                     <td><?php echo $equipmentReport['username']; ?></td>
                                     <td><?php echo $equipmentReport['firstname'] . ' ' . $equipmentReport['middlename'] . ' ' . $equipmentReport['lastname']; ?></td>
-                                    <td><?php echo $equipmentReport['status']; ?></td>
+                                    <td><?php echo strtoupper($equipmentReport['status']); ?></td>
                                     <td><?php echo $equipmentReport['request_date']; ?></td>
                                     <td><?php echo $equipmentReport['process_at']; ?></td>
                                     <td><?php echo $equipmentReport['process_by']; ?></td>
