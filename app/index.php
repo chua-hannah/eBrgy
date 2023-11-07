@@ -311,7 +311,7 @@ switch ($filename) {
                                 
                             });
                             break;
-                        case 'edit-documents-management':
+                        case 'edit-document-management':
                             includeAdminContent(function() use ($requestManagementController, $settingsController) {
                                 $docDatas = $requestManagementController->getDocById();
                                 $requestManagementController->updateDocbyId();

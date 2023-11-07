@@ -15,7 +15,7 @@
                                 <form action="" method="post">
                                     <div class="form-group">
                                         <label for="purposeRemarks">Document name:</label>
-                                        <input type="text" class="form-control" id="documentName" name="documentName" value="<?php echo $docData['request_name']; ?>"disabled >
+                                        <input type="text" class="form-control" id="request_name" name="request_name" value="<?php echo $docData['request_name']; ?>"disabled >
                                     </div>  
                                     <div class="form-group">
                                         <label for="purposeRemarks">Purpose / Remarks:</label>

@@ -261,7 +261,7 @@ class RequestManagementController {
         if (isset($_POST['update_doc_by_id'])) {
             $doc_id = $_POST['doc_id'];
             $status = $_POST['status'];
-            $documentName = $_POST['documentName'];
+            $documentName = $_POST['request_name'];
             $purposeRemarks = $_POST['purposeRemarks'];
 
           

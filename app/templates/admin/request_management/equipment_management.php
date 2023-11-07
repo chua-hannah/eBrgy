@@ -63,7 +63,7 @@
                     ?>
                         <tr>
                         <td style="display: flex; justify-content: space-around;">
-                                <form method="post" action="edit-documents-management">
+                                <form method="post" action="">
                                     <input type="hidden" name="equipment_id" value="<?php echo $request['equipment_id']; ?>">
                                     <button type="submit" name="edit_request_doc" class="btn btn-primary">Edit</button>
                                 </form>                                
