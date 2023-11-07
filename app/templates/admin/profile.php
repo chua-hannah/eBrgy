@@ -78,7 +78,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
                                         <input type="text" class="form-control" id="mobile" name="mobile" oninput="validateNumericInput(this)" maxlength="10"
-                                            value="<?php echo $user_data['mobile']; ?>" required disabled>
+                                            value="<?php echo substr($user_data['mobile'], 3); ?>" required disabled>
                                     </div>
                                         <div class="invalid-feedback" id="error_mobile2" <?php echo isset($errors["mobile"]) ? 'style="display: none; margin-top: -6px;"' : ''; ?>>Invalid mobile number format</div>
                                 </div>

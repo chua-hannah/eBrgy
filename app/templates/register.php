@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="col-lg-6 col-12">
-                            <h6>Document Upload</h6>
+                            <h6>Document Uploads</h6>
                         </div>
 
                         <div class="col-lg-6 col-12">
