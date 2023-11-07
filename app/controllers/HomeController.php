@@ -255,22 +255,20 @@ public function print_doc($docId) {
           die("Connection failed: " . $this->connection->error);
       }
   
-      $query = "SELECT * FROM users WHERE role = 'captain' OR role = 'kagawad'";
+      $query = "SELECT * FROM users WHERE position IS NOT NULL";
       $result = $this->connection->query($query);
-  
-      // Fetch all user records as an associative array
       $users = array();
+
       if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
               $users[] = $row;
           }
       }
-  
-      // Render the home page content
-      include 'templates/officials.php';
-  
-      // Return the fetched user data
       return $users;
+      
+    
+  
+     
   }
 
   public function services() {

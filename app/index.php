@@ -112,7 +112,8 @@ switch ($filename) {
                         break;
                         case 'officials':
                             includeHeaderFooter(function() use ($homeController, $filename) {
-                                $homeController->$filename();
+                               $officials = $homeController->officials();
+                                include 'templates/officials.php';
                             });
                             break;
                         case 'schedules':
