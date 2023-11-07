@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div style="float: right;">
-        <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#registrationModal">
+        <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#registrationModal" <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>
             <i class="bi bi-plus-square"></i> Add New Health Information
         </button>
     </div>

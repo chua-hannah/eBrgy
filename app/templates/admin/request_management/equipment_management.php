@@ -7,9 +7,9 @@
 </nav>
 </nav>
 <div class="container-fluid">
-<h3>Manage Equipment</h3>
+<h3 <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>Manage Equipment</h3>
 <div class="col-md-12">
-    <form class="custom-form mb-4" action="" method="post">
+    <form class="custom-form mb-4" action="" method="post" <?php if(!($_SESSION['role']=="captain")) { echo "hidden"; } ?>>
     <div class="row">
         <div class="col-md-3">
             <label class="labels">Equipment Name</label>
