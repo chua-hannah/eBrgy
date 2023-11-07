@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2023 at 06:36 PM
+-- Generation Time: Nov 07, 2023 at 05:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -55,7 +55,8 @@ INSERT INTO `attendance` (`id`, `user_id`, `username`, `date`, `time_in`, `time_
 (10, 1, 'lance chua', '2023-09-02', '13:12:44', '13:12:45', 'Present', ''),
 (11, 1, 'lance chua', '2023-09-18', '21:12:48', '21:18:43', 'Late', ''),
 (12, 1, 'kapitantest', '2023-10-18', '05:36:16', NULL, 'Present', ''),
-(13, 1, 'kapitantest', '2023-11-06', '01:16:51', NULL, 'Present', '');
+(13, 1, 'kapitantest', '2023-11-06', '01:16:51', NULL, 'Present', ''),
+(14, 1, 'kapitantest', '2023-11-07', '10:55:55', NULL, 'Late', '');
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,7 @@ CREATE TABLE `doc_settings` (
 --
 
 INSERT INTO `doc_settings` (`request_type_id`, `request_name`, `request_status`, `description`, `created_at`) VALUES
-(1, 'firstjob certificate', '1', 'Certificate', '2023-07-20'),
+(1, 'firstjob certificate', '0', 'Certificate', '2023-07-20'),
 (2, 'indigency certificate', '1', 'Birth Certificate', '2023-07-20'),
 (3, 'barangay certificate', '1', 'Taxpayer Identification Number\r\n', '2023-07-20'),
 (4, 'oath certificate', '1', 'POST OFFICE VALID ID', '2023-09-18');
@@ -140,7 +141,7 @@ CREATE TABLE `equipment_requests` (
   `remarks` varchar(255) NOT NULL,
   `process_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `process_return` varchar(255) NOT NULL,
-  `returned_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `returned_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -148,9 +149,16 @@ CREATE TABLE `equipment_requests` (
 --
 
 INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `status`, `total_equipment_borrowed`, `return_date`, `username`, `request_date`, `process_by`, `message`, `remarks`, `process_at`, `process_return`, `returned_at`) VALUES
-(1, 2, 'plastic table', 'returned', 5, '0000-00-00', 'resident1', '2023-10-23 20:40:48', 'kapitantest', 'claim it saturday 6pm', 'helped by kagawad 1', '2023-10-23 20:41:23', 'kapitantest', '2023-10-23 20:41:45'),
-(2, 1, 'plastic chair', 'returned', 12, '0000-00-00', 'resident1', '2023-10-23 20:40:55', 'kapitantest', 'Test', 'Test', '2023-11-03 17:22:14', 'kapitantest', '2023-11-03 17:22:22'),
-(3, 2, 'plastic table', 'returned', 1, '2023-11-04', 'devtest1', '2023-11-03 17:21:00', 'kapitantest', 'haha', 'haha', '2023-11-03 17:22:34', 'kapitantest', '2023-11-03 17:22:39');
+(1, 3, 'router', 'returned', 4, '2023-11-12', 'resident1', '2023-11-07 08:33:08', 'kapitantest', 'test', 'helped by mang meng', '2023-11-07 08:33:44', 'kapitantest', '2023-11-07 08:34:34'),
+(2, 3, 'router', 'cancelled', 23, '2023-11-16', 'resident1', '2023-11-07 08:39:56', 'kapitantest', 'test', '', '2023-11-07 08:40:03', 'kapitantest', '0000-00-00 00:00:00'),
+(3, 3, 'router', 'cancelled', 1, '2023-11-16', 'resident1', '2023-11-07 08:43:54', 'kapitantest', 'test', '', '2023-11-07 08:44:00', 'kapitantest', '0000-00-00 00:00:00'),
+(4, 3, 'router', 'cancelled', 1, '2023-11-14', 'resident1', '2023-11-07 08:45:23', 'kapitantest', 'test', '', '2023-11-07 08:45:38', 'kapitantest', '0000-00-00 00:00:00'),
+(5, 3, 'router', 'returned', 1, '2023-11-08', 'resident1', '2023-11-07 08:47:49', 'kapitantest', 'test', 'test', '2023-11-07 08:47:54', 'kapitantest', '2023-11-07 08:48:11'),
+(6, 3, 'router', 'approved', 1, '2023-11-09', 'resident1', '2023-11-07 08:49:13', 'kapitantest', 'test', '', '2023-11-07 08:57:40', '', NULL),
+(7, 3, 'router', 'approved', 1, '1970-01-01', 'resident1', '2023-11-07 08:49:18', 'kapitantest', 'test', '', '2023-11-07 09:00:54', '', NULL),
+(8, 3, 'router', 'pending', 1, '1970-01-01', 'resident1', '2023-11-07 08:49:35', '', '', '', '2023-11-07 08:49:35', '', NULL),
+(9, 3, 'router', 'cancelled', 1, '2023-11-08', 'resident1', '2023-11-07 08:53:10', 'kapitantest', 'test', '', '2023-11-07 08:53:34', 'kapitantest', '0000-00-00 00:00:00'),
+(10, 3, 'router', 'cancelled', 2, '2023-11-10', 'resident1', '2023-11-07 08:57:20', 'kapitantest', 'test', '', '2023-11-07 08:57:26', 'kapitantest', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -161,7 +169,6 @@ INSERT INTO `equipment_requests` (`id`, `equipment_id`, `equipment_name`, `statu
 CREATE TABLE `equipment_settings` (
   `equipment_id` int(11) NOT NULL,
   `equipment_name` varchar(255) NOT NULL,
-  `number_of_equipment` varchar(255) NOT NULL,
   `total_equipment` int(11) NOT NULL,
   `availability` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -170,14 +177,15 @@ CREATE TABLE `equipment_settings` (
 -- Dumping data for table `equipment_settings`
 --
 
-INSERT INTO `equipment_settings` (`equipment_id`, `equipment_name`, `number_of_equipment`, `total_equipment`, `availability`) VALUES
-(1, 'plastic chair', '20', 13, '1'),
-(2, 'plastic table', '100', 10, '1'),
-(3, 'router', '20', 30, '1'),
-(4, 'Jack Hammer', '20', 23, '1'),
-(5, 'NMAX', '100', 100, '1'),
-(6, 'NMAX', '100', 100, '1'),
-(7, 'VESPA JB limited edition', '300', 300, '1');
+INSERT INTO `equipment_settings` (`equipment_id`, `equipment_name`, `total_equipment`, `availability`) VALUES
+(1, 'plastic chair', 0, '0'),
+(2, 'plastic table', 5, '0'),
+(3, 'router', 0, '1'),
+(4, 'Jack Hammer', 23, '1'),
+(5, 'NMAX', 100, '1'),
+(6, 'NMAX', 100, '1'),
+(7, 'VESPA JB limited edition', 23, '1'),
+(8, 'Truck', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -386,7 +394,7 @@ CREATE TABLE `time_settings` (
 --
 
 INSERT INTO `time_settings` (`setting_id`, `work_hours_start`, `work_hours_end`, `late_threshold`) VALUES
-(1, '01:00:00', '08:00:00', '01:20:00');
+(1, '10:20:00', '20:00:00', '10:30:00');
 
 -- --------------------------------------------------------
 
@@ -424,10 +432,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `sex`, `role`, `position`, `senior`, `four_ps`, `pwd`, `solo_parent`, `scholar`, `id_selfie`, `valid_id`, `status`) VALUES
-(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', 'test244', '1986-06-17', 37, 'male', 'captain', NULL, NULL, NULL, NULL, NULL, NULL, '20070322_041721_shooter300.webp', '8.png', 'activated'),
-(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', NULL, '1988-02-14', 35, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'deactivate'),
-(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', NULL, '1990-01-19', 33, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
-(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', NULL, '1982-12-25', 40, 'male', 'kagawad', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
+(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', 'test244', '1986-06-17', 37, 'male', 'captain', 'captain', NULL, NULL, NULL, NULL, NULL, '20070322_041721_shooter300.webp', '8.png', 'activated'),
+(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', NULL, '1988-02-14', 35, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
+(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', NULL, '1990-01-19', 33, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
+(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', NULL, '1982-12-25', 40, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (5, 'resident1', 'pass123', 'TSTUASDAAS@mail.com', '2232323223', 'resident1', 'resident1', 'resident1', '3022 Masayahin Street2', NULL, 0, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '94871234_252475826139607_9092101356499501056_n.jpg', '8.png', 'activated'),
 (6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', NULL, '1997-01-25', 26, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
 (7, 'resident3', '123456789', 'hannahchua013@gmail.com', '1', 'RResident', 'Resident', 'Resident', NULL, '2023-11-11', -1, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivated'),
@@ -445,7 +453,14 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firs
 (23, 'useruser123', 'useruser123', 'hannahchua0134444@gmail.com', '+639064372222', 'Hannah', '', 'Chua', 'pass me sensei', '1992-11-13', 30, 'Male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'curl_request.png', 'curl_request.png', 'deactivate'),
 (24, 'resident678', 'pass123456', 'hannahchu11a013@gmail.com', '+639064376576', 'Hannah', '', 'Chua', 'pass me sensei', '2020-01-11', 3, 'Male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'curl_request.png', 'curl_request.png', 'deactivate'),
 (26, 'devtest1', 'pass1234', 'devtest1@mail.com', '+639234567890', 'devtest1', 'asddas', 'asdasdad', 'pass me sensei', '1960-02-14', 63, 'Female', 'residence', NULL, 0, 1, 0, 1, 0, '8.png', '8.png', 'activated'),
-(27, 'devtest2', 'pass1234', 'devtest2@mail.com', '+639999999292', 'devtest2', 'dasdas', 'qwe', '33 pasado talaga', '1950-01-01', 73, 'Male', 'residence', NULL, 1, 1, 1, 1, 0, '8.png', '8.png', 'deactivate');
+(27, 'devtest2', 'pass1234', 'devtest2@mail.com', '+639999999292', 'devtest2', 'dasdas', 'qwe', '33 pasado talaga', '1950-01-01', 73, 'Male', 'residence', NULL, 1, 1, 1, 1, 0, '8.png', '8.png', 'deactivate'),
+(28, 'kersey123', 'pass1234', 'kersey@mail.com', '+639123456789', 'kersey', 'kersey', 'kersey', 'Barangay hall', '1988-12-22', 34, 'Male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'images.jpg', 'images.jpg', 'pending'),
+(29, 'sexytary', 'pass1234', 'sexytary@mail.com', '+639234562782', 'sexytary', 'sexytary', 'sexytary', 'kapitabahay ni chairman', '1994-04-01', 29, 'Female', 'captain', 'secretary', 0, 0, 0, 1, 0, 'cheesecake.jpg', 'cheesecake.jpg', 'pending'),
+(30, 'portifued', 'pass1234', 'portifued@mail.com', '+639123123123', 'portifued', 'portifued', 'portifued', 'portifued2222', '2002-11-08', 21, 'Female', 'captain', 'treasurer', 0, 0, 0, 0, 1, 'images.jpg', 'images.jpg', 'activated'),
+(31, 'ERROR191', 'pass1234', 'ERROR191@mail.com', '+639902390290', 'ERROR191', 'ERROR191', 'ERROR191', 'ERROR191', '2000-02-18', 23, 'Male', 'captain', 'skcouncilor', 0, 0, 0, 0, 0, 'images.jpg', 'images.jpg', 'activated'),
+(32, 'treasurertest', 'pass1234', 'treasurertest@mail.com', '+639123123123', 'treasurertest', 'treasurertest', 'treasurertest', 'adsada55', '2004-01-03', 19, 'Female', 'kagawad', 'sktreasurer', 0, 0, 0, 0, 1, 'images.jpg', '8.png', 'activated'),
+(33, 'sktary', 'pass12345', 'sktary@mail.com', '+639873173131', 'sktary', 'sktary', 'sktary', 'qeqweqwewqeqw', '1999-02-14', 24, 'Female', 'kagawad', 'sksecretary', 0, 0, 0, 1, 0, 'bb.png', 'bb.png', 'activated'),
+(34, 'kersey', 'pass1234', 'kersey@mail.com', '+639123123123', 'kersey', 'kersey', 'kersey', 'barangay hallers', '1996-03-14', 27, 'Male', 'kagawad', 'skchairman', 0, 0, 0, 0, 1, '8.png', '8.png', 'activated');
 
 -- --------------------------------------------------------
 
@@ -573,7 +588,7 @@ ALTER TABLE `users_masterlist`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `doc_requests`
@@ -591,13 +606,13 @@ ALTER TABLE `doc_settings`
 -- AUTO_INCREMENT for table `equipment_requests`
 --
 ALTER TABLE `equipment_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `equipment_settings`
 --
 ALTER TABLE `equipment_settings`
-  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `health_info`
@@ -639,7 +654,7 @@ ALTER TABLE `time_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `users_masterlist`
