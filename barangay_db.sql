@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2023 at 05:36 PM
+-- Generation Time: Nov 07, 2023 at 08:29 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -454,8 +454,8 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firs
 (24, 'resident678', 'pass123456', 'hannahchu11a013@gmail.com', '+639064376576', 'Hannah', '', 'Chua', 'pass me sensei', '2020-01-11', 3, 'Male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'curl_request.png', 'curl_request.png', 'deactivate'),
 (26, 'devtest1', 'pass1234', 'devtest1@mail.com', '+639234567890', 'devtest1', 'asddas', 'asdasdad', 'pass me sensei', '1960-02-14', 63, 'Female', 'residence', NULL, 0, 1, 0, 1, 0, '8.png', '8.png', 'activated'),
 (27, 'devtest2', 'pass1234', 'devtest2@mail.com', '+639999999292', 'devtest2', 'dasdas', 'qwe', '33 pasado talaga', '1950-01-01', 73, 'Male', 'residence', NULL, 1, 1, 1, 1, 0, '8.png', '8.png', 'deactivate'),
-(28, 'kersey123', 'pass1234', 'kersey@mail.com', '+639123456789', 'kersey', 'kersey', 'kersey', 'Barangay hall', '1988-12-22', 34, 'Male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'images.jpg', 'images.jpg', 'pending'),
-(29, 'sexytary', 'pass1234', 'sexytary@mail.com', '+639234562782', 'sexytary', 'sexytary', 'sexytary', 'kapitabahay ni chairman', '1994-04-01', 29, 'Female', 'captain', 'secretary', 0, 0, 0, 1, 0, 'cheesecake.jpg', 'cheesecake.jpg', 'pending'),
+(28, 'kersey123', 'pass1234', 'kersey@mail.com', '+639123456789', 'kersey', 'kersey', 'kersey', 'Barangay hall', '1988-12-22', 34, 'Male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'images.jpg', 'images.jpg', 'activated'),
+(29, 'sexytary', 'pass1234', 'sexytary@mail.com', '+639234562782', 'sexytary', 'sexytary', 'sexytary', 'kapitabahay ni chairman', '1994-04-01', 29, 'Female', 'captain', 'secretary', 0, 0, 0, 1, 0, 'cheesecake.jpg', 'cheesecake.jpg', 'activated'),
 (30, 'portifued', 'pass1234', 'portifued@mail.com', '+639123123123', 'portifued', 'portifued', 'portifued', 'portifued2222', '2002-11-08', 21, 'Female', 'captain', 'treasurer', 0, 0, 0, 0, 1, 'images.jpg', 'images.jpg', 'activated'),
 (31, 'ERROR191', 'pass1234', 'ERROR191@mail.com', '+639902390290', 'ERROR191', 'ERROR191', 'ERROR191', 'ERROR191', '2000-02-18', 23, 'Male', 'captain', 'skcouncilor', 0, 0, 0, 0, 0, 'images.jpg', 'images.jpg', 'activated'),
 (32, 'treasurertest', 'pass1234', 'treasurertest@mail.com', '+639123123123', 'treasurertest', 'treasurertest', 'treasurertest', 'adsada55', '2004-01-03', 19, 'Female', 'kagawad', 'sktreasurer', 0, 0, 0, 0, 1, 'images.jpg', '8.png', 'activated'),
@@ -493,10 +493,9 @@ CREATE TABLE `users_masterlist` (
 --
 
 INSERT INTO `users_masterlist` (`id`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `gender`, `role`, `position`, `senior`, `pwd`, `four_ps`, `solo_parent`, `scholar`) VALUES
-(1, 'test@mail.com', '+639712312312', 'test', 'test', 'test', 'test', '1960-08-02', 63, 'Male', NULL, 'residence', 1, 1, 0, 1, 1),
-(2, 'sheeesh@mail.com', '+639000000200', 'tesatqweq', 'sheeesh', 'sheeesh', 'tqewqweqwe', '2000-10-20', 23, 'Female', NULL, 'residence', 0, 0, 0, 0, 1),
-(3, 'dito@ditolang.com', '+639123456789', 'Lebron', 'King', 'James', 'purok999', '1990-11-01', 33, 'Male', NULL, 'residence', 0, 1, 1, 1, 0),
-(4, 'healtthier@optiuons.com', '+639123761287', 'healtthier', 'healtthier2', 'healtthier3', 'healtthier222', '1999-01-02', 24, 'Male', NULL, 'residence', 0, 1, 1, 0, 0);
+(1, 'test@mail.com', '+639712312312', 'test', 'test', 'test', 'testtqweqwe', '1960-08-02', 63, 'Male', NULL, 'residence', 1, 1, 0, 1, 0),
+(2, 'sheeesh@mail.com', '+639000000200', 'tesatqweq', 'sheeesh', 'sheeesh', 'tqewqweqwe', '2000-10-20', 23, 'Female', NULL, 'residence', 0, 0, 1, 0, 1),
+(3, 'dito@ditolang.com', '+639123456789', 'Lebron', 'King', 'James', 'purokpurok2', '1990-11-01', 33, 'Male', NULL, 'residence', 0, 1, 0, 1, 1);
 
 --
 -- Indexes for dumped tables
