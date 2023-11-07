@@ -6,18 +6,16 @@
     </ol>
 </nav>
 <?php
-$username = isset($_POST['username']) ? $_POST['username'] : null;
 
 // Ensure that userId is available as a variable
-if ($username) {
-    if ($username) {
+if ($userData) {
+    if ($userData) {
         // Now, you can display the user data in a Bootstrap card format
         ?>
   <div>
 </div>
 
 <div class="container-fluid edit-user">
-    <h5>Manage Equipment Request</h5>
     <div class="card">
         <div class="card-header">
             <h6 class="mb-0">Equipment Request Details</h6>
@@ -117,8 +115,8 @@ if ($username) {
             <div class="col-md-12 mb-3"></div>
             <div class="col-md-12 mb-3">
                 <form method="post" action="">
-                    <input type="hidden" name="equipment_id" value="<?php echo $userData['id']; ?>">
-                    <input type="hidden" name="total_equipment_id" value="<?php echo $userData['equipment_id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $userData['id']; ?>">
+                    <input type="hidden" name="equipment_id" value="<?php echo $userData['equipment_id']; ?>">
                     <input type="hidden" name="username" value="<?php echo $userData['username']; ?>">
                         <?php if ($userData['status'] !== 'pending') { ?>
                         <p class="mb-3"><strong>Admin Remarks:</strong></p>
@@ -134,7 +132,7 @@ if ($username) {
                         <button name="returned_equipment" type="submit" class="btn btn-primary" style="padding: 8px;">Tag as Returned</button>
                     <?php } elseif ($userData['status'] === 'approved') { ?>
                         <button name="add_remarks" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">Add Remarks</button>
-                        <button name="delete_equipment" type="submit" class="btn btn-danger" style="padding: 8px;">Reject</button>
+                        <button name="cancel_equipment_request" type="submit" class="btn btn-warning" style="padding: 8px;">Cancel</button>
                     <?php } elseif ($userData['status'] === 'pending') { ?>
                         <button name="approve_equipment" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">Approve</button>
                         <button name="delete_equipment" type="submit" class="btn btn-danger" style="padding: 8px;">Reject</button>

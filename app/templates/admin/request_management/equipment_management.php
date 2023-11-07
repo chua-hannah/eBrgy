@@ -16,10 +16,6 @@
             <input type="text" class="form-control" name="equipment_name" placeholder="ex. Tables, Chairs" required>
         </div>
         <div class="col-md-3">
-            <label class="labels">Number of Equipment</label>
-            <input type="number" class="form-control" name="number_of_equipment" oninput="validateNumericInput(this)" required>
-        </div>
-        <div class="col-md-3">
             <label class="labels">Total Number of Equipment</label>
             <input type="number" class="form-control" name="total_equipment" oninput="validateNumericInput(this)" required>
         </div>
@@ -52,8 +48,7 @@
                             <th class="wrap-text">Action/s</th>
                             <th class="wrap-text">Name</th>
                             <th class="wrap-text">Status</th>
-                            <th class="wrap-text">Number to Borrow</th>
-                            <th class="wrap-text">Total Number of Equipment</th>
+                            <th class="wrap-text">Total Available Equipment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,19 +57,14 @@
                         // Display the data for each request
                     ?>
                         <tr>
-<<<<<<< Updated upstream
                         <td style="display: flex; justify-content: space-around;">
-                                <form method="post" action="">
+                                <form method="post" action="edit-equipment-management">
                                     <input type="hidden" name="equipment_id" value="<?php echo $request['equipment_id']; ?>">
-                                    <button type="submit" name="edit_request_doc" class="btn btn-primary">Edit</button>
+                                    <button type="submit" name="edit_request_equip" class="btn btn-primary">Edit</button>
                                 </form>                                
                             </td>      
                             <td><?php echo $request['equipment_name']; ?></td>
-=======
-                            <td><?php echo strtoupper($request['equipment_name']); ?></td>
->>>>>>> Stashed changes
-                            <td><?php echo $request['availability'] = "1" ? "Available" : "Not Available"; ?></td>
-                            <td><?php echo $request['number_of_equipment']; ?></td>
+                            <td><?php echo $request['availability'] == "1" ? "Available" : "Not Available"; ?></td>
                             <td><?php echo $request['total_equipment']; ?></td>
 
                         </tr>

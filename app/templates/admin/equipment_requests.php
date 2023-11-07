@@ -67,9 +67,8 @@
                         ?>
                         <td>
                             <form action="requests-edit-equipment" method="post">
-                                <input type="hidden" name="equipment_id" value="<?php echo $request['id']; ?>">
-                                <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
-                                <button type="submit" class="btn btn-primary btn-md">Edit</button>
+                                <input type="hidden" name="id" value="<?php echo $request['id']; ?>">
+                                <button type="submit" name="edit_equip_request" class="btn btn-primary btn-md">Edit</button>
                             </form>
                         </td>
                     </tr>

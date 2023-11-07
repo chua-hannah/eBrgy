@@ -127,12 +127,11 @@ class SettingsController {
         if (isset($_POST['add_equipment'])) {
             $equipment_name = $_POST['equipment_name'];
             $availability = $_POST['availability'];
-            $number_of_equipment = $_POST['number_of_equipment'];
             $total_equipment = $_POST['total_equipment'];
     
     
             // Use prepared statement to insert data into the database
-            $query = "INSERT INTO equipment_settings (equipment_name, availability, number_of_equipment, total_equipment) VALUES ('$equipment_name', '$availability', '$number_of_equipment', '$total_equipment')";
+            $query = "INSERT INTO equipment_settings (equipment_name, availability, total_equipment) VALUES ('$equipment_name', '$availability', '$total_equipment')";
     
             // Prepare the statement
             if ($this->connection->query($query) === true) {
@@ -151,7 +150,7 @@ class SettingsController {
     }
 
 
-    public function get_equipments_list() {
+    public function admin_get_equipments_list() {
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);
         }
@@ -170,6 +169,27 @@ class SettingsController {
         // Return the fetched request settings data
         return $requests;
     }
+
+    public function get_equipments_list() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+    
+        $query = "SELECT * FROM equipment_settings WHERE availability = '1' AND total_equipment != 0"; // Add the WHERE clause
+        $result = $this->connection->query($query);
+    
+        // Fetch all request settings records as an associative array
+        $requests = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $requests[] = $row;
+            }
+        }
+    
+        // Return the fetched request settings data
+        return $requests;
+    }
+    
 
     public function get_time_settings() {
         if ($this->connection->error) {

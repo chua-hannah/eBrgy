@@ -14,6 +14,7 @@ $users = UserManagementController::user_management();
     </div>
     <h3 class="mt-2 mb-2">User Management</h3>
     <div class="container-fluid">
+        <div style="overflow-x: auto;">
         <table class="table table-bordered table-striped custom-table" id="userTable">
             <thead>
                 <tr>
@@ -45,7 +46,7 @@ $users = UserManagementController::user_management();
                         <td><?= $user['address']; ?></td>
                         <td><?= $user['role']; ?></td>
                         <td class="<?= $user['status'] === 'activated' ? 'text-success' : ($user['status'] === 'pending' ? 'text-warning' : 'text-danger'); ?>">
-                            <?= strToUpper($user['status']); ?>
+                            <?= strtoupper($user['status']); ?>
                         </td>
                         <td>
                             <div class="btn-group" style="display: flex; gap: 8px; justify-content: space-around;">
@@ -59,6 +60,11 @@ $users = UserManagementController::user_management();
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+    </div>
+</div>
+   <!--Additional div for sidebar-->
+   </div>
     </div>
 </div>
 <script>
@@ -81,7 +87,3 @@ $users = UserManagementController::user_management();
         
     });
 </script>
-   <!--Additional div for sidebar-->
-   </div>
-    </div>
-</div>

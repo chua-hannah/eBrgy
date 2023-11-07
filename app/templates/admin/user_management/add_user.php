@@ -5,7 +5,7 @@
     </ol>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid" style="background: #F0F8FF;">
     <form class="custom-form mb-4 align-items-center needs-validation" id="register" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
     <h3 class="mb-4">Add Barangay Official</h3>
 
@@ -14,14 +14,33 @@
         <h6>Personal Information</h6>
         </div>
         <div class="col-lg-3 col-12 mb-2">
-            <label class="labels">Barangay Position</label>
+            <label class="labels">System Role</label>
             <select class="form-select <?php echo isset($errors["role"]) ? 'is-invalid' : ''; ?>" name="role" id="role" placeholder="Barangay Position">
-                <option value="" disabled selected>Select Barangay Position</option>
-                <option value="captain" <?= isset($_POST["role"]) && $_POST["role"] == "captain" ? 'selected' : ''; ?>>Captain</option>
-                <option value="kagawad" <?= isset($_POST["role"]) && $_POST["role"] == "kagawad" ? 'selected' : ''; ?>>Kagawad</option>
+                <option value="" disabled selected>Select System Role</option>
+                <option value="captain" <?= isset($_POST["role"]) && $_POST["role"] == "captain" ? 'selected' : ''; ?>>Super Admin</option>
+                <option value="kagawad" <?= isset($_POST["role"]) && $_POST["role"] == "kagawad" ? 'selected' : ''; ?>>Admin</option>
             </select>
             <?php if (isset($errors["role"])) : ?>
                 <div class="text-danger" id="error_role"><?= $errors["role"] ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="col-lg-3 col-12 mb-2">
+            <label class="labels">Barangay Position</label>
+            <select class="form-select <?php echo isset($errors["position"]) ? 'is-invalid' : ''; ?>" name="position" id="position" placeholder="Barangay Position">
+                <option value="" disabled selected>Select Barangay Position</option>
+                <option value="captain" <?= isset($_POST["position"]) && $_POST["position"] == "captain" ? 'selected' : ''; ?>>Barangay Chairman</option>
+                <option value="councilor" <?= isset($_POST["position"]) && $_POST["position"] == "councilor" ? 'selected' : ''; ?>>Councilor</option>
+                <option value="secretary" <?= isset($_POST["position"]) && $_POST["position"] == "secretary" ? 'selected' : ''; ?>>Secretary</option>
+                <option value="treasurer" <?= isset($_POST["position"]) && $_POST["position"] == "treasurer" ? 'selected' : ''; ?>>Treasurer</option>
+                <option value="exo1" <?= isset($_POST["position"]) && $_POST["position"] == "exo1" ? 'selected' : ''; ?>>EX-O(Dayshift)</option>
+                <option value="exo2" <?= isset($_POST["position"]) && $_POST["position"] == "exo2" ? 'selected' : ''; ?>>EX-O(Nighshift)</option>
+                <option value="skchairman" <?= isset($_POST["position"]) && $_POST["position"] == "skchairman" ? 'selected' : ''; ?>>SK-Chairman</option>
+                <option value="skcouncilor" <?= isset($_POST["position"]) && $_POST["position"] == "skcouncilor" ? 'selected' : ''; ?>>SK-Councilor</option>
+                <option value="sksecretary" <?= isset($_POST["position"]) && $_POST["position"] == "sksecretary" ? 'selected' : ''; ?>>SK-Secretary</option>
+                <option value="sktreasurer" <?= isset($_POST["position"]) && $_POST["position"] == "skcouncilor" ? 'selected' : ''; ?>>SK-Treasurer</option>
+            </select>
+            <?php if (isset($errors["position"])) : ?>
+                <div class="text-danger" id="error_position"><?= $errors["position"] ?></div>
             <?php endif; ?>
         </div>
         <div class="col-lg-3 col-12">
@@ -70,6 +89,31 @@
                     <div class="text-danger" id="error_sex"><?= $errors["sex"] ?></div>
                 <?php endif; ?>
             </div> 
+            <div class="col-lg-6 col-12">
+                        <div class="membership-info">
+                        <p>Check any applicable status (optional):</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_4ps" name="membership_4ps" value="1" <?php if (!empty($_POST["membership_4ps"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_4ps">Pantawid Pamilyang Pilipino Program (4Ps)</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_pwd" name="membership_pwd" value="1" <?php if (!empty($_POST["membership_pwd"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_pwd">Person with Disabilities (PWD)</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_solo_parent" name="membership_solo_parent" value="1" <?php if (!empty($_POST["membership_solo_parent"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_solo_parent">Solo Parent</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkbox_scholar" name="membership_scholar" value="1" <?php if (!empty($_POST["membership_scholar"])) echo 'checked'; ?>>
+                            <label class="form-check-label" for="checkbox_scholar">Government Scholar</label>
+                        </div>
+                    </div>
+
+                        </div>
 
             <div class="col-lg-12 col-12">
                 <h6 class="mb-3">Contact Details</h6>

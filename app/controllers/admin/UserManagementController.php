@@ -31,14 +31,51 @@ class UserManagementController {
       // Render the home page content
       include 'templates/admin/user_management.php';
     }
-
+    public function checkRequiredPositionsExist() {
+        // Define an array of required positions
+        $requiredPositions = array('captain', 'councilor', 'secretary', 'treasurer', 'exo1', 'exo2', 'skchairman', 'skcouncilor', 'sksecretary', 'sktreasurer');
+    
+        // Query to check the existence of required positions
+        $query = "SELECT COUNT(*) as count FROM users WHERE position IN ('" . implode("', '", $requiredPositions) . "')";
+    
+        $result = $this->connection->query($query);
+    
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $count = $row['count'];
+            
+            // Check if all the required positions exist
+            return $count >= count($requiredPositions);
+        }
+        
+        return false; // Something went wrong
+    }
     public function add() {
         if (isset($_POST['add-officials'])) {
-             // Retrieve the submitted form data
+            $requiredPositionsCounts = array(
+                'captain' => 1,
+                'councilor' => 7,
+                'secretary' => 1,
+                'treasurer' => 1,
+                'exo1' => 1,
+                'exo2' => 1,
+                'skchairman' => 1,
+                'skcouncilor' => 1,
+                'sksecretary' => 1,
+                'sktreasurer' => 1
+            );
+            if (!$this->checkRequiredPositionsExist()) {
+                // Display an error message
+                $_SESSION['error'] = "Position assigned is already at limit.";
+            }
+            else
+            {
+                            // Retrieve the submitted form data
         $username = $_POST['username'];
         $password = $_POST['password'];
         $email = $_POST['email'];
         $mobile = $_POST['mobile'];
+        $position = $_POST['position'];
         $firstname = $_POST['firstname'];
         $middlename = $_POST['middlename'];
         $lastname = $_POST['lastname'];
@@ -48,6 +85,10 @@ class UserManagementController {
         $minPasswordLength = 8;
         $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
         $mobilePattern = "/^9\d{9}$/";
+        $four_ps = isset($_POST['membership_4ps']) ? 1 : 0;
+        $pwd = isset($_POST['membership_pwd']) ? 1 : 0;
+        $solo_parent = isset($_POST['membership_solo_parent']) ? 1 : 0;
+        $scholar = isset($_POST['membership_scholar']) ? 1 : 0;
         // Handle undefined array error for sex
         if (isset($_POST['sex'])) {
             $sex = $_POST['sex'];
@@ -63,7 +104,7 @@ class UserManagementController {
             // Handle the case when 'selectOption' is not set.
             $role = ""; // or some default value
         }
-        $status = 'pending';
+        $status = 'activated';
 
         if (empty($firstname)) {
             $errors["firstname"] = "Enter your First name";
@@ -79,6 +120,9 @@ class UserManagementController {
         }
         if (empty($mobile)) {
             $errors["mobile"] = "Enter Mobile number";
+        }
+        if (empty($position)) {
+            $errors["position"] = "Enter barangay position number";
         }
         else if (!preg_match($mobilePattern, $mobile)) {
             $errors["mobile"] = "Invalid mobile number format.";    
@@ -127,7 +171,7 @@ class UserManagementController {
             // Add prefix in mobile number input
             $prefixMobileNumber = "+63";
             $mobile = $prefixMobileNumber . $mobile;
-
+            $senior = $age >= 60 ? 1 : 0;
             // Convert birthdate to YYYY-MM-DD format
             $birthdateTimestamp = strtotime($birthdate);
             // Valid date format, convert it to YYYY-MM-DD
@@ -197,8 +241,8 @@ class UserManagementController {
                 $error = "Given mobile number already exists.";
             }  elseif (empty($error) && empty($errors)) {
                 // Insert the data into the database
-                $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status) 
-                        VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status')";
+                $query = "INSERT INTO users (username, password, email, mobile, position, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar) 
+                        VALUES ('$username', '$password', '$email', '$mobile', '$position', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
                 if ($this->connection->query($query) === true) {
                     // Registration successful
                     header("Location: user-management");
@@ -210,10 +254,10 @@ class UserManagementController {
                 }
             }
         }
+            }
+     
         }
-    
-        // Render the register page content
-        include 'templates/admin/user_management/add_user.php';
+   
     }
      // Function to fetch user data from the database
      private function getUserData($userId) {

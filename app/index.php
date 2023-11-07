@@ -270,6 +270,7 @@ switch ($filename) {
                         case 'user-management-add-user':
                             includeAdminContent(function () use ($userManagementController) {
                                 $userManagementController->add();
+                                include 'templates/admin/user_management/add_user.php';
                             });
                             break;
                         case 'user-management-edit-user':
@@ -342,24 +343,29 @@ switch ($filename) {
                             });
                             break;
                         case 'requests-edit-equipment':
-                            $equipment_id = isset($_POST['equipment_id']) ? $_POST['equipment_id'] : null;
-                            $remarks = isset($_POST['remarks']) ? $_POST['remarks'] : null;
-                            $message = isset($_POST['message']) ? $_POST['message'] : null;
-                            $total_equipment_id = isset($_POST['total_equipment_id']) ? $_POST['total_equipment_id'] : null;
-
-                            includeAdminContent(function() use ($requestManagementController, $equipment_id, $remarks, $message, $total_equipment_id) {
-                                $requestManagementController->edit_equipment($equipment_id);
-                                $requestManagementController->approve_equipment($equipment_id, $message, $total_equipment_id);
-                                $requestManagementController->add_remarks($equipment_id, $remarks);
-                                $requestManagementController->delete_equipment($equipment_id, $remarks, $total_equipment_id);
-                                $requestManagementController->returned_equipment($equipment_id, $total_equipment_id);
+                            includeAdminContent(function() use ($requestManagementController) {
+                                $userData = $requestManagementController->getEquipRequestById();
+                                $requestManagementController->approve_equipment();
+                                $requestManagementController->add_remarks();
+                                $requestManagementController->delete_equipment();
+                                $requestManagementController->cancel_equipment();
+                                $requestManagementController->returned_equipment();
+                                include 'templates/admin/equipment_edit.php';
                             });
                             break;     
                         case 'requests-equipments-management':
                             includeAdminContent(function() use ($requestManagementController, $settingsController) {
                                 $settingsController->add_equipment_setting();
-                                $requests = $settingsController->get_equipments_list();
+                                $requests = $settingsController->admin_get_equipments_list();
                                 include 'templates/admin/request_management/equipment_management.php';
+                                
+                            });
+                            break;
+                        case 'edit-equipment-management':
+                            includeAdminContent(function() use ($requestManagementController, $settingsController) {
+                                $equipmentDatas = $requestManagementController->getEquipById();
+                                $requestManagementController->updateEquipById();
+                                include 'templates/admin/request_management/edit_equipment_management.php';
                                 
                             });
                             break;

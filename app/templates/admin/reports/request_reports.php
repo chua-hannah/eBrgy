@@ -179,15 +179,14 @@
                             <tr>
                                 <th class="wrap-text">Equipment name</th>
                                 <th class="wrap-text">Quantity</th>
-                                <th class="wrap-text">Return date</th>
                                 <th class="wrap-text">Username</th>
                                 <th class="wrap-text">Fullname</th>
-                                <th class="wrap-text">Status </th>
                                 <th class="wrap-text">Request Date</th>
-                                <th class="wrap-text">Proccess at</th>
-                                <th class="wrap-text">Process by</th>
-                              
-
+                                <th class="wrap-text">Initial Proccess at</th>
+                                <th class="wrap-text">End Proccess at</th>
+                                <th class="wrap-text">Initial Process by</th>
+                                <th class="wrap-text">End Process by</th>
+                                <th class="wrap-text">Status </th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -197,15 +196,14 @@
                                 <tr>
                                     <td><?php echo $equipmentReport['equipment_name']; ?></td>
                                     <td><?php echo $equipmentReport['total_equipment_borrowed']; ?></td>
-                                    <td><?php echo $equipmentReport['return_date']; ?></td>
                                     <td><?php echo $equipmentReport['username']; ?></td>
                                     <td><?php echo $equipmentReport['firstname'] . ' ' . $equipmentReport['middlename'] . ' ' . $equipmentReport['lastname']; ?></td>
-                                    <td><?php echo $equipmentReport['status']; ?></td>
                                     <td><?php echo $equipmentReport['request_date']; ?></td>
                                     <td><?php echo $equipmentReport['process_at']; ?></td>
+                                    <td><?php echo $equipmentReport['returned_at']; ?></td>
                                     <td><?php echo $equipmentReport['process_by']; ?></td>
-
-
+                                    <td><?php echo $equipmentReport['process_return']; ?></td>
+                                    <td><?php echo $equipmentReport['status']; ?></td>
                                 </tr>
                                 <?php
                             }

@@ -149,4 +149,28 @@ document.addEventListener("DOMContentLoaded", function() {
         availableQuantitySpan.textContent = " (Available: " + maxQuantity + ")";
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get references to the return date input element
+    var returnDateInput = document.getElementById("datepicker-future");
+
+    // Calculate tomorrow's date
+    var today = new Date();
+    var tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    // Format the date as "YYYY-MM-DD"
+    var formattedDate = formatDate(tomorrow);
+
+    // Set the default value in the input field
+    returnDateInput.value = formattedDate;
+
+    // Function to format the date as "YYYY-MM-DD"
+    function formatDate(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, "0");
+        var day = String(date.getDate()).padStart(2, "0");
+        return year + "-" + month + "-" + day;
+    }
+});
 </script>

@@ -480,7 +480,7 @@ public function equipments() {
         date_default_timezone_set('Asia/Manila');
         $username = $_SESSION['username'];
         $status = 'pending';
-        $return_date = $_POST['return_date'];
+        $return_date = date('Y-m-d', strtotime($_POST['return_date']));
         $equipment_id = $_POST['equipment_id'];
         $total_equipment_borrowed = $_POST['total_equipment_borrowed'];
         $date = date('Y-m-d');
@@ -488,9 +488,6 @@ public function equipments() {
 
         // Combine date and time into a single datetime string
         $datetime = $date . ' ' . $time_in;
-
-        $return_date = date('Y-m-d');
-
         // Check if the requested quantity is valid
         if ($this->isRequestedQuantityValid($equipment_id, $total_equipment_borrowed)) {
             // Valid quantity, proceed with the request
