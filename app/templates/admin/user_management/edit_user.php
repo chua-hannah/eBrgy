@@ -51,7 +51,7 @@ if ($userId) {
                 }
                 ?>
 
-                <span class="<?php echo $colorClass; ?>"><?php echo $status; ?></strong></soan>
+                <span class="<?php echo $colorClass; ?>"><?php echo strtoupper($status); ?></strong></soan>
             </div>
             <div class="col-md-4 text-end">
                 <div class="mb-3">
@@ -69,6 +69,18 @@ if ($userId) {
                     </form>';
                     ?>
                 </div>
+            </div>
+            <div class="col-md-12 mb-3">
+            <p class="card-text">
+                <strong>Position:</strong>
+                <?php
+                if ($userData['role']==="residence") {
+                    echo $userData['role'];
+                } else {
+                    echo $userData['position'];
+                }
+                ?>
+            </p>
             </div>
             <hr>
             <div class="col-md-4">

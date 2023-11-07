@@ -5,15 +5,15 @@
     </ol>
 </nav>
 
-<div class="container-fluid" style="background: #F0F8FF;">
-    <form class="custom-form mb-4 align-items-center needs-validation" id="register" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
+<div class="container-fluid">
+    <form class="custom-form contact-form mb-4 align-items-center needs-validation" id="register" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
     <h3 class="mb-4">Add Barangay Official</h3>
 
     <div class="row g-2">
         <div class="col-lg-12 col-12">
         <h6>Personal Information</h6>
         </div>
-        <div class="col-lg-3 col-12 mb-2">
+        <div class="col-lg-6 col-12 mb-2">
             <label class="labels">System Role</label>
             <select class="form-select <?php echo isset($errors["role"]) ? 'is-invalid' : ''; ?>" name="role" id="role" placeholder="Barangay Position">
                 <option value="" disabled selected>Select System Role</option>
@@ -24,7 +24,7 @@
                 <div class="text-danger" id="error_role"><?= $errors["role"] ?></div>
             <?php endif; ?>
         </div>
-        <div class="col-lg-3 col-12 mb-2">
+        <div class="col-lg-6 col-12 mb-2">
             <label class="labels">Barangay Position</label>
             <select class="form-select <?php echo isset($errors["position"]) ? 'is-invalid' : ''; ?>" name="position" id="position" placeholder="Barangay Position">
                 <option value="" disabled selected>Select Barangay Position</option>
@@ -43,7 +43,7 @@
                 <div class="text-danger" id="position"><?= $errors["position"] ?></div>
             <?php endif; ?>
         </div>
-        <div class="col-lg-3 col-12">
+        <div class="col-lg-4 col-12">
             <label class="labels">First Name</label>
             <input type="text" name="firstname" class="form-control <?= isset($errors["firstname"]) ? 'is-invalid' : ''; ?>" id="firstname" value="<?= !empty($_POST["firstname"]) ? $_POST["firstname"] : ''; ?>" required>
             <?php if (isset($errors["firstname"])) : ?>
@@ -51,11 +51,11 @@
             <?php endif; ?>
         </div>
 
-            <div class="col-lg-3 col-12">
+            <div class="col-lg-4 col-12">
                 <label class="labels">Middle Name (Optional)</label>
                 <input type="text" name="middlename" class="form-control" id="middlename" value="<?php if (!empty($_POST["middlename"])) { echo $_POST["middlename"]; } else { echo ''; };?>">
             </div>
-            <div class="col-lg-3 col-12">
+            <div class="col-lg-4 col-12">
                 <label class="labels">Last Name</label>
                 <input type="text" name="lastname" class="form-control 
                 <?php echo isset($errors["lastname"]) ? 'is-invalid' : ''; ?>" id="lastname" value="<?php if (!empty($_POST["lastname"])) { echo $_POST["lastname"]; } else { echo ''; };?>">
@@ -90,6 +90,14 @@
                 <?php endif; ?>
             </div> 
             <div class="col-lg-6 col-12">
+                            <h6>Membership Information</h6>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <h6>Document Uploads</h6>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
                         <div class="membership-info">
                         <p>Check any applicable status (optional):</p>
                         <div class="form-check">
@@ -112,9 +120,27 @@
                             <label class="form-check-label" for="checkbox_scholar">Government Scholar</label>
                         </div>
                     </div>
+                    </div>
 
+                        <!-- Add file upload fields -->
+                        <div class="col-lg-6 col-12">
+                            <div>
+                                <label for="valid_id">Upload Valid ID / Proof of Membership (if any)</label>
+                                <input type="file" name="valid_id" id="valid_id" class="form-control
+                                <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*" onchange="removeIdErrorMsg(event)">
+                                <?php if (isset($errors["valid_id"])) : ?>
+                                    <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <label for="id_selfie">Upload Selfie w/ ID</label>
+                                <input type="file" name="id_selfie" id="id_selfie" class="form-control
+                                <?php echo isset($errors["id_selfie"]) ? 'is-invalid' : ''; ?>" accept="image/*" onchange="removeIdSelfieErrorMsg(event)">
+                                <?php if (isset($errors["id_selfie"])) : ?>
+                                    <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
+                                <?php endif; ?>
+                            </div>
                         </div>
-
             <div class="col-lg-12 col-12">
                 <h6 class="mb-3">Contact Details</h6>
             </div>
@@ -160,27 +186,6 @@
                 <label class="labels">Barangay</label>
                 <input type="text" name="barangay" class="form-control" value="Barangay 95" disabled>
             </div>
-
-        <div class="col-lg-12 col-12">
-            <h6 class="mb-3">Document Upload</h6>
-        </div>
-
-        <div class="col-lg-6 col-12">
-                <label for="valid_id">Upload Valid ID</label>
-                <input type="file" name="valid_id" id="valid_id" class="form-control
-                <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*" onchange="removeIdErrorMsg(event)">
-                <?php if (isset($errors["valid_id"])) : ?>
-                    <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
-                <?php endif; ?>
-        </div>
-        <div class="col-lg-6 col-12">
-                <label for="id_selfie">Upload Selfie</label>
-                <input type="file" name="id_selfie" id="id_selfie" class="form-control
-                <?php echo isset($errors["id_selfie"]) ? 'is-invalid' : ''; ?>" accept="image/*" onchange="removeIdSelfieErrorMsg(event)">
-                <?php if (isset($errors["id_selfie"])) : ?>
-                    <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
-                <?php endif; ?>
-        </div>
 
         <div class="col-lg-12 col-12">
             <h6 class="mb-3">Access Credentials</h6>

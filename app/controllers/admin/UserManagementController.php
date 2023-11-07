@@ -15,9 +15,9 @@ class UserManagementController {
     }
     public function user_management() {
          // Prepare and execute the query
-         $query = "SELECT * FROM users WHERE role != 'captain'";
+         $query = "SELECT * FROM users";
          $result = $this->connection->query($query);
- 
+        
          // Fetch all user records as an associative array
          $users = array();
          if ($result->num_rows > 0) {

@@ -51,6 +51,7 @@
     <?php $baseUrl = "http://localhost/eBrgy/app";?>
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container-fluid">
+    <img src="assets/images/Barangay.png" class="logo img-fluid" alt="Barangay 95" style="margin-right: 10px;">
     <?php
         // Check the user's role from the session and conditionally show the "User Management" tab
         if ($_SESSION['role'] === 'captain') {

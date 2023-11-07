@@ -44,7 +44,15 @@ $users = UserManagementController::user_management();
                         <td><?= $user['age']; ?></td>
                         <td><?= $user['sex']; ?></td>
                         <td><?= $user['address']; ?></td>
-                        <td><?= $user['role']; ?></td>
+                        <td>  
+                        <?php
+                        if ($user['role']==="residence") {
+                            echo $user['role'];
+                        } else {
+                            echo $user['position'];
+                        }
+                        ?>
+                        </td>
                         <td class="<?= $user['status'] === 'activated' ? 'text-success' : ($user['status'] === 'pending' ? 'text-warning' : 'text-danger'); ?>">
                             <?= strtoupper($user['status']); ?>
                         </td>
