@@ -40,7 +40,7 @@
                 <option value="sktreasurer" <?= isset($_POST["position"]) && $_POST["position"] == "skcouncilor" ? 'selected' : ''; ?>>SK-Treasurer</option>
             </select>
             <?php if (isset($errors["position"])) : ?>
-                <div class="text-danger" id="error_position"><?= $errors["position"] ?></div>
+                <div class="text-danger" id="position"><?= $errors["position"] ?></div>
             <?php endif; ?>
         </div>
         <div class="col-lg-3 col-12">

@@ -271,7 +271,6 @@ switch ($filename) {
                         case 'user-management-add-user':
                             includeAdminContent(function () use ($userManagementController) {
                                 $userManagementController->add();
-                                include 'templates/admin/user_management/add_user.php';
                             });
                             break;
                         case 'user-management-edit-user':
