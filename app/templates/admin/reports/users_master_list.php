@@ -247,7 +247,7 @@ document.getElementById("printTableButton").addEventListener("click", function()
     newWin.document.write('<table>');
 
     // Add column headers, including the "Row Number" column
-    var headerCells = $('#myTable thead th:not(:last-child)'); // Get column headers from the table
+    var headerCells = $('#myTable thead th:not(:first-child)'); // Get column headers from the table
     newWin.document.write('<tr>');
     newWin.document.write('<th class="wrap-text">#</th>'); // Add Row Number header
     headerCells.each(function () {
@@ -259,7 +259,7 @@ document.getElementById("printTableButton").addEventListener("click", function()
     tableData.forEach(function (dataRow, rowIndex) {
         newWin.document.write('<tr>');
         newWin.document.write('<td>' + (rowIndex + 1) + '</td>'); // Add Row Number
-        dataRow.slice(0, -1).forEach(function (cellData) {
+        dataRow.slice(1).forEach(function (cellData) {
             newWin.document.write('<td>' + cellData + '</td>');
         });
         newWin.document.write('</tr>');
