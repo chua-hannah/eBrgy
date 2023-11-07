@@ -84,6 +84,42 @@ switch ($filename) {
                                 include 'templates/admin/dashboard.php';
                             });
                             break;
+                            case 'indigency-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/indigency_cert.php';
+                                break;
+                            case 'first-job-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/firstjob_cert.php';
+                                break;
+                            case 'barangay-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/barangay_cert.php';
+                                break;
+                            case 'oath-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/oath_cert.php';
+                                break;
                         case 'profile':
                             includeAdminContent(function() use ($profileController, $filename) {
                                 $user_id = $_SESSION['user_id'];
@@ -425,6 +461,42 @@ switch ($filename) {
                                 include 'templates/admin/dashboard.php';
                             });
                             break;
+                            case 'indigency-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/indigency_cert.php';
+                                break;
+                            case 'first-job-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/firstjob_cert.php';
+                                break;
+                            case 'barangay-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/barangay_cert.php';
+                                break;
+                            case 'oath-certificate':
+                                $docId = $_POST['id'];
+                                $docRequestUserData = $homeController->print_doc($docId);
+                                if (empty($docRequestUserData) || $docRequestUserData['status'] !== 'approved') {
+                                    header("Location: documents"); // Redirect to the 'documents.php' page
+                                    exit; 
+                                }
+                                include 'templates/certificates/oath_cert.php';
+                                break;
                         case 'profile':
                             includeAdminContent(function() use ($profileController, $filename) {
                                 $user_id = $_SESSION['user_id'];

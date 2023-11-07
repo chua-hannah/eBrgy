@@ -125,7 +125,7 @@
                                                 // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
                                                 $action = ''; // Initialize the action variable
                                             
-                                                if ($request['request_name'] === 'barangay certification (first time jobseekers assistance act - ra 11261)') {
+                                                if ($request['request_name'] === 'firstjob certificate') {
                                                     $action = 'first-job-certificate';
                                                 } 
                                                 elseif ($request['request_name'] === 'certificate of indigency') {
