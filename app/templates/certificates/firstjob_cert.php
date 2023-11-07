@@ -83,25 +83,25 @@
             <p>(First Time Jobseekers Assistance Act - RA 11261)</p>
         </div>
 
-        <div class="content">
-            <p class="indented-paragraph">This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo $docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname'] ;?>, a resident of</p>
-            <p><?php echo $docRequestUserData['address'];?>, for 18 years 7 months, is a qualified availee of <strong>RA 11261</strong> or the <strong>First Time Jobseekers Assistance Act of 2019</strong>.</p>
-            <p class="indented-paragraph">I further certify that the holder/bearer was informed of his/her rights, including the duties and responsibilities accorded by RA 11261 through the Oath of</p><p> Undertaking he/she has signed and executed in the presence of Barangay Official/s.</p>
-            <p>Signed this <?php
+        <div class="content justify-content">
+            <p class="indented-paragraph mb-0" style="text-indent: 20px;">This is to certify that <?php echo $docRequestUserData['sex'] = " male" ? "Mr." : "Ms./Mrs."; ?> <?php echo strtoupper($docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname']);?>, a resident of
+            <?php echo strtoupper($docRequestUserData['address']);?>, for <?php echo strtoupper($docRequestUserData['message']);?>, is a qualified availee of <strong>RA 11261</strong>
+            or the <strong>First Time Jobseekers Assistance Act of 2019</strong>.</p>
+            <p class="indented-paragraph mt-3 mb-0" style="text-indent: 20px;">I further certify that the holder/bearer was informed of his/her rights, including the duties and responsibilities accorded by RA 11261 through the Oath of Undertaking he/she has signed and executed in the presence of Barangay Official/s.</p>
+            <p class="indented-paragraph mt-3 mb-0" style="text-indent: 20px;">Signed this <?php
             $datetime = $docRequestUserData['process_at'];
             $date = date("jS \d\a\y \of F, Y", strtotime($datetime));
-            echo $date;
-            ?>
-            , in the City/Municipality of Manila</p>
+            echo $date . ", ";
+            ?> in the City/Municipality of Manila.</p>
+            <p class="indented-paragraph mt-3 mb-0" style="text-indent: 20px;">This certification is valid only until <?php
+                $datetime = $docRequestUserData['process_at'];
+                $newDate = date("Y-m-d", strtotime($datetime . ' +1 year'));
+                $formattedDate = date("jS \d\a\y \of F, Y", strtotime($newDate));
+                echo $formattedDate;
+                ?>
+            , one (1) year from the issuance.</p>
         </div>
         <div class="footer">
-        <p>This certification is valid only until <?php
-        $datetime = $docRequestUserData['process_at'];
-        $newDate = date("Y-m-d", strtotime($datetime . ' +1 year'));
-        $formattedDate = date("jS \d\a\y \of F, Y", strtotime($newDate));
-        echo $formattedDate;
-        ?>
-        , one (1) year from the issuance.</p>
             <br>
             <div><strong>RONALD M. LEE</strong></div>
             <div>Punong Barangay</div>

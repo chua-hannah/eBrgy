@@ -170,7 +170,7 @@
         <div class="form-check mt-2">
         <input type="checkbox" class="form-check-input" id="data_privacy_agreement" name="data_privacy_agreement">
         <label for="data_privacy_agreement" id="dpa" class="text-justify form-check-label" style="<?php echo isset($errors["terms"]) ? 'color: #dc3545' : ''; ?>">
-            <strong>I have read and agree to the terms of the Republic Act No. 10173, also known as the Data Privacy Act of 2012 (DPA), and consent to the collection, processing, and storage of my personal data in accordance with its provisions.</strong>
+            <strong>I have read and agree to the Data Privacy Act (Republic Act No. 10173 of 2012) and consent to the collection, processing, and storage of my personal data in accordance with its provisions.</strong>
         </label>
         <?php if (isset($errors["terms"])) : ?>
             <div class="text-danger mb-2" id="error_terms"><?= $errors["terms"] ?></div>

@@ -40,13 +40,49 @@ class DashboardController {
         $rowResidence = $resultResidence->fetch_assoc();
         $totalResidences = $rowResidence['total_residences'];
 
+        // Fetch the count of users with role 'admin'
+        $queryActiveUsers = "SELECT COUNT(*) AS userlist_senior FROM users WHERE senior = '1'";
+        $resultActiveUsers = $this->connection->query($queryActiveUsers);
+        $activeUsersRow = $resultActiveUsers->fetch_assoc();
+        $totalActiveUsers = $activeUsersRow['userlist_senior'];
+        
+
+        // Fetch the count of users with role 'admin'
+        $queryAdmin = "SELECT COUNT(*) AS userlist_pwd FROM users WHERE pwd = '1'";
+        $resultAdmin = $this->connection->query($queryAdmin);
+        $rowAdmin = $resultAdmin->fetch_assoc();
+        $totalAdmins = $rowAdmin['userlist_pwd'];
+
+        // Fetch the count of users with role 'residence' and status 'activated'
+        $queryResidence = "SELECT COUNT(*) AS userlist_four_ps FROM users WHERE four_ps = '1'";
+        $resultResidence = $this->connection->query($queryResidence);
+        $rowResidence = $resultResidence->fetch_assoc();
+        $totalResidences = $rowResidence['userlist_four_ps'];
+
+        // Fetch the count of users with role 'residence' and status 'activated'
+        $queryScholar = "SELECT COUNT(*) AS userlist_scholar FROM users WHERE scholar = '1'";
+        $resultScholar = $this->connection->query($queryScholar);
+        $rowScholar = $resultScholar->fetch_assoc();
+        $totalScholar= $rowScholar['userlist_scholar'];
+
+        // Fetch the count of users with role 'residence' and status 'activated'
+        $querySoloParent = "SELECT COUNT(*) AS userlist_soloparent FROM users WHERE solo_parent = '1'";
+        $resultSoloParent = $this->connection->query($querySoloParent);
+        $rowSoloParent = $resultSoloParent->fetch_assoc();
+        $totalSoloParent= $rowSoloParent['userlist_soloparent'];
+
     
         // Return the data as an array
         return [
             'totalUsers' => $totalUsers,
             'totalAdmins' => $totalAdmins,
             'totalResidences' => $totalResidences,
-            'totalActiveUsers' => $totalActiveUsers
+            'totalActiveUsers' => $totalActiveUsers,
+            'totalSenior' => $totalActiveUsers,
+            'totalPwd' => $totalAdmins,
+            'totalFourps' => $totalResidences,
+            'totalScholar' => $totalScholar,
+            'totalSoloParent' => $totalSoloParent,
         ];
     }
 
@@ -88,6 +124,12 @@ class DashboardController {
         $rowScholar = $resultScholar->fetch_assoc();
         $totalScholar= $rowScholar['masterlist_scholar'];
 
+        // Fetch the count of users with role 'residence' and status 'activated'
+        $querySoloParent = "SELECT COUNT(*) AS masterlist_soloparent FROM users_masterlist WHERE solo_parent = '1'";
+        $resultSoloParent = $this->connection->query($querySoloParent);
+        $rowSoloParent = $resultSoloParent->fetch_assoc();
+        $totalSoloParent= $rowSoloParent['masterlist_soloparent'];
+
     
         // Return the data as an array
         return [
@@ -95,7 +137,8 @@ class DashboardController {
             'masterlistSenior' => $totalActiveUsers,
             'masterlistPwd' => $totalAdmins,
             'masterlistFourps' => $totalResidences,
-            'masterlistScholar' => $totalResidences,
+            'masterlistScholar' => $totalScholar,
+            'masterlistSoloParent' => $totalSoloParent,
 
         ];
     }

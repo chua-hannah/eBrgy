@@ -16,7 +16,7 @@
                     foreach ($requests as $request) {
                         // Display the data for each request
                         ?>
-                        <option value="<?php echo $request['request_name']; ?>"><?php echo $request['request_name']; ?></option>
+                        <option value="<?php echo $request['request_name']; ?>"><?php echo strtoupper($request['request_name']); ?></option>
                         <?php
                     }
                 ?>
@@ -97,7 +97,7 @@
                                     }
                                     ?>
                                     <tr>
-                                        <td><?php echo $request['request_name']; ?></td>
+                                        <td><?php echo strtoupper($request['request_name']); ?></td>
                                         <td><?php echo !empty($request['message']) ? $request['message'] : '-'; ?></td>
                                         <td><?php echo !empty($request['purpose']) ? $request['purpose'] : '-'; ?></td>
                                         <td><?php echo $createdAtDateFormattedDate . " " . $createdAtTimeFormattedTime; ?></td>
@@ -125,15 +125,16 @@
                                                 // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
                                                 $action = ''; // Initialize the action variable
                                             
-                                                if ($request['request_name'] === 'firstjob certificate') {
+                                                if ($request['request_name'] === 'barangay certification (first time jobseekers assistance act - ra 11261)') {
                                                     $action = 'first-job-certificate';
-                                                } elseif ($request['request_name'] === 'indigency certificate') {
+                                                } 
+                                                elseif ($request['request_name'] === 'certificate of indigency') {
                                                     $action = 'indigency-certificate';
                                                 }
                                                 elseif ($request['request_name'] === 'barangay certificate') {
                                                     $action = 'barangay-certificate';
                                                 }
-                                                elseif ($request['request_name'] === 'oath certificate') {
+                                                elseif ($request['request_name'] === 'oath of undertaking') {
                                                     $action = 'oath-certificate';
                                                 }
                                             
@@ -173,6 +174,7 @@
 <script>
   // Get references to the document type and remarks field
 const selectedService = document.getElementById('selected_service');
+const serviceMessage = document.getElementById('service_message');
 const remarksLabel = document.getElementById('remarks_label');
 const remarksField = document.getElementById('remarks_field');
 const purposeField = document.getElementById('purpose_field');
@@ -197,17 +199,28 @@ const allowedValues = ["Medical Purpose", "School Requirement", "Vending Permit"
 
 // Add an event listener to the document type selection
 selectedService.addEventListener('change', function() {
-    if (selectedService.value === "barangay certificate") {
+    if (selectedService.value.toLowerCase() === "barangay certificate") {
         // If "Barangay Certificate" is selected, change the field to an option select input
         remarksLabel.innerText = "Purpose";
         remarksField.innerHTML = '<select name="service_message" class="form-select" required>' +
             '<option value="" disabled selected>Select Purpose</option>' +
             barangayCertificateOptions.map(option => `<option value="${option}">${option}</option>`).join('') +
             '</select>';
-    } else {
+    }
+    else if (selectedService.value.toLowerCase() === "certificate of indigency") {
+        // If "Barangay Certificate" is selected, change the field to an option select input
+        remarksLabel.innerText = "Purpose";
+        remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. Financial Assistance" required></textarea>';
+    }
+    else if (selectedService.value.toLowerCase() === "oath of undertaking" || selectedService.value.toLowerCase() === "barangay certification (first time jobseekers assistance act - ra 11261)") {
+        // If "Barangay Certificate" is selected, change the field to an option select input
+        remarksLabel.innerText = "Years of Residency";
+        remarksField.innerHTML = '<input text name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. 5 years and 3 months" required>';
+    }
+     else {
         // If a different document type is selected, revert to the text area
         remarksLabel.innerText = "Remarks";
-        remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Details"></textarea>';
+        remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. Special Requests"></textarea>';
     }
 });
 

@@ -176,7 +176,6 @@ public function print_doc($docId) {
 
 
     public function get_schedules($reserved_schedule) {
-        $errors = array(); // Initialize an errors array
     
         if (isset($_POST['showData'])) {
             if (empty($_POST['reserved_schedule'])) {
@@ -332,7 +331,7 @@ public function documents() {
      
 }
 
-public function get_doc_requests($username, $mobile, $email) {
+public function get_doc_requests($username) {
         
     if ($this->connection->error) {
         die("Connection failed: " . $this->connection->error);
@@ -430,7 +429,7 @@ public function reports() {
     }
 }
 
-public function get_reports($username, $mobile, $email) {
+public function get_reports($username) {
         
     if ($this->connection->error) {
         die("Connection failed: " . $this->connection->error);
@@ -439,8 +438,10 @@ public function get_reports($username, $mobile, $email) {
     // Use prepared statement to prevent SQL injection
     $query = "SELECT u.firstname, u.middlename, u.lastname, u.address, d.*
               FROM users u
-              JOIN report_requests d ON u.username = d.username";
+              JOIN report_requests d ON u.username = d.username
+              WHERE d.username = ?";
     $stmt = $this->connection->prepare($query);
+    $stmt->bind_param('s', $username);
     $stmt->execute();
 
     // Fetch the requested user data and doc_requests data as an associative array

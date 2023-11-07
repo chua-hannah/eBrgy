@@ -82,10 +82,12 @@
         <u><h2>OATH OF UNDERTAKING CERTIFICATE</h2></u>
         </div>
 
-        <div class="content">
+        <div class="content justify-content">
 
-            <p class="indented-paragraph">I, <?php echo $docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname'] ;?>, <?php echo $docRequestUserData['age'];?> years of age, resident of <?php echo $docRequestUserData['address'];?> BARANGAY 95 ZONE 8, TONDO MANILA for 18 years 7 months, availing the benefits</p><p> of <strong>Republic Acts 11261</strong>, otherwise known as the <strong>First Time Jobseeker Act of 2019</strong>   , do hereby declare, agree, and undertake to abide and be bound by the following:</p>
-                <ol>
+            <p class="indented-paragraph mb-0">I, <?php echo strtoupper($docRequestUserData['firstname'] .' '. $docRequestUserData['firstname'].' '.$docRequestUserData['lastname']);?>, 
+            <?php echo $docRequestUserData['age'];?> years of age, resident of <?php echo strtoupper($docRequestUserData['address']);?> 
+            BARANGAY 95 ZONE 8, TONDO MANILA for  <?php echo strtoupper($docRequestUserData['message']);?>, availing the benefits of <strong>Republic Acts 11261</strong>, otherwise known as the <strong>First Time Jobseeker Act of 2019</strong>   , do hereby declare, agree, and undertake to abide and be bound by the following:</p>
+                <ol class="mt-3">
                     <li>That this is the first time that I will actively look for a job, and therefore requesting that a Barangay Certification be issued in my favor to avail the benefits of the law.</li>
                     <li>That I am aware that the benefit and privilege/s under the said law shall be valid only for one (1) year from the date that the Barangay Certification is issued.</li>
                     <li>That I can avail the benefits of the law only once.</li>
@@ -99,20 +101,10 @@
             <p>Signed this <?php
             $datetime = $docRequestUserData['process_at'];
             $date = date("jS \d\a\y \of F, Y", strtotime($datetime));
-            echo $date;
+            echo $date . ", ";
             ?>
-            , in the City/Municipality of Manila</p>
-        </div>
-        <div class="footer">
-        <p>This certification is valid only until <?php
-        $datetime = $docRequestUserData['process_at'];
-        $newDate = date("Y-m-d", strtotime($datetime . ' +1 year'));
-        $formattedDate = date("jS \d\a\y \of F, Y", strtotime($newDate));
-        echo $formattedDate;
-        ?>
-        , one (1) year from the issuance.</p>
-            <br>
-        </div>
+            in the City/Municipality of Manila.</p>
+        </div>        
         <div class="footer">
             <p><strong>Signed by:</strong></p>
             <p><strong>ELJUN C. SAYO</strong></p>

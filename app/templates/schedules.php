@@ -90,7 +90,7 @@
     </div>
     <!-- Modal for Submitted Request -->
     <div class="modal fade" id="submittedScheduleModal" tabindex="-1" aria-labelledby="submittedScheduleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">

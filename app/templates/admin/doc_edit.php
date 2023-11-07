@@ -25,7 +25,7 @@ if ($username) {
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-4 mb-3">
-                    <p class="card-text"><strong>Document Type: </strong><?php echo $userData['request_name']; ?></p>
+                    <p class="card-text"><strong>Document Type: </strong><?php echo strtoupper($userData['request_name']); ?></p>
                 </div>
                 <div class="col-md-4 mb-3">
                     <p class="card-text"><strong>Status:

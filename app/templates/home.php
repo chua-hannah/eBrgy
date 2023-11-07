@@ -31,15 +31,15 @@ foreach ($homeSettings as $setting) {
                                         class="carousel-image img-fluid" alt="...">
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Welcome!</h1>
-                                        <p>Explore our online services and stay informed about Barangay 95's latest updates.</p>
+                                        <p>Explore our online services and <br> stay informed about Barangay 95's latest updates.</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <img src="uploads/homepage/<?php echo $setting['slide2']; ?>"
                                         class="carousel-image img-fluid" alt="...">
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Online Services</h1>
-                                        <p>Access essential online services with ease. From requesting documents to filing complaints, we've got you covered. Experience the convenience of E-Barangay.</p>
+                                        <h1>E-Services</h1>
+                                        <p>Easily access essential online services, <br> including document requests and complaint filings, <br>for the utmost convenience through E-Barangay.</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
@@ -47,7 +47,7 @@ foreach ($homeSettings as $setting) {
                                         class="carousel-image img-fluid" alt="...">
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Community<br>Announcements</h1>
-                                        <p>Stay in the loop with the latest news and announcements from your barangay. Be part of our thriving community, and make sure you never miss an important update.</p>
+                                        <p>Stay informed about your barangay's <br> latest news and announcements <br> and become an active part of our thriving community.</p>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
