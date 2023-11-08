@@ -38,6 +38,7 @@
     dateFormat: "m/d/Y", // Set the desired date format
     altInput: true,     // Show the formatted date in the input field
     altFormat: "m/d/Y", // Use the same date format for displaying
+    minDate: new Date(1900, 0, 1),
     maxDate: "today",    // Optionally, limit selection to today or earlier
     disableMobile: true
   });
@@ -52,6 +53,7 @@
 
   flatpickr("#datepicker-regular", {
     dateFormat: "m/d/Y", // Set the desired date format
+    minDate: new Date(1900, 0, 1),
     altInput: true,     // Show the formatted date in the input field
     altFormat: "m/d/Y", // Use the same date format for displaying
     disableMobile: true

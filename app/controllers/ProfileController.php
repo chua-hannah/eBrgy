@@ -113,9 +113,9 @@ function update_admin_profile($user_id) {
         $newEmail = $_POST['email'];
         $newAddress = $_POST['address'];
         $newBirthdate = $_POST['birthdate']; // Added Birthdate
-        $newFirstname = $_POST['firstname'];
-        $newMiddlename = $_POST['middlename']; // Fix variable names
-        $newLastname = $_POST['lastname']; // Fix variable names
+        $newFirstname = trim($_POST['firstname']);
+        $newMiddlename = trim($_POST['middlename']);
+        $newLastname = trim($_POST['lastname']);
         $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
         $mobilePattern = "/^9\d{9}$/";
         // Calculate age based on the updated Birthdate

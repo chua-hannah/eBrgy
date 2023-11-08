@@ -32,8 +32,8 @@
                 <option value="councilor" <?= isset($_POST["position"]) && $_POST["position"] == "councilor" ? 'selected' : ''; ?>>Councilor</option>
                 <option value="secretary" <?= isset($_POST["position"]) && $_POST["position"] == "secretary" ? 'selected' : ''; ?>>Secretary</option>
                 <option value="treasurer" <?= isset($_POST["position"]) && $_POST["position"] == "treasurer" ? 'selected' : ''; ?>>Treasurer</option>
-                <option value="exo1" <?= isset($_POST["position"]) && $_POST["position"] == "exo1" ? 'selected' : ''; ?>>EX-O(Dayshift)</option>
-                <option value="exo2" <?= isset($_POST["position"]) && $_POST["position"] == "exo2" ? 'selected' : ''; ?>>EX-O(Nighshift)</option>
+                <option value="exo1" <?= isset($_POST["position"]) && $_POST["position"] == "exo1" ? 'selected' : ''; ?>>Ex-O (Dayshift)</option>
+                <option value="exo2" <?= isset($_POST["position"]) && $_POST["position"] == "exo2" ? 'selected' : ''; ?>>Ex-O (Nightshift)</option>
                 <option value="skchairman" <?= isset($_POST["position"]) && $_POST["position"] == "skchairman" ? 'selected' : ''; ?>>SK-Chairman</option>
                 <option value="skcouncilor" <?= isset($_POST["position"]) && $_POST["position"] == "skcouncilor" ? 'selected' : ''; ?>>SK-Councilor</option>
                 <option value="sksecretary" <?= isset($_POST["position"]) && $_POST["position"] == "sksecretary" ? 'selected' : ''; ?>>SK-Secretary</option>

@@ -40,7 +40,7 @@
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Middle Name</label>
                                     <input type="text" class="form-control" id="middlename" name="middlename"
-                                        value="<?php echo $user_data['middlename']; ?>" required disabled>
+                                        value="<?php echo $user_data['middlename']; ?>" disabled>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Last Name</label>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <label class="labels">Gender</label>
-                                    <select class="form-control" id="sex" name="sex" required disabled>
+                                    <select class="form-select" id="sex" name="sex" required disabled>
                                         <option value="male" <?php if ($user_data['sex'] === 'male') echo 'selected'; ?>>Male
                                         </option>
                                         <option value="female" <?php if ($user_data['sex'] === 'female') echo 'selected'; ?>>

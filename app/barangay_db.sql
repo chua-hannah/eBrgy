@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2023 at 08:29 PM
+-- Generation Time: Nov 08, 2023 at 11:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -116,9 +116,9 @@ CREATE TABLE `doc_settings` (
 --
 
 INSERT INTO `doc_settings` (`request_type_id`, `request_name`, `request_status`, `description`, `created_at`) VALUES
-(1, 'firstjob certificate', '0', 'Certificate', '2023-07-20'),
+(1, 'firstjob certificate', '0', 'Certificates', '2023-07-20'),
 (2, 'indigency certificate', '1', 'Birth Certificate', '2023-07-20'),
-(3, 'barangay certificate', '1', 'Taxpayer Identification Number\r\n', '2023-07-20'),
+(3, 'barangay certificate', '1', 'Taxpayer Identification Number', '2023-07-20'),
 (4, 'oath certificate', '1', 'POST OFFICE VALID ID', '2023-09-18');
 
 -- --------------------------------------------------------
@@ -178,14 +178,15 @@ CREATE TABLE `equipment_settings` (
 --
 
 INSERT INTO `equipment_settings` (`equipment_id`, `equipment_name`, `total_equipment`, `availability`) VALUES
-(1, 'plastic chair', 0, '0'),
+(1, 'plastic chair', 1, '0'),
 (2, 'plastic table', 5, '0'),
 (3, 'router', 0, '1'),
 (4, 'Jack Hammer', 23, '1'),
 (5, 'NMAX', 100, '1'),
 (6, 'NMAX', 100, '1'),
 (7, 'VESPA JB limited edition', 23, '1'),
-(8, 'Truck', 0, '1');
+(8, 'Truck', 0, '1'),
+(9, 'Karaoke', 10, '1');
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,7 @@ CREATE TABLE `health_info` (
 --
 
 INSERT INTO `health_info` (`id`, `firstname`, `middlename`, `lastname`, `age`, `VAX1`, `VAX2`, `VAX3`, `VAX4`, `test2`) VALUES
-(3, 'Lebron', 'King', 'James', 33, '02/20/2023', '', '', '', NULL),
+(3, 'Lebron', 'King', 'James', 33, '02/20/2023', '', '', '', ''),
 (4, 'healtthier', 'healtthier2', 'healtthier3', 24, 'test22', 'tes22', 'test3t', 'test45', 'testest');
 
 -- --------------------------------------------------------
@@ -239,7 +240,7 @@ CREATE TABLE `home_setting` (
 --
 
 INSERT INTO `home_setting` (`id`, `announcement_text`, `mission_text`, `vision_text`, `slide1`, `slide2`, `slide3`, `slide4`, `contact`, `facebook`, `messenger`) VALUES
-(1, 'qweqweqwe', 'qweqwewq', 'test', '', '', '', '', '099999', 'https://www.facebook.com/Barangay95/', 'loqhwje;oqje;qwjeq');
+(1, 'We have a Feeding Program this upcoming Sunday, November 12. \r\nLet\'s come together to nourish our community. \r\nVolunteers and donations welcome!', '\"Our mission is to provide a safe, inclusive, and empowered community where residents can thrive. We are committed to delivering efficient and responsive public services, fostering unity among our residents, and promoting sustainable development for the b', 'Our vision is to become a model Barangay known for its harmonious and resilient community. We aspire to create an environment where every resident enjoys a high quality of life, has access to essential services, and actively participates in the decision-m', '370827994_677871561041615_6287721289644807065_n.jpg', '370827994_677871561041615_6287721289644807065_n.jpg', 'cityhall2022-05-0823-02-37_2022-07-15_23-10-24.jpg', 'officials_photo.jpg', '8-294-47-66', 'https://www.facebook.com/Barangay95/', 'm.me/Barangay95/');
 
 -- --------------------------------------------------------
 
@@ -432,35 +433,26 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `sex`, `role`, `position`, `senior`, `four_ps`, `pwd`, `solo_parent`, `scholar`, `id_selfie`, `valid_id`, `status`) VALUES
-(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '0', 'kapitan', 'Doe', 'John', 'test244', '1986-06-17', 37, 'male', 'captain', 'captain', NULL, NULL, NULL, NULL, NULL, '20070322_041721_shooter300.webp', '8.png', 'activated'),
-(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '1231231312', 'kagawad1', 'test1', 'test1', NULL, '1988-02-14', 35, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
-(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '4444444444', 'kagawad2', 'test2', 'test2', NULL, '1990-01-19', 33, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
-(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '2123124114', 'kagawad3', 'kagawad3', 'kagawad3', NULL, '1982-12-25', 40, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
-(5, 'resident1', 'pass123', 'TSTUASDAAS@mail.com', '2232323223', 'resident1', 'resident1', 'resident1', '3022 Masayahin Street2', NULL, 0, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '94871234_252475826139607_9092101356499501056_n.jpg', '8.png', 'activated'),
+(1, 'kapitantest', 'pass123', 'kapitantest@mail.com', '+639423453453', 'Ronnie', 'M.', 'Lee', 'Tondo', '1986-06-17', 37, 'male', 'captain', 'captain', NULL, NULL, NULL, NULL, NULL, 'Ronald_M._Lee.png', '8.png', 'activated'),
+(2, 'kagawad1', 'pass123', 'kagawad1@mail.com', '+639786734345', 'Arman Christofer', '', 'Buzeta', 'Tondo', '1988-02-14', 35, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'Arman Christofer Buzeta.png', '8.png', 'activated'),
+(3, 'kagawad2', 'pass123', 'kagawad2@mail.com', '+639786453434', 'Reynaldo', '', 'Reyes', 'Tondo', '1990-01-19', 33, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'Reynaldo_Reyes.png', '8.png', 'activated'),
+(4, 'kagawad3', 'pass123', 'kagawad3@mail.com', '+639543453453', 'Edgardo', '', 'Feliciano', 'Tondo', '1982-12-25', 40, 'male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'Edgardo_Feliciano.png', '8.png', 'activated'),
+(5, 'resident1', 'pass123', 'TSTUASDAAS@mail.com', '+639266577725', 'resident1', 'resident1', 'resident1', '3022 Masayahin Street2', NULL, 0, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Picture1.jpg', '8.png', 'activated'),
 (6, 'resident2', 'pass123', 'resident2@mail.com', '0000000000', 'resident2', 'resident2', 'resident2', NULL, '1997-01-25', 26, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, '8.png', '8.png', 'activated'),
-(7, 'resident3', '123456789', 'hannahchua013@gmail.com', '1', 'RResident', 'Resident', 'Resident', NULL, '2023-11-11', -1, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivated'),
-(8, 'resident4', 'pass123456', 'hannahchua11@gmail.com', '9412611555', 'Resident', 'Resident', 'Resident', NULL, '1997-11-11', 25, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(9, 'resident5', 'pass12345678', 'hannahchua12@gmail.com', '9412611558', 'Resident', 'Resident', 'Resident', 'Manila', '1997-11-11', 25, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(10, 'resident6', 'pass123456', 'hannahchua03@gmail.com', '9064376528', 'Hannah', 'Tan', 'Chua', NULL, '2002-12-31', 20, 'others', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(11, 'resident7', 'asdasdqwrqwrqwr', 'hannahchua014@gmail.com', '9064376533', 'Hannah', 'Tan', 'Chua', NULL, '1111-11-11', 912, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(12, 'user123456', 'useruser', 'hannahchua016@gmail.com', '9064376555', 'Hannah', '', 'Chua', NULL, '1111-11-11', 912, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(13, 'user1234567', 'asdasdasdasd', 'hannahchua088@gmail.com', '9064376588', 'Hannah', 'Test', 'Chua', NULL, '2002-11-11', 20, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(14, 'tao1tao1', 'tao1tao1', 'hannahchua0444@gmail.com', '9064376544', 'Hannah', '', 'Chua', 'test', '2003-11-11', 19, 'others', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(17, 'resident111', 'pass123456', 'hannahchua013@gmail.com1111', '9064376521', 'Hannah', '', 'Chua', 'testing', '1993-11-11', 29, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(18, 'residentevil', 'evil1234', 'hannahchua013@gmail.com123', '9064376583', 'Hannah', '', 'Chua', NULL, '1993-11-11', 29, 'male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'activated'),
-(20, 'testtest', 'testtest', 'hannahchua013@gmail.com111', '9064376411', 'Hannah', '', 'Chua', NULL, '1997-11-11', 25, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'deactivate'),
-(22, 'user12345678', 'pass1234', 'hannahchua011113@gmail.com', '+639642411111', 'Hannah', '', 'Chua', '33 pasado talaga', '1997-12-01', 25, 'female', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'Barangay.png', 'Barangay.png', 'activated'),
-(23, 'useruser123', 'useruser123', 'hannahchua0134444@gmail.com', '+639064372222', 'Hannah', '', 'Chua', 'pass me sensei', '1992-11-13', 30, 'Male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'curl_request.png', 'curl_request.png', 'deactivate'),
-(24, 'resident678', 'pass123456', 'hannahchu11a013@gmail.com', '+639064376576', 'Hannah', '', 'Chua', 'pass me sensei', '2020-01-11', 3, 'Male', 'residence', NULL, NULL, NULL, NULL, NULL, NULL, 'curl_request.png', 'curl_request.png', 'deactivate'),
 (26, 'devtest1', 'pass1234', 'devtest1@mail.com', '+639234567890', 'devtest1', 'asddas', 'asdasdad', 'pass me sensei', '1960-02-14', 63, 'Female', 'residence', NULL, 0, 1, 0, 1, 0, '8.png', '8.png', 'activated'),
-(27, 'devtest2', 'pass1234', 'devtest2@mail.com', '+639999999292', 'devtest2', 'dasdas', 'qwe', '33 pasado talaga', '1950-01-01', 73, 'Male', 'residence', NULL, 1, 1, 1, 1, 0, '8.png', '8.png', 'deactivate'),
-(28, 'kersey123', 'pass1234', 'kersey@mail.com', '+639123456789', 'kersey', 'kersey', 'kersey', 'Barangay hall', '1988-12-22', 34, 'Male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'images.jpg', 'images.jpg', 'activated'),
-(29, 'sexytary', 'pass1234', 'sexytary@mail.com', '+639234562782', 'sexytary', 'sexytary', 'sexytary', 'kapitabahay ni chairman', '1994-04-01', 29, 'Female', 'captain', 'secretary', 0, 0, 0, 1, 0, 'cheesecake.jpg', 'cheesecake.jpg', 'activated'),
-(30, 'portifued', 'pass1234', 'portifued@mail.com', '+639123123123', 'portifued', 'portifued', 'portifued', 'portifued2222', '2002-11-08', 21, 'Female', 'captain', 'treasurer', 0, 0, 0, 0, 1, 'images.jpg', 'images.jpg', 'activated'),
-(31, 'ERROR191', 'pass1234', 'ERROR191@mail.com', '+639902390290', 'ERROR191', 'ERROR191', 'ERROR191', 'ERROR191', '2000-02-18', 23, 'Male', 'captain', 'skcouncilor', 0, 0, 0, 0, 0, 'images.jpg', 'images.jpg', 'activated'),
-(32, 'treasurertest', 'pass1234', 'treasurertest@mail.com', '+639123123123', 'treasurertest', 'treasurertest', 'treasurertest', 'adsada55', '2004-01-03', 19, 'Female', 'kagawad', 'sktreasurer', 0, 0, 0, 0, 1, 'images.jpg', '8.png', 'activated'),
-(33, 'sktary', 'pass12345', 'sktary@mail.com', '+639873173131', 'sktary', 'sktary', 'sktary', 'qeqweqwewqeqw', '1999-02-14', 24, 'Female', 'kagawad', 'sksecretary', 0, 0, 0, 1, 0, 'bb.png', 'bb.png', 'activated'),
-(34, 'kersey', 'pass1234', 'kersey@mail.com', '+639123123123', 'kersey', 'kersey', 'kersey', 'barangay hallers', '1996-03-14', 27, 'Male', 'kagawad', 'skchairman', 0, 0, 0, 0, 1, '8.png', '8.png', 'activated');
+(28, 'kagawad7', 'pass1234', 'kagawad7@mail.com', '+639123456789', 'Ernesto ', '', 'De Castro', 'Tondo', '1988-12-22', 34, 'Male', 'kagawad', 'councilor', NULL, NULL, NULL, NULL, NULL, 'manager.png', 'images.jpg', 'activated'),
+(29, 'secretary', 'pass1234', 'sexytary@mail.com', '+639234562782', 'Eljun', '', 'Sayo', 'Tondo', '1994-04-01', 29, 'Female', 'captain', 'secretary', 0, 0, 0, 1, 0, 'Eljun_Sayo.png', 'cheesecake.jpg', 'activated'),
+(30, 'treasurer', 'pass1234', 'treasurer@gmail.com', '+639123123123', 'Antonio', NULL, 'Garra', 'Tondo', '2002-11-08', 21, 'Female', 'captain', 'treasurer', 0, 0, 0, 0, 1, 'manager.png', 'images.jpg', 'activated'),
+(31, 'skcouncilor', 'pass1234', 'skcouncilor@mail.com', '+639902390290', ' Jhezelle Nicole', '', 'Ignacio', 'Tondo', '2000-02-18', 23, 'Male', 'captain', 'skcouncilor', 0, 0, 0, 0, 0, 'businesswoman.png', 'images.jpg', 'activated'),
+(32, 'treasurertest', 'pass1234', 'treasurertest@mail.com', '+639123123123', 'Erlisa', '', 'Aducal', 'Tondo', '2004-01-03', 19, 'Female', 'kagawad', 'sktreasurer', 0, 0, 0, 0, 1, 'businesswoman.png', '8.png', 'activated'),
+(33, 'sktary', 'pass12345', 'sktary@mail.com', '+639873173131', ' Camille', '', 'Delos Reyes', 'test', '1999-02-03', 24, 'Female', 'kagawad', 'sksecretary', 0, 0, 0, 1, 0, 'businesswoman.png', 'bb.png', 'activated'),
+(34, 'skchairman', 'pass1234', 'skchairman@mail.com', '+639123123123', 'Jasmin', '', 'Corbito', 'Tondo', '1996-03-14', 27, 'Male', 'kagawad', 'skchairman', 0, 0, 0, 0, 1, 'Jasmine_Corbito.png', '8.png', 'activated'),
+(35, 'karina', 'pass1234', 'karina11@gmail.com', '+639543453453', 'Karina', 'Lopez', 'Santos', '50 Masaya St.', '1975-04-02', 48, 'Female', 'residence', NULL, 0, 1, 0, 0, 0, 'Picture1.png', 'Picture1.png', 'activated'),
+(36, 'kagawad4', 'passs1234', 'kagawad4@gmail.com', '+639345343453', 'Estela', '', 'Flores', 'Tondo', '1988-04-06', 35, 'Female', 'kagawad', 'councilor', 0, 0, 0, 0, 0, 'Estela_Flores.png', 'Estela_Flores.png', 'activated'),
+(37, 'kagawad5', 'pass1234', 'kagawad5@gmail.com', '+639434345345', 'Luisito', '', 'Agustin', 'Tondo', '1998-07-09', 25, 'Male', 'kagawad', 'councilor', 0, 0, 0, 0, 0, 'manager.png', 'manager.png', 'activated'),
+(38, 'kagawad6', 'pass1234', 'kagawad6@gmail.com', '+639783453453', 'Ernesto ', '', 'De Castro', 'Tondo', '1970-03-11', 53, 'Male', 'kagawad', 'councilor', 0, 0, 0, 0, 0, 'manager.png', 'manager.png', 'activated'),
+(39, 'exoday', 'pass1234', 'exoday@gmail.com', '+639784534345', 'Luisito', '', 'Agustin', 'Tondo', '2000-09-13', 23, 'Male', 'kagawad', 'exo1', 0, 0, 0, 1, 0, 'manager.png', 'manager.png', 'activated'),
+(40, 'exonight', 'pass1234', 'exonight@gmail.com', '+639354345343', 'Ricardo ', '', 'Alicante', 'Tondo', '1988-04-14', 35, 'Male', 'kagawad', 'exo2', 0, 0, 1, 0, 0, 'manager.png', 'manager.png', 'activated');
 
 -- --------------------------------------------------------
 
@@ -493,8 +485,8 @@ CREATE TABLE `users_masterlist` (
 --
 
 INSERT INTO `users_masterlist` (`id`, `email`, `mobile`, `firstname`, `middlename`, `lastname`, `address`, `birthdate`, `age`, `gender`, `role`, `position`, `senior`, `pwd`, `four_ps`, `solo_parent`, `scholar`) VALUES
-(1, 'test@mail.com', '+639712312312', 'test', 'test', 'test', 'testtqweqwe', '1960-08-02', 63, 'Male', NULL, 'residence', 1, 1, 0, 1, 0),
-(2, 'sheeesh@mail.com', '+639000000200', 'tesatqweq', 'sheeesh', 'sheeesh', 'tqewqweqwe', '2000-10-20', 23, 'Female', NULL, 'residence', 0, 0, 1, 0, 1),
+(1, 'test@mail.com', '+639712312312', 'test', 'test', 'test', '10 Ligaya St.', '1960-08-02', 63, 'Male', NULL, 'residence', 1, 1, 0, 1, 0),
+(2, 'sheeesh@mail.com', '+639000000200', 'tesatqweq', 'sheeesh', 'sheeesh', 'tqewqweqwe', '2000-10-20', 23, 'Female', NULL, 'residence', 1, 0, 1, 0, 1),
 (3, 'dito@ditolang.com', '+639123456789', 'Lebron', 'King', 'James', 'purokpurok2', '1990-11-01', 33, 'Male', NULL, 'residence', 0, 1, 0, 1, 1);
 
 --
@@ -611,7 +603,7 @@ ALTER TABLE `equipment_requests`
 -- AUTO_INCREMENT for table `equipment_settings`
 --
 ALTER TABLE `equipment_settings`
-  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `equipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `health_info`
@@ -653,7 +645,7 @@ ALTER TABLE `time_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users_masterlist`
