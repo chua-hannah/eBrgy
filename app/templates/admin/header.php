@@ -20,6 +20,9 @@ $messages = $homeController->getAllMessages();
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    
 
   <title>Barangay 95</title>
   <meta content="" name="description">
@@ -165,7 +168,7 @@ $messages = $homeController->getAllMessages();
                 <?php } ?>
                 <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'non-user' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo $baseUrl; ?>/non-user">
-                        <i class="bi bi-list-ul"></i> Non-user Residence
+                        <i class="bi bi-person"></i> Non-user Residence
                     </a>
                 </li>
                 <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'masterlist' ? 'active' : ''; ?>">

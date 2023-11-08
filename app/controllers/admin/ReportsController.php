@@ -687,6 +687,36 @@ class ReportsController {
     }
     
     
+    function getMasterList() {
+        // Initialize an array to store the results
+        $results = array();
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+    
+        // Query to select all users from the "users" table where status is 'activated'
+        $queryUsers = "SELECT * FROM users WHERE status = 'activated'";
+        $resultUsers = $this->connection->query($queryUsers);
+    
+        if ($resultUsers->num_rows > 0) {
+            // Fetch data from the "users" table
+            while ($row = $resultUsers->fetch_assoc()) {
+                $results['users'][] = $row;
+            }
+        }
+    
+        // Query to select all users from the "users_masterlist" table
+        $queryMasterlist = "SELECT * FROM users_masterlist";
+        $resultMasterlist = $this->connection->query($queryMasterlist);
+    
+        if ($resultMasterlist->num_rows > 0) {
+            // Fetch data from the "users_masterlist" table
+            while ($row = $resultMasterlist->fetch_assoc()) {
+                $results['masterlist'][] = $row;
+            }
+        }
+        return $results;
+    }
     
     
     

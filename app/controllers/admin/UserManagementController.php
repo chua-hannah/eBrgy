@@ -207,6 +207,7 @@ class UserManagementController {
                                 $query = "INSERT INTO users (username, password, email, mobile, position, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar) VALUES ('$username', '$password', '$email', '$mobile', '$position', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
     
                                 if ($this->connection->query($query) === true) {
+                                    $newUserId = $this->connection->insert_id;
                                       // Now, insert data into the health_info table
                                     $query = "INSERT INTO health_info (id, firstname, middlename, lastname, age)
                                     VALUES ('$newUserId', '$firstname', '$middlename', '$lastname', '$age')";

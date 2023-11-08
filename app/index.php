@@ -676,11 +676,17 @@ switch ($filename) {
                                 include 'templates/admin/reports/users_master_list.php';
                             });
                             break;
-                        case 'masterlist-edit-user':
+                        case 'edit-non-user':
                             includeAdminContent(function() use ($reportsController) {
                                 $userDatas = $reportsController->getUserInMasterList();
                                 $reportsController->updateUserInMasterList();
                                 include 'templates/admin/reports/edit_user_master_list.php';
+                            });
+                            break;
+                        case 'masterlist':
+                            includeAdminContent(function() use ($reportsController) {
+                                $mastersDatas = $reportsController->getMasterList();
+                                include 'templates/admin/reports/real_master_list.php';
                             });
                             break;
                         case 'health-information':

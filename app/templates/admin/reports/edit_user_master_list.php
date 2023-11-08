@@ -1,11 +1,11 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="masterlist">Resident Masterlist</a></li>
+        <li class="breadcrumb-item"><a href="masterlist">Non-User</a></li>
         <li class="breadcrumb-item active" aria-current="page"><?php foreach ($userDatas as $userData): echo  $userData['firstname']; endforeach;?> Info</li>
     </ol>
 </nav>
 <div class="container-fluid">
-<h3>User Master List</h3>
+<h3>Update Non-User Information</h3>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -60,7 +60,7 @@
                                             </div>
                                             <input type="hidden" name="id" value="<?php echo $userData['id']; ?>">
                                             <div class="col-md-6 mb-3">
-                                                    <a href="masterlist" class="form-control cancel-button">Cancel</a>
+                                                    <a href="non-user" class="form-control cancel-button">Cancel</a>
                                             </div>  
                                             <div class="col-md-6 mb-3">
                                                 <button type="button" class="form-control" id="editButton">Edit</button>                                            
