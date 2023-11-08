@@ -1,21 +1,26 @@
 
 <main>
 <?php
-$announcementText = ''; // Initialize the announcement text variable
+$announcements = []; // Initialize an array to store multiple announcements
 
 foreach ($homeSettings as $setting) {
     $announcementText = $setting['announcement_text'];
-    // Assuming $setting['announcement_text'] contains the announcement text
     if (!empty($announcementText)) {
-        break; // Stop the loop when a non-empty announcement text is found
+        $announcements[] = $announcementText; // Add non-empty announcements to the array
     }
 }
 ?>
 
-<?php if (!empty($announcementText)): ?>
+<?php if (!empty($announcements)): ?>
     <div class="announcement">
         <p class="mb-0"><strong><i class="bi bi-megaphone-fill"></i> <!-- Megaphone icon -->Announcement:</strong>
-            <?php echo $announcementText; ?>
+            <?php foreach ($announcements as $key => $announcement): ?>
+                <?php
+                // Check if the announcement contains line breaks
+                $isMultiline = strpos($announcement, "\n") !== false;
+                ?>
+                <?php echo ($key > 0 ? '<br>' : '') . ($isMultiline ? nl2br($announcement) : $announcement); ?>
+            <?php endforeach; ?>
         </p>
     </div>
 <?php endif; ?>
