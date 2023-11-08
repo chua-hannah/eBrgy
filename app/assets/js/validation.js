@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // Remove is-invalid for Register page
 document.addEventListener("DOMContentLoaded", function() {
     const firstname = document.getElementById("firstname");
+    const middlename = document.getElementById("middlename");
     const lastname = document.getElementById("lastname");
     const mobile = document.getElementById("mobile");
     const sex = document.getElementById("sex");
@@ -168,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const dpa = document.getElementById("dpa");
     const chkbox = document.getElementById("data_privacy_agreement");
     const errorFirst = document.getElementById("error_first");
+    const errorMiddle = document.getElementById("error_middle");
     const errorLast = document.getElementById("error_last");
     const errorSex = document.getElementById("error_sex");
     const errorRole = document.getElementById("error_role");
@@ -188,6 +190,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else if (inputFirstname.length>0){
             firstname.classList.remove("is-invalid");
+        }
+    });
+    middlename.addEventListener("input", function() {
+        const inputMiddlename= middlename.value.trim();
+        errorMiddle.style.display = "none";
+        if (inputMiddlename === "") {
+            middlename.classList.remove("is-invalid");
+          
+        }
+        else if (inputMiddlename.length>0){
+            middlename.classList.remove("is-invalid");
         }
     });
     lastname.addEventListener("input", function() {

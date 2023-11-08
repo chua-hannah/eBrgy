@@ -27,9 +27,13 @@
                                     </div>
 
                                     <div class="col-lg-4 col-12">
-                                        <label class="labels">Middle Name (Optional)</label>
-                                        <input type="text" name="middlename" class="form-control" id="middlename" value="<?php if (!empty($_POST["middlename"])) { echo $_POST["middlename"]; } else { echo ''; };?>">
-                                        <div class="text-danger error-message" data-field="middlename" id="error_middle"><?= isset($errors["middlename"]) ? $errors["middlename"] : ''; ?></div>
+                                    <label class="labels">Middle Name (Optional)</label>
+                                        <input type="text" name="middlename" class="form-control
+                                        <?php echo isset($errors["middlename"]) ? 'is-invalid' : ''; ?>" 
+                                        id="middlename" value="<?php if (!empty($_POST["middlename"])) { echo $_POST["middlename"]; } else { echo ''; };?>">
+                                        <?php if (isset($errors["middlename"])) : ?>
+                                            <div class="text-danger" id="error_middle"><?= $errors["middlename"] ?></div>
+                                        <?php endif; ?>
                                     </div>
 
                                     <div class="col-lg-4 col-12">
@@ -121,7 +125,7 @@
                                 </div>
                                 <div class="row g-2 mt-2">
                                     <div class="col-md-6 col-12">
-                                        <button type="cancel" class="btn btn-secondary form-control mb-0" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="" class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <button type="submit" name="add_to_user_masterlist" id="registerButton" class="btn btn-primary form-control mb-0">Register</button>
@@ -303,6 +307,7 @@ document.getElementById("printTableButton").addEventListener("click", function()
         if (!firstname) {
             errors["firstname"] = "Enter First Name";
         }
+
 
         // Last Name
         const lastname = document.getElementById("lastname").value;

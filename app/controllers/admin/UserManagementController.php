@@ -65,6 +65,7 @@ class UserManagementController {
             $minPasswordLength = 8;
             $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zAZ0-9.-]+.[a-zA-Z]{2,4}$/";
             $mobilePattern = "/^9d{9}$/";
+            $namePattern = '/^[A-Za-z\s\'.-]+$/';
             $four_ps = isset($_POST['membership_4ps']) ? 1 : 0;
             $pwd = isset($_POST['membership_pwd']) ? 1 : 0;
             $solo_parent = isset($_POST['membership_solo_parent']) ? 1 : 0;
@@ -111,6 +112,18 @@ class UserManagementController {
             }
             if (empty($role)) {
                 $errors["role"] = "Select System role";
+            }
+            // Validate first name and last name
+            if (!preg_match($namePattern, $firstname)) {
+                $errors["firstname"] = "Please enter a valid first name using letters, spaces, dots, hyphens, and single quotes.";
+            }
+            if(!empty($middlename)) {
+                if (!preg_match($namePattern, $middlename)) {
+                    $errors["middlename"] = "Please enter a valid middle name using letters, spaces, dots, hyphens, and single quotes.";
+                }
+            }
+            if (!preg_match($namePattern, $lastname)) {
+                $errors["lastname"] = "Please enter a last name using letters, spaces, dots, hyphens, and single quotes.";
             }
             if (!(isset($_POST["data_privacy_agreement"]))) {
                 // The checkbox was checked

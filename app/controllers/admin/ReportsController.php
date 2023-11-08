@@ -275,6 +275,7 @@ class ReportsController {
                 $address = $_POST['address'];
                 $mobilePattern = "/^9\d{9}$/";
                 $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
+                $namePattern = '/^[A-Za-z\s\'.-]+$/';
                 if (isset($_POST['sex'])) {
                     $sex = $_POST['sex'];
                 } else {
@@ -303,6 +304,18 @@ class ReportsController {
                 }
                 if (empty($address)) {
                     $errors["address"] = "Enter Address";
+                }
+                // Validate first name and last name
+                if (!preg_match($namePattern, $firstname)) {
+                    $errors["firstname"] = "Please enter a valid first name using letters, spaces, dots, hyphens, and single quotes.";
+                }
+                if(!empty($middlename)) {
+                    if (!preg_match($namePattern, $middlename)) {
+                        $errors["middlename"] = "Please enter a valid middle name using letters, spaces, dots, hyphens, and single quotes.";
+                    }
+                }
+                if (!preg_match($namePattern, $lastname)) {
+                    $errors["lastname"] = "Please enter a last name using letters, spaces, dots, hyphens, and single quotes.";
                 }
         
                 if (empty($errors)) {

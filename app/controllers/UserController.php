@@ -106,6 +106,7 @@ class UserController {
         $minPasswordLength = 8;
         $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
         $mobilePattern = "/^9\d{9}$/";
+        $namePattern = '/^[A-Za-z\s\'.-]+$/';
         // Handle undefined array error for sex
         if (isset($_POST['sex'])) {
             $sex = $_POST['sex'];
@@ -160,7 +161,19 @@ class UserController {
             // The checkbox was checked
             $errors["terms"] = "In order to proceed, I must agree to the data privacy consent.";
         }
-
+        //Validate first name and last name
+        if (!preg_match($namePattern, $firstname)) {
+            $errors["firstname"] = "Please enter a valid first name using letters, spaces, dots, hyphens, and single quotes.";
+        }
+        if(!empty($middlename)) {
+            if (!preg_match($namePattern, $middlename)) {
+                $errors["middlename"] = "Please enter a valid middle name using letters, spaces, dots, hyphens, and single quotes.";
+            }
+        }
+        if (!preg_match($namePattern, $lastname)) {
+            $errors["lastname"] = "Please enter a last name using letters, spaces, dots, hyphens, and single quotes.";
+        }
+        
         // Validate username length
         if (!(empty($username)) && strlen($username) < $minUsernameLength) {
             $errors["username"] = "Username must be at least {$minUsernameLength} characters long.";

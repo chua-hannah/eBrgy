@@ -53,7 +53,10 @@
 
             <div class="col-lg-4 col-12">
                 <label class="labels">Middle Name (Optional)</label>
-                <input type="text" name="middlename" class="form-control" id="middlename" value="<?php if (!empty($_POST["middlename"])) { echo $_POST["middlename"]; } else { echo ''; };?>">
+                <input type="text" name="middlename" class="form-control <?= isset($errors["middlename"]) ? 'is-invalid' : ''; ?>" id="middlename" value="<?= !empty($_POST["middlename"]) ? $_POST["middlename"] : ''; ?>" required>
+            <?php if (isset($errors["middlename"])) : ?>
+            <div class="text-danger" id="error_middle"><?= $errors["middlename"] ?></div>
+            <?php endif; ?>
             </div>
             <div class="col-lg-4 col-12">
                 <label class="labels">Last Name</label>
