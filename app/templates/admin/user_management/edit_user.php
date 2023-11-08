@@ -54,20 +54,34 @@ if ($userId) {
                 <span class="<?php echo $colorClass; ?>"><?php echo strtoupper($status); ?></strong></soan>
             </div>
             <div class="col-md-4 text-end">
-                <div class="mb-3">
+                <div class="mb-3" style="display: flex;">
                     <!-- Activation/Deactivation form -->
-                    <?php echo $userData['status'] === 'activated' ? '<div><form method="post" action="">
-                        <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
-                        <button name="deactivate_user" type="submit" class="btn btn-danger btn-md">
-                            Deactivate
-                        </button>
-                    </form></div>' : '<form method="post" action="">
-                        <input type="hidden" name="user_id" value="' . $userData['user_id'] . '">
-                        <button name="activate_user" type="submit" class="btn btn-success btn-md">
-                            Activate user
-                        </button>
-                    </form>';
+                    <?php echo $userData['status'] === 'activated' ? 
+                    '<div>
+                       <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#registrationModal" style="background: grey;">
+                       Deactivate user
+                       </button>
+                    </div>' : 
+                    '<div><button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#activateModal">
+                        Activate user
+                    </button></div>';
                     ?>
+                    <form method="post" action="">
+                    <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
+                    <div style="display: flex;">
+                        <div>
+                        <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background: red;">
+                            Delete user
+                        </button>
+                        </div>
+                        <?php echo $userData['position'] != NULL ? 
+                            '<div><button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#removeOfficial" style="background: black;">
+                            Remove Official
+                        </button></div>
+                       ' : '';
+                        ?>
+                    </div>
+                    </form>
                 </div>
             </div>
             <div class="col-md-12 mb-3">
@@ -200,20 +214,7 @@ if ($userId) {
         </div>
     </div>
 </div>
-<div class="mb-4"></div>
-<div class="row">
-    <div class="col-md-10"></div>
-    <div class="col-md-2 text-end">
-        <div class="mb-3">
-            <form method="post" action="">
-                <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
-                <button name="delete_user" type="submit" class="btn btn-danger btn-md">
-                    Delete this user
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
+
     <?php
     } else {
         // Handle the case when the user with the provided userId is not found
@@ -224,6 +225,137 @@ if ($userId) {
     echo "User ID not provided!";
 }
 ?>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registrationModalLabel">Are you to Deactivate this user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-lg-12 col-12">
+                                <div class="row g-2 mt-2">
+                                    <div class="col-md-6 col-12">
+                                        <button class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                    <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
+                                    <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
+                                    <button name="deactivate_user" type="submit" class="form-control custom-button" style="background: grey;">
+                                        Confirm
+                                    </button>
+                                    </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="activateModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activateModal">Are you to Activate user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-lg-12 col-12">
+                                <div class="row g-2 mt-2">
+                                    <div class="col-md-6 col-12">
+                                        <button class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
+                                            <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
+                                                <button name="activate_user" type="submit" class="form-control custom-button" style="background: green;">
+                                                    Confirm
+                                                </button>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activateModal">Are you to delete user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-lg-12 col-12">
+                                <div class="row g-2 mt-2">
+                                    <div class="col-md-6 col-12">
+                                        <button class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
+                                            <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
+                                            <button name="delete_user" type="submit" class="form-control custom-button" style="background: red;">
+                                                Delete  user
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="removeOfficial" tabindex="-1" aria-labelledby="removeOfficial" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activateModal">Are you to remove <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?> as official?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-lg-12 col-12">
+                                <div class="row g-2 mt-2">
+                                    <div class="col-md-6 col-12">
+                                        <button class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
+                                            <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
+                                            <button name="remove_official" type="submit"  class="form-control custom-button" style="background: black;">
+                                            Remove as Official
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!--Additional div for sidebar-->
     </div>
     </div>

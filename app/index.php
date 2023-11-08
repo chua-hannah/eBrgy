@@ -136,6 +136,12 @@ switch ($filename) {
                                 include 'templates/admin/attendance/attendance.php';
                             });
                             break;
+                        case 'messages':
+                            includeAdminContent(function() use ($homeController) {
+                                $messages = $homeController->getAllMessages();
+                                include 'templates/admin/messages.php';
+                            });
+                            break;
                         case 'user-management':
                             includeAdminContent(function () use ($userManagementController) {
                                 $userManagementController->index();
@@ -351,7 +357,6 @@ switch ($filename) {
                             includeHeaderFooter(function() use ($homeController, $filename) {
                                 $homeController->$filename();
                             });
-                            $homeSettings = $homeController->getHomeSettings();
                             break;
                         case 'profile':
                             includeHeaderFooter(function() use ($profileController, $filename) {
@@ -514,6 +519,12 @@ switch ($filename) {
                                 include 'templates/admin/attendance/attendance.php';
                             });
                             break;
+                        case 'messages':
+                            includeAdminContent(function() use ($homeController) {
+                                $messages = $homeController->getAllMessages();
+                                include 'templates/admin/messages.php';
+                            });
+                            break;
                         case 'user-management':
                             includeAdminContent(function () use ($userManagementController) {
                                 $userManagementController->index();
@@ -532,6 +543,7 @@ switch ($filename) {
                                 $userManagementController->activate_user($userId);
                                 $userManagementController->deactivate_user($userId);
                                 $userManagementController->delete_user($userId);
+                                $userManagementController->downgradeOfficial();
                             });
                             break;
                         case 'requests':

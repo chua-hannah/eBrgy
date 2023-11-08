@@ -1,3 +1,10 @@
+<?php
+require_once 'controllers/HomeController.php';
+global $connection; // Access the $connection variable from the global scope
+$homeController = new HomeController($connection); // Create an instance of HomeController
+
+$messages = $homeController->getAllMessages();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +84,19 @@
                 echo '<li class="nav-item">';
                 echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'profile' ? 'active' : ''; echo '"href="'.$baseUrl.'/profile">'.$username.'</a>';
                 echo '</li>';
+              // Replace 'notification_count' with the actual count you want to display
+                $notification_count = $messages['total_count']; // You can fetch this count from your application
+
+                echo '<li class="nav-item">';
+                echo '<a class="nav-link ' . (basename($_SERVER['REQUEST_URI']) == 'messages' ? 'active' : '') . '" href="messages">';
+                echo ' Messages';
+                if ($notification_count > 0) {
+                    echo ' <span class="badge badge-danger">' . $notification_count . '</span>';
+                }
+                echo '</a>';
+                echo '</li>';
+
+                
                 echo '<li class="nav-item">';
                 echo '<a class="nav-link" href="logout.php">Logout</a>';
                 echo '</li>';

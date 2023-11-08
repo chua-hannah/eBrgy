@@ -44,21 +44,29 @@
                         <a href="mailto:someone@example.com">dummy@only.ph</a>
                     </p>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required>
-                        </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required
+                            <?php if(isset($_SESSION['firstname'])) echo 'hidden readonly value="' . $_SESSION['firstname'] . '"'; ?>>
+                    </div>
 
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required>
-                        </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required
+                            <?php if(isset($_SESSION['lastname'])) echo 'hidden readonly value="' . $_SESSION['lastname'] . '"'; ?>>
+                    </div>
 
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required>
-                        </div>
+                    <div class="col-lg-6 col-md-6 col-12" <?php if(isset($_SESSION['email'])) echo 'style="display: none;"'; ?>>
+                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required
+                            <?php if(isset($_SESSION['email'])) echo 'hidden readonly value="' . $_SESSION['email'] . '"'; ?>>
+                    </div>
 
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <input type="text" name="mobile" id="mobileNumber" class="form-control" placeholder="Mobile Number" oninput="validateNumericInput(this)" maxlength="11">
-                        </div>
+                    <div class="col-lg-6 col-md-6 col-12" <?php if(isset($_SESSION['mobile'])) echo 'style="display: none;"'; ?>>
+                        <input type="text" name="mobile" id="mobileNumber" class="form-control" placeholder="Mobile Number" oninput="validateNumericInput(this)" maxlength="11" required
+                            <?php if(isset($_SESSION['mobile'])) echo 'hidden readonly value="' . $_SESSION['mobile'] . '"'; ?>>
+                    </div>
+
+
+
+
                     </div>
                     <textarea name="contact_message" rows="5" class="form-control mb-4" id="contact_message"
                         placeholder="What can we help you?" required></textarea>

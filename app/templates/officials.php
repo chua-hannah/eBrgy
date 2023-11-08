@@ -31,7 +31,7 @@
                             <h6 class="card-title mt-2 mb-0" style="color: #0037ab">
                                 <?php echo strtoupper($official['firstname'] . ' ' . $official['middlename'] . ' ' . $official['lastname']); ?>
                             </h6>
-                            <strong><?php echo strtoupper($official['position']); ?></strong>
+                            <strong><?php echo strtoupper($official['position'] == 'captain' ? 'Chairman' : $official['position']); ?></strong>
                             <?php
                                 break;
                             endif;
@@ -117,7 +117,24 @@
                             <h6 class="card-title mt-2 mb-0" style="color: #0037ab">
                                 <?php echo strtoupper($official['firstname'] . ' ' . $official['middlename'] . ' ' . $official['lastname']); ?>
                             </h6>
-                            <strong><?php echo strtoupper($official['position']); ?></strong>
+                            <strong><?php
+                            switch ($official['position']) {
+                                case 'skchairman':
+                                    echo 'SK Chairman';
+                                    break;
+                                case 'skcouncilor':
+                                    echo 'SK Councilor';
+                                    break;
+                                case 'sksecretary':
+                                    echo 'SK Secretary';
+                                    break;
+                                case 'sktreasurer':
+                                    echo 'SK Treasurer';
+                                    break;
+                                default:
+                                    echo '';
+                            }
+                            ?></strong>
                             <?php
                                 break;
                             endif;

@@ -348,6 +348,36 @@ class UserManagementController {
                 $stmt->close();
             }
         }
+
+        function downgradeOfficial() {
+
+            $activationMessage = '';
+
+            if (isset($_POST['remove_official'])) {
+                // Retrieve the user ID from the form
+                $user_id = $_POST['user_id'];
+            
+                // Use prepared statements to prevent SQL injection
+                $stmt = $this->connection->prepare("UPDATE users SET role = 'residence', position = NULL WHERE user_id = ?");
+                $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+            
+                if ($stmt->execute()) {
+                    // Activation successful
+                    header("Location: /eBrgy/app/user-management");
+                    $_SESSION['success'] = "Official Remove successfully.";
+                    exit();
+
+                } else {
+                    // Activation failed
+                    $_SESSION['error'] = "Error updating user status: " . $stmt->error;
+                }
+            
+                // Close the prepared statement
+                $stmt->close();
+            }
+            return $activationMessage;
+
+        }
  
 }
   

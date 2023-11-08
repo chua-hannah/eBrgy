@@ -42,7 +42,16 @@ $users = UserManagementController::user_management();
                         </td>
                         <td><?= $user['lastname']; ?></td>
                         <td><?= $user['age']; ?></td>
-                        <td><?= $user['sex']; ?></td>
+                        <td> <?php
+                        if ($user['sex']==="Male") {
+                            echo 'M';
+                        } elseif ($user['sex']==="Female") {
+                            echo 'F';
+                        }else {
+                            echo 'O';
+                        }
+                        ?>
+                        </td>
                         <td><?= $user['address']; ?></td>
                         <td>  
                         <?php

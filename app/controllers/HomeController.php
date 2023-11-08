@@ -656,6 +656,36 @@ public function isRequestedQuantityValid($equipment_id, $requestedQuantity) {
             return false;
         }
     }
+
+    public function getAllMessages() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+        
+        // Query to get all messages
+        $messagesQuery = "SELECT * FROM messages";
+        $messagesResult = $this->connection->query($messagesQuery);
+        
+        // Query to get the total count of messages
+        $countQuery = "SELECT COUNT(*) AS total_count FROM messages";
+        $countResult = $this->connection->query($countQuery);
+        
+        if ($messagesResult && $countResult) {
+            $messages = array();
+            while ($row = $messagesResult->fetch_assoc()) {
+                $messages[] = $row;
+            }
+            
+            // Fetch the total count
+            $totalCount = $countResult->fetch_assoc()['total_count'];
+            
+            return array('messages' => $messages, 'total_count' => $totalCount);
+        } else {
+            // Query failed
+            return false;
+        }
+    }
+    
     
     
     
