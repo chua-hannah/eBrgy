@@ -28,7 +28,7 @@
             <label class="labels">Barangay Position</label>
             <select class="form-select <?php echo isset($errors["position"]) ? 'is-invalid' : ''; ?>" name="position" id="position" placeholder="Barangay Position">
                 <option value="" disabled selected>Select Barangay Position</option>
-                <option value="captain" <?= isset($_POST["position"]) && $_POST["position"] == "captain" ? 'selected' : ''; ?>>Barangay Chairman</option>
+                <option value="chairman" <?= isset($_POST["position"]) && $_POST["position"] == "captain" ? 'selected' : ''; ?>>Barangay Chairman</option>
                 <option value="councilor" <?= isset($_POST["position"]) && $_POST["position"] == "councilor" ? 'selected' : ''; ?>>Councilor</option>
                 <option value="secretary" <?= isset($_POST["position"]) && $_POST["position"] == "secretary" ? 'selected' : ''; ?>>Secretary</option>
                 <option value="treasurer" <?= isset($_POST["position"]) && $_POST["position"] == "treasurer" ? 'selected' : ''; ?>>Treasurer</option>
@@ -128,12 +128,16 @@
                         <!-- Add file upload fields -->
                         <div class="col-lg-6 col-12">
                             <div>
-                                <label for="valid_id">Upload Valid ID / Proof of Membership (if any)</label>
+                            <label for="valid_id">Upload Valid ID / Proof of Membership (if any)</label>
                                 <input type="file" name="valid_id" id="valid_id" class="form-control
                                 <?php echo isset($errors["valid_id"]) ? 'is-invalid' : ''; ?>" accept="image/*" onchange="removeIdErrorMsg(event)">
                                 <?php if (isset($errors["valid_id"])) : ?>
                                     <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
                                 <?php endif; ?>
+                                <div class="col-lg-12 col-12 mt-2">
+                                    <label for="id_preview" id="id_label" style="display: none;"><strong>Image Preview</strong></label>
+                                    <img id="id_preview" class="img-fluid mb-4" style="width: 250px; height: 280px; display: none;">
+                                </div>
                             </div>
                             <div>
                                 <label for="id_selfie">Upload Selfie w/ ID</label>
@@ -142,6 +146,10 @@
                                 <?php if (isset($errors["id_selfie"])) : ?>
                                     <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
                                 <?php endif; ?>
+                                <div class="col-lg-12 col-12 mt-2">
+                                    <label for="idSelfie_preview" id="idSelfie_label" style="display: none;"><strong>Image Preview</strong></label>
+                                    <img id="idSelfie_preview" class="img-fluid mb-4" style="width: 250px; height: 280px; display: none;">
+                                </div>
                             </div>
                         </div>
             <div class="col-lg-12 col-12">
@@ -237,3 +245,41 @@
 </div>
 </div>
 </div>
+<script>
+       const validIdInput = document.getElementById('valid_id');
+    const idSelfieInput = document.getElementById('id_selfie');
+    const idSelfiePreview = document.getElementById('idSelfie_preview');
+    const idSelfieLabel = document.getElementById('idSelfie_label');
+    const idPreview = document.getElementById('id_preview');
+    const idLabel = document.getElementById('id_label');
+
+
+    validIdInput.addEventListener('change', function () {
+    const selectedImage = validIdInput.files[0];
+    if (selectedImage) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            idPreview.src = e.target.result;
+            idPreview.style.display = 'block';
+            idLabel.style.display = 'block'; // Show the label
+        };
+
+        reader.readAsDataURL(selectedImage);
+    }
+    });
+    idSelfieInput.addEventListener('change', function () {
+    const selectedImage = idSelfieInput.files[0];
+    if (selectedImage) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            idSelfiePreview.src = e.target.result;
+            idSelfiePreview.style.display = 'block';
+            idSelfieLabel.style.display = 'block'; // Show the label
+        };
+
+        reader.readAsDataURL(selectedImage);
+    }
+});
+</script>

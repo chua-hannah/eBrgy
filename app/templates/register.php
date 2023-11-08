@@ -156,6 +156,10 @@
                                 <?php if (isset($errors["valid_id"])) : ?>
                                     <div class="text-danger" id="error_id"><?= $errors["valid_id"] ?></div>
                                 <?php endif; ?>
+                                <div class="col-lg-12 col-12 mt-2">
+                                    <label for="id_preview" id="id_label" style="display: none;"><strong>Image Preview</strong></label>
+                                    <img id="id_preview" class="img-fluid mb-4" style="width: 250px; height: 280px; display: none;">
+                                </div>
                             </div>
                             <div>
                                 <label for="id_selfie">Upload Selfie w/ ID</label>
@@ -164,6 +168,10 @@
                                 <?php if (isset($errors["id_selfie"])) : ?>
                                     <div class="text-danger" id="error_id_selfie"><?= $errors["id_selfie"] ?></div>
                                 <?php endif; ?>
+                                <div class="col-lg-12 col-12 mt-2">
+                                    <label for="idSelfie_preview" id="idSelfie_label" style="display: none;"><strong>Image Preview</strong></label>
+                                    <img id="idSelfie_preview" class="img-fluid mb-4" style="width: 250px; height: 280px; display: none;">
+                                </div>
                             </div>
                         </div>
 
@@ -294,6 +302,42 @@
 </section>
 <!-- Add this JavaScript code at the bottom of your HTML page -->
 <script>
+    const validIdInput = document.getElementById('valid_id');
+    const idSelfieInput = document.getElementById('id_selfie');
+    const idSelfiePreview = document.getElementById('idSelfie_preview');
+    const idSelfieLabel = document.getElementById('idSelfie_label');
+    const idPreview = document.getElementById('id_preview');
+    const idLabel = document.getElementById('id_label');
+
+
+    validIdInput.addEventListener('change', function () {
+    const selectedImage = validIdInput.files[0];
+    if (selectedImage) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            idPreview.src = e.target.result;
+            idPreview.style.display = 'block';
+            idLabel.style.display = 'block'; // Show the label
+        };
+
+        reader.readAsDataURL(selectedImage);
+    }
+    });
+    idSelfieInput.addEventListener('change', function () {
+    const selectedImage = idSelfieInput.files[0];
+    if (selectedImage) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            idSelfiePreview.src = e.target.result;
+            idSelfiePreview.style.display = 'block';
+            idSelfieLabel.style.display = 'block'; // Show the label
+        };
+
+        reader.readAsDataURL(selectedImage);
+    }
+});
     $(document).ready(function() {
         // Open the DPN modal when the link is clicked
         $('#openDpnModal').click(function() {
