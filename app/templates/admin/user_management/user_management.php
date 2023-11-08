@@ -8,7 +8,7 @@ $users = UserManagementController::user_management();
     <div style="float:right;">
         <a href="user-management-add-user" style="color: white; text-decoration: none;">
             <button class="form-control custom-button">
-                <i class="bi bi-person-add"></i> Add Official
+                <i class="bi bi-person-add"></i> Add User
             </button>
         </a>
     </div>

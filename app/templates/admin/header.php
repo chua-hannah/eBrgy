@@ -163,6 +163,11 @@ $messages = $homeController->getAllMessages();
                         </a>
                     </li>
                 <?php } ?>
+                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'non-user' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/non-user">
+                        <i class="bi bi-list-ul"></i> Non-user Residence
+                    </a>
+                </li>
                 <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'masterlist' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo $baseUrl; ?>/masterlist">
                         <i class="bi bi-list-ul"></i> Barangay Masterlist

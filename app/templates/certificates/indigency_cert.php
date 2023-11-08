@@ -48,13 +48,30 @@
         .printable {
             display: block;
         }
+        .kapsign {
+            position: absolute;
+            right: 60px;
+            bottom: 500px;
+            visibility: hidden;
+        } 
+        .secsign {
+            position: absolute;
+            right: 0;
+            bottom: 420px;
+            width: 300px;
+            height: 600px;
+            visibility: hidden;
+        }
         @media print {
              .non-printable {
                 display: none;
             }
-            input[type="checkbox"]:checked {
-            background-color: red; /* Change the background color to black when checked */
-        }
+            .kapsign {
+                visibility: visible;
+            }
+            .secsign {
+                visibility: visible;
+            }
         }
         .logo {
             position: absolute;
@@ -207,6 +224,8 @@
                 ?> in the City of Manila.</p>
             </div>
        <div>
+       <img src="./templates/certificates/kap_sign.png" alt="kap-signature" class="kapsign">
+        <img src="./templates/certificates/sec_sign.png" alt="sec-signature" class="secsign">
        <div class="footer">
                 <p>Issued by:</p>
                 <div><strong>ELJUN C. SAYO</strong></div>
@@ -219,7 +238,6 @@
                 </div>        
             </div>
             <div class="footer">
-     
             <br>
             <p>Certified by:</p>
             <div><strong>Hon. RONALD M. LEE</strong></div>
@@ -236,7 +254,7 @@
     </div>
 
     <div class="text-center">
-        <button id="generatePdf" class="btn btn-secondary non-printable">Print</button>
+        <button id="generatePdf" class="btn btn-secondary non-printable mb-2">Print</button>
     </div>
     <script>
     document.getElementById("generatePdf").addEventListener("click", function () {

@@ -7,7 +7,7 @@
 
 <div class="container-fluid">
     <form class="custom-form contact-form mb-4 align-items-center needs-validation" id="register" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
-    <h3 class="mb-4">Add Barangay Official</h3>
+    <h3 class="mb-4">Add Barangay User</h3>
 
     <div class="row g-2">
         <div class="col-lg-12 col-12">
@@ -19,16 +19,17 @@
                 <option value="" disabled selected>Select System Role</option>
                 <option value="captain" <?= isset($_POST["role"]) && $_POST["role"] == "captain" ? 'selected' : ''; ?>>Super Admin</option>
                 <option value="kagawad" <?= isset($_POST["role"]) && $_POST["role"] == "kagawad" ? 'selected' : ''; ?>>Admin</option>
+                <option value="residence" <?= isset($_POST["role"]) && $_POST["role"] == "residence" ? 'selected' : ''; ?>>Residence</option>
             </select>
             <?php if (isset($errors["role"])) : ?>
                 <div class="text-danger" id="error_role"><?= $errors["role"] ?></div>
             <?php endif; ?>
         </div>
         <div class="col-lg-6 col-12 mb-2">
-            <label class="labels">Barangay Position</label>
+            <label class="labels" id="positionlabel">Barangay Position</label>
             <select class="form-select <?php echo isset($errors["position"]) ? 'is-invalid' : ''; ?>" name="position" id="position" placeholder="Barangay Position">
                 <option value="" disabled selected>Select Barangay Position</option>
-                <option value="chairman" <?= isset($_POST["position"]) && $_POST["position"] == "captain" ? 'selected' : ''; ?>>Barangay Chairman</option>
+                <option value="captain" <?= isset($_POST["position"]) && $_POST["position"] == "captain" ? 'selected' : ''; ?>>Barangay Chairman</option>
                 <option value="councilor" <?= isset($_POST["position"]) && $_POST["position"] == "councilor" ? 'selected' : ''; ?>>Councilor</option>
                 <option value="secretary" <?= isset($_POST["position"]) && $_POST["position"] == "secretary" ? 'selected' : ''; ?>>Secretary</option>
                 <option value="treasurer" <?= isset($_POST["position"]) && $_POST["position"] == "treasurer" ? 'selected' : ''; ?>>Treasurer</option>
@@ -236,7 +237,7 @@
             <div class="text-danger mb-2" id="error_terms"><?= $errors["terms"] ?></div>
         <?php endif; ?>
         </div>
-
+        <button type="submit" name="register_user" class="form-control mt-2">Register User</button>
         <button type="submit" name="add-officials" class="form-control mt-2">Register Official</button>
     </form>
 </div>
@@ -281,5 +282,29 @@
 
         reader.readAsDataURL(selectedImage);
     }
+});
+$(document).ready(function() {
+  // Initially hide the "Register" button
+  $("button[name='register_user']").hide();
+
+  // Add an event listener to the "System Role" select box
+  $("#role").change(function() {
+    // Get the selected value
+    var selectedRole = $(this).val();
+    // Check if the selected value is "residence"
+    if (selectedRole === "residence") {
+      // If "residence" is selected, show the "Register" button
+      $("button[name='register_user']").show();
+      $("button[name='add-officials']").hide();
+      $("#position").hide(); // Hide the position dropdown
+      $("#positionlabel").hide();
+    } else {
+      // If any other role is selected, hide the "Register" button and show the "Register Official" button
+      $("button[name='register_user']").hide();
+      $("button[name='add-officials']").show();
+      $("#position").show(); // Show the position dropdown
+      $("#positionlabel").show();
+    }
+  });
 });
 </script>

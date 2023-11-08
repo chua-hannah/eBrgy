@@ -38,9 +38,20 @@
         .printable {
             display: block;
         }
+        .secsign {
+            position: absolute;
+            right: 0;
+            bottom: 50px;
+            width: 300px;
+            height: 600px;
+            visibility: hidden;
+        }
         @media print {
              .non-printable {
                 display: none;
+            }
+            .secsign {
+                visibility: visible;
             }
         }
         .logo {
@@ -106,6 +117,8 @@
             in the City/Municipality of Manila.</p>
         </div>        
         <div class="footer">
+        <img src="./templates/certificates/sec_sign.png" alt="sec-signature" class="secsign">
+
             <p><strong>Signed by:</strong></p>
             <p><strong>ELJUN C. SAYO</strong></p>
             <p>Barangay Secretary</p>
@@ -119,7 +132,7 @@
     </div>
 
     <div class="text-center">
-        <button id="generatePdf" class="btn btn-secondary non-printable">Print</button>
+        <button id="generatePdf" class="btn btn-secondary non-printable mb-2">Print</button>
     </div>
     <script>
     document.getElementById("generatePdf").addEventListener("click", function () {

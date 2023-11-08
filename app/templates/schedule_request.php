@@ -37,6 +37,7 @@
                             <option value="8:00 PM">8:00 PM</option>
                             <option value="9:00 PM">9:00 PM</option>
                             <option value="10:00 PM">10:00 PM</option>
+                            <option value="11:00 PM">11:00 PM</option>
                         </select>
                     </div>
                     <div class="col-lg-6 col-12">
@@ -72,7 +73,7 @@ $(document).ready(function() {
             var startTime = new Date('2000-01-01 ' + selectedStartTime);
 
             // Define end time options based on the selected start time
-            var endTimeOptions = ["2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM"];
+            var endTimeOptions = ["2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "11:59 PM"];
 
             // Filter end time options to ensure they are greater than the selected start time
             var filteredEndTimeOptions = endTimeOptions.filter(function(endTime) {

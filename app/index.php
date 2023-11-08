@@ -533,6 +533,8 @@ switch ($filename) {
                         case 'user-management-add-user':
                             includeAdminContent(function () use ($userManagementController) {
                                 $userManagementController->add();
+                                $userManagementController->registerUser();
+
                             });
                             break;
                         case 'user-management-edit-user':
@@ -666,7 +668,7 @@ switch ($filename) {
                                 include 'templates/admin/reports/request_reports.php';
                             });
                             break;
-                        case 'masterlist':
+                        case 'non-user':
                             includeAdminContent(function() use ($reportsController) {
                                 $reportsController->register_to_masterlist();
                                 $masterListReports = $reportsController->masterlist_reports();

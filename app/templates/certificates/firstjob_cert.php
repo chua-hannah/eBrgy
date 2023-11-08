@@ -38,9 +38,29 @@
         .printable {
             display: block;
         }
+        .kapsign {
+            position: absolute;
+            right: 40px;
+            bottom: 360px;
+            visibility: hidden;
+        } 
+        .secsign {
+            position: absolute;
+            right: 0;
+            bottom: 360px;
+            width: 300px;
+            height: 600px;
+            visibility: hidden;
+        }
         @media print {
              .non-printable {
                 display: none;
+            }
+            .kapsign {
+                visibility: visible;
+            }
+            .secsign {
+                visibility: visible;
             }
         }
         .logo {
@@ -101,8 +121,22 @@
                 ?>
             , one (1) year from the issuance.</p>
         </div>
+        <img src="./templates/certificates/kap_sign.png" alt="kap-signature" class="kapsign">
+        <img src="./templates/certificates/sec_sign.png" alt="sec-signature" class="secsign">
+        <div class="footer">
+            <p><strong>Witnessed by:</strong></p>
+            <p><strong>ELJUN C. SAYO</strong></p>
+            <p>Barangay Secretary</p>
+            <p><?php
+            $datetime = $docRequestUserData['process_at'];
+            $date = date("F j, Y", strtotime($datetime));
+            echo $date;
+            ?>
+            </p>        
+        </div>
         <div class="footer">
             <br>
+            <p>Certified by:</p>
             <div><strong>RONALD M. LEE</strong></div>
             <div>Punong Barangay</div>
             <br>
@@ -113,21 +147,10 @@
             ?>
             </p>
         </div>
-        <div class="footer">
-            <p><strong>Witnessed by:</strong></p>
-            <p><strong>ELJUN C. SAYO</strong></p>
-            <p>Barangay Secretary</p>
-            <p><?php
-            $datetime = $docRequestUserData['process_at'];
-            $date = date("F j, Y", strtotime($datetime));
-            echo $date;
-            ?>
-            </p>        </div>
-      
     </div>
 
     <div class="text-center">
-        <button id="generatePdf" class="btn btn-secondary non-printable">Print</button>
+        <button id="generatePdf" class="btn btn-secondary non-printable mb-2">Print</button>
     </div>
     <script>
     document.getElementById("generatePdf").addEventListener("click", function () {

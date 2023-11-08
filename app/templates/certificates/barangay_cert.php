@@ -48,13 +48,30 @@
         .printable {
             display: block;
         }
+        .kapsign {
+            position: absolute;
+            right: 40px;
+            bottom: 260px;
+            visibility: hidden;
+        } 
+        .secsign {
+            position: absolute;
+            right: 0;
+            bottom: 180px;
+            width: 300px;
+            height: 600px;
+            visibility: hidden;
+        }
         @media print {
              .non-printable {
                 display: none;
             }
-            input[type="checkbox"]:checked {
-            background-color: red; /* Change the background color to black when checked */
-        }
+            .kapsign {
+                visibility: visible;
+            }
+            .secsign {
+                visibility: visible;
+            }
         }
         .logo {
             position: absolute;
@@ -80,6 +97,7 @@
             width: 800px;
             opacity: 0.2;
         }
+       
         .kap {
          
             height: 200px;
@@ -249,7 +267,10 @@
                 </div>
        <div>
        <div class="footer">
+       <img src="./templates/certificates/kap_sign.png" alt="kap-signature" class="kapsign">
+       <img src="./templates/certificates/sec_sign.png" alt="sec-signature" class="secsign">
                 <p>Issued by:</p>
+               
                 <div><strong>ELJUN C. SAYO</strong></div>
                 <div>Barangay Secretary</div>
                 <div><?php
