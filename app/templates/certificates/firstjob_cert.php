@@ -48,7 +48,7 @@
             right: 100px;
             top: 100px;
             height: 200px;
-            weight: 200px;
+            width: 200px;
         }
         .logo0 {
             position: absolute;

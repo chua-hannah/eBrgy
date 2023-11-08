@@ -484,7 +484,7 @@ class ReportsController {
     
             if ($stmt->execute()) {
                 header("Location: /eBrgy/app/masterlist");
-                $_SESSION['success'] = "The masterlist updated successfully approved.";
+                $_SESSION['success'] = "The resident masterlist information was successfully updated";
                 exit();
             } else {
                 $_SESSION['error'] = "Error updating user status: " . $stmt->error;
@@ -548,7 +548,7 @@ class ReportsController {
     
             // Execute the SQL statement
             if ($this->connection->query($sql) === TRUE) {
-                $_SESSION['success'] = "New Column was added successfully.";
+                $_SESSION['success'] = "New column was added successfully.";
                 header("Location: health-information");
                 exit;
             } else {
@@ -662,8 +662,9 @@ class ReportsController {
             $updateQuery .= " WHERE id = '$id'";
     
             if ($this->connection->query($updateQuery)) {
-                return "Data updated successfully.";
-                echo '<script>window.location.href = "health-information";</script>';
+                $_SESSION['success'] = "Resident health information was updated successfully.";
+                header("Location: health-information");
+                exit;
 
             } else {
                 return "Error updating data: " . $this->connection->error;

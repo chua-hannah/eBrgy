@@ -52,7 +52,7 @@
 
                                         </div>
                                         <input type="hidden" name="id" value="<?php echo $userData['id']; ?>">
-                                        <div style="display: flex; justify-conter: space-around;">
+                                        <div style="display: flex; justify-content: space-around;">
                                             <button type="button" class="btn btn-primary me-2" id="editButton"><i class="bi bi-pencil"></i> Edit</button>
                                             <button type="submit" class="btn btn-success me-2" id="saveButton" name="update_masterlist_user" style="display: none;"><i class="bi bi-check"></i> Save Changes</button>
                                             <a href="masterlist" class="btn btn-secondary">Cancel</a>
