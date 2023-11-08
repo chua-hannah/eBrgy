@@ -207,19 +207,35 @@ class UserManagementController {
                                 $query = "INSERT INTO users (username, password, email, mobile, position, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar) VALUES ('$username', '$password', '$email', '$mobile', '$position', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
     
                                 if ($this->connection->query($query) === true) {
-                                    $newUserId = $this->connection->insert_id;
-                                      // Now, insert data into the health_info table
-                                    $query = "INSERT INTO health_info (id, firstname, middlename, lastname, age)
-                                    VALUES ('$newUserId', '$firstname', '$middlename', '$lastname', '$age')";
-                
-                                    if ($this->connection->query($query) === true) {
-                                        // Both inserts were successful
-                                        header("Location: user-management");
-                                        $_SESSION['success'] =  "The resident has been successfully added to both the masterlist and health information pages.";
-                                        exit();
-                                    } else {
-                                        $_SESSION['error'] = "Error inserting data into the health_info table." . $this->connection->error;
-                                    }
+                                     // Retrieve the ID of the newly inserted row from users_masterlist
+                                        $newUserId = $this->connection->insert_id;
+                                
+                                        // Get the latest ID from the health_info table and generate the next ID
+                                        $query = "SELECT MAX(id) AS max_id FROM health_info";
+                                        $result = $this->connection->query($query);
+                                
+                                        if ($result->num_rows > 0) {
+                                            $row = $result->fetch_assoc();
+                                            $latestHealthInfoId = $row['max_id'];
+                                            // Generate the next ID by incrementing the latest ID
+                                            $nextHealthInfoId = $latestHealthInfoId + 1;
+                                        } else {
+                                            // If the health_info table is empty, start with an ID of 1
+                                            $nextHealthInfoId = 1;
+                                        }
+                                
+                                        // Now, insert data into the health_info table using the generated ID
+                                        $query = "INSERT INTO health_info (id, firstname, middlename, lastname, age)
+                                        VALUES ('$nextHealthInfoId', '$firstname', '$middlename', '$lastname', '$age')";
+                                
+                                        if ($this->connection->query($query) === true) {
+                                            // Both inserts were successful
+                                            header("Location: non-user");
+                                            $_SESSION['success'] = "The resident has been successfully added to User management and health information page.";
+                                            exit();
+                                        } else {
+                                            $_SESSION['error'] = "Error inserting data into the health_info table." . $this->connection->error;
+                                        }
                                 } else {
                                     // Error occurred
                                     $_SESSION['error'] = "Error: " . $this->connection->error;

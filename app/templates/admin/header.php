@@ -1,10 +1,4 @@
-<?php
-require_once 'controllers/HomeController.php';
-global $connection; // Access the $connection variable from the global scope
-$homeController = new HomeController($connection); // Create an instance of HomeController
 
-$messages = $homeController->getAllMessages();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,19 +81,6 @@ $messages = $homeController->getAllMessages();
                 echo '<li class="nav-item">';
                 echo '<a class="nav-link '; echo basename($_SERVER['REQUEST_URI']) == 'profile' ? 'active' : ''; echo '"href="'.$baseUrl.'/profile">'.$username.'</a>';
                 echo '</li>';
-              // Replace 'notification_count' with the actual count you want to display
-                $notification_count = $messages['total_count']; // You can fetch this count from your application
-
-                echo '<li class="nav-item">';
-                echo '<a class="nav-link ' . (basename($_SERVER['REQUEST_URI']) == 'messages' ? 'active' : '') . '" href="messages">';
-                echo ' Messages';
-                if ($notification_count > 0) {
-                    echo ' <span class="badge badge-danger">' . $notification_count . '</span>';
-                }
-                echo '</a>';
-                echo '</li>';
-
-                
                 echo '<li class="nav-item">';
                 echo '<a class="nav-link" href="logout.php">Logout</a>';
                 echo '</li>';
@@ -160,13 +141,17 @@ $messages = $homeController->getAllMessages();
                     </a>
                 </li>
                 <?php if ($_SESSION['role'] === 'captain') { ?>
+                    <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'messages' ? 'active' : ''; ?>">
+                        <a class="nav-link" href="<?php echo $baseUrl; ?>/messages">
+                            <i class="bi bi-envelope"></i> Messages
+                        </a>
+                    </li>
                     <li class="nav-item <?php echo basename($_SERVER['REQUEST_URI']) == 'user-management' ? 'active' : ''; ?>">
                         <a class="nav-link" href="<?php echo $baseUrl; ?>/user-management">
                             <i class="bi bi-person"></i> User Management
                         </a>
                     </li>
-                <?php } ?>
-                <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'non-user' ? 'active' : ''; ?>">
+                    <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'non-user' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo $baseUrl; ?>/non-user">
                         <i class="bi bi-person"></i> Non-user Residence
                     </a>
@@ -195,7 +180,12 @@ $messages = $homeController->getAllMessages();
                         </a>
                     </li>
                     <li class="nav-item ms-3">
-                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/requests-report">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab2' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/non-users-report">
+                            <i class="bi bi-person"></i> Non Users
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab3' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/requests-report">
                             <i class="bi bi-journal-text"></i> Requests
                         </a>
                     </li>                      
@@ -206,6 +196,9 @@ $messages = $homeController->getAllMessages();
                     <i class="bi bi-gear"></i> Homepage Setting
                     </a>
                 </li>
+                <?php } ?>
+               
+               
             </ul>
         </div>
     <div class="col-lg-10" style="padding: 20px;">

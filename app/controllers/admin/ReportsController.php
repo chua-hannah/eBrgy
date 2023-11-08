@@ -61,6 +61,59 @@ class ReportsController {
         return $userReports;
     }
 
+    public function non_user_reports() {
+        if ($this->connection->error) {
+            die("Connection failed: " . $this->connection->error);
+        }
+    
+        $query = "SELECT * FROM users_masterlist";
+        $result = $this->connection->query($query);
+    
+        // Initialize counts for senior, PWD, 4Ps, and solo parent
+        $seniorCount = 0;
+        $pwdCount = 0;
+        $fourPsCount = 0;
+        $soloParentCount = 0;
+        $scholarCount = 0;
+    
+        // Fetch all user records as an associative array
+        $users = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $users[] = $row;
+    
+                // Check user attributes and update counts
+                if ($row['senior'] == 1) {
+                    $seniorCount++;
+                }
+                if ($row['pwd'] == 1) {
+                    $pwdCount++;
+                }
+                if ($row['four_ps'] == 1) {
+                    $fourPsCount++;
+                }
+                if ($row['solo_parent'] == 1) {
+                    $soloParentCount++;
+                }
+                if ($row['scholar'] == 1) {
+                    $scholarCount++;
+                }
+            }
+        }
+    
+        // Create an associative array to return user data and counts
+        $userReports = array(
+            'users' => $users,
+            'seniorCount' => $seniorCount,
+            'pwdCount' => $pwdCount,
+            'fourPsCount' => $fourPsCount,
+            'soloParentCount' => $soloParentCount,
+            'scholarCount' => $scholarCount,
+        );
+    
+        return $userReports;
+    }
+
     public function request_document_reports() {
         if ($this->connection->error) {
             die("Connection failed: " . $this->connection->error);
@@ -358,17 +411,31 @@ class ReportsController {
                         VALUES ( '$mobile', '$email', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$position', $senior, $four_ps, $pwd, $solo_parent, $scholar)";
         
                         if ($this->connection->query($query) === true) {
-                            // Retrieve the ID of the newly inserted row
+                            // Retrieve the ID of the newly inserted row from users_masterlist
                             $newUserId = $this->connection->insert_id;
-        
-                            // Now, insert data into the health_info table
+                    
+                            // Get the latest ID from the health_info table and generate the next ID
+                            $query = "SELECT MAX(id) AS max_id FROM health_info";
+                            $result = $this->connection->query($query);
+                    
+                            if ($result->num_rows > 0) {
+                                $row = $result->fetch_assoc();
+                                $latestHealthInfoId = $row['max_id'];
+                                // Generate the next ID by incrementing the latest ID
+                                $nextHealthInfoId = $latestHealthInfoId + 1;
+                            } else {
+                                // If the health_info table is empty, start with an ID of 1
+                                $nextHealthInfoId = 1;
+                            }
+                    
+                            // Now, insert data into the health_info table using the generated ID
                             $query = "INSERT INTO health_info (id, firstname, middlename, lastname, age)
-                            VALUES ('$newUserId', '$firstname', '$middlename', '$lastname', '$age')";
-        
+                            VALUES ('$nextHealthInfoId', '$firstname', '$middlename', '$lastname', '$age')";
+                    
                             if ($this->connection->query($query) === true) {
                                 // Both inserts were successful
-                                header("Location: masterlist");
-                                $_SESSION['success'] =  "The resident has been successfully added to both the masterlist and health information pages.";
+                                header("Location: non-user");
+                                $_SESSION['success'] = "The resident has been successfully added to both the Non-User Residence and health information pages.";
                                 exit();
                             } else {
                                 $_SESSION['error'] = "Error inserting data into the health_info table." . $this->connection->error;

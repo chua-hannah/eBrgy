@@ -136,33 +136,6 @@ switch ($filename) {
                                 include 'templates/admin/attendance/attendance.php';
                             });
                             break;
-                        case 'messages':
-                            includeAdminContent(function() use ($homeController) {
-                                $messages = $homeController->getAllMessages();
-                                include 'templates/admin/messages.php';
-                            });
-                            break;
-                        case 'user-management':
-                            includeAdminContent(function () use ($userManagementController) {
-                                $userManagementController->index();
-                            });
-                            break;
-                        case 'user-management-add-user':
-                            includeAdminContent(function () use ($userManagementController) {
-                                $userManagementController->add();
-                            });
-                            break;
-                        case 'user-management-edit-user':
-                            // Check if the userId parameter is present in the POST data
-                            $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
-                            
-                            includeAdminContent(function () use ($userManagementController, $userId) {
-                                $userManagementController->edit($userId);
-                                $userManagementController->activate_user($userId);
-                                $userManagementController->deactivate_user($userId);
-                                $userManagementController->delete_user($userId);
-                            });
-                            break;
                         case 'requests':
                             includeAdminContent(function() use ($requestManagementController) {
                                 include 'templates/admin/requests.php';   
@@ -232,14 +205,6 @@ switch ($filename) {
                                 include 'templates/admin/equipment_edit.php';
                             });
                             break;     
-                        case 'requests-equipments-management':
-                            includeAdminContent(function() use ($requestManagementController, $settingsController) {
-                                $settingsController->add_equipment_setting();
-                                $requests = $settingsController->admin_get_equipments_list();
-                                include 'templates/admin/request_management/equipment_management.php';
-                                
-                            });
-                            break;
                         case 'edit-equipment-management':
                             includeAdminContent(function() use ($requestManagementController, $settingsController) {
                                 $equipmentDatas = $requestManagementController->getEquipById();
@@ -268,12 +233,6 @@ switch ($filename) {
                                 include 'templates/admin/request_management/equipment_management.php';
                                 
                             });   
-                        case 'users-report':
-                            includeAdminContent(function() use ($reportsController, $filename) {
-                                $usersReports = $reportsController->user_reports();
-                                include 'templates/admin/reports/users_list.php';
-                            });
-                            break;
                         case 'requests-report':
                             includeAdminContent(function() use ($reportsController, $filename) {
                                 $docReports = $reportsController->request_document_reports();
@@ -283,39 +242,7 @@ switch ($filename) {
                                 include 'templates/admin/reports/request_reports.php';
                             });
                             break;
-                        case 'masterlist':
-                            includeAdminContent(function() use ($reportsController) {
-                                $reportsController->register_to_masterlist();
-                                $masterListReports = $reportsController->masterlist_reports();
-                                $delete_resident = $reportsController->delete_resident();
-                                include 'templates/admin/reports/users_master_list.php';
-                            });
-                            break;
-                        case 'health-information':
-                            includeAdminContent(function() use ($reportsController) {
-                                $headers = $reportsController->getColumnNamesFromHealthInfoTable();
-                                $healthInfos = $reportsController->getAllHealthInfo();
-                                $reportsController->addHealthInfoColumn();
-                                // $masterListReports = $reportsController->masterlist_reports();
-                                // $delete_resident = $reportsController->delete_resident();
-                                include 'templates/admin/health_info.php';
-                            });
-                            break;
-                        case 'edit-health-information':
-                            includeAdminContent(function() use ($reportsController) {
-                                $usersHealthInfo = $reportsController->getHealthInfoById();
-                                $reportsController->save_new_health_information();
-                                include 'templates/admin/health_info_edit.php';
-                            });
-                            break;
-                        case 'home-setting':
-                            includeAdminContent(function() use ($settingsController, $homeController) {
-                                $homeSettings = $homeController->getHomeSettings();
-                                $settingsController->home_setting();
-                                $settingsController->update_home_setting();
-                                include 'templates/admin/homepage_settings.php';
-                            });
-                            break;
+                      
                         default:
                         header("Location: " . $baseUrl . "/dashboard");
                         exit;
@@ -652,11 +579,17 @@ switch ($filename) {
                                 $requests = $settingsController->get_equipments_list();
                                 include 'templates/admin/request_management/equipment_management.php';
                                 
-                            });   
+                            });  
                         case 'users-report':
                             includeAdminContent(function() use ($reportsController, $filename) {
                                 $usersReports = $reportsController->user_reports();
                                 include 'templates/admin/reports/users_list.php';
+                            });
+                            break;
+                        case 'non-users-report':
+                            includeAdminContent(function() use ($reportsController, $filename) {
+                                $nonusersReports = $reportsController->non_user_reports();
+                                include 'templates/admin/reports/non_users_report.php';
                             });
                             break;
                         case 'requests-report':

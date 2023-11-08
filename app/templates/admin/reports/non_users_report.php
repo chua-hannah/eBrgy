@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h3 class="mt-2 mb-2 text-center">Users Report</h3>
+<h3 class="mt-2 mb-2 text-center">Non Users Report</h3>
     <!-- Display counts here -->
     <div class="table-responsive">
     <h4 class="mt-2 mb-2">Demographic Information</h4>
@@ -14,11 +14,11 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-                <td><?php echo $usersReports['seniorCount']; ?></td>
-                <td><?php echo $usersReports['pwdCount']; ?></td>
-                <td><?php echo $usersReports['fourPsCount']; ?></td>
-                <td><?php echo $usersReports['soloParentCount']; ?></td>
-                <td><?php echo $usersReports['scholarCount']; ?></td>
+                <td><?php echo $nonusersReports['seniorCount']; ?></td>
+                <td><?php echo $nonusersReports['pwdCount']; ?></td>
+                <td><?php echo $nonusersReports['fourPsCount']; ?></td>
+                <td><?php echo $nonusersReports['soloParentCount']; ?></td>
+                <td><?php echo $nonusersReports['scholarCount']; ?></td>
             </tbody>
         </table>
     </div>
@@ -28,7 +28,6 @@
     <table class="table table-bordered table-striped custom-table datatable" id="myTable">
             <thead>
                 <tr>
-                    <th>Username</th>
                     <th>Full name</th>
                     <th>Age</th>
                     <th>Mobile</th>
@@ -43,10 +42,9 @@
             </thead>
             <tbody class="text-center">
                 <?php
-                foreach ($usersReports['users'] as $usersReport) {
+                foreach ($nonusersReports['users'] as $usersReport) {
                     ?>
                     <tr>
-                        <td><?php echo $usersReport['username']; ?></td>
                         <td><?php echo $usersReport['firstname'] . ' ' . $usersReport['middlename'] . ' ' . $usersReport['lastname']; ?></td>
                         <td><?php echo $usersReport['age']; ?></td>
                         <td><?php echo $usersReport['mobile']; ?></td>

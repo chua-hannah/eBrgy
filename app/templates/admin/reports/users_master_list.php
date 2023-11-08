@@ -4,7 +4,6 @@
     <i class="bi bi-person"></i> Add Resident
 </button>
 </div>
-<h3 class="mt-2 mb-2 text-center">Resident Masterlist</h3>
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -164,11 +163,11 @@
         </table>
     </div>
     <div class="table-responsive">
-    <h4 class="mt-2 mb-2">Resident Information</h4>
+    <h4 class="mt-2 mb-2">Non User Resident Information</h4>
         <table class="table table-bordered table-striped custom-table datatable" id="myTable">
             <thead>
                 <tr>
-                    <th class="wrap-text">Action/s</th>
+                    <th class="wrap-text" id="hide-on-print">Action/s</th>
                     <th class="wrap-text">First name</th>
                     <th class="wrap-text">Middle name</th>
                     <th class="wrap-text">Last name</th>
@@ -190,7 +189,7 @@
                 foreach ($masterListReports['users'] as $masterListReport) {
                     ?>
                     <tr>
-                    <td style="display: flex;"> 
+                    <td style="display: flex;" id="hide-on-print"> 
                         <form method="POST" action="edit-non-user">
                             <input type="hidden" name="resident_id" value="<?php echo $masterListReport['id'] ?>">
                             <button type="" class="btn btn-primary me-2" name="edit_resident">Edit</button>
@@ -222,64 +221,12 @@
         </table>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        <!-- Content in the left side of the row (if any) -->
-    </div>
-    <div class="col">
-        <div class="d-flex justify-content-end mt-4">
-            <button id="printTableButton">Print Table</button>
-        </div>
-    </div>
-</div>
 </div>
     <!--Additional div for sidebar-->
     </div>
     </div>
 </div>
 <script>
-document.getElementById("printTableButton").addEventListener("click", function() {
-    var table = $('#myTable').DataTable(); // Initialize DataTables on your table
-    var username = "<?php echo $_SESSION['username']; ?>"; // Get the username from the PHP session
-    var newWin = window.open('', '_blank', 'width=800,height=1100');
-   
-    newWin.document.open();
-    newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
-
-    // Add a header above the table
-    newWin.document.write('<h1>Non Users Report</h1>');
-    newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
-
-    var tableData = table.data().toArray(); // Get all the data from DataTables
-
-    newWin.document.write('<table>');
-
-    // Add column headers, including the "Row Number" column
-    var headerCells = $('#myTable thead th:not(:last-child)'); // Get column headers from the table
-    newWin.document.write('<tr>');
-    newWin.document.write('<th class="wrap-text">#</th>'); // Add Row Number header
-    headerCells.each(function () {
-        newWin.document.write('<th class="wrap-text">' + $(this).text() + '</th>');
-    });
-    newWin.document.write('</tr>');
-
-    // Add data rows with row numbers
-    tableData.forEach(function (dataRow, rowIndex) {
-        newWin.document.write('<tr>');
-        newWin.document.write('<td>' + (rowIndex + 1) + '</td>'); // Add Row Number
-        dataRow.slice(0, -1).forEach(function (cellData) {
-            newWin.document.write('<td>' + cellData + '</td>');
-        });
-        newWin.document.write('</tr>');
-    });
-
-    newWin.document.write('</table>');
-
-    newWin.document.write('</body></html>');
-    newWin.document.close();
-    newWin.print();
-    newWin.close();
-});
 
     // Display error messages
     document.addEventListener("DOMContentLoaded", function () {
