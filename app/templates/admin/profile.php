@@ -116,7 +116,8 @@
                                         accept="image/*" disabled>
                                 </div>
                                 <div class="col-lg-12 col-12 mt-2">
-                                    <img id="image_preview" class="img-fluid mb-4" style="display: none;">
+                                    <label for="image_upload" id="image_label" style="display: none;"><strong>Image Preview</strong></label>
+                                    <img id="image_preview" class="img-fluid mb-4" style="width: 250px; height: 280px; display: none;">
                                 </div>
                             </div>
                             <div class="text-center mt-2">
@@ -145,6 +146,7 @@
     const addressInput = document.getElementById('address');
     const profilePictureInput = document.getElementById('profile_picture');
     const imagePreview = document.getElementById('image_preview');
+    const imageLabel = document.getElementById('image_label');
     const editProfileButton = document.getElementById('edit_profile');
     const saveChangesButton = document.getElementById('save_changes');
 
@@ -163,19 +165,20 @@
         saveChangesButton.style.display = saveChangesButton.style.display === 'none' ? 'block' : 'none';
     }
 
-    profilePictureInput.addEventListener('change', function () {
-        const selectedImage = profilePictureInput.files[0];
-        if (selectedImage) {
-            const reader = new FileReader();
+profilePictureInput.addEventListener('change', function () {
+    const selectedImage = profilePictureInput.files[0];
+    if (selectedImage) {
+        const reader = new FileReader();
 
-            reader.onload = function (e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-            };
+        reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+            imageLabel.style.display = 'block'; // Show the label
+        };
 
-            reader.readAsDataURL(selectedImage);
-        }
-    });
+        reader.readAsDataURL(selectedImage);
+    }
+});
 
     // Add a click event listener to the edit button
     editProfileButton.addEventListener('click', toggleButtons);

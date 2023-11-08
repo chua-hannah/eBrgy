@@ -5,7 +5,7 @@
     </ol>
 </nav>
 <div class="container-fluid edit-user">
-    <h5>Health Information</h5>
+    <h3>Health Information</h3>
     <form method="post" class="custom-form" action="">
         <input type="hidden" name="id" value="<?php echo isset($usersHealthInfo['id']) ? $usersHealthInfo['id'] : ''; ?>">
         <table class="table table-bordered">

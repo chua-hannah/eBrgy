@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="requests">Manage Requests</a></li>
-    <li class="breadcrumb-item"><a href="requests-equipments">Equipments</a></li>
+    <li class="breadcrumb-item"><a href="requests-equipments">Equipment</a></li>
     <li class="breadcrumb-item active" aria-current="page">Manage Equipment</li>
   </ol>
 </nav>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-3">
             <label class="labels">Total Number of Equipment</label>
-            <input type="number" class="form-control" name="total_equipment" oninput="validateNumericInput(this)" required>
+            <input type="number" class="form-control" name="total_equipment" oninput="validateNumericInput(this)" min="1" required>
         </div>
         <div class="col-md-3">
             <label class="labels">Availability</label>
@@ -29,7 +29,7 @@
         </div>
         <!-- <textarea name="description" placeholder="Description" required></textarea> -->
         <!-- Add more fields as needed -->
-        <div class="col-md-12">
+        <div class="col-md-3 d-flex align-items-end">
             <button type="submit" class="form-control mt-2" name="add_equipment">Add Equipment</button>
         </div>
     </div>

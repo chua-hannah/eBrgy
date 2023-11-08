@@ -1234,8 +1234,8 @@ blockquote::before {
   border-color: transparent;
 }
 
-.custom-form button[type="cancel"] {
-  background: #dc3545;
+.custom-form button[type="button"] {
+  background: gray;
   border: none;
   border-radius: var(--border-radius-large);
   color: var(--white-color);
@@ -1244,8 +1244,25 @@ blockquote::before {
   transition: all 0.3s;
 }
 
-.custom-form button[type="cancel"]:hover:enabled,
-.custom-form button[type="cancel"]:focus:enabled {
+.custom-form button[type="button"]:hover:enabled,
+.custom-form button[type="button"]:focus:enabled {
+  background: var(--p-color);
+  border-color: transparent;
+}
+
+.custom-form .cancel-button {
+  background: #dc3545;
+  border: none;
+  border-radius: var(--border-radius-large);
+  color: var(--white-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-semibold);
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.custom-form .cancel-button:hover:enabled,
+.custom-form .cancel-button:focus:enabled {
   background: #990000;
   border-color: transparent;
 }
@@ -2025,4 +2042,8 @@ table.dataTable tfoot td {
 
 .slideImage-label {
   margin-top: 10px;
+}
+
+.form-control.disabled-style {
+  background-color: #dddddd; /* Change the background color to a light gray */
 }

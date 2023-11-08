@@ -666,7 +666,6 @@ switch ($filename) {
                             includeAdminContent(function() use ($reportsController) {
                                 $userDatas = $reportsController->getUserInMasterList();
                                 $reportsController->updateUserInMasterList();
-                                var_dump($userDatas);
                                 include 'templates/admin/reports/edit_user_master_list.php';
                             });
                             break;

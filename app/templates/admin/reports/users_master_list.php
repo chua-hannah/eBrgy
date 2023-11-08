@@ -178,7 +178,7 @@
                     <th class="wrap-text">PWD</th>
                     <th class="wrap-text">Solo Parent</th>
                     <th class="wrap-text">Scholar</th>
-                   
+                    <th class="wrap-text">Senior</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -209,7 +209,7 @@
                         <td><?php echo $masterListReport['pwd'] == 1 ? '&#10003;' : ''; ?></td>
                         <td><?php echo $masterListReport['solo_parent'] == 1 ? '&#10003;' : ''; ?></td>
                         <td><?php echo $masterListReport['scholar'] == 1 ? '&#10003;' : ''; ?></td>
-                       
+                        <td><?php echo $masterListReport['senior'] == 1 ? '&#10003;' : ''; ?></td>
                     </tr>
                     <?php
                 }
