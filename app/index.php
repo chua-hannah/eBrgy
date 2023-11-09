@@ -28,7 +28,7 @@ $requestUri = $_SERVER['REQUEST_URI'];
 $basePath = parse_url($baseUrl, PHP_URL_PATH);
 $trimmedPath = trim(str_replace($basePath, '', $requestUri), '/');
 $filename = $trimmedPath;
-
+var_dump($filename);
 function includeHeaderFooter($controller) {
     include 'templates/header.php';
     $controller();
