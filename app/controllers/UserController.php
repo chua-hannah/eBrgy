@@ -40,9 +40,14 @@ class UserController {
                     $status = $user['status'];
                 
                     // User is not yet activated
-                    if ($status=="pending"){
+                    if ($status === "pending"){
                         $error = "Account is not yet activated. Please wait for your account to be verified by the administrator within 24 hours.";
                     }
+
+                    if ($status === "deactivated"){
+                        $error = "Account is deactivated. Please contact administrator.";
+                    }
+
                     // User is activated
                     else {
                         // Store the user's data in the session

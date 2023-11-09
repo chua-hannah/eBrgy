@@ -40,6 +40,7 @@
                         <th class="wrap-text">Date</th>
                         <th class="wrap-text">Start at</th>
                         <th class="wrap-text">End at</th>
+                        <th class="wrap-text">Date & Time submitted</th>
                         <th class="wrap-text">Status</th>
                         <th class="wrap-text">Action/s</th>
                     </tr>
@@ -52,7 +53,7 @@
         <td><?php echo date('m/d/Y', strtotime($scheduleData['schedule_date'])); ?></td>
         <td><?php echo date('h:i A', strtotime($scheduleData['time_in'])); ?></td>
         <td><?php echo date('h:i A', strtotime($scheduleData['time_out'])); ?></td>
-
+        <td><?php echo date('m/d/Y', strtotime($scheduleData['created_at'])); ?></td>
         <td>
         <?php
         $status = strtoupper($scheduleData['status']);

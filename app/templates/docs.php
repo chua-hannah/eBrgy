@@ -128,13 +128,13 @@
                                                 if ($request['request_name'] === 'firstjob certificate') {
                                                     $action = 'first-job-certificate';
                                                 } 
-                                                elseif ($request['request_name'] === 'certificate of indigency') {
+                                                elseif ($request['request_name'] === 'indigency certificate') {
                                                     $action = 'indigency-certificate';
                                                 }
                                                 elseif ($request['request_name'] === 'barangay certificate') {
                                                     $action = 'barangay-certificate';
                                                 }
-                                                elseif ($request['request_name'] === 'oath of undertaking') {
+                                                elseif ($request['request_name'] === 'oath certificate') {
                                                     $action = 'oath-certificate';
                                                 }
                                             
@@ -207,12 +207,12 @@ selectedService.addEventListener('change', function() {
             barangayCertificateOptions.map(option => `<option value="${option}">${option}</option>`).join('') +
             '</select>';
     }
-    else if (selectedService.value.toLowerCase() === "certificate of indigency") {
+    else if (selectedService.value.toLowerCase() === "indigency certificate") {
         // If "Barangay Certificate" is selected, change the field to an option select input
         remarksLabel.innerText = "Purpose";
         remarksField.innerHTML = '<textarea name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. Financial Assistance" required></textarea>';
     }
-    else if (selectedService.value.toLowerCase() === "oath of undertaking" || selectedService.value.toLowerCase() === "barangay certification (first time jobseekers assistance act - ra 11261)") {
+    else if (selectedService.value.toLowerCase() === "oath certificate" || selectedService.value.toLowerCase() === "firstjob certificate") {
         // If "Barangay Certificate" is selected, change the field to an option select input
         remarksLabel.innerText = "Years of Residency";
         remarksField.innerHTML = '<input text name="service_message" rows="3" class="form-control mb-4" id="service_message" placeholder="Ex. 5 years and 3 months" required>';

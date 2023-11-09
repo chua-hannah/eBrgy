@@ -523,7 +523,7 @@ public function equipments() {
             }
         } else {
             // Invalid quantity, show an error message
-            echo "Error: The requested quantity exceeds the available equipment.";
+            $_SESSION['error'] =  "Error: The requested quantity exceeds the available equipment.";
         }
     }
 }

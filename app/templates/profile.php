@@ -18,7 +18,18 @@
                                 <?php } else { ?>
                                 <h3>User Data Not Available</h3>
                                 <?php } ?>
-                                <p class="text-bottom mb-0">Resident</p>
+                                <p class="text-bottom">
+                                <?php 
+                                if (!empty($user_data['position'])) {
+                                    echo $user_data['position'];
+                                } else {
+                                    if ($user_data['role'] == "residence") {
+                                        echo "Resident";
+                                    } else {
+                                        echo $user_data['role'];
+                                    }
+                                }
+                                ?></p>
                             </div>
                             <?php else: ?>
                             <p>Profile picture is not available</p>

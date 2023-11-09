@@ -228,7 +228,7 @@
                         <input type="checkbox" name="option" id="option2"  <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo ' checked '; ?> > Medical Purpose <?php if ($docRequestUserData['message'] === 'Medical Purpose') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
                     </label>
                     <label>
-                        <input type="checkbox" name="option" id="option3"  <?php if ($docRequestUserData['message'] === 'School Requirement') echo ' checked '; ?> > School Requirement <u>ADMISSION</u>
+                        <input type="checkbox" name="option" id="option3"  <?php if ($docRequestUserData['message'] === 'School Requirement') echo ' checked '; ?> > School Requirement <?php if ($docRequestUserData['message'] === 'School Requirement') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
                     </label>
                     <label>
                         <input type="checkbox" name="option" id="option4" <?php if ($docRequestUserData['message'] === 'Vending Permit') echo ' checked '; ?> > Vending Permit <?php if ($docRequestUserData['message'] === 'Vending Permit') echo '<u>' . strtoupper($docRequestUserData['purpose']) . '</u>'; ?>
