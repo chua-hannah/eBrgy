@@ -173,6 +173,44 @@ function update_admin_profile($user_id) {
         $stmt->close();
     }
 }
+
+function updatePassword() {
+    
+   
+    if ($this->connection->error) {
+        die("Connection failed: " . $this->connection->error);
+    }
+   if(isset($_POST['update_password']))
+   {
+    $new_password = $_POST['update_password'];
+    $userId = $_POST['user_id'];
+    $hashedPassword = password_hash($new_password, PASSWORD_DEFAULT);
+    // Update the password in the database
+    $query = "UPDATE users SET password = ? WHERE user_id = ?";
+    $stmt = $this->connection->prepare($query);
+
+    if ($stmt) {
+        $stmt->bind_param("si", $hashedPassword, $userId);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $_SESSION['success'] =  "Password updated successfully!";
+            header("Location: profile");
+
+        } else {
+            $_SESSION['error'] =  "Error Updating to database!";
+        }
+
+        $stmt->close();
+    } else {
+        echo "Error in prepared statement: " . $this->connection->error;
+    }
+
+   }
+}
+
+
+
 }
   
 ?>

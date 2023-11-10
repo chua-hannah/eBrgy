@@ -126,6 +126,38 @@
                                 <!-- Button to save changes (initially hidden) -->
                                 <button type="submit" name="save_changes" id="save_changes" class="form-control"
                                     style="display: none;">Save Changes</button>
+                                <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#removeOfficial" style="background: #1d1ec7;">
+                                    Change Password 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="removeOfficial" tabindex="-1" aria-labelledby="removeOfficial" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="activateModal">Change Password</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row d-flex justify-content-center align-items-center">
+                                        <div class="col-lg-12 col-12">
+                                            New password: <input type="password" name="update_password" value="">
+
+                                                <div class="row g-2 mt-2">
+                                                    <div class="col-md-6 col-12">
+                                                        <button class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                            <button name="update_password" type="submit"  class="form-control custom-button" style="background: #1d1ec7;">
+                                                                Submit
+                                                            </button>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -22,64 +22,73 @@ class UserController {
                 // Invalid login, display an error message
                 $error = "Enter username and password.";
             } else {
-                // Retrieve user data from the database
-                $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+                // Retrieve hashed password from the database
+                $query = "SELECT * FROM users WHERE username = '$username'";
                 $result = $this->connection->query($query);
     
                 if ($result->num_rows > 0) {
                     // User exists
                     $user = $result->fetch_assoc();
-                    $username = $user['username'];
-                    $firstname = $user['firstname'];
-                    $middlename = $user['middlename'];
-                    $lastname = $user['lastname'];
-                    $email = $user['email'];
-                    $mobile = $user['mobile'];
-                    $user_id = $user['user_id'];
-                    $role = $user['role'];
-                    $status = $user['status'];
-                
-                    // User is not yet activated
-                    if ($status === "pending"){
-                        $error = "Account is not yet activated. Please wait for your account to be verified by the administrator within 24 hours.";
-                    }
-
-                    if ($status === "deactivated"){
-                        $error = "Account is deactivated. Please contact administrator.";
-                    }
-
-                    // User is activated
-                    else {
-                        // Store the user's data in the session
-                        $_SESSION['username'] = $username;
-                        $_SESSION['firstname'] = $firstname;
-                        $_SESSION['middlename'] = $middlename;
-                        $_SESSION['lastname'] = $lastname;
-                        $_SESSION['user_id'] = $user_id;
-                        $_SESSION['role'] = $role;
-                        $_SESSION['mobile'] = $mobile;
-                        $_SESSION['email'] = $email;
-                        // Redirect to appropriate page based on user role
-                        switch ($role) {
-                            case 'residence':
-                                header("Location: home");
-                                exit();
-                                break; // Add a "break" statement here
-                            case 'captain':
-                            case 'kagawad':
-                                header("Location: dashboard");
-                                exit();
-                                break; // Add a "break" statement here
-                            default:
-                                echo "Invalid user role.";
-                                return;
-                                header("Location: login");
-                                exit();
-                        }
-                    }
+                    $hashedPassword = $user['password'];
     
+                    // Verify the entered password with the hashed password
+                    if (password_verify($password, $hashedPassword)) {
+                        // Passwords match, proceed with login
+                        $username = $user['username'];
+                        $firstname = $user['firstname'];
+                        $middlename = $user['middlename'];
+                        $lastname = $user['lastname'];
+                        $email = $user['email'];
+                        $mobile = $user['mobile'];
+                        $user_id = $user['user_id'];
+                        $role = $user['role'];
+                        $status = $user['status'];
+    
+                        // User is not yet activated
+                        if ($status === "pending") {
+                            $error = "Account is not yet activated. Please wait for your account to be verified by the administrator within 24 hours.";
+                        }
+                        
+                        else if ($status === "deactivated") {
+                            $error = "Account is deactivated. Please contact administrator.";
+                        }
+    
+                        // User is activated
+                        else {
+                            // Store the user's data in the session
+                            $_SESSION['username'] = $username;
+                            $_SESSION['firstname'] = $firstname;
+                            $_SESSION['middlename'] = $middlename;
+                            $_SESSION['lastname'] = $lastname;
+                            $_SESSION['user_id'] = $user_id;
+                            $_SESSION['role'] = $role;
+                            $_SESSION['mobile'] = $mobile;
+                            $_SESSION['email'] = $email;
+    
+                            // Redirect to appropriate page based on user role
+                            switch ($role) {
+                                case 'residence':
+                                    header("Location: home");
+                                    exit();
+                                    break;
+                                case 'captain':
+                                case 'kagawad':
+                                    header("Location: dashboard");
+                                    exit();
+                                    break;
+                                default:
+                                    echo "Invalid user role.";
+                                    return;
+                                    header("Location: login");
+                                    exit();
+                            }
+                        }
+                    } else {
+                        // Invalid password
+                        $error = "Invalid password.";
+                    }
                 } else {
-                    // Invalid username or password
+                    // Invalid username
                     $error = "Invalid username or password.";
                 }
             }
@@ -88,6 +97,7 @@ class UserController {
         // Render the login page content
         include 'templates/login.php';
     }
+    
     
 
 
@@ -274,9 +284,9 @@ class UserController {
                 // Mobile number already exists, display an error message
                 $error = "Given mobile number already exists.";
             } elseif (empty($error) && empty($errors)) {
-                // Insert the data into the database
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar)
-                VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
+                VALUES ('$username', '$hashedPassword', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
     
                 if ($this->connection->query($query) === true) {
                     // Registration successful

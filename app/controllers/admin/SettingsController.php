@@ -18,6 +18,18 @@ class SettingsController {
     
             // Add more fields as needed
     
+            // Check if the end time is greater than the start time
+            if ($end <= $start) {
+                $_SESSION["error"] = "Time out must be greater than the Time in.";
+                return;
+            }
+    
+            // Check if the late threshold is greater than the start time and less than the end time
+            if ($late <= $start || $late >= $end) {
+                $_SESSION["error"] = "Late threshold must be greater than the Time in and less than the Time out.";
+                return;
+            }
+    
             // Check if a record already exists in the settings table
             $existingRecordQuery = "SELECT * FROM time_settings";
             $existingRecordResult = $this->connection->query($existingRecordQuery);
@@ -30,7 +42,7 @@ class SettingsController {
                 if ($updateResult === true) {
                     // Update successful
                     $_SESSION["success"] = "Office time settings have been updated successfully.";
-                    header("Location:  /eBrgy/app/settings");
+                    header("Location:  attendance");
                     exit();
                 } else {
                     // Error occurred
@@ -43,7 +55,7 @@ class SettingsController {
     
                 if ($insertResult === true) {
                     // Insertion successful
-                    header("Location: /eBrgy/app/settings");
+                    header("Location: attendance");
                     $_SESSION["success"] = "Office hours have been successfully updated.";
                     exit();
                 } else {
@@ -53,6 +65,7 @@ class SettingsController {
             }
         }
     }
+    
 
     public function request_setting() {
         if (isset($_POST['add_request'])) {

@@ -28,7 +28,7 @@ $requestUri = $_SERVER['REQUEST_URI'];
 $basePath = parse_url($baseUrl, PHP_URL_PATH);
 $trimmedPath = trim(str_replace($basePath, '', $requestUri), '/');
 $filename = $trimmedPath;
-var_dump($filename);
+
 function includeHeaderFooter($controller) {
     include 'templates/header.php';
     $controller();
@@ -434,6 +434,7 @@ switch ($filename) {
                                 $user_id = $_SESSION['user_id'];
                                 $user_data = $profileController->$filename($user_id);
                                 $profileController->update_admin_profile($user_id);
+                                $profileController->updatePassword();
                                 include 'templates/admin/profile.php';
                             });
                             break;
