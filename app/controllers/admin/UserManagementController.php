@@ -139,6 +139,8 @@ class UserManagementController {
             if (!(empty($password)) && strlen($password) < $minPasswordLength) {
                 $errors["password"] = "Password must be at least {$minPasswordLength} characters long.";
             }
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
     
             // File input is empty
             if (empty($_FILES['id_selfie']['name'])) {
@@ -204,7 +206,7 @@ class UserManagementController {
                             if (move_uploaded_file($_FILES['id_selfie']['tmp_name'], $idSelfieTargetPath) && move_uploaded_file($_FILES['valid_id']['tmp_name'], $validIdTargetPath)) {
                                 // Both image uploads were successful
                                 // Proceed with the insertion
-                                $query = "INSERT INTO users (username, password, email, mobile, position, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar) VALUES ('$username', '$password', '$email', '$mobile', '$position', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
+                                $query = "INSERT INTO users (username, password, email, mobile, position, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar) VALUES ('$username', '$hashedPassword', '$email', '$mobile', '$position', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
     
                                 if ($this->connection->query($query) === true) {
                                      // Retrieve the ID of the newly inserted row from users_masterlist
@@ -522,6 +524,7 @@ class UserManagementController {
                 if (!(empty($password)) && strlen($password) < $minPasswordLength) {
                     $errors["password"] = "Password must be at least {$minPasswordLength} characters long.";
                 }
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
                 // File input is empty
                 if (empty($_FILES['id_selfie']['name'])) {
@@ -610,12 +613,12 @@ class UserManagementController {
                     } elseif (empty($error) && empty($errors)) {
                         // Insert the data into the database
                         $query = "INSERT INTO users (username, password, email, mobile, firstname, middlename, lastname, birthdate, age, sex, address, role, id_selfie, valid_id, status, senior, four_ps, pwd, solo_parent, scholar)
-                        VALUES ('$username', '$password', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
+                        VALUES ('$username', '$hashedPassword', '$email', '$mobile', '$firstname', '$middlename', '$lastname', '$birthdate', '$age', '$sex', '$address', '$role', '$idSelfieFileName', '$validIdFileName', '$status', '$senior', '$four_ps', '$pwd', '$solo_parent', '$scholar')";
             
                         if ($this->connection->query($query) === true) {
                             // Registration successful
                             header("Location: user-management");
-                            $_SESSION['registration_successful'] = true;
+                            $_SESSION['success'] = 'User Registration Success';
                             exit();
                         } else {
                             // Error occurred
