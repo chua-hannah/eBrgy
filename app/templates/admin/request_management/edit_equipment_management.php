@@ -1,9 +1,9 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="requests">Manage Requests</a></li>
-        <li class="breadcrumb-item"><a href="requests-equipments">Equipment</a></li>
-        <li class="breadcrumb-item"><a href="requests-equipments-management">Manage Equipment</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit Equipment</li>
+        <li class="breadcrumb-item"><a href="requests-equipments">Materials</a></li>
+        <li class="breadcrumb-item"><a href="requests-equipments-management">Manage Materials</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Materials</li>
     </ol>
 </nav>
 <div class="container-fluid">
@@ -12,11 +12,11 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="text-center my-2">Equipment Details</h5>
+                    <h5 class="text-center my-2">Material Details</h5>
                 </div>
                 <div class="card-body">
                     <?php if (empty($equipmentDatas)): ?>
-                        <p>There is no equipment to edit.</p>
+                        <p>There is no material to edit.</p>
                     <?php else: ?>
                         <?php foreach ($equipmentDatas as $docData): ?>
                             <div class="card mb-4 shadow">
@@ -24,12 +24,12 @@
                                     <form action="" class="custom-form" method="post">
                                     <div class="row d-flex justify-content-center align-items-center">
                                         <div class="form-group col-md-12 mb-3">
-                                            <label>Equipment name:</label>
+                                            <label>Material name:</label>
                                             <input type="text" class="form-control disabled-style" id="equipment_name" name="equipment_name" value="<?php echo $docData['equipment_name']; ?>" readonly>
                                         </div>
                                       
                                         <div class="form-group col-md-6 mb-3">
-                                            <label>Total Equipment Available:</label>
+                                            <label>Total Materials Available:</label>
                                             <input type="number" class="form-control" id="total_equipment" name="total_equipment" value="<?php echo $docData['total_equipment']; ?>" min="1" maxlength="6" disabled>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">

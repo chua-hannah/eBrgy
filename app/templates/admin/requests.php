@@ -20,7 +20,7 @@
                     <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 my-2">
                             <a href="/eBrgy/app/requests-equipments" class="d-block">
                                 <img src="assets/images/icons/chair.png" class="featured-block-image" alt="" style="height: 150px;">
-                                <p class="featured-block-text"><strong>Equipments</strong></p>
+                                <p class="featured-block-text"><strong>Materials</strong></p>
                             </a>
                     </div>
                      <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 my-2">

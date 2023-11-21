@@ -143,7 +143,7 @@
                 <?php if ($_SESSION['role'] === 'captain') { ?>
                     <li class="nav-item mb-2 <?php echo basename($_SERVER['REQUEST_URI']) == 'messages' ? 'active' : ''; ?>">
                         <a class="nav-link" href="<?php echo $baseUrl; ?>/messages">
-                            <i class="bi bi-envelope"></i> Messages
+                            <i class="bi bi-envelope"></i> Inquiries
                         </a>
                     </li>
                     <li class="nav-item <?php echo basename($_SERVER['REQUEST_URI']) == 'user-management' ? 'active' : ''; ?>">
@@ -176,7 +176,7 @@
                     <ul class="nav flex-column">
                     <li class="nav-item ms-3">
                         <a class="nav-link <?php echo basename($_SERVER['REQUEST_URI']) == 'tab1' ? 'active' : ''; ?>" href="<?php echo $baseUrl; ?>/users-report">
-                            <i class="bi bi-person"></i> Users
+                            <i class="bi bi-person"></i> Population
                         </a>
                     </li>
                     <li class="nav-item ms-3">

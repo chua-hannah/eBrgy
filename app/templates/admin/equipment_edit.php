@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="requests">Requests</a></li>
-        <li class="breadcrumb-item"><a href="/eBrgy/app/requests-equipments">Equipments</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><?php echo $userData['username']; ?>'s Equipment Request</li>
+        <li class="breadcrumb-item"><a href="/eBrgy/app/requests-equipments">Materials</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><?php echo $userData['username']; ?>'s Material Request</li>
     </ol>
 </nav>
 <?php
@@ -18,12 +18,12 @@ if ($userData) {
 <div class="container-fluid edit-user">
     <div class="card">
         <div class="card-header">
-            <h6 class="mb-0">Equipment Request Details</h6>
+            <h6 class="mb-0">Material Request Details</h6>
         </div>
         <div class="card-body">
         <div class="row justify-content-center">
             <div class="col-md-4 mb-3">
-                <p class="card-text"><strong>Equipment: </strong><?php echo strtoupper($userData['equipment_name']); ?></p>
+                <p class="card-text"><strong>Material: </strong><?php echo strtoupper($userData['equipment_name']); ?></p>
             </div>
             <div class="col-md-4 mb-3">
                 <p class="card-text"><strong>Status:
@@ -132,7 +132,7 @@ if ($userData) {
                         <button name="returned_equipment" type="submit" class="btn btn-primary" style="padding: 8px;">Tag as Returned</button>
                     <?php } elseif ($userData['status'] === 'approved') { ?>
                         <button name="add_remarks" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">Add Remarks</button>
-                        <button name="cancel_equipment_request" type="submit" class="btn btn-warning" style="padding: 8px;">Cancel</button>
+                        <button name="cancel_equipment_request" type="button" class="btn btn-danger" style="padding: 8px;" onclick="goBack()">Cancel</button>
                     <?php } elseif ($userData['status'] === 'pending') { ?>
                         <button name="approve_equipment" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">Approve</button>
                         <button name="delete_equipment" type="submit" class="btn btn-danger" style="padding: 8px;">Reject</button>
@@ -160,3 +160,8 @@ if ($userData) {
     </div>
     </div>
 </div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

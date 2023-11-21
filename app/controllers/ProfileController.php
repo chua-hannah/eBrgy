@@ -182,7 +182,7 @@ function updatePassword() {
     }
    if(isset($_POST['update_password']))
    {
-    $new_password = $_POST['update_password'];
+    $new_password = $_POST['new_password'];
     $userId = $_POST['user_id'];
     $hashedPassword = password_hash($new_password, PASSWORD_DEFAULT);
     // Update the password in the database

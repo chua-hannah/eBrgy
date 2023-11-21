@@ -321,7 +321,7 @@ class RequestManagementController {
     
             if ($stmt->execute()) {
                 header("Location: /eBrgy/app/requests-equipments-management");
-                $_SESSION['success'] = "The Equipment updated successfully approved.";
+                $_SESSION['success'] = "The material updated successfully approved.";
                 exit();
             } else {
                 $_SESSION['error'] = "Error updating user status: " . $stmt->error;
@@ -445,7 +445,7 @@ class RequestManagementController {
     
             if ($totalEquipment === 0) {
                 header("Location: /eBrgy/app/requests-equipments");
-                $_SESSION['error'] = "Error: The equipment is not available. Total equipment is 0.";
+                $_SESSION['error'] = "Error: The material is not available. Total equipment is 0.";
             } else {
                 // Equipment is available, proceed with updating the status
                 if ($stmt->execute()) {
@@ -467,7 +467,7 @@ class RequestManagementController {
                         $this->connection->commit();
     
                         header("Location: /eBrgy/app/requests-equipments");
-                        $_SESSION['success'] = "Equipment request was successfully approved.";
+                        $_SESSION['success'] = "Material request was successfully approved.";
                         exit();
                     } else {
                         // Equipment settings update failed
@@ -528,11 +528,11 @@ class RequestManagementController {
                     $this->connection->commit();
     
                     header("Location: /eBrgy/app/requests-equipments");
-                    $_SESSION['success'] = "Equipment was returned successfully.";
+                    $_SESSION['success'] = "Material was returned successfully.";
                     exit();
                 } else {
                     // Equipment settings update failed
-                    $_SESSION['error'] = "Error updating equipment settings: " . $stmt2->error;
+                    $_SESSION['error'] = "Error updating materials settings: " . $stmt2->error;
     
                     // Rollback the transaction
                     $this->connection->rollback();
@@ -581,7 +581,7 @@ class RequestManagementController {
                     $this->connection->commit();
     
                     header("Location: /eBrgy/app/requests-equipments");
-                    $_SESSION['success'] = "Equipment was returned successfully.";
+                    $_SESSION['success'] = "Material was returned successfully.";
                     exit();
                 } else {
                     // Equipment settings update failed
@@ -621,7 +621,7 @@ class RequestManagementController {
             if ($stmt->execute()) {
                 // Activation successful
                 header("Location: /eBrgy/app/requests-equipments");
-                $_SESSION['success'] = "Equipment request was successfully rejected.";
+                $_SESSION['success'] = "Material request was successfully rejected.";
                 exit();
             } else {
                 // Activation failed

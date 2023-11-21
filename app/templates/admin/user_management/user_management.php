@@ -70,7 +70,7 @@ $users = UserManagementController::user_management();
                             <div class="btn-group" style="display: flex; gap: 8px; justify-content: space-around;">
                                 <form action="user-management-edit-user" method="post">
                                     <input type="hidden" name="userId" value="<?= $user['user_id']; ?>">
-                                    <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
+                                    <button type="submit" class="btn btn-primary" style="padding: 8px; width: 60px;">Edit</button>
                                 </form>
                             </div>
                         <?php else : ?>

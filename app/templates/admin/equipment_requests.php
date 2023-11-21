@@ -1,23 +1,23 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="requests">Manage Requests</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Equipments</li>
+        <li class="breadcrumb-item active" aria-current="page">Material</li>
     </ol>
 </nav>
 <div class="container-fluid">
     <div style="float: right;">
         <a href="http://localhost/eBrgy/app/requests-equipments-management" style="color: white; text-decoration: none;">
         <button class="form-control custom-button">
-            <i class="bi bi-tools"></i> Manage Equipments
+            <i class="bi bi-tools"></i> Manage Materials
         </button>
         </a>
     </div>
-    <h3 class="mt-2 mb-2">Equipment Requests</h3>
+    <h3 class="mt-2 mb-2">Material Requests</h3>
     <div class="table-responsive">
         <table class="table table-bordered table-striped custom-table" id="equipTable">
             <thead>
                 <tr>
-                    <th class="text-wrap">Equipment</th>
+                    <th class="text-wrap">Material</th>
                     <th class="wrap-text">Quantity</th>
                     <th class="wrap-text">Return Date</th>
                     <th class="wrap-text">First Name</th>
@@ -68,7 +68,10 @@
                         <td>
                             <form action="requests-edit-equipment" method="post">
                                 <input type="hidden" name="id" value="<?php echo $request['id']; ?>">
-                                <button type="submit" name="edit_equip_request" class="btn btn-primary btn-md">Edit</button>
+                                <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
+                                <button type="submit" name="edit_equip_request" class="btn btn-primary" style="padding: 8px; width: 60px;">
+                                    <?php echo $request['status'] === 'pending' ? 'Edit' : 'View'; ?>
+                                </button>
                             </form>
                         </td>
                     </tr>

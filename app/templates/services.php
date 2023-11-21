@@ -30,7 +30,7 @@
                     <a href="/eBrgy/app/equipments" class="d-block">
                         <img src="assets/images/icons/chair.png" class="featured-block-image img-fluid" alt="">
 
-                        <p class="featured-block-text"><strong>Borrow an Equipment</strong></p>
+                        <p class="featured-block-text"><strong>Borrow Materials</strong></p>
                     </a>
                 </div>
             </div>

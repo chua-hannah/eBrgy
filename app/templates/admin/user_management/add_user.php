@@ -87,7 +87,6 @@
                     <option value="" disabled selected>Select gender</option>
                     <option value="Male" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Male"){ echo 'selected';} ?>>Male</option>
                     <option value="Female" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Female"){ echo 'selected';} ?>>Female</option>
-                    <option value="Others" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Others"){ echo 'selected';} ?>>Others</option>
                 </select>
                 <?php if (isset($errors["sex"])) : ?>
                     <div class="text-danger" id="error_sex"><?= $errors["sex"] ?></div>
@@ -237,8 +236,13 @@
             <div class="text-danger mb-2" id="error_terms"><?= $errors["terms"] ?></div>
         <?php endif; ?>
         </div>
-        <button type="submit" name="register_user" class="form-control mt-2">Register User</button>
-        <button type="submit" name="add-officials" class="form-control mt-2">Register Official</button>
+        <div class="col-md-6 col-12">
+        <button type="button" class="form-control cancel-button">Cancel</button>
+        </div>
+        <div class="col-md-6 col-12">
+            <button type="submit" name="register_user" class="form-control">Register User</button>
+            <button type="submit" name="add-officials" class="form-control">Register Official</button>
+        </div>
     </form>
 </div>
 

@@ -8,8 +8,8 @@
     <h3 class="mb-4">Schedule Requests</h3>
     <form class="custom-form mb-4" method="post" action="">
         <div class="row d-flex justify-content-center">
-            <h6>Check Schedules by entering a date</h6>
-            <div class="col-md-6">
+            <h6>Check Schedules by entering a date</h6> 
+            <div class="col-md-3">
                 <label class="labels">Enter a date:</label>
                 <div class="input-group">
                     <span class="input-group-text">
@@ -19,9 +19,10 @@
                     else { date_default_timezone_set(date_default_timezone_get()); $current_time = time(); echo date('m/d/Y', $current_time); }; ?>">
                 </div>
             </div>
-            <div class="col-md-6 align-self-end">
+            <div class="col-md-3 align-self-end">
                 <button class="form-control" type="submit" name="showData">Show Schedules</button>
             </div>
+            <div class="col-md-6"></div>
         </div>
     </form>
     <div class="table-responsive text-center">

@@ -847,6 +847,23 @@ blockquote::before {
   font-weight: var(--font-weight-normal);
   line-height: normal;
   padding-bottom: 2px;
+  font-size: var(--p-font-size);
+}
+
+.custom-list-group {
+  border: 2px solid #dddddd;
+}
+
+.custom-list-group-item {
+  position: relative;
+}
+
+.custom-list-number {
+  position: absolute;
+  left: -24px; /* Adjust the position of the number */
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
 }
 
 .tags-block-link {
@@ -1235,7 +1252,7 @@ blockquote::before {
 }
 
 .custom-form button[type="button"] {
-  background: gray;
+  background: var(--p-color);
   border: none;
   border-radius: var(--border-radius-large);
   color: var(--white-color);
@@ -1246,7 +1263,7 @@ blockquote::before {
 
 .custom-form button[type="button"]:hover:enabled,
 .custom-form button[type="button"]:focus:enabled {
-  background: var(--p-color);
+  background: #555555;
   border-color: transparent;
 }
 
@@ -1259,11 +1276,35 @@ blockquote::before {
   font-weight: var(--font-weight-semibold);
   transition: all 0.3s;
   text-align: center;
+  margin-bottom: 13px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  outline: none;
 }
 
 .custom-form .cancel-button:hover:enabled,
 .custom-form .cancel-button:focus:enabled {
-  background: #990000;
+  background: #c82333;
+  border-color: transparent;
+}
+
+.cancel-button {
+  background: #dc3545;
+  border: none;
+  border-radius: var(--border-radius-large);
+  color: var(--white-color);
+  font-size: var(--p-font-size);
+  font-weight: var(--font-weight-semibold);
+  transition: all 0.3s;
+  margin-bottom: 13px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  outline: none;
+}
+
+.cancel-button:hover:enabled,
+.cancel-button:focus:enabled {
+  background: #c82333;
   border-color: transparent;
 }
 

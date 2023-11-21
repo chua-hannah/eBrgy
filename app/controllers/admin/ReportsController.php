@@ -13,7 +13,11 @@ class ReportsController {
             die("Connection failed: " . $this->connection->error);
         }
     
-        $query = "SELECT * FROM users";
+        $query = "SELECT firstname, middlename, lastname, birthdate, age, sex, mobile, email, address, four_ps, solo_parent, scholar, senior, pwd FROM users
+        UNION
+        SELECT firstname, middlename, lastname, birthdate, age, gender, mobile, email, address, four_ps, solo_parent, scholar, senior, pwd FROM users_masterlist
+        ORDER BY firstname";
+    
         $result = $this->connection->query($query);
     
         // Initialize counts for senior, PWD, 4Ps, and solo parent
@@ -25,7 +29,9 @@ class ReportsController {
     
         // Fetch all user records as an associative array
         $users = array();
-        if ($result->num_rows > 0) {
+        $totalRows = $result->num_rows;  // Count of total rows
+    
+        if ($totalRows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $users[] = $row;
     
@@ -48,7 +54,7 @@ class ReportsController {
             }
         }
     
-        // Create an associative array to return user data and counts
+        // Create an associative array to return user data, counts, and total row count
         $userReports = array(
             'users' => $users,
             'seniorCount' => $seniorCount,
@@ -56,10 +62,11 @@ class ReportsController {
             'fourPsCount' => $fourPsCount,
             'soloParentCount' => $soloParentCount,
             'scholarCount' => $scholarCount,
+            'totalRows' => $totalRows,
         );
     
         return $userReports;
-    }
+    }    
 
     public function non_user_reports() {
         if ($this->connection->error) {
@@ -435,7 +442,7 @@ class ReportsController {
                             if ($this->connection->query($query) === true) {
                                 // Both inserts were successful
                                 header("Location: non-user");
-                                $_SESSION['success'] = "The resident has been successfully added to both the Non-User Residence and health information pages.";
+                                $_SESSION['success'] = "The resident has been successfully added to the Non-User Residence.";
                                 exit();
                             } else {
                                 $_SESSION['error'] = "Error inserting data into the health_info table." . $this->connection->error;
@@ -445,9 +452,127 @@ class ReportsController {
                         }
                     }
                 }
+            } 
+            elseif (isset($_POST['batch_upload'])) {
+                // Batch upload logic
+        
+                $this->processBatchUpload();
             }
         }
-    
+
+        private function processBatchUpload()
+        {
+            // Set default values
+            $age = 0;
+            $position = 'residence';
+            $senior = 0;
+            $four_ps = 0;
+            $pwd = 0;
+            $solo_parent = 0;
+            $scholar = 0;
+
+            // Check if a file is uploaded
+            if ($_FILES['csv_file']['error'] == UPLOAD_ERR_OK) {
+                $file_name = $_FILES['csv_file']['name'];
+                $temp_file = $_FILES['csv_file']['tmp_name'];
+
+                // Validate if it's a CSV file
+                $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+                if ($file_extension != 'csv') {
+                    $_SESSION['error'] = "Please upload a valid CSV file.";
+                    header("Location: non-user");
+                    exit();
+                }
+
+                // Process the CSV file
+                $csv_data = array_map('str_getcsv', file($temp_file));
+                $header = array_shift($csv_data); // Assuming the first row is the header
+                $existingEntries = []; // To store unique entries based on firstname, lastname, and birthdate
+
+                foreach ($csv_data as $row) {
+                    // Extract data from CSV row
+                    $email = isset($row[0]) ? $row[0] : "";
+                    $mobile = isset($row[1]) ? $row[1] : "";
+                    $firstname = isset($row[2]) ? $row[2] : "";
+                    $middlename = isset($row[3]) ? $row[3] : "";
+                    $lastname = isset($row[4]) ? $row[4] : "";
+                    $address = isset($row[5]) ? $row[5] : "";
+                    $birthdate = isset($row[6]) ? $row[6] : "";
+                    $age = $this->calculateAge($birthdate); // Calculate age
+                    $gender = isset($row[8]) ? $row[8] : "";
+                    $role = isset($row[9]) ? $row[9] : "";
+                    $position = isset($row[10]) ? $row[10] : "residence";
+                    $senior = $age >= 60 ? 1 : 0;
+                    $pwd = isset($row[12]) ? $row[12] : "";
+                    $four_ps = isset($row[13]) ? $row[13] : "";
+                    $solo_parent = isset($row[14]) ? $row[14] : "";
+                    $scholar = isset($row[15]) ? $row[15] : "";
+                    $error = '';
+                    $errors = array();
+
+
+                    // Check for duplicates within the CSV file
+                    $csvEntry = "$firstname|$lastname|$birthdate"; // Create a unique key based on the columns you want to check
+                    if (in_array($csvEntry, $existingEntries)) {
+                        $_SESSION['error'] = "Duplicate entry found in the CSV file.";
+                        header("Location: non-user");
+                        exit();
+                    }
+
+                    // Check if the entry already exists in the database
+                    $existingEntryQuery = "SELECT * FROM users_masterlist WHERE firstname = '$firstname' AND lastname = '$lastname' AND birthdate = '$birthdate'";
+                    $existingEntryResult = $this->connection->query($existingEntryQuery);
+
+                    if ($existingEntryResult->num_rows > 0) {
+                        // Handle the case when the entry already exists
+                        $_SESSION['error'] = "An entry with the same first name, last name, and birthdate already exists in the database.";
+                        header("Location: non-user");
+                        exit();
+                    }
+
+                    // Insert data into the users_masterlist table
+                    $query = "INSERT INTO users_masterlist (email, mobile, firstname, middlename, lastname, address, birthdate, age, gender, role, position, senior, pwd, four_ps, solo_parent, scholar)
+                            VALUES ('$email', '$mobile', '$firstname', '$middlename', '$lastname', '$address', STR_TO_DATE('$birthdate', '%Y-%m-%d'), '$age', '$gender', '$role', '$position', '$senior', '$pwd', '$four_ps', '$solo_parent', '$scholar')";
+
+                    if ($this->connection->query($query) !== true) {
+                        $_SESSION['error'] = "Error inserting data into the users_masterlist table." . $this->connection->error;
+                        header("Location: non-user");
+                        exit();
+                    }
+
+                    // Insert data into the health_info table (similar to your existing logic)
+                    // ...
+                }
+
+                $_SESSION['success'] = "Batch upload successful.";
+                header("Location: non-user");
+                exit();
+            } else {
+                $_SESSION['error'] = "Error uploading the CSV file.";
+                header("Location: non-user");
+                exit();
+            }
+        }
+
+        private function calculateAge($birthdate)
+        {
+            if ($birthdate === null) {
+                // Handle the case where birthdate is null
+                return 0; // or handle it in a way that makes sense for your application
+            }
+        
+            // Convert the date format from 'yyyy-mm-dd' to DateTime object
+            $birthdate = DateTime::createFromFormat('Y-m-d', $birthdate);
+        
+            if (!$birthdate) {
+                // Handle invalid date format
+                throw new Exception("Invalid date format: $birthdate");
+            }
+        
+            $currentDate = new DateTime();
+            $age = $currentDate->diff($birthdate)->y;
+            return $age;
+        }     
 
     function delete_resident() {
         if (isset($_POST['delete_resident'])) {
@@ -457,12 +582,12 @@ class ReportsController {
             $stmt = $this->connection->prepare("DELETE FROM users_masterlist WHERE id = ?");
             $stmt->bind_param("i", $resident_id); // Assuming id is an integer
             if ($stmt->execute()) {
-                header("Location: /eBrgy/app/masterlist");
+                header("Location: /eBrgy/app/non-user");
                 $_SESSION['success'] = "Resident was successfully deleted.";
                 exit();
             } else {
                 $_SESSION['error'] = "Error deleting resident: " . $stmt->error;
-                header("Location: /eBrgy/app/masterlist"); // Redirect even on error
+                header("Location: /eBrgy/app/non-user"); // Redirect even on error
                 exit();
             }
     
@@ -563,7 +688,7 @@ class ReportsController {
             $stmt->bind_param("ssssssi", $mobile, $address, $scholar, $four_ps, $solo_parent, $senior, $id); // Assuming user_id is an integer
     
             if ($stmt->execute()) {
-                header("Location: /eBrgy/app/masterlist");
+                header("Location: /eBrgy/app/non-user");
                 $_SESSION['success'] = "The resident masterlist information was successfully updated";
                 exit();
             } else {

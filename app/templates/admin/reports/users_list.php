@@ -1,11 +1,12 @@
 <div class="container-fluid">
-<h3 class="mt-2 mb-2 text-center">Users Report</h3>
+<h3 class="mt-2 mb-2 text-center">Population Report</h3>
     <!-- Display counts here -->
     <div class="table-responsive">
     <h4 class="mt-2 mb-2">Demographic Information</h4>
         <table class="table table-bordered table-striped custom-table">
             <thead>
                 <tr>
+                    <th class="wrap-text">Total Population</th>    
                     <th class="wrap-text">Total Senior Citizen</th>
                     <th class="wrap-text">Total PWD</th>
                     <th class="wrap-text">Total 4Ps</th>
@@ -14,6 +15,7 @@
                 </tr>
             </thead>
             <tbody class="text-center">
+                <td><?php echo $usersReports['totalRows']; ?></td>    
                 <td><?php echo $usersReports['seniorCount']; ?></td>
                 <td><?php echo $usersReports['pwdCount']; ?></td>
                 <td><?php echo $usersReports['fourPsCount']; ?></td>
@@ -28,13 +30,12 @@
     <table class="table table-bordered table-striped custom-table datatable" id="myTable">
             <thead>
                 <tr>
-                    <th>Username</th>
                     <th>Full name</th>
                     <th>Age</th>
                     <th>Mobile</th>
                     <th>Email</th>
                     <th>Address</th>
-                    <th>Birthday<br />(YY-MM-DD)</th>
+                    <th>Birthdate<br />(YY-MM-DD)</th>
                     <th>4PS</th>
                     <th>PWD</th>
                     <th>Solo Parent</th>
@@ -46,7 +47,6 @@
                 foreach ($usersReports['users'] as $usersReport) {
                     ?>
                     <tr>
-                        <td><?php echo $usersReport['username']; ?></td>
                         <td><?php echo $usersReport['firstname'] . ' ' . $usersReport['middlename'] . ' ' . $usersReport['lastname']; ?></td>
                         <td><?php echo $usersReport['age']; ?></td>
                         <td><?php echo $usersReport['mobile']; ?></td>
@@ -88,10 +88,16 @@ document.getElementById("printTableButton").addEventListener("click", function()
     var newWin = window.open('', '_blank', 'width=800,height=1100');
    
     newWin.document.open();
-    newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
+    newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} .header {text-align: center; font-weight: bold; margin-top: 60px;} </style></head><body>');
 
-    // Add a header above the table
-    newWin.document.write('<h1>Users Report</h1>');
+    newWin.document.write('<div class="header">');
+    newWin.document.write('<p class="fw-bold">REPUBLIC OF THE PHILIPPINES</p>');
+    newWin.document.write('<p>City of Manila</p>');
+    newWin.document.write('<p>OFFICE OF THE BARANGAY CHAIRMAN</p>');
+    newWin.document.write('<p>BARANGAY 95 - ZONE 8 DISTRICT 1</p>');
+    newWin.document.write('<p>TELEPHONE NO. 08-294-47-66</p>');
+    newWin.document.write('</div>');
+    newWin.document.write('<h3 style="text-align: center; margin-top: 24px;">Population Report</h3>');
     newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
 
     var tableData = table.data().toArray(); // Get all the data from DataTables

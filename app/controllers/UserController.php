@@ -32,7 +32,7 @@ class UserController {
                     $hashedPassword = $user['password'];
     
                     // Verify the entered password with the hashed password
-                    if (password_verify($password, $hashedPassword)) {
+                    if ($password === $hashedPassword) {
                         // Passwords match, proceed with login
                         $username = $user['username'];
                         $firstname = $user['firstname'];

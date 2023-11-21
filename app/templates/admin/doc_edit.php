@@ -117,7 +117,6 @@ if ($username) {
                 <div class="col-md-12 mb-3">
                     <p class="card-text"><strong>Date and Time Requested:</strong> <?php echo date('m/d/Y h:i A', strtotime($userData['created_at'])); ?></p>
                 </div>
-                <div class="col-md-10"></div>
                 <div class="col-md-1">
                     <?php
                     if ($userData['status'] === "pending") {
@@ -142,6 +141,7 @@ if ($username) {
                     </form>
                 <?php } ?>
                 </div>
+                <div class="col-md-10"></div>
             </div>
         </div>
     </div>

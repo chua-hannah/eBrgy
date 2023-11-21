@@ -70,7 +70,7 @@ if ($userId) {
                     <input type="hidden" name="user_id" value="<?php echo $userData['user_id'] ?>">
                     <div style="display: flex;">
                         <div>
-                        <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background: red;">
+                        <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background: #DC3545;">
                             Delete user
                         </button>
                         </div>
@@ -228,10 +228,10 @@ if ($userId) {
 
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="registrationModalLabel">Are you to Deactivate this user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
+                <h5 class="modal-title" id="registrationModalLabel">Are you to deactivate this user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -245,7 +245,7 @@ if ($userId) {
                                     <div class="col-md-6 col-12">
                                     <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
                                     <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
-                                    <button name="deactivate_user" type="submit" class="form-control custom-button" style="background: grey;">
+                                    <button name="deactivate_user" type="submit" class="form-control" style="background: grey;">
                                         Confirm
                                     </button>
                                     </form>
@@ -260,10 +260,10 @@ if ($userId) {
 </div>
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="activateModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="activateModal">Are you to Activate user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
+                <h5 class="modal-title" id="activateModal">Are you sure to activate user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -277,8 +277,8 @@ if ($userId) {
                                     <div class="col-md-6 col-12">
                                         <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
                                             <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
-                                                <button name="activate_user" type="submit" class="form-control custom-button" style="background: green;">
-                                                    Confirm
+                                                <button name="activate_user" type="submit" class="form-control" style="background: #00796b;">
+                                                    Activate
                                                 </button>
                                         </form>
                                     </div>
@@ -293,10 +293,10 @@ if ($userId) {
 
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="activateModal">Are you to delete user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
+                <h5 class="modal-title" id="activateModal">Are you sure to delete user <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?>?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -310,8 +310,8 @@ if ($userId) {
                                     <div class="col-md-6 col-12">
                                         <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
                                             <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
-                                            <button name="delete_user" type="submit" class="form-control custom-button" style="background: red;">
-                                                Delete  user
+                                            <button name="delete_user" type="submit" class="form-control">
+                                                Confirm
                                             </button>
                                         </form>
                                     </div>
@@ -326,10 +326,10 @@ if ($userId) {
 
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="removeOfficial" tabindex="-1" aria-labelledby="removeOfficial" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="activateModal">Are you to remove <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?> as official?</h5>
+                <h5 class="modal-title" id="activateModal">Are you sure to remove <?php echo $userData['firstname'] . ' '. $userData['middlename'] . ' ' . $userData['lastname']; ?> as official?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -338,13 +338,13 @@ if ($userId) {
                         <div class="col-lg-12 col-12">
                                 <div class="row g-2 mt-2">
                                     <div class="col-md-6 col-12">
-                                        <button class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="form-control cancel-button">Cancel</button>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <form class="custom-form mb-4 align-items-center needs-validation" action="" method="post">
                                             <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>">
-                                            <button name="remove_official" type="submit"  class="form-control custom-button" style="background: black;">
-                                            Remove as Official
+                                            <button name="remove_official" type="submit"  class="form-control" style="background: black;">
+                                                Remove as Official
                                             </button>
                                         </form>
                                     </div>

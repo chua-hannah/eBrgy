@@ -64,7 +64,6 @@
                                 <option value="" disabled selected>Select gender</option>
                                 <option value="Male" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Male"){ echo 'selected';} ?>>Male</option>
                                 <option value="Female" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Female"){ echo 'selected';} ?>>Female</option>
-                                <option value="Others" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Others"){ echo 'selected';} ?>>Others</option>
                             </select>
                             <?php if (isset($errors["sex"])) : ?>
                                 <div class="text-danger" id="error_sex"><?= $errors["sex"] ?></div>
@@ -219,14 +218,12 @@
                     
                     <p class="text-center" style="margin-bottom: -8px"><a href="login">I am already a member</a></p>
                     <!-- Modal -->
-                    <div class="modal"tabindex="-1" role="dialog" id="dpnModal">
+                    <div class="modal" tabindex="-1" role="dialog" id="dpnModal">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
                                     <h5 class="modal-title">Data Privacy Notice</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <p><strong>Data Privacy Notice</strong></p>

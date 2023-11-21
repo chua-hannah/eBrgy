@@ -1,7 +1,7 @@
 <div class="container-fluid">
 <ul class="nav nav-tabs" id="myTabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Reklamo Report</a>
+            <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Blotter / Complaint Report</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Document Report</a>
@@ -10,7 +10,7 @@
             <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Schedule Report</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Equipment Report</a>
+            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Materials Report</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabsContent">
@@ -177,7 +177,7 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th class="wrap-text">Equipment name</th>
+                                <th class="wrap-text">Material name</th>
                                 <th class="wrap-text">Quantity</th>
                                 <th class="wrap-text">Username</th>
                                 <th class="wrap-text">Fullname</th>
@@ -233,6 +233,7 @@
 <script>
 document.getElementById("printTableButton").addEventListener("click", function() {
     var activeTab = document.querySelector('.nav-link.active'); // Get the active tab link
+    var tabLabel = activeTab.textContent.trim(); // Get the text content of the active tab and remove leading/trailing spaces
     var tabContentId = activeTab.getAttribute('href').substring(1); // Get the tab content ID
 
     var tableToPrint = document.getElementById(tabContentId).querySelector('table'); // Get the table in the active tab
@@ -245,7 +246,16 @@ document.getElementById("printTableButton").addEventListener("click", function()
 
     var newWin = window.open('', '', 'width=600,height=600');
     newWin.document.open();
-    newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} </style></head><body>');
+    newWin.document.write('<html><head><style>table {border-collapse: collapse; text-align: center;} table, th, td {border: 1px solid #000; text-align: center;} .header {text-align: center; font-weight: bold; margin-top: 60px;} </style></head><body>');
+
+    newWin.document.write('<div class="header">');
+    newWin.document.write('<p class="fw-bold">REPUBLIC OF THE PHILIPPINES</p>');
+    newWin.document.write('<p>City of Manila</p>');
+    newWin.document.write('<p>OFFICE OF THE BARANGAY CHAIRMAN</p>');
+    newWin.document.write('<p>BARANGAY 95 - ZONE 8 DISTRICT 1</p>');
+    newWin.document.write('<p>TELEPHONE NO. 08-294-47-66</p>');
+    newWin.document.write('</div>');
+    newWin.document.write('<h3 style="text-align: center; margin-top: 24px;">' + tabLabel + '</h3>');
     newWin.document.write('<p>Printed by: ' + username + '</p>'); // Add "printed by" note with the username
 
     // Get the table's content dynamically

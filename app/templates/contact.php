@@ -6,11 +6,23 @@
                     <h2>Get in touch</h2>
 
                     <div class="contact-image-wrap d-flex flex-wrap">
-                        <img src="assets/images/dummy-avatar.png"
-                            class="img-fluid avatar-image" alt="">
+                        <?php
+                        $idSelfiePath = 'uploads/id_selfie/' . $secretary['id_selfie'];
+                        if (!empty($secretary['id_selfie']) && file_exists($idSelfiePath)):
+                        ?>
+                            <img src="<?php echo $idSelfiePath; ?>" alt="ID Selfie" class="img-fluid avatar-image">
+                        <?php else: ?>
+                            <p>ID Selfie not available</p>
+                        <?php endif; ?>
 
                         <div class="d-flex flex-column justify-content-center ms-3">
-                            <p class="mb-0">ELJUN C. SAYO</p>
+                            <p class="mb-0">
+                                <?php
+                                echo !empty($secretary)
+                                    ? strtoupper($secretary['firstname'] . ' ' . $secretary['middlename'] . ' ' . $secretary['lastname'])
+                                    : 'Barangay Secretary is Unavailable';
+                                ?>
+                            </p>
                             <p class="mb-0"><strong>Barangay Secretary</strong></p>
                         </div>
                     </div>
@@ -40,8 +52,8 @@
                 <form class="custom-form contact-form" action="" method="post" role="form">
                     <h2>Contact form</h2>
 
-                    <p class="mb-4">Or, you can just send an email:
-                        <a href="mailto:someone@example.com">dummy@only.ph</a>
+                    <p class="mb-4">Or, you can just send SMS to:
+                        <a href="sms:<?php echo $secretary['mobile']; ?>"><?php echo $secretary['mobile']; ?></a>
                     </p>
                     <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
@@ -55,12 +67,12 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-12" <?php if(isset($_SESSION['email'])) echo 'style="display: none;"'; ?>>
-                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required
+                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address (Optional)"
                             <?php if(isset($_SESSION['email'])) echo 'hidden readonly value="' . $_SESSION['email'] . '"'; ?>>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-12" <?php if(isset($_SESSION['mobile'])) echo 'style="display: none;"'; ?>>
-                        <input type="text" name="mobile" id="mobileNumber" class="form-control" placeholder="Mobile Number" oninput="validateNumericInput(this)" maxlength="11" required
+                        <input type="text" name="mobile" id="mobileNumber" class="form-control" placeholder="Mobile Number (Optional)" oninput="validateNumericInput(this)" maxlength="11"
                             <?php if(isset($_SESSION['mobile'])) echo 'hidden readonly value="' . $_SESSION['mobile'] . '"'; ?>>
                     </div>
 

@@ -1,17 +1,17 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="services">Services</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Borrow an Equipment</li>
+    <li class="breadcrumb-item active" aria-current="page">Borrow a Material</li>
   </ol>
 </nav>
 <div class="col-lg-6 col-12 mx-auto">
     <form class="custom-form contact-form mb-4" action="#" method="post" role="form">
         <div class="row d-flex justify-content-center">
-            <h3 class="mb-4">Borrow an equipment</h3>
+            <h3 class="mb-4">Borrow an material</h3>
             <div class="col-lg-12 col-md-12 col-12">
-                <label class="labels">Type of Equipment</label>
+                <label class="labels">Type of Material</label>
                 <select class="form-select" name="equipment_id" id="equipment_id" required>
-                    <option value="" disabled selected>Select Equipment</option>
+                    <option value="" disabled selected>Select Material</option>
                     <?php
                     foreach ($requests as $request) {
                     // Display the data for each request
@@ -45,7 +45,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Equipment Request</h5>
+                <h5 class="modal-title">Material Request</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Modal Body (Your Table) -->
@@ -57,7 +57,7 @@
                         <table class="table table-bordered table-striped custom-table datatable">
                             <thead class="text-center">
                                 <tr>
-                                    <th class="wrap-text">Equipment</th>
+                                    <th class="wrap-text">Material</th>
                                     <th class="wrap-text">Quantity</th>
                                     <th class="wrap-text">Return Date</th>
                                     <th class="wrap-text">Request Date & Time</th>
@@ -117,7 +117,7 @@
                                                         <button type="" class="btn btn-danger" name="cancel_request_equipment">Cancel</button>
                                                     </form>';
                                             } else {                                            
-                                                echo 'N/A';
+                                                echo '-';
                                             }
                                             ?>
                                         </td>
@@ -150,27 +150,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Get references to the return date input element
-    var returnDateInput = document.getElementById("datepicker-future");
-
-    // Calculate tomorrow's date
-    var today = new Date();
-    var tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-
-    // Format the date as "YYYY-MM-DD"
-    var formattedDate = formatDate(tomorrow);
-
-    // Set the default value in the input field
-    returnDateInput.value = formattedDate;
-
-    // Function to format the date as "YYYY-MM-DD"
-    function formatDate(date) {
-        var year = date.getFullYear();
-        var month = String(date.getMonth() + 1).padStart(2, "0");
-        var day = String(date.getDate()).padStart(2, "0");
-        return year + "-" + month + "-" + day;
-    }
-});
 </script>

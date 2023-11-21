@@ -1,11 +1,11 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="requests">Manage Requests</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Reports / Complaints</li>
+    <li class="breadcrumb-item active" aria-current="page">Blotter Reports / Complaints</li>
   </ol>
 </nav>
 <div class="container-fluid">
-    <h3>Report / Complaint Requests</h3>
+    <h3>Blotter Report / Complaint Requests</h3>
     <div class="table-responsive text-center">
     <table class="table table-bordered table-striped custom-table" id="reportsTable">
             <thead>
@@ -48,11 +48,18 @@
                         echo '<td class="' . $statusClass . '">' . $status . '</td>';
                         ?>
                         <td>
-                            <form action="requests-edit-report" method="post">
-                                <input type="hidden" name="report_id" value="<?php echo $request['id']; ?>">
-                                <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
-                                <button type="submit" class="btn btn-primary" style="padding: 8px;">Edit</button>
-                            </form>
+                        <form action="requests-edit-report" method="post">
+                            <input type="hidden" name="report_id" value="<?php echo $request['id']; ?>">
+                            <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
+
+                            <?php $buttonStyle = 'style="padding: 8px; width: 60px;"'; // Adjust the width as needed ?>
+
+                            <?php if($request['status'] === 'pending') { ?>
+                                <button type="submit" class="btn btn-primary" <?php echo $buttonStyle; ?>>Edit</button>
+                            <?php } else { ?>
+                                <button type="submit" class="btn btn-primary" <?php echo $buttonStyle; ?>>View</button>
+                            <?php } ?>
+                        </form>
                         </td>
                     </tr>
                     <?php

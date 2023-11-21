@@ -18,7 +18,7 @@
                                 <?php } else { ?>
                                 <h3>User Data Not Available</h3>
                                 <?php } ?>
-                                <p class="text-bottom">Resident</p>
+                                <p class="text-bottom"><?php echo strtoupper($user_data['position']); ?></p>
                             </div>
                             <?php else: ?>
                             <p>Profile picture is not available</p>
@@ -126,7 +126,7 @@
                                 <!-- Button to save changes (initially hidden) -->
                                 <button type="submit" name="save_changes" id="save_changes" class="form-control"
                                     style="display: none;">Save Changes</button>
-                                <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#removeOfficial" style="background: #1d1ec7;">
+                                <button type="button" class="form-control" data-bs-toggle="modal" data-bs-target="#removeOfficial" style="background: #1d1ec7;">
                                     Change Password 
                                 </button>
                             </div>
@@ -134,8 +134,8 @@
                     </div>
                 </div>
                 <div class="modal fade" id="removeOfficial" tabindex="-1" aria-labelledby="removeOfficial" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content" role="document">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="activateModal">Change Password</h5>
                             </div>
@@ -143,18 +143,18 @@
                                 <div class="container-fluid">
                                     <div class="row d-flex justify-content-center align-items-center">
                                         <div class="col-lg-12 col-12">
-                                            New password: <input type="password" name="update_password" value="">
-
-                                                <div class="row g-2 mt-2">
-                                                    <div class="col-md-6 col-12">
-                                                        <button class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
-                                                    </div>
-                                                    <div class="col-md-6 col-12">
-                                                            <button name="update_password" type="submit"  class="form-control custom-button" style="background: #1d1ec7;">
-                                                                Submit
-                                                            </button>
+                                            New password: <input type="password" class="form-control" name="new_password" value="">
+                                            <div class="row g-2 mt-2">
+                                                <div class="col-md-6 col-12">
+                                                    <button type="button" class="form-control cancel-button" data-bs-dismiss="modal" style="background: #dc3545;">Cancel</button>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                        <button name="update_password" type="submit"  class="form-control custom-button" style="background: #1d1ec7;">
+                                                            Submit
+                                                        </button>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

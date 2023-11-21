@@ -68,43 +68,48 @@
 
                         echo '<td class="' . $statusClass . '">' . $status . '</td>';
                         ?>
-                        <td style="display: flex;">
+                        <td style="display: flex; align-items: center;">
                         <form action="requests-edit-document" method="post">
                             <input type="hidden" name="doc_id" value="<?php echo $request['id']; ?>">
                             <input type="hidden" name="username" value="<?php echo $request['username']; ?>">
-                            <button type="submit" class="btn btn-primary btn-md">Edit</button>
+                            <?php $buttonStyle = 'class="btn btn-primary" style="padding: 8px; width: 60px;"'; ?>
+                            <?php if($request['status'] === 'pending') { ?>
+                                <button type="submit" <?php echo $buttonStyle; ?>>Edit</button>
+                            <?php } else { ?>
+                                <button type="submit" <?php echo $buttonStyle; ?>>View</button>
+                            <?php } ?>
                         </form>
                         <?php
-                                            $status = strtoupper($request['status']);
-                                            if ($status == 'APPROVED') {
-                                                // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
-                                                $action = ''; // Initialize the action variable
-                                            
-                                                if ($request['request_name'] === 'firstjob certificate') {
-                                                    $action = 'first-job-certificate';
-                                                } 
-                                                elseif ($request['request_name'] === 'indigency certificate') {
-                                                    $action = 'indigency-certificate';
-                                                }
-                                                elseif ($request['request_name'] === 'barangay certificate') {
-                                                    $action = 'barangay-certificate';
-                                                }
-                                                elseif ($request['request_name'] === 'oath certificate') {
-                                                    $action = 'oath-certificate';
-                                                }
-                                            
-                                                if (!empty($action)) {
-                                                    echo '<form method="POST" action="' . $action . '" target="_blank">
-                                                            <input type="hidden" name="id" value="' . $request['id'] . '">
-                                                            <button type="submit" class="btn btn-secondary ms-2" name="print_request_doc">Print</button>
-                                                        </form>';
-                                                }
-                                            }  else {
-                                                // If the status is 'REJECTED', echo 'N/A'.
-                                                echo '';
-                                            }
-                                            
-                                            ?>
+                            $status = strtoupper($request['status']);
+                            if ($status == 'APPROVED') {
+                                // If the status is 'APPROVED', change the button to a form and include an invisible input for the id.
+                                $action = ''; // Initialize the action variable
+                            
+                                if ($request['request_name'] === 'firstjob certificate') {
+                                    $action = 'first-job-certificate';
+                                } 
+                                elseif ($request['request_name'] === 'indigency certificate') {
+                                    $action = 'indigency-certificate';
+                                }
+                                elseif ($request['request_name'] === 'barangay certificate') {
+                                    $action = 'barangay-certificate';
+                                }
+                                elseif ($request['request_name'] === 'oath certificate') {
+                                    $action = 'oath-certificate';
+                                }
+                            
+                                if (!empty($action)) {
+                                    echo '<form method="POST" action="' . $action . '" target="_blank">
+                                            <input type="hidden" name="id" value="' . $request['id'] . '">
+                                            <button type="submit" class="btn btn-secondary ms-2" style="padding: 8px; width: 60px;" name="print_request_doc">Print</button>
+                                        </form>';
+                                }
+                            }  else {
+                                // If the status is 'REJECTED', echo 'N/A'.
+                                echo '';
+                            }
+                            
+                            ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>

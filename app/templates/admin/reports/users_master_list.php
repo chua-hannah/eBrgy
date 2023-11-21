@@ -1,10 +1,10 @@
 <div class="container-fluid">
 <div style="float:right;">
 <button type="button" class="form-control custom-button" data-bs-toggle="modal" data-bs-target="#registrationModal">
-    <i class="bi bi-person"></i> Add Resident
+    <i class="bi bi-person"></i> Add residents
 </button>
 </div>
-<!-- Bootstrap Modal -->
+<h4 class="mt-2 mb-2">Demographic Information</h4>
 <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -15,7 +15,19 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row d-flex justify-content-center align-items-center">
+                        <h6 class="text-center">Residents Batch Upload</h6>
+                        <form action="" class="custom-form" method="post" enctype="multipart/form-data">
+                            <label class="labels" for="csv_file">Upload CSV File:</label>
+                            <input type="file" name="csv_file" class="form-control" accept=".csv">
+                            <button type="submit" class="form-control mb-0" name="batch_upload">
+                                Upload Batch File
+                            </button>
+                        </form>
+                        <div class="text-center mt-3 mb-3">
+                            <p><strong>OR</strong></p>
+                        </div>
                         <div class="col-lg-12 col-12">
+                        <h6 class="text-center">Resident Single Entry</h6>
                         <form class="custom-form mb-4 align-items-center needs-validation" id="register-form" action="" method="post" enctype="multipart/form-data" role="form" novalidate>
                                 <div class="row g-2">
                                     <h6>Personal Information</h6>
@@ -58,7 +70,6 @@
                                             <option value="" disabled selected>Select gender</option>
                                             <option value="Male" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Male"){ echo 'selected';} ?>>Male</option>
                                             <option value="Female" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Female"){ echo 'selected';} ?>>Female</option>
-                                            <option value="Others" <?php if(isset($_POST["sex"]) && $_POST["sex"]=="Others"){ echo 'selected';} ?>>Others</option>
                                         </select>
                                         <div class="text-danger error-message" data-field="sex" id="error_sex"><?= isset($errors["sex"]) ? $errors["sex"] : ''; ?></div>
                                     </div>
@@ -124,10 +135,10 @@
                                 </div>
                                 <div class="row g-2 mt-2">
                                     <div class="col-md-6 col-12">
-                                        <button type="" class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="form-control cancel-button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                     <div class="col-md-6 col-12">
-                                        <button type="submit" name="add_to_user_masterlist" id="registerButton" class="btn btn-primary form-control mb-0">Register</button>
+                                        <button type="submit" name="add_to_user_masterlist" id="registerButton" class="form-control mb-0">Register</button>
                                     </div>
                                 </div>
                             </form>
@@ -142,7 +153,6 @@
 
 <div>
     <div class="table-responsive">
-    <h4 class="mt-2 mb-2">Demographic Information</h4>
         <table class="table table-bordered table-striped custom-table">
             <thead>
                 <tr>

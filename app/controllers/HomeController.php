@@ -264,11 +264,7 @@ public function print_doc($docId) {
               $users[] = $row;
           }
       }
-      return $users;
-      
-    
-  
-     
+      return $users;     
   }
 
   public function services() {
@@ -515,7 +511,7 @@ public function equipments() {
             if ($stmt->execute()) {
                 // Request sent successfully
                 header("Location: equipments");
-                $_SESSION['success'] = "The equipment request has been sent successfully.";
+                $_SESSION['success'] = "The material request has been sent successfully.";
                 exit();
             } else {
                 // Error occurred
@@ -523,7 +519,7 @@ public function equipments() {
             }
         } else {
             // Invalid quantity, show an error message
-            $_SESSION['error'] =  "Error: The requested quantity exceeds the available equipment.";
+            $_SESSION['error'] =  "Error: The requested quantity exceeds the available material.";
         }
     }
 }
@@ -536,10 +532,10 @@ function reject_equipments() {
         $stmt->bind_param("i", $equipment_id); // Assuming doc_id is an integer
         if ($stmt->execute()) {
             header("Location: /eBrgy/app/equipments");
-            $_SESSION['success'] = "Equipment request was successfully cancelled.";
+            $_SESSION['success'] = "Material request was successfully cancelled.";
             exit();
         } else {
-            $_SESSION['error'] = "Error cancelling equipment request: " . $stmt->error;
+            $_SESSION['error'] = "Error cancelling material request: " . $stmt->error;
         }
     
         // Close the prepared statement
@@ -597,39 +593,71 @@ public function isRequestedQuantityValid($equipment_id, $requestedQuantity) {
 
 
 
-    public function contact() {
-      if (isset($_POST['submit_message'])) {
-          date_default_timezone_set('Asia/Manila');
-          $firstname = $_POST['firstname'];
-          $lastname = $_POST['lastname'];
-          $email = $_POST['email'];
-          $mobile = $_POST['mobile'];
-          $subject = $_POST['subject'];
-          $contact_message = $_POST['contact_message'];
-          $date = date('Y-m-d');
-          $time_in = date('H:i:s'); // Philippine time
-  
-          // Combine date and time into a single datetime string
-          $datetime = $date . ' ' . $time_in;
-  
-          // Use prepared statement to insert data into the database
-          $query = "INSERT INTO messages (firstname, lastname, email, mobile, subject, contact_message, created_at) VALUES ('$firstname', '$lastname', '$email', '$mobile', '$subject', '$contact_message', '$datetime')";
-  
-          // Prepare the statement
-          if ($this->connection->query($query) === true) {
-            // Message successful
-            header("Location: contact");
-            $_SESSION["success"] = "Message sent successfully.";
-            exit();
-        } else {
-            // Error occurred
-            echo "Error: " . $this->connection->error;
+    public function contact() { 
+        $secretary = $this->getSecretary();
+        if (isset($_POST['submit_message'])) {
+            date_default_timezone_set('Asia/Manila');
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $email = $_POST['email'];
+            $mobile = $_POST['mobile'];
+            $subject = $_POST['subject'];
+            $contact_message = $_POST['contact_message'];
+            $date = date('Y-m-d');
+            $time_in = date('H:i:s'); // Philippine time
+    
+            // Combine date and time into a single datetime string
+            $datetime = $date . ' ' . $time_in;
+    
+            // Use prepared statement to insert data into the database
+            $query = "INSERT INTO messages (firstname, lastname, email, mobile, subject, contact_message, created_at) VALUES ('$firstname', '$lastname', '$email', '$mobile', '$subject', '$contact_message', '$datetime')";
+    
+            // Prepare the statement
+            if ($this->connection->query($query) === true) {
+                // Message successful
+                header("Location: contact");
+                $_SESSION["success"] = "Message sent successfully.";
+                exit();
+            } else {
+                // Error occurred
+                echo "Error: " . $this->connection->error;
+            }
         }
-      }
-  
-      // Render the contact page content
-      include 'templates/contact.php';
+    
+        // Render the contact page content
+        include 'templates/contact.php';
   }
+
+    public function getSecretary() {
+        if ($this->connection->error) {
+            // Log the error or handle it appropriately
+            error_log("Connection failed: " . $this->connection->error);
+
+            // Return an empty array or handle the error in another way
+            return array();
+        }
+
+        $query = "SELECT * FROM users WHERE position = 'secretary'";
+        $result = $this->connection->query($query);
+
+        if ($result === false) {
+            // Log the query error or handle it appropriately
+            error_log("Query failed: " . $this->connection->error);
+
+            // Return an empty array or handle the error in another way
+            return array();
+        }
+
+        $secretary = array();
+
+        if ($result->num_rows > 0) {
+            // Since there is expected to be only one entry, you can fetch directly
+            $secretary = $result->fetch_assoc();
+        }
+
+        return $secretary;
+    }
+
   
     public function admin() {
       // Render the home page content
@@ -663,7 +691,7 @@ public function isRequestedQuantityValid($equipment_id, $requestedQuantity) {
         }
         
         // Query to get all messages
-        $messagesQuery = "SELECT * FROM messages";
+        $messagesQuery = "SELECT * FROM messages ORDER BY created_at DESC";
         $messagesResult = $this->connection->query($messagesQuery);
         
         // Query to get the total count of messages

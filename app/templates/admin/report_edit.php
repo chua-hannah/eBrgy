@@ -18,11 +18,6 @@ if ($username) {
 
 <div class="container-fluid edit-user">
     <h5>Manage Report / Complaint Request</h5> 
-    <div class="text-end ">
-    <?php if ($userData['status'] === 'approved'): ?>
-        <button class="btn btn-secondary" onclick="printPage()">Print Report</button>
-    <?php endif; ?>
-    </div>
     <div class="card">
         <div class="card-header">
             <h6 class="mb-0">Report Information</h6>
@@ -118,31 +113,35 @@ if ($username) {
                     <p class="card-text mb-0"><strong>Complaint:</strong></p> 
                     <p class="mt-0 mb-0"><?php echo $userData['note']; ?></p>
                 </div>
-                <div class="col-md-10"></div>
                 <?php echo $userData['status'] === 'approved' ? 
                     '' : 
                     '<div class="col-md-1 mb-3">
                         <form method="post" action="">
                             <input type="hidden" name="report_id" value="' . $userData['id'] . '">
-                            <button name="approve_report" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">
+                            <button name="approve_report" type="submit" class="btn btn-primary" style="padding: 8px;">
                                 Approve
                             </button>
                         </form>
                     </div>
-                    <div class="col-md-1 mb-3">
-                    <form method="post" action="">
-                        <input type="hidden" name="report_id" value="' . $userData['id'] . '">
-                        <button name="delete_report" type="submit" class="btn btn-danger" style="padding: 8px;">
-                            Reject
-                        </button>
-                    </form>
-                </div>';
+                    <div class="col-md-1 mb-3 d-flex">
+                        <form method="post" action="" class="ml-auto">
+                            <input type="hidden" name="report_id" value="' . $userData['id'] . '">
+                            <button name="delete_report" type="submit" class="btn btn-danger" style="padding: 8px;">
+                                Reject
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-md-10 mb-3"></div>';
                 ?>
             </form>
           </div>
         </div>
     </div>
-   
+    <?php if ($userData['status'] === 'approved'): ?>
+    <div class="d-flex justify-content-end mt-4">
+        <button id="printTableButton" onclick="printPage()">Print Report</button>
+    </div>
+    <?php endif; ?>
 </div>
 
 
@@ -172,7 +171,6 @@ if ($username) {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Printable Content</title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
                 <!-- Include your stylesheets here if needed -->
@@ -187,7 +185,7 @@ if ($username) {
                 </style>
             </head>
             <body>
-
+                <h4 class="text-center">BARANGAY 95 - ZONE 8 DISTRICT 1</h4>
                 <!-- Card content that you want to print -->
                 <div class="card">
                     <div class="card-header">
@@ -195,31 +193,9 @@ if ($username) {
                     </div>
                     <div class="card-body">
                     <div class="row justify-content-center">
-                <div class="col-md-4 mb-3">
-                    <p class="card-text"><strong>Status:
-                    <?php
-                    $status = strtoupper($userData['status']);
-                    $colorClass = '';
-
-                    switch ($status) {
-                        case 'REJECTED':
-                            $colorClass = 'text-danger';
-                            break;
-                        case 'PENDING':
-                            $colorClass = 'text-warning';
-                            break;
-                        case 'APPROVED':
-                            $colorClass = 'text-success';
-                            break;
-                        default:
-                            // Handle other statuses if needed
-                            break;
-                    }
-                    ?>
-
-                    <span class="<?php echo $colorClass; ?>"><?php echo $status; ?></strong></span>
+                <div class="col-md-4">            
                 </div>
-                <div class="col-md-8 mb-3"></div>
+                <div class="col-md-8"></div>
                 <?php
                 if ($status === "APPROVED" || $status === "REJECTED") {
                     echo '<div class="col-md-12 mb-3">';
@@ -284,26 +260,6 @@ if ($username) {
                     <p class="card-text mb-0"><strong>Complaint:</strong></p> 
                     <p class="mt-0 mb-0"><?php echo $userData['note']; ?></p>
                 </div>
-                <div class="col-md-10"></div>
-                <?php echo $userData['status'] === 'approved' ? 
-                    '' : 
-                    '<div class="col-md-1 mb-3">
-                        <form method="post" action="">
-                            <input type="hidden" name="report_id" value="' . $userData['id'] . '">
-                            <button name="approve_report" type="submit" class="btn btn-primary" style="padding: 8px; margin-right: 16px">
-                                Approve
-                            </button>
-                        </form>
-                    </div>
-                    <div class="col-md-1 mb-3">
-                    <form method="post" action="">
-                        <input type="hidden" name="report_id" value="' . $userData['id'] . '">
-                        <button name="delete_report" type="submit" class="btn btn-danger" style="padding: 8px;">
-                            Reject
-                        </button>
-                    </form>
-                </div>';
-                ?>
             </form>
           </div>
                     </div>
